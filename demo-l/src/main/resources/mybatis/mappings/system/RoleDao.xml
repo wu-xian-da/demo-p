@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jianfei.d.dao.system.RoleDao">
+	<resultMap type="com.jianfei.d.entity.system.Role" id="roleMap">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<collection property="menus" ofType="com.jianfei.d.entity.system.Menu">
+			<id property="id" column="menu_id"/>
+		</collection>
+	</resultMap>
+	
+	<resultMap type="com.jianfei.d.entity.system.Role" id="roleMapPage">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<collection property="users" ofType="com.jianfei.d.entity.system.User">
+			<id property="loginName" column="loginName"/>
+		</collection>
+	</resultMap>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert into t_role(name) values (#{name})
+	</insert>
+	
+	<delete id="deleteRoleMenu">
+		delete from t_role_menu where role_id = #{id}
+	</delete>
+	
+	<insert id="insertRoleMenu">
+		insert into t_role_menu(role_id,menu_id)
+		<foreach collection="menus" item="menu" separator="union all">
+			select #{id},#{menu.id} from dual
+		</foreach>
+	</insert>
+	
+	<delete id="delete">
+		delete from t_role where id = #{id}
+	</delete>
+	
+	<update id="update">
+		update t_role set name = #{name} where id = #{id}
+	</update>
+	
+	<select id="get" resultMap="roleMap">
+		select a.id,a.name,b.menu_id from t_role a
+		LEFT JOIN t_role_menu b ON b.role_id = a.id
+		where a.id = #{id}
+	</select>
+	
+	<select id="getCountByRoleName" resultType="java.lang.Integer">
+		select count(1) from t_role a where a.name = #{name}
+	</select>
+	
+	<select id="findAll" resultType="com.jianfei.d.entity.system.Role">
+		select id,name from t_role
+	</select>
+	
+	<select id="findPage" resultMap="roleMapPage">
+		select a.id,a.name,b.loginName from t_role a
+		LEFT JOIN t_user b ON b.role_id = a.id
+		<where>
+			<if test="name != null and name != ''">a.name like CONCAT('%',#{name},'%')</if>
+		</where>
+		ORDER BY a.id DESC
+	</select>
+</mapper>

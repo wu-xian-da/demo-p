@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jianfei.d.dao.system.UserDao">
+	<sql id="userColumns">
+		a.id,
+		a.name,
+		a.loginName,
+		a.tel,
+		a.password,
+		a.salt,
+		a.status,
+		a.createDate,
+		a.role_id AS "role.id",
+		a.department_id AS "department.id",
+	</sql>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert into t_user(
+			name,loginName,tel,password,salt,status,role_id,department_id,createDate
+		) values (
+			#{name},#{loginName},#{tel},#{password},#{salt},#{status},#{role.id},#{department.id},#{createDate}
+		)
+	</insert>
+	
+	<update id="update">
+		update t_user set 
+		name = #{name},
+		loginName = #{loginName},
+		tel = #{tel},
+		status = #{status},
+		role_id =#{role.id},
+		department_id = #{department.id}
+		where id = #{id}
+	</update>
+	
+	<update id="initPasswordBatch" parameterType="java.util.List">
+		<foreach collection="list" item="user" index="index" separator=";">
+			update t_user
+			<set>
+				password =#{user.password},
+				salt = #{user.salt}
+			</set>
+			where id = #{user.id}
+		</foreach>
+	</update>
+	
+	<update id="updateUserStatusBatch" parameterType="java.util.List">
+		<foreach collection="list" item="user" index="index" separator=";">
+			update t_user
+			<set>status = #{user.status}</set>
+			where id = #{user.id}
+		</foreach>
+	</update>
+	
+	<delete id="delete">
+		delete from t_user where id = #{id}
+	</delete>
+	
+	<select id="get" resultType="com.jianfei.d.entity.system.User">
+		select <include refid="userColumns"></include>
+		from t_user a where a.id = #{id}
+	</select>
+	
+	<select id="findByLoginName" resultType="com.jianfei.d.entity.system.User">
+		select <include refid="userColumns"></include>
+		from t_user a where a.loginName = #{loginName}
+	</select>
+	
+	<select id="findPage" resultType="com.jianfei.d.entity.system.User">
+		select <include refid="userColumns"></include>
+		,
+		b.name AS "role.name",
+		c.name AS "department.name"
+		from t_user a
+		LEFT JOIN t_role b ON a.role_id = b.id
+		LEFT JOIN t_department c ON a.department_ = c.id
+		<where>
+			<if test="loginName != null">a.loginName like CONCAT('%',#{loginName},'%')</if>
+			<if test="role != null and role.id != null">AND role_id = #{role.id}</if>
+			<if test="department != null and department.id != null">AND department_id = #{department.id}</if>
+		</where>
+		ORDER BY a.id DESC 
+	</select>
+</mapper>

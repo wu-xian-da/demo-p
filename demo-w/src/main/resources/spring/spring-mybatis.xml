@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd"
+		default-lazy-init="true">
+	
+	<context:property-placeholder location="classpath:config/jdbc.properties"/>
+	
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
+	      <property name="url" value="${jdbc.url.site}" />
+	      <property name="username" value="${jdbc.username.site}" />
+	      <property name="password" value="${jdbc.password.site}" />
+	
+	      <property name="initialSize" value="${jdbc.pool.init}" />
+	      <property name="minIdle" value="${jdbc.pool.minIdle}" /> 
+	      <property name="maxActive" value="${jdbc.pool.maxActive}" />
+	
+	      <property name="maxWait" value="60000" />
+	      <property name="timeBetweenEvictionRunsMillis" value="60000" />
+	      <property name="minEvictableIdleTimeMillis" value="300000" />
+	      <property name="validationQuery" value="SELECT 'x'" />
+	      <property name="testWhileIdle" value="true" />
+	      <property name="testOnBorrow" value="false" />
+	      <property name="testOnReturn" value="false" />
+	      <property name="poolPreparedStatements" value="true" />
+	      <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+	      <property name="filters" value="stat" /> 
+	  </bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:mybatis/mappings/**/*.xml" />
+		<property name="configLocation" value="classpath:mybatis/config.xml" />
+		<property name="typeAliasesPackage" value="com.jianfei.d.entity" />
+		<property name="typeAliasesSuperType" value="com.jianfei.d.base.entity.BaseEntity" />
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.jianfei.d.dao" />
+	</bean>
+
+</beans>
