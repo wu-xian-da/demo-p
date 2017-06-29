@@ -7,11 +7,13 @@ package com.jianfei.d.entity.common;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.jianfei.d.base.annotation.FormQuery;
+import com.jianfei.d.common.utils.JodaUtil;
 import com.jianfei.d.common.utils.Reflections;
 
 import lombok.Getter;
@@ -119,7 +121,13 @@ public class Page<T> {
 
 	private void converObjToString(List<String> params, String key,Object fieldValue) {
 		if (fieldValue != null) {
-			String fieldValueStr = fieldValue.toString();
+			//String fieldValueStr = fieldValue.toString();
+			String fieldValueStr = null;
+			if (fieldValue.getClass() == Date.class) {
+				fieldValueStr = JodaUtil.format((Date)fieldValue);
+			} else {
+				fieldValueStr = fieldValue.toString();
+			}
 			if (StringUtils.isNotBlank(fieldValueStr)) {
 				params.add(key+" = "+fieldValueStr);
 			}

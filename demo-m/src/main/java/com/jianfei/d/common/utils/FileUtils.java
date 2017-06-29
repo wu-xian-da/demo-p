@@ -35,7 +35,7 @@ public class FileUtils {
     }
     
     public static String randomString(int id){
-        return JodaUtil.formatDate(new Date(), "yyyyMMdd") + "-" + String.format("%04d", id);
+        return JodaUtil.format(new Date(), "yyyyMMdd") + "-" + String.format("%04d", id);
     }
     
     public static String newFileName(String oldName, String ext){
