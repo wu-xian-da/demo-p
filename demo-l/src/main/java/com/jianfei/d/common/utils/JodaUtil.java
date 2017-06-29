@@ -57,17 +57,17 @@ public class JodaUtil extends DateUtils {
 	
 	public static String getYear(){
 		DateTime dt = new DateTime(new Date());
-		return String.valueOf(dt.getYear());
+		return dt.toString("yyyy");
 	}
 	
 	public static String getMonth(){
 		DateTime dt = new DateTime(new Date());
-		return String.valueOf(dt.getMonthOfYear());
+		return dt.toString("MM");
 	}
 	
 	public static String getDay(){
 		DateTime dt = new DateTime(new Date());
-		return String.valueOf(dt.getDayOfMonth());
+		return dt.toString("dd");
 	}
 	
 	public static void main(String[] args) {
