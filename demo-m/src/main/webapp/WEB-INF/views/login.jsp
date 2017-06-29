@@ -47,7 +47,6 @@
 						<input type="text" name="password" class="user-password" value="密码" /> <span class="password-icon"></span>
 					</div>
 					
-					<p><a href="#">忘记密码？</a></p>
 					<input class="submit-btn" type="submit" value="登录" />
 				</form>
 			</div>

@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jianfei.d.base.BaseController;
+
+
+import com.jianfei.d.controller.base.BaseController;
 import com.jianfei.d.entity.common.MenuType;
 import com.jianfei.d.entity.common.Page;
 import com.jianfei.d.entity.system.Menu;

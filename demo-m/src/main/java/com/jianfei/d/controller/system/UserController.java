@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jianfei.d.base.BaseController;
+
 import com.jianfei.d.common.config.Constants;
 import com.jianfei.d.common.utils.PasswordHelper;
 import com.jianfei.d.entity.common.UserStatus;
@@ -36,7 +36,7 @@ import com.jianfei.d.service.system.UserService;
  */
 @Controller
 @RequestMapping(value = "/sys/system/user")
-public class UserController extends BaseController{
+public class UserController extends com.jianfei.d.controller.base.BaseController{
     
     @Autowired
 	private UserService userService;
