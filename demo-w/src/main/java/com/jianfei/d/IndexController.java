@@ -5,6 +5,11 @@
   */
 package com.jianfei.d;
 
-public class IndexController {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+
+public abstract class IndexController {
+	
+	protected Logger log = LoggerFactory.getLogger(getClass());
 }

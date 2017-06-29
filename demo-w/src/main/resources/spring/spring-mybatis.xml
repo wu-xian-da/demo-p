@@ -20,7 +20,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd"
 		default-lazy-init="true">
 	
-	<context:property-placeholder location="classpath:config/jdbc.properties"/>
+	<context:property-placeholder location="classpath:config/*.properties"/>
 	
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
 	      <property name="url" value="${jdbc.url.site}" />

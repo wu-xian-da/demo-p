@@ -14,7 +14,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 	
 	<!-- 自动扫描且只扫描@Controller (use-default-filters=false)自定义扫描 -->
-    <context:component-scan base-package="com.jianfei.d" use-default-filters="false">
+    <context:component-scan base-package="com.jianfei.d.controller" use-default-filters="false">
     	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     

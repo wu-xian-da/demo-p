@@ -5,9 +5,8 @@
   */
 package com.jianfei.d.base;
 
-
-import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;

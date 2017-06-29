@@ -11,6 +11,7 @@ import java.util.Date;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.joda.time.DateTime;
 
 /**
  * 日期工具类
@@ -191,12 +192,9 @@ public class JodaUtil extends DateUtils {
 	
 	//获得指定日期24点时间
     public static Date getNight(Date date) {  
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.set(Calendar.HOUR_OF_DAY, 24);  
-        cal.set(Calendar.SECOND, 0);  
-        cal.set(Calendar.MINUTE, 0);
-        return cal.getTime();  
+        DateTime dt = new DateTime();
+        dt.plusDays(1);
+        return dt.toDate();
     }
     
     //获得指定日期0点时间
