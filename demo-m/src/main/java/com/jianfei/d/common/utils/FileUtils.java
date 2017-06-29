@@ -24,9 +24,9 @@ public class FileUtils {
     public static String newDic(){
         StringBuilder path = new StringBuilder();
         path.append(separator)
-            .append(DateUtils.getYear()).append(separator)
-            .append(DateUtils.getMonth()).append(separator)
-            .append(DateUtils.getDay()).append(separator);
+            .append(JodaUtil.getYear()).append(separator)
+            .append(JodaUtil.getMonth()).append(separator)
+            .append(JodaUtil.getDay()).append(separator);
         return  path.toString();
     }
 
@@ -35,7 +35,7 @@ public class FileUtils {
     }
     
     public static String randomString(int id){
-        return DateUtils.formatDate(new Date(), "yyyyMMdd") + "-" + String.format("%04d", id);
+        return JodaUtil.formatDate(new Date(), "yyyyMMdd") + "-" + String.format("%04d", id);
     }
     
     public static String newFileName(String oldName, String ext){
