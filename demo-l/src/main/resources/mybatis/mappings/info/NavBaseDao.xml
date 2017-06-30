@@ -66,7 +66,8 @@
     	,
     	pn.id as "parent.id",
     	pn.nav_name as "parent.navName"
-    from tb_nav_base n, tb_nav_base pn where 1 = 1 and n.parent_id = pn.id and n.id = #{id}
+    from tb_nav_base n
+    left join tb_nav_base pn on n.parent_id = pn.id where n.id = #{id} 
   </select>
   
   <select id="findPage" resultType="com.jianfei.d.entity.info.NavBase">
@@ -74,7 +75,7 @@
     	,
     	pn.id as "parent.id",
     	pn.nav_name as "parent.navName"
-    from tb_nav_base n, tb_nav_base pn where 1 = 1 and n.parent_id = pn.id
+    from tb_nav_base n left join tb_nav_base pn on n.parent_id = pn.id where 1 = 1
     <if test="null != navName">and n.nav_name like CONCAT('%',#{navName},'%')</if>
     <if test="null != parent and null != parent.id">and n.parent_id = #{parent.id}</if>
     order by n.create_time desc
@@ -85,7 +86,24 @@
     	,
     	pn.id as "parent.id",
     	pn.nav_name as "parent.navName"
-	FROM tb_nav_base n WHERE n.nav_type = 1 AND n.nav_level = 1 AND n.nav_status = 1
+	FROM tb_nav_base n WHERE n.nav_type = 1 
+	from tb_nav_base n left join tb_nav_base pn on n.parent_id = pn.id where (n.nav_type = 1 OR n.nav_type = 2)
+	AND n.nav_level = 1 AND n.nav_status = 1
+  </select>
+  
+  <select id="getleafList" resultType="com.jianfei.d.entity.info.NavBase">
+  	SELECT 
+	    <include refid="Base_Column_List" />
+    	,
+    	pn.id as "parent.id",
+    	pn.nav_name as "parent.navName"
+	FROM tb_nav_base n
+        LEFT JOIN tb_nav_base pn
+        ON n.parent_id = pn.id
+	WHERE 1 = 1
+	AND (n.nav_type = 1 AND n.nav_level = 2) 
+	OR (n.nav_type = 2 AND n.nav_level = 1)
+	AND n.nav_status = 1
   </select>
   
   <update id="updateNavBaseStatusBatch" parameterType="java.util.List">

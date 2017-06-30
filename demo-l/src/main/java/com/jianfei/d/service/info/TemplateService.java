@@ -7,7 +7,6 @@ package com.jianfei.d.service.info;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.jianfei.d.base.service.CrudService;
@@ -16,7 +15,6 @@ import com.jianfei.d.entity.info.Template;
 
 @Service
 public class TemplateService extends CrudService<TemplateDao, Template> {
-	Logger logger = Logger.getLogger(this.getClass());
 	
 	/****
 	 * 根据模板类型查询模板
@@ -24,12 +22,6 @@ public class TemplateService extends CrudService<TemplateDao, Template> {
 	 * @return
 	 */
 	public List<Template> getListByType(Short type){
-		List<Template> template = null;
-		try {
-			template = this.dao.getListByType(type);
-		} catch (Exception e) {
-			logger.error("call:TemplateService.getListByType(Short type) exception:::"+e);
-		}
-		return template;
+		return this.dao.getListByType(type);
 	}
 }

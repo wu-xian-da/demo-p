@@ -7,7 +7,6 @@ package com.jianfei.d.service.info;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.jianfei.d.base.service.CrudService;
@@ -17,20 +16,12 @@ import com.jianfei.d.entity.info.NavBase;
 @Service
 public class NavBaseService extends CrudService<NavBaseDao, NavBase> {
 	
-	Logger logger = Logger.getLogger(this.getClass());
-	
 	/******
-	 * 获取父级可选择的栏目
+	 * 获取父级可选择的栏目(操作栏目时使用)
 	 * @return
 	 */
 	public List<NavBase> getParentList(){
-		List<NavBase> navBases = null;
-		try{
-			navBases = this.dao.getParentList();
-		}catch (Exception e) {
-			logger.error("call:NavBaseService.getParentList() exception:::" + e);
-		}
-		return navBases;
+		return this.dao.getParentList();
 	}
 	
 	/******
@@ -39,12 +30,14 @@ public class NavBaseService extends CrudService<NavBaseDao, NavBase> {
 	 * @return
 	 */
 	public int updateNavBaseStatusBatch(List<NavBase> navBases){
-		int result = 0;
-		try{
-			result = this.dao.updateNavBaseStatusBatch(navBases);
-		}catch (Exception e) {
-			logger.error("call:NavBaseService.updateNavBaseStatusBatch(List<NavBase> navBases) exception:::" + e);
-		}
-		return result;
+		return this.dao.updateNavBaseStatusBatch(navBases);
+	}
+	
+	/****
+	 * 获取可选择的叶子栏目(操作栏目信息时使用)
+	 * @return
+	 */
+	public List<NavBase> getleafList(){
+		return this.dao.getleafList();
 	}
 }
