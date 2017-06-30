@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jianfei.d.dao.info.NavInfoDao">
+  <sql id="Base_Column_List" >
+    i.id id, 
+    i.title title, 
+    i.type type, 
+    i.status status,
+    i.nav_id navId, 
+    i.check_time checkTime, 
+    i.push_status pushStatus, 
+    i.content content,
+    i.create_time createTime, 
+    i.update_time updateTime
+  </sql>
+  
+  <insert id="insert" parameterType="com.jianfei.d.entity.info.NavInfo" >
+    insert into tb_nav_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="navId != null" >
+        nav_id,
+      </if>
+      <if test="checkTime != null" >
+        check_time,
+      </if>
+      <if test="pushStatus != null" >
+        push_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="title != null" >
+        #{title},
+      </if>
+      <if test="type != null" >
+        #{type},
+      </if>
+      <if test="status != null" >
+        #{status},
+      </if>
+      <if test="navId != null" >
+        #{navId},
+      </if>
+      <if test="checkTime != null" >
+        #{checkTime},
+      </if>
+      <if test="pushStatus != null" >
+        #{pushStatus},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+      <if test="content != null" >
+        #{content},
+      </if>
+    </trim>
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from tb_nav_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <update id="update" parameterType="com.jianfei.d.entity.info.NavInfo" >
+    update tb_nav_info
+    <set >
+      <if test="title != null" >
+        title = #{title},
+      </if>
+      <if test="type != null" >
+        type = #{type},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="navId != null" >
+        nav_id = #{navId},
+      </if>
+      <if test="checkTime != null" >
+        check_time = #{checkTime},
+      </if>
+      <if test="pushStatus != null" >
+        push_status = #{pushStatus},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="content != null" >
+        content = #{content},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  
+  <select id="get" resultType="com.jianfei.d.entity.info.NavInfo" parameterType="java.lang.Long" >
+    select 
+    	<include refid="Base_Column_List" />
+    from tb_nav_info i, tb_nav_base n
+    where i.nav_id = n.id
+    and i.id = #{id}
+  </select>
+  
+  <select id="findPage" resultType="com.jianfei.d.entity.info.NavInfo" >
+    select 
+    	<include refid="Base_Column_List" />
+    from tb_nav_info i, tb_nav_base n
+    where i.nav_id = n.id
+    <if test="null != title">
+    	and i.title like CONCAT('%',#{title},'%') 
+    </if>
+    <if test="null != type">
+    	and i.type = #{type}
+    </if>
+    <if test="null != status">
+    	and i.status = #{status}
+    </if>
+    <if test="null != navBase and null != navBase.id">
+        and i.nav_id = #{navBase.id}
+    </if>
+    order by i.status asc, i.create_time desc
+  </select>
+  
+  <update id="updateNavInfoStatusBatch" parameterType="java.util.List">
+  	  <foreach collection="list" item="navInfo" index="index" separator=";">
+         UPDATE tb_nav_info
+         set status = #{status}
+         where id = #{id}
+      </foreach>
+  </update>
+</mapper>
