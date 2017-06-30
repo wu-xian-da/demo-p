@@ -10,6 +10,7 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
+import com.jianfei.d.base.annotation.FormQuery;
 import com.jianfei.d.base.entity.BaseEntity;
 /***
  * 栏目基础实体类
@@ -24,6 +25,7 @@ public class NavBase extends BaseEntity {
 	 */
 	private static final long serialVersionUID = -7195497965682548835L;
 	
+	@FormQuery
 	private String navName;//名称
 
     private Short navType;//类型(1:下辖二级菜单;2:无二级菜单;3:URL外链)
@@ -37,6 +39,9 @@ public class NavBase extends BaseEntity {
     private Short navStatus;//状态(1:展示;2:取消展示;)
 
     private Long parentId;//父级栏目ID
+    
+    @FormQuery
+    private NavBase parent = null;//父级栏目
 
     private Date createTime;
 

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jianfei.d.dao.info.NavSecondMenuDao">
+  <sql id="Base_Column_List" >
+    m.id id, 
+    m.menu_head_icon menuHeadIcon, 
+    m.menu_list_template_id menuListTemplateId, 
+    m.menu_content_template_id menuContentTemplateId, 
+    m.nav_id navId, 
+    m.create_time createTime, 
+    m.update_time update_time
+  </sql>
+  
+  <insert id="insert" parameterType="com.jianfei.d.entity.info.NavSecondMenu" >
+    insert into tb_nav_second_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuHeadIcon != null" >
+        menu_head_icon,
+      </if>
+      <if test="menuListTemplateId != null" >
+        menu_list_template_id,
+      </if>
+      <if test="menuContentTemplateId != null" >
+        menu_content_template_id,
+      </if>
+      <if test="navId != null" >
+        nav_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuHeadIcon != null" >
+        #{menuHeadIcon},
+      </if>
+      <if test="menuListTemplateId != null" >
+        #{menuListTemplateId},
+      </if>
+      <if test="menuContentTemplateId != null" >
+        #{menuContentTemplateId},
+      </if>
+      <if test="navId != null" >
+        #{navId},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+    </trim>
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from tb_nav_second_menu
+    where id = #{id}
+  </delete>
+  
+  <update id="update" parameterType="com.jianfei.d.entity.info.NavSecondMenu" >
+    update tb_nav_second_menu
+    <set >
+      <if test="menuHeadIcon != null" >
+        menu_head_icon = #{menuHeadIcon},
+      </if>
+      <if test="menuListTemplateId != null" >
+        menu_list_template_id = #{menuListTemplateId},
+      </if>
+      <if test="menuContentTemplateId != null" >
+        menu_content_template_id = #{menuContentTemplateId},
+      </if>
+      <if test="navId != null" >
+        nav_id = #{navId},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  
+  <select id="get" resultType="com.jianfei.d.entity.info.NavSecondMenu" parameterType="java.lang.Long" >
+    select 
+    	<include refid="Base_Column_List" />
+	    	,
+			lt.id AS "menuListTemplate.id",
+	    	lt.name AS "menuListTemplate.name",
+	    	lt.img_path AS "menuListTemplate.imgPath",
+	    	lt.file_path AS "menuListTemplate.filePath",
+	    	ct.id AS "menuContentTemplate.id",
+	    	ct.name AS "menuContentTemplate.name",
+	    	ct.img_path AS "menuContentTemplate.imgPath",
+	    	ct.file_path AS "menuContentTemplate.filePath"
+		FROM tb_nav_second_menu m
+		LEFT JOIN tb_template lt ON m.menu_list_template_id = lt.id
+		LEFT JOIN tb_template ct ON m.menu_content_template_id = ct.id
+    where m.id = #{id}
+  </select>
+  
+  
+  <delete id="deleteByNavId" parameterType="java.lang.Long" >
+    delete from tb_nav_second_menu
+    where nav_id = #{navId}
+  </delete>
+  
+  <update id="updateByNavId" parameterType="com.jianfei.d.entity.info.NavSecondMenu" >
+    update tb_nav_second_menu
+    <set >
+      <if test="menuHeadIcon != null" >
+        menu_head_icon = #{menuHeadIcon},
+      </if>
+      <if test="menuListTemplateId != null" >
+        menu_list_template_id = #{menuListTemplateId},
+      </if>
+      <if test="menuContentTemplateId != null" >
+        menu_content_template_id = #{menuContentTemplateId},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where nav_id = #{navId}
+  </update>
+  
+  <select id="getByNavId" resultType="com.jianfei.d.entity.info.NavSecondMenu" parameterType="java.lang.Long" >
+    select 
+    	<include refid="Base_Column_List" />
+    	,
+		lt.id AS "menuListTemplate.id",
+    	lt.name AS "menuListTemplate.name",
+    	lt.img_path AS "menuListTemplate.imgPath",
+    	lt.file_path AS "menuListTemplate.filePath",
+    	ct.id AS "menuContentTemplate.id",
+    	ct.name AS "menuContentTemplate.name",
+    	ct.img_path AS "menuContentTemplate.imgPath",
+    	ct.file_path AS "menuContentTemplate.filePath"
+		FROM tb_nav_second_menu m
+		LEFT JOIN tb_template lt ON m.menu_list_template_id = lt.id
+		LEFT JOIN tb_template ct ON m.menu_content_template_id = ct.id
+    where m.nav_id = #{navId}
+  </select>
+  
+  <select id="getListByTemplateId" resultType="com.jianfei.d.entity.info.NavSecondMenu" parameterType="java.util.Map" >
+    select 
+    	<include refid="Base_Column_List" />
+    from tb_nav_second_menu m
+    where 1 = 1
+    <if test="null != listTemplateId">
+    	and m.menu_list_template_id = #{listTemplateId}
+    </if>
+    <if test="null != contentTemplateId">
+    	and m.menu_content_template_id = #{contentTemplateId}
+    </if>
+  </select>
+</mapper>

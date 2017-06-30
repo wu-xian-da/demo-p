@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jianfei.d.dao.info.NavContentDao">
+  <sql id="Base_Column_List" >
+    c.id id, 
+    c.content_head_icon contentHeadIcon, 
+    c.content_template_id contentTemplateId, 
+    c.nav_id navId, 
+    c.create_time createTime, 
+    c.update_time updateTime
+  </sql>
+  
+  <insert id="insert" parameterType="com.jianfei.d.entity.info.NavContent" >
+    insert into tb_nav_content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contentHeadIcon != null" >
+        content_head_icon,
+      </if>
+      <if test="contentTemplateId != null" >
+        content_template_id,
+      </if>
+      <if test="navId != null" >
+        nav_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contentHeadIcon != null" >
+        #{contentHeadIcon},
+      </if>
+      <if test="contentTemplateId != null" >
+        #{contentTemplateId},
+      </if>
+      <if test="navId != null" >
+        #{navId},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+    </trim>
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from tb_nav_content
+    where id = #{id}
+  </delete>
+  
+  <update id="update" parameterType="com.jianfei.d.entity.info.NavContent" >
+    update tb_nav_content
+    <set >
+      <if test="contentHeadIcon != null" >
+        content_head_icon = #{contentHeadIcon},
+      </if>
+      <if test="contentTemplateId != null" >
+        content_template_id = #{contentTemplateId},
+      </if>
+      <if test="navId != null" >
+        nav_id = #{navId},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  
+  <select id="get" resultType="com.jianfei.d.entity.info.NavContent" parameterType="java.lang.Long" >
+    select 
+    	<include refid="Base_Column_List" />
+    	,
+    	ct.id AS "contentTemplate.id",
+    	ct.name AS "contentTemplate.name",
+    	ct.img_path AS "contentTemplate.imgPath",
+    	ct.file_path AS "contentTemplate.filePath"
+    from tb_nav_content c
+    LEFT JOIN tb_template ct ON c.content_template_id = ct.id
+    where c.id = #{id}
+  </select>
+  
+  <delete id="deleteByNavId" parameterType="java.lang.Long" >
+    delete from tb_nav_content
+    where nav_id = #{navId}
+  </delete>
+  
+  <update id="updateByNavId" parameterType="com.jianfei.d.entity.info.NavContent" >
+    update tb_nav_content
+    <set >
+      <if test="contentHeadIcon != null" >
+        content_head_icon = #{contentHeadIcon},
+      </if>
+      <if test="contentTemplateId != null" >
+        content_template_id = #{contentTemplateId},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where nav_id = #{navId}
+  </update>
+  
+  <select id="getByNavId" resultType="com.jianfei.d.entity.info.NavContent" parameterType="java.lang.Long" >
+    select 
+    	<include refid="Base_Column_List" />
+    	,
+    	ct.id AS "contentTemplate.id",
+    	ct.name AS "contentTemplate.name",
+    	ct.img_path AS "contentTemplate.imgPath",
+    	ct.file_path AS "contentTemplate.filePath"
+    from tb_nav_content c
+    LEFT JOIN tb_template ct ON c.content_template_id = ct.id
+    where c.nav_id = #{navId}
+  </select>
+  
+  <select id="getListByTemplateId" resultType="com.jianfei.d.entity.info.NavContent" parameterType="java.lang.Long" >
+    select 
+    	<include refid="Base_Column_List" />
+    from tb_nav_content c
+    where 1 = 1
+    and c.content_template_id = #{contentTemplateId}
+  </select>
+</mapper>

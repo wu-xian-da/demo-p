@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jianfei.d.dao.info.NavBaseDao">
+  <sql id="Base_Column_List" >
+    n.id id, 
+    n.nav_name navName, 
+    n.nav_type navType, 
+    n.nav_level navLevel, 
+    n.nav_icon navIcon, 
+    n.nav_order_num navOrderNum, 
+    n.nav_status navStatus, 
+    n.parent_id parentId, 
+    n.create_time createTime, 
+    n.update_time updateTime
+  </sql>
+  
+  <insert id="insert" parameterType="com.jianfei.d.entity.info.NavBase" >
+    insert into tb_nav_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="navName != null" >nav_name,</if>
+      <if test="navType != null" >nav_type,</if>
+      <if test="navLevel != null" >nav_level,</if>
+      <if test="navIcon != null" >nav_icon,</if>
+      <if test="navOrderNum != null" >nav_order_num,</if>
+      <if test="navStatus != null" >nav_status,</if>
+      <if test="parentId != null" >parent_id,</if>
+      <if test="createTime != null" >create_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="navName != null" >#{navName},</if>
+      <if test="navType != null" >#{navType},</if>
+      <if test="navLevel != null" >#{navLevel},</if>
+      <if test="navIcon != null" >#{navIcon},</if>
+      <if test="navOrderNum != null" >#{navOrderNum},</if>
+      <if test="navStatus != null" >#{navStatus},</if>
+      <if test="parentId != null" >#{parentId},</if>
+      <if test="createTime != null" >#{createTime},</if>
+    </trim>
+    
+    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+         SELECT LAST_INSERT_ID() AS id    
+   	</selectKey>
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from tb_nav_base where id = #{id}
+  </delete>
+  
+  <update id="update" parameterType="com.jianfei.d.entity.info.NavBase" >
+    update tb_nav_base
+    <set >
+      <if test="navName != null" >nav_name = #{navName},</if>
+      <if test="navType != null" >nav_type = #{navType},</if>
+      <if test="navLevel != null" >nav_level = #{navLevel},</if>
+      <if test="navIcon != null" >nav_icon = #{navIcon},</if>
+      <if test="navOrderNum != null" >nav_order_num = #{navOrderNum},</if>
+      <if test="navStatus != null" >nav_status = #{navStatus},</if>
+      <if test="parentId != null" >parent_id = #{parentId},</if>
+      <if test="updateTime != null" >update_time = #{updateTime},</if>
+    </set>
+    where id = #{id}
+  </update>
+  
+  <select id="get" resultType="com.jianfei.d.entity.info.NavBase">
+    select <include refid="Base_Column_List" />
+    	,
+    	pn.id as "parent.id",
+    	pn.nav_name as "parent.navName"
+    from tb_nav_base n, tb_nav_base pn where 1 = 1 and n.parent_id = pn.id and n.id = #{id}
+  </select>
+  
+  <select id="findPage" resultType="com.jianfei.d.entity.info.NavBase">
+    select <include refid="Base_Column_List" />
+    	,
+    	pn.id as "parent.id",
+    	pn.nav_name as "parent.navName"
+    from tb_nav_base n, tb_nav_base pn where 1 = 1 and n.parent_id = pn.id
+    <if test="null != navName">and n.nav_name like CONCAT('%',#{navName},'%')</if>
+    <if test="null != parent and null != parent.id">and n.parent_id = #{parent.id}</if>
+    order by n.create_time desc
+  </select>
+  
+  <select id="getParentList" resultType="com.jianfei.d.entity.info.NavBase">
+  	SELECT <include refid="Base_Column_List" />
+    	,
+    	pn.id as "parent.id",
+    	pn.nav_name as "parent.navName"
+	FROM tb_nav_base n WHERE n.nav_type = 1 AND n.nav_level = 1 AND n.nav_status = 1
+  </select>
+  
+  <update id="updateNavBaseStatusBatch" parameterType="java.util.List">
+  	  <foreach collection="list" item="navBase" index="index" separator=";">
+         UPDATE tb_nav_base set nav_status = #{navStatus} where id = #{id}
+      </foreach>
+  </update>
+</mapper>

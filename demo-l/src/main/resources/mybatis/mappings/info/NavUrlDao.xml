@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jianfei.d.dao.info.NavUrlDao">
+	<sql id="Base_Column_List" >
+	    u.id id, 
+	    u.url url, 
+	    u.target target, 
+	    u.nav_id navId, 
+	    u.create_time createTime, 
+	    u.update_time updateTime
+	</sql>
+  
+  <insert id="insert" parameterType="com.jianfei.d.entity.info.NavUrl" >
+    insert into tb_nav_url
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="url != null" >url,</if>
+      <if test="target != null" >target,</if>
+      <if test="navId != null" >nav_id,</if>
+      <if test="createTime != null" >create_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="url != null" >#{url},</if>
+      <if test="target != null" >#{target},</if>
+      <if test="navId != null" >#{navId},</if>
+      <if test="createTime != null" >#{createTime},</if>
+    </trim>
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from tb_nav_url where id = #{id}
+  </delete>
+  
+  <update id="update" parameterType="com.jianfei.d.entity.info.NavUrl" >
+    update tb_nav_url
+    <set >
+      <if test="url != null" >url = #{url},</if>
+      <if test="target != null" >target = #{target},</if>
+      <if test="navId != null" >nav_id = #{navId},</if>
+      <if test="updateTime != null" >update_time = #{updateTime},</if>
+    </set>
+    where id = #{id}
+  </update>
+  
+  <select id="get" resultType="com.jianfei.d.entity.info.NavUrl" parameterType="java.lang.Long" >
+    select <include refid="Base_Column_List" />
+    from tb_nav_url u where u.id = #{id}
+  </select>
+  
+  <delete id="deleteByNavId" parameterType="java.lang.Long" >
+    delete from tb_nav_url where nav_id = #{navId}
+  </delete>
+  
+  <update id="updateByNavId" parameterType="com.jianfei.d.entity.info.NavUrl" >
+    update tb_nav_url
+    <set >
+      <if test="url != null" >url = #{url},</if>
+      <if test="target != null" >target = #{target},</if>
+      <if test="updateTime != null" >update_time = #{updateTime},</if>
+    </set>
+    where nav_id = #{navId}
+  </update>
+  
+  <select id="getByNavId" resultType="com.jianfei.d.entity.info.NavUrl" parameterType="java.lang.Long" >
+    select <include refid="Base_Column_List" />
+    from tb_nav_url u where u.nav_id = #{navId}
+  </select>
+</mapper>
