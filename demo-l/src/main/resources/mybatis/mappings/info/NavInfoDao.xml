@@ -141,4 +141,11 @@
          where id = #{id}
       </foreach>
   </update>
+  
+  <update id="updateNavInfoPushStatusBatch" parameterType="java.util.List">
+  	<foreach collection="list" item="navInfo" index="index" separator=";">
+  		update tb_nav_info set push_status = #{pushStatus} where id = #{id}
+  	</foreach>
+  </update>
+  
 </mapper>

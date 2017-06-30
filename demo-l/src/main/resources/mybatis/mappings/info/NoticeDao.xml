@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jianfei.d.dao.info.NoticeDao">
+  <sql id="Base_Column_List" >
+    n.id id, 
+    n.title title, 
+    n.status status, 
+    n.check_time checkTime, 
+    n.push_status pushStatus,
+    n.content content,
+    n.create_time createTime, 
+    n.update_time updateTime
+  </sql>
+  
+  <insert id="insert" parameterType="com.jianfei.d.entity.info.Notice" >
+    insert into tb_notice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="checkTime != null" >
+        check_time,
+      </if>
+      <if test="pushStatus != null" >
+        push_status,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="title != null" >
+        #{title},
+      </if>
+      <if test="status != null" >
+        #{status},
+      </if>
+      <if test="checkTime != null" >
+        #{checkTime},
+      </if>
+      <if test="pushStatus != null" >
+        #{pushStatus},
+      </if>
+      <if test="content != null" >
+        #{content},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+    </trim>
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from tb_notice
+    where id = #{id}
+  </delete>
+  
+  <update id="update" parameterType="com.jianfei.d.entity.info.Notice" >
+    update tb_notice
+    <set >
+      <if test="title != null" >
+        title = #{title},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="checkTime != null" >
+        check_time = #{checkTime},
+      </if>
+      <if test="pushStatus != null" >
+        push_status = #{pushStatus},
+      </if>
+      <if test="content != null" >
+        content = #{content},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  
+  <select id="get" resultType="com.jianfei.d.entity.info.Notice" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_notice n
+    where n.id = #{id}
+  </select>
+  
+  <select id="findPage" resultType="com.jianfei.d.entity.info.Notice">
+  	select 
+    	<include refid="Base_Column_List" />
+    from tb_notice n
+    where 1 = 1
+    <if test="null != title and '' != title">
+        and n.title like CONCAT('%',#{title},'%') 
+    </if>
+    <if test="null != status">
+        and n.status = #{status}
+    </if>
+    <if test="null != beginCheckTime and '' != beginCheckTime">
+        and n.check_time  <![CDATA[>=]]> #{beginCheckTime}
+    </if>
+    <if test="null != endCheckTime and '' != endCheckTime">
+        and n.check_time <![CDATA[<=]]> #{endCheckTime}
+    </if>
+    order by n.status asc, n.create_time desc
+  </select>
+  
+  <update id="updateNoticeStatusBatch" parameterType="java.util.List">
+  	  <foreach collection="list" item="notice" index="index" separator=";">
+         UPDATE tb_notice
+         set status = #{notice.status}
+         where id = #{notice.id}
+      </foreach>
+  </update>
+  
+  <update id="updateNoticePushStatusBatch" parameterType="java.util.List">
+  	  <foreach collection="list" item="notice" index="index" separator=";">
+         UPDATE tb_notice
+         set push_status = #{notice.pushStatus}
+         where id = #{notice.id}
+      </foreach>
+  </update>
+</mapper>

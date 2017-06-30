@@ -10,6 +10,7 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
+import com.jianfei.d.base.annotation.FormQuery;
 import com.jianfei.d.base.entity.BaseEntity;
 
 /****
@@ -25,10 +26,12 @@ public class ImgNews extends BaseEntity {
 	 */
 	private static final long serialVersionUID = -4395341929777662474L;
 	
+	@FormQuery
 	private String title;//名称
 
     private String imgPath;//图片路径
 
+    @FormQuery
     private Short status;//状态(1:待审核;2:审核通过;3:已上刊;4:已下刊)
 
     private Date checkTime;//发布时间(审核时间)
@@ -40,5 +43,11 @@ public class ImgNews extends BaseEntity {
     private Date createTime;
 
     private Date updateTime;
+    
+    @FormQuery
+    private String beginCheckTime;
+    
+    @FormQuery
+    private String endCheckTime;
 
 }

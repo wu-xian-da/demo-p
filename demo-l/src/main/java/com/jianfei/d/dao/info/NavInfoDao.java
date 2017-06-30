@@ -13,5 +13,7 @@ import com.jianfei.d.entity.info.NavInfo;
 public interface NavInfoDao extends CrudDao<NavInfo> {
 	
 	public int updateNavInfoStatusBatch(List<NavInfo> navInfo);
+	
+	public int updateNavInfoPushStatusBatch(List<NavInfo> navInfos);
 
 }

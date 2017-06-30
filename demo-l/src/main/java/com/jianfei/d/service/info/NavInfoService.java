@@ -24,4 +24,8 @@ public class NavInfoService extends CrudService<NavInfoDao, NavInfo> {
 	public int updateNavInfoStatusBatch(List<NavInfo> navInfo){
 		return this.dao.updateNavInfoStatusBatch(navInfo);
 	}
+	
+	public int updateNavInfoPushStatusBatch(List<NavInfo> navInfos){
+		return this.dao.updateNavInfoPushStatusBatch(navInfos);
+	}
 }
