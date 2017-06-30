@@ -6,12 +6,18 @@
 package com.jianfei.d.entity.info;
 
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import com.jianfei.d.base.annotation.FormQuery;
 import com.jianfei.d.base.entity.BaseEntity;
+import com.jianfei.d.entity.common.NavStatus;
 /***
  * 栏目基础实体类
  * @author changchun.wu
@@ -25,10 +31,13 @@ public class NavBase extends BaseEntity {
 	 */
 	private static final long serialVersionUID = -7195497965682548835L;
 	
+	@NotBlank(message="栏目名称不能为空")
+	@Length(max=200,message="栏目名称长度不能超过200")
 	@FormQuery
 	private String navName;//名称
 
-    private Short navType;//类型(1:下辖二级菜单;2:无二级菜单;3:URL外链)
+	@NotBlank(message="栏目类型不能为空")
+    private Integer navType;//类型(1:下辖二级菜单;2:无二级菜单;3:URL外链)
 
     private Integer navLevel;//层级(1:一级栏目;2:二级栏目;)
 
@@ -36,7 +45,7 @@ public class NavBase extends BaseEntity {
 
     private Integer navOrderNum;//排序权重
 
-    private Short navStatus;//状态(1:展示;2:取消展示;)
+    private Integer navStatus = NavStatus.ZS.getValue();//状态(1:展示;2:取消展示;)
 
     private Long parentId;//父级栏目ID
     
@@ -53,4 +62,20 @@ public class NavBase extends BaseEntity {
     
     private NavUrl navUrl = null;//URL外链内容
 
+    //取消展示、恢复展示
+    private List<NavBase> navBases = null;
+
+    public void filterNavBases(){
+    	if(null == this.navBases){
+    		return;
+    	}
+ 
+    	Iterator<NavBase> iter = this.navBases.iterator();
+		while(iter.hasNext()){
+			NavBase r = iter.next();  
+			if(null == r || null == r.getId()){
+				iter.remove();
+			}
+		}  
+    }
 }

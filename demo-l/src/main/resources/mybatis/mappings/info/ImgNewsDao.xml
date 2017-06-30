@@ -126,16 +126,16 @@
   <update id="updateImgNewsStatusBatch" parameterType="java.util.List">
   	  <foreach collection="list" item="imgNew" index="index" separator=";">
          UPDATE tb_img_news
-         set status = #{status}
-         where id = #{id}
+         set status = #{imgNew.status}
+         where id = #{imgNew.id}
       </foreach>
   </update>
   
   <update id="updateImgNewsPushStatusBatch" parameterType="java.util.List">
   	  <foreach collection="list" item="imgNew" index="index" separator=";">
          UPDATE tb_img_news
-         set push_status = #{pushStatus}
-         where id = #{id}
+         set push_status = #{imgNew.pushStatus}
+         where id = #{imgNew.id}
       </foreach>
   </update>
 </mapper>

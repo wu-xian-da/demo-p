@@ -137,14 +137,14 @@
   <update id="updateNavInfoStatusBatch" parameterType="java.util.List">
   	  <foreach collection="list" item="navInfo" index="index" separator=";">
          UPDATE tb_nav_info
-         set status = #{status}
-         where id = #{id}
+         set status = #{navInfo.status}
+         where id = #{navInfo.id}
       </foreach>
   </update>
   
   <update id="updateNavInfoPushStatusBatch" parameterType="java.util.List">
   	<foreach collection="list" item="navInfo" index="index" separator=";">
-  		update tb_nav_info set push_status = #{pushStatus} where id = #{id}
+  		update tb_nav_info set push_status = #{navInfo.pushStatus} where id = #{navInfo.id}
   	</foreach>
   </update>
   

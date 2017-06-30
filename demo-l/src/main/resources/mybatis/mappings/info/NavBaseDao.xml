@@ -108,7 +108,7 @@
   
   <update id="updateNavBaseStatusBatch" parameterType="java.util.List">
   	  <foreach collection="list" item="navBase" index="index" separator=";">
-         UPDATE tb_nav_base set nav_status = #{navStatus} where id = #{id}
+         UPDATE tb_nav_base set nav_status = #{navBase.navStatus} where id = #{navBase.id}
       </foreach>
   </update>
 </mapper>
