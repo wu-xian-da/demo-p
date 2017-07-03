@@ -18,6 +18,7 @@ import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jianfei.d.common.config.Constants;
+import com.jianfei.d.common.utils.HttpUtils;
 import com.jianfei.d.entity.common.LoginStatus;
 import com.jianfei.d.entity.system.LogLogin;
 import com.jianfei.d.service.system.LogLoginService;
@@ -48,13 +49,13 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 
 	    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request,ServletResponse response) throws Exception {
 	        HttpServletRequest httpRequest = WebUtils.getHttpRequest(request);
-	        this.logLoginService.save(new LogLogin(getUsername(request),request.getParameterMap().toString(),new Date(),httpRequest.getHeader("User-Agent"),httpRequest.getRemoteAddr(),LoginStatus.Success));
+	        this.logLoginService.save(new LogLogin(getUsername(request),request.getParameterMap().toString(),new Date(),httpRequest.getHeader("User-Agent"),HttpUtils.getRemoteAddr(httpRequest),LoginStatus.Success));
 	        return super.onLoginSuccess(token, subject, request, response);
 	    }
 
 	    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request,ServletResponse response) {
 	    	 HttpServletRequest httpRequest = WebUtils.getHttpRequest(request);
-		     this.logLoginService.save(new LogLogin(getUsername(request),request.getParameterMap().toString(),new Date(),httpRequest.getHeader("User-Agent"),httpRequest.getRemoteAddr(),LoginStatus.Fail));  
+		     this.logLoginService.save(new LogLogin(getUsername(request),request.getParameterMap().toString(),new Date(),httpRequest.getHeader("User-Agent"),HttpUtils.getRemoteAddr(httpRequest),LoginStatus.Fail));  
 	        return super.onLoginFailure(token, e, request, response);
 	    }
 }

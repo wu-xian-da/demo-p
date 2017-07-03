@@ -8,19 +8,18 @@
 							<div class="from-gy-controls">
 								<div class="form-inline">
 								  <div class="form-group">
-								    <label>权限名称：</label>
-								    <input type="text" name="name" value="${page.entity.name }" class="form-control" placeholder="权限名称">
+								    <label>登录名：</label>
+								    <input type="text" name="user.loginName" value="${page.entity.user.loginName }" class="form-control" placeholder="登录名">
 								  </div>
 								  <div class="form-group">
-								    <label>权限标识符：</label>
-								    <input type="text" name="permission" value="${page.entity.permission }" class="form-control" placeholder="权限标识符">
+								    <label>IP：</label>
+								    <input type="text" name="ip" value="${page.entity.ip }" class="form-control" placeholder="IP">
 								  </div>
 								</div>
 							</div>
 
 							<div class="operation-box">
 								<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
-								<a href="${base }/sys/system/menu/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
 							</div>
 							</form>
 
@@ -29,30 +28,22 @@
 									<thead>
 										<tr>
 											<th>序号</th>
-											<th>权限名称</th>
-											<th>权限URL</th>
-											<th>权限标识符</th>
-											<th>权限类型</th>
-											<th>上级权限</th>
-											<th>序号</th>
-											<th>管理</th>
+											<th>登录名</th>
+											<th>请求地址</th>
+											<!-- <th>请求参数</th> -->
+											<th>IP</th>
+											<th>时间</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach items="${page.data }" var="d" varStatus="stat">
 											<tr>
 												<td>${page.beginIndex + stat.count}</td>
-												<td>${d.name }</td>
-												<td>${d.href }</td>
-												<td>${d.permission }</td>
-												<td>${d.type.name }</td>
-												<td>${d.parent.name }</td>
-												<td>${d.sort }</td>
-												<td>
-													<a href="${base }/sys/system/menu/update/${d.id}" class="edit"><i></i>编辑</a> 
-													<a href="${base }/sys/system/menu/delete/${d.id}" onclick="javascript:return confirmDel();"
-														class="delete"><i></i>删除</a>
-												</td>
+												<td>${d.user.loginName }</td>
+												<td>${d.requestUrl }</td>
+												<%-- <td>${d.params }</td> --%>
+												<td>${d.ip }</td>
+												<td><fmt:formatDate value="${d.date }" pattern="yyyy-MM-dd HH:m" type="date"/></td>
 											</tr>
 										</c:forEach>
 									</tbody>

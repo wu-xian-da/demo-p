@@ -30,13 +30,13 @@ public class LogController extends BaseController {
 	@Autowired
 	private LogAccessService logAccessService;
 	
-	@RequestMapping
+	@RequestMapping("/login")
 	public String login(Model model,LogLogin log){
 		model.addAttribute("page",this.logLoginService.findPage(log));
 		return "system/log/login";
 	}
 	
-	@RequestMapping
+	@RequestMapping("/access")
 	public String access(Model model,LogAccess log){
 		model.addAttribute("page", this.logAccessService.findPage(log));
 		return "system/log/access";
