@@ -19,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+import com.jianfei.d.common.vo.MessageStatus;
 import com.jianfei.d.controller.base.BaseController;
 import com.jianfei.d.entity.common.MenuType;
 import com.jianfei.d.entity.common.Page;
@@ -85,7 +87,7 @@ public class MenuController extends BaseController{
             super.addMessage(attrs, "菜单删除成功");
         }
         catch(Exception e){
-            super.addMessage(attrs, "当前菜单已绑定角色，请先解除绑定");
+            super.addMessage(attrs,MessageStatus.ERROR, "当前菜单已绑定角色，请先解除绑定");
         }
         return "redirect:/sys/system/menu";
     }

@@ -28,10 +28,48 @@
 			</ul>
 
 			<ul class="navbar-nav navbar-right nav-signout">
-				<li><a href="${base }/logout">安全退出</a></li>
+				<li id="change-password" data-toggle="modal" data-target="#change-password-modal">
+					<i class="glyphicon glyphicon-user"></i><a href="#">修改密码</a>
+				</li>
+				<li><i class="glyphicon glyphicon-off"></i><a href="${base }/logout">安全退出</a></li>
 			</ul>
 			<jsp:useBean id="now" class="java.util.Date" />   
 			<div class="navbar-nav navbar-right nav-week-tips">今天是<fmt:formatDate value="${now }" pattern="yyyy年MM月dd日" type="date" /></div>
 		</nav>
 	</div>
 </div>
+
+
+<!-- dialog -->
+<div class="modal fade from-gy-controls change-controls" id="change-password-modal" tabindex="-1" role="dialog" aria-labelledby="change-password-modal">
+    	<div class="modal-dialog" role="document">
+    		<div class="modal-content">
+    			<div class="modal-header">
+    				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    				<h4 class="modal-title">修改密码</h4>
+    			</div>
+    			<div class="modal-body">
+    				<form>
+    					<div class="form-group form-inline">
+    						<label class="control-label">旧密码:</label>
+    						<input type="text" class="form-control">
+    					</div>
+
+    					<div class="form-group form-inline">
+    						<label class="control-label">新密码:</label>
+    						<input type="text" class="form-control">
+    					</div>
+
+    					<div class="form-group form-inline">
+    						<label class="control-label">重复一次:</label>
+    						<input type="text" class="form-control">
+    					</div>
+    				</form>
+    			</div>
+    			<div class="modal-footer">
+    				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    				<button type="button" class="btn btn-primary">确认</button>
+    			</div>
+    		</div>
+    	</div>
+    </div>

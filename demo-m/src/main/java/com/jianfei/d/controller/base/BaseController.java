@@ -20,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jianfei.d.common.config.Constants;
 import com.jianfei.d.common.utils.SessionUtils;
+import com.jianfei.d.common.vo.Message;
+import com.jianfei.d.common.vo.MessageStatus;
 import com.jianfei.d.entity.system.Menu;
 
 public abstract class BaseController {
@@ -30,12 +32,12 @@ public abstract class BaseController {
      * 添加Flash消息
      * @param message
      */
-    protected void addMessage(RedirectAttributes redirectAttributes, String... messages) {
+    protected void addMessage(RedirectAttributes redirectAttributes,MessageStatus status ,String... messages) {
         StringBuilder sb = new StringBuilder();
         for (String message : messages){
-            sb.append(message).append(messages.length>1?"<br/>":"");
+            sb.append(message).append(messages.length>1?"<br/>":" ");
         }
-        redirectAttributes.addFlashAttribute(Constants.MESSAGE, sb.toString());
+        redirectAttributes.addFlashAttribute(Constants.MESSAGE,new Message(sb.toString(),status));
     }
     
     /**
