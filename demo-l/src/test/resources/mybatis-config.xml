@@ -5,6 +5,10 @@
 		<typeAlias type="com.jianfei.d.entity.system.Menu" />
 	</typeAliases>
 
+	<typeHandlers>
+		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.jianfei.d.entity.common.MenuType"/>
+	</typeHandlers>
+
 	<objectFactory type="com.jianfei.d.base.interceptor.PageObjectFactory" />
 	<objectWrapperFactory type="com.jianfei.d.base.interceptor.PageObjectWrapperFactory" />
 	
