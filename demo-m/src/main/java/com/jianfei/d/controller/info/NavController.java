@@ -5,6 +5,8 @@
   */
 package com.jianfei.d.controller.info;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jianfei.d.controller.base.BaseController;
+import com.jianfei.d.entity.common.NavType;
+import com.jianfei.d.entity.common.TemplateType;
 import com.jianfei.d.entity.info.NavBase;
+import com.jianfei.d.entity.info.Template;
 import com.jianfei.d.service.info.NavBaseService;
 import com.jianfei.d.service.info.NavContentService;
 import com.jianfei.d.service.info.NavSecondMenuService;
@@ -49,7 +54,11 @@ public class NavController extends BaseController{
 	private TemplateService templateService;
 	
 	private void setModel(Model model){
-		
+		List<Template> listTemplates = templateService.getListByType(TemplateType.LB.getValue());
+		List<Template> contentTemplates = templateService.getListByType(TemplateType.NR.getValue());
+		model.addAttribute("listTemplates", listTemplates);
+		model.addAttribute("contentTemplates", contentTemplates);
+		model.addAttribute("navTypes", NavType.values());
 	}
 
 	@GetMapping("/create")

@@ -21,6 +21,7 @@ import lombok.Setter;
 
 import com.jianfei.d.base.annotation.FormQuery;
 import com.jianfei.d.base.entity.BaseEntity;
+import com.jianfei.d.entity.common.InfoPushStatus;
 import com.jianfei.d.entity.common.InfoStatus;
 
 /***
@@ -46,7 +47,7 @@ public class Notice extends BaseEntity {
 	
 	private Date checkTime;//发布时间
 	
-	private Integer pushStatus;//推送状态(1:已推送,2:未推送)
+	private Integer pushStatus = InfoPushStatus.WTS.getValue();//推送状态(1:已推送,2:未推送)
 	
 	private String content;//内容
 	

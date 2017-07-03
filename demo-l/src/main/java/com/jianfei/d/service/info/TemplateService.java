@@ -21,7 +21,7 @@ public class TemplateService extends CrudService<TemplateDao, Template> {
 	 * @param type
 	 * @return
 	 */
-	public List<Template> getListByType(Short type){
+	public List<Template> getListByType(Integer type){
 		return this.dao.getListByType(type);
 	}
 }

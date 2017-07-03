@@ -12,6 +12,6 @@ import com.jianfei.d.entity.info.Template;
 
 public interface TemplateDao extends CrudDao<Template> {
 	
-	public List<Template> getListByType(Short type);
+	public List<Template> getListByType(Integer type);
 
 }
