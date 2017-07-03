@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jianfei.d.dao.system.LogLoginDao">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert into t_log_login(
+			loginName,date,userAgent,params,ip,status
+		) values (
+			#{loginName},#{date},#{userAgent},#{params},#{ip},#{status}
+		)
+	</insert>
+	
+	<select id="findPage" resultType="com.jianfei.d.entity.system.LogLogin">
+		SELECT 
+			a.id,
+			a.loginName,
+			a.date,
+			a.userAgent,
+			a.params,
+			a.ip,
+			a.status
+		FROM t_log_login a
+		<where>
+			<if test="loginName != null and loginName != ''">a.loginName=#{loginName} </if>
+			<if test="ip != null and ip != ''">AND a.ip=#{ip}</if>
+		</where>
+		ORDER BY a.id DESC
+	</select>
+</mapper>

@@ -22,7 +22,6 @@ public class Department extends BaseEntity{
 	 */
 	private static final long serialVersionUID = 6879390533831012019L;
 	
-	@NotBlank(message = "部门名称不能为空")
 	@FormQuery
 	private String name;//部门名称
 	
