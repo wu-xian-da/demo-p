@@ -12,7 +12,7 @@ package com.jianfei.d.common.config;
  */
 public interface Constants {
     
-    String SITE_NAME = "siteName";
+    //String SITE_NAME = "siteName";
     
     /**
      * 用户权限菜单
@@ -27,32 +27,32 @@ public interface Constants {
     /**
      * 查询参数字符串
      */
-    String SEARCH_PARAMS = "searchParams";
+    //String SEARCH_PARAMS = "searchParams";
     
     
     /**
      * 模板中模块数据集
      */
-    String COMPONENT_VO = "componentVos";
+    //String COMPONENT_VO = "componentVos";
     
     
     /**
      * 模板ID
      */
-    String TEMPLATE_ID = "template_id";
+    //String TEMPLATE_ID = "template_id";
     
     
     
     /**
      * 站点
      */
-    String SITE = "site_session";
+    //String SITE = "site_session";
 
     
     /**
      * 默认页码大小
      */
-    int PAGE_SIZE = 8;
+    //int PAGE_SIZE = 8;
     
 
     /**
@@ -63,7 +63,7 @@ public interface Constants {
     /**
      * 错误key
      */
-    String ERROR = "error";
+    //String ERROR = "error";
 
     /**
      * 管理员

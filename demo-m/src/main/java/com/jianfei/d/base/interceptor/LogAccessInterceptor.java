@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.jianfei.d.common.utils.HttpUtils;
@@ -28,14 +29,13 @@ public class LogAccessInterceptor extends HandlerInterceptorAdapter{
 	@Autowired
 	private LogAccessService logAccessService;
 	
-	public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object handler) throws Exception{
+	public void postHandle(HttpServletRequest request,HttpServletResponse response,Object handler,ModelAndView modelAndView) throws Exception{
 		User user = SessionUtils.getUser();
 		try {
 			this.logAccessService.save(new LogAccess(user,new Date(),request.getRequestURI(),request.getParameterMap().toString(),HttpUtils.getRemoteAddr(request)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return true;
 	}
 	
 }

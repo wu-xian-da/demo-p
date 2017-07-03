@@ -38,9 +38,9 @@ public class SessionUtils {
         return (User)SecurityUtils.getSubject().getPrincipal();
     }
     
-    public static void removeSite(){
+  /*  public static void removeSite(){
         removeSessionArrtibute(Constants.SITE);
-    }
+    }*/
     
     /**
      * remove Session Attribute

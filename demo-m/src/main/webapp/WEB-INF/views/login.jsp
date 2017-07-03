@@ -46,7 +46,9 @@
 					<div class="login-input-control">
 						<input type="text" name="password" class="user-password" value="密码" /> <span class="password-icon"></span>
 					</div>
-					
+					<c:if test="${not empty message }">
+						<div class="login-input-control" style="text-align:center;">${message }</div>
+					</c:if>
 					<input class="submit-btn" type="submit" value="登录" />
 				</form>
 			</div>

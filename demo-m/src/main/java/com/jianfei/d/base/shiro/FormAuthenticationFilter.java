@@ -29,33 +29,35 @@ import com.jianfei.d.service.system.LogLoginService;
  */
 public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.FormAuthenticationFilter{
 	
+	private static final String UA = "User-Agent";
+	
 	@Autowired
 	private LogLoginService logLoginService;
 	
-	 protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
-	        String username = getUsername(request);
-	        String password = getPassword(request);
-	        boolean rememberMe = isRememberMe(request);
-	        String host = super.getHost(request);
+	/*protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
+        String username = getUsername(request);
+        String password = getPassword(request);
+        boolean rememberMe = isRememberMe(request);
+        String host = super.getHost(request);
 
-	        return new UsernamePasswordToken(username, password.toCharArray(), rememberMe, host);
-	    }
+        return new UsernamePasswordToken(username, password.toCharArray(), rememberMe, host);
+    }*/
 
-	    protected void setFailureAttribute(ServletRequest request, AuthenticationException ae) {
-	    	ae.printStackTrace();
-	    	request.setAttribute(Constants.MESSAGE, "登陆出错");
-	        super.setFailureAttribute(request, ae);
-	    }
+    protected void setFailureAttribute(ServletRequest request, AuthenticationException ae) {
+    	ae.printStackTrace();
+    	request.setAttribute(Constants.MESSAGE, "登陆出错");
+        super.setFailureAttribute(request, ae);
+    }
 
-	    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request,ServletResponse response) throws Exception {
-	        HttpServletRequest httpRequest = WebUtils.getHttpRequest(request);
-	        this.logLoginService.save(new LogLogin(getUsername(request),request.getParameterMap().toString(),new Date(),httpRequest.getHeader("User-Agent"),HttpUtils.getRemoteAddr(httpRequest),LoginStatus.Success));
-	        return super.onLoginSuccess(token, subject, request, response);
-	    }
+    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request,ServletResponse response) throws Exception {
+        HttpServletRequest httpRequest = WebUtils.getHttpRequest(request);
+        this.logLoginService.save(new LogLogin(getUsername(request),request.getParameterMap().toString(),new Date(),httpRequest.getHeader(UA),HttpUtils.getRemoteAddr(httpRequest),LoginStatus.Success));
+        return super.onLoginSuccess(token, subject, request, response);
+    }
 
-	    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request,ServletResponse response) {
-	    	 HttpServletRequest httpRequest = WebUtils.getHttpRequest(request);
-		     this.logLoginService.save(new LogLogin(getUsername(request),request.getParameterMap().toString(),new Date(),httpRequest.getHeader("User-Agent"),HttpUtils.getRemoteAddr(httpRequest),LoginStatus.Fail));  
-	        return super.onLoginFailure(token, e, request, response);
-	    }
+    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request,ServletResponse response) {
+    	 HttpServletRequest httpRequest = WebUtils.getHttpRequest(request);
+	     this.logLoginService.save(new LogLogin(getUsername(request),request.getParameterMap().toString(),new Date(),httpRequest.getHeader(UA),HttpUtils.getRemoteAddr(httpRequest),LoginStatus.Fail));  
+        return super.onLoginFailure(token, e, request, response);
+    }
 }
