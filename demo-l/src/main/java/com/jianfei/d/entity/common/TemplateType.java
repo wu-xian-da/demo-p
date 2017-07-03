@@ -11,24 +11,12 @@ package com.jianfei.d.entity.common;
  */
 public enum TemplateType {
 	
-	LB("列表页模板",1),NR("内容页模板",2);
+	LB("列表页模板"),NR("内容页模板");
 	
 	private String name;
 	
-	private int value;
-	
-	public static String getName(int value){
-		for (TemplateType u : TemplateType.values()) {
-			if (u.getValue() == value) {
-				return u.name;
-			}
-		}
-		return null;
-	}
-	
-	private TemplateType(String name, int value) {
+	private TemplateType(String name) {
 		this.name = name;
-		this.value = value;
 	}
 
 	public String getName() {
@@ -38,14 +26,5 @@ public enum TemplateType {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getValue() {
-		return value;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
-	
 	
 }

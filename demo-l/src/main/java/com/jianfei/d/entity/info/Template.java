@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import com.jianfei.d.base.entity.BaseEntity;
+import com.jianfei.d.entity.common.TemplateType;
 
 /****
  * 模板实体类
@@ -31,7 +32,7 @@ public class Template extends BaseEntity{
 	
 	private String filePath;//模板文件路径
 	
-	private Short type;//类型(1:列表页模板,2:内容页模板)
+	private TemplateType type;//类型(1:列表页模板,2:内容页模板)
 	
 	private Date createTime;
 	

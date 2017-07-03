@@ -82,7 +82,7 @@ public class ImgNewsController extends BaseController{
 	public String checkSHTG(ImgNews imgNews,RedirectAttributes attrs){
 		imgNews.fileterImgNewss();
 		for (ImgNews news : imgNews.getImgNews()) {
-			news.setStatus(InfoStatus.SHTG.getValue());
+			news.setStatus(InfoStatus.SHTG);
 			news.setCheckTime(new Date());
 		}
 		this.imgNewsService.updateImgNewsStatusBatch(imgNews.getImgNews());
@@ -100,7 +100,7 @@ public class ImgNewsController extends BaseController{
 	public String checkYXK(ImgNews imgNews,RedirectAttributes attrs){
 		imgNews.fileterImgNewss();
 		for (ImgNews news : imgNews.getImgNews()) {
-			news.setStatus(InfoStatus.YXK.getValue());
+			news.setStatus(InfoStatus.YXK);
 			news.setCheckTime(new Date());
 		}
 		this.imgNewsService.updateImgNewsStatusBatch(imgNews.getImgNews());
@@ -118,7 +118,7 @@ public class ImgNewsController extends BaseController{
 	public String checkYSK(ImgNews imgNews,RedirectAttributes attrs){
 		imgNews.fileterImgNewss();
 		for (ImgNews news : imgNews.getImgNews()) {
-			news.setStatus(InfoStatus.YSK.getValue());
+			news.setStatus(InfoStatus.YSK);
 			news.setCheckTime(new Date());
 		}
 		this.imgNewsService.updateImgNewsStatusBatch(imgNews.getImgNews());

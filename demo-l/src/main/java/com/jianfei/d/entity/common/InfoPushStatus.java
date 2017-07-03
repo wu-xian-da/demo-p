@@ -12,25 +12,22 @@ package com.jianfei.d.entity.common;
  */
 public enum InfoPushStatus {
 	
-	YTS("已推送",1),WTS("未推送",2);
+	YTS("已推送"),WTS("未推送");
 	
 	private String name;
 	
-	private int value;
-	
-	private InfoPushStatus(String name,int value){
+	private InfoPushStatus(String name){
 		this.name = name;
-		this.setValue(value);
 	}
 	
-	public static String getName(int value){
+	/*public static String getName(int value){
 		for (InfoPushStatus u : InfoPushStatus.values()) {
 			if (u.getValue() == value) {
 				return u.name;
 			}
 		}
 		return null;
-	}
+	}*/
 
 	public String getName() {
 		return name;
@@ -40,11 +37,4 @@ public enum InfoPushStatus {
 		this.name = name;
 	}
 	
-	public int getValue() {
-		return value;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
 }

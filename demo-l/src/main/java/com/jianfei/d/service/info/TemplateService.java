@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.jianfei.d.base.service.CrudService;
 import com.jianfei.d.dao.info.TemplateDao;
+import com.jianfei.d.entity.common.TemplateType;
 import com.jianfei.d.entity.info.Template;
 
 @Service
@@ -21,7 +22,7 @@ public class TemplateService extends CrudService<TemplateDao, Template> {
 	 * @param type
 	 * @return
 	 */
-	public List<Template> getListByType(Integer type){
+	public List<Template> getListByType(TemplateType type){
 		return this.dao.getListByType(type);
 	}
 }

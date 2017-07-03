@@ -54,8 +54,8 @@ public class NavController extends BaseController{
 	private TemplateService templateService;
 	
 	private void setModel(Model model){
-		List<Template> listTemplates = templateService.getListByType(TemplateType.LB.getValue());
-		List<Template> contentTemplates = templateService.getListByType(TemplateType.NR.getValue());
+		List<Template> listTemplates = templateService.getListByType(TemplateType.LB);
+		List<Template> contentTemplates = templateService.getListByType(TemplateType.NR);
 		model.addAttribute("listTemplates", listTemplates);
 		model.addAttribute("contentTemplates", contentTemplates);
 		model.addAttribute("navTypes", NavType.values());

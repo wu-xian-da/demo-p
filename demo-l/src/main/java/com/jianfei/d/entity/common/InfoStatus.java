@@ -11,17 +11,14 @@ package com.jianfei.d.entity.common;
  */
 public enum InfoStatus {
 	
-	DSH("待审核",1),SHTG("审核通过",2),YSK("已上刊",3),YXK("已下刊",4);
+	DSH("待审核"),SHTG("审核通过"),YSK("已上刊"),YXK("已下刊");
 
 	private String name;
 	
-	private int value;
-	
-	private InfoStatus(String name,int value){
+	private InfoStatus(String name){
 		this.name = name;
-		this.value = value;
 	}
-	
+	/*
 	public static String getName(int value){
 		for (InfoStatus u : InfoStatus.values()) {
 			if (u.getValue() == value) {
@@ -29,7 +26,7 @@ public enum InfoStatus {
 			}
 		}
 		return null;
-	}
+	}*/
 	
 	public String getName() {
 		return name;
@@ -39,11 +36,4 @@ public enum InfoStatus {
 		this.name = name;
 	}
 
-	public int getValue() {
-		return value;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
 }

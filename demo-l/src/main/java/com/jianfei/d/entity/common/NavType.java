@@ -11,24 +11,12 @@ package com.jianfei.d.entity.common;
  */
 public enum NavType {
 	
-	XXEJCD("下辖二级菜单",1),WEJCD("无二级菜单",2),URLWL("URL外链",3);
+	XXEJCD("下辖二级菜单"),WEJCD("无二级菜单"),URLWL("URL外链");
 	
 	private String name;
 	
-	private int value;
-
-	public static String getName(int value){
-		for (NavType u : NavType.values()) {
-			if (u.getValue() == value) {
-				return u.name;
-			}
-		}
-		return null;
-	}
-	
-	private NavType(String name, int value) {
+	private NavType(String name) {
 		this.name = name;
-		this.value = value;
 	}
 
 	public String getName() {
@@ -39,13 +27,4 @@ public enum NavType {
 		this.name = name;
 	}
 
-	public int getValue() {
-		return value;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
-	
-	
 }

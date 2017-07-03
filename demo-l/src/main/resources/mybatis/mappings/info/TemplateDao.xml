@@ -51,7 +51,7 @@
     from tb_template t where t.id = #{id}
   </select>
   
-  <select id="getListByType" parameterType="java.lang.Integer" resultType="com.jianfei.d.entity.info.Template">
+  <select id="getListByType" resultType="com.jianfei.d.entity.info.Template">
     select <include refid="Base_Column_List" />
     from tb_template t where t.type = #{type}
   </select>
