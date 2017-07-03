@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
+
 import com.jianfei.d.common.config.Constants;
 import com.jianfei.d.common.utils.PasswordHelper;
+import com.jianfei.d.common.vo.MessageStatus;
 import com.jianfei.d.entity.common.UserStatus;
 import com.jianfei.d.entity.system.User;
 import com.jianfei.d.service.system.DepartmentService;
@@ -79,7 +81,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
         passwordHelper.encryptPassword(user);//加密密码
         user.setCreateDate(new Date());
 		userService.save(user);
-		super.addMessage(attrs, "保存用户成功");
+		super.addMessage(attrs,MessageStatus.SUC, "保存用户成功");
 		return "redirect:/sys/system/user";
 	}
 
@@ -107,7 +109,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
         }
         
         userService.save(user);
-        super.addMessage(attrs, "更新用户成功");
+        super.addMessage(attrs,MessageStatus.SUC, "更新用户成功");
         return "redirect:/sys/system/user";
     }
 
@@ -115,12 +117,12 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
 	public String delete(@PathVariable("pid") Long id, RedirectAttributes attrs) {
 	    User user = userService.get(id);
 	    if(user != null && user.getLoginName().equals(Constants.ADMIN)){
-	        super.addMessage(attrs, "管理员用户不可以删除");
+	        super.addMessage(attrs,MessageStatus.WARN, "管理员用户不可以删除");
 	        return "redirect:/sys/system/user";
 	    }
 	    
 	    this.userService.delete(id);
-        super.addMessage(attrs, "删除用户成功");
+        super.addMessage(attrs,MessageStatus.SUC, "删除用户成功");
 		return "redirect:/sys/system/user";
 	}
 	
@@ -133,7 +135,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
             passwordHelper.encryptPassword(u);//加密密码
         }
         this.userService.initPasswordBatch(user.getUsers());
-        super.addMessage(attrs, user.getLoginName() + "密码初始化成功, 默认为：" + Constants.INIT_PASSWORD);
+        super.addMessage(attrs,MessageStatus.SUC, user.getLoginName() + "密码初始化成功, 默认为：" + Constants.INIT_PASSWORD);
         return "redirect:/sys/system/user";
     }
 	
@@ -146,7 +148,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
 	    }
 	    
 	    this.userService.updateUserStatusBatch(user.getUsers());
-	    super.addMessage(attrs, "启用成功");
+	    super.addMessage(attrs,MessageStatus.SUC, "启用成功");
 	    return "redirect:/sys/system/user";
 	}
 	
@@ -159,7 +161,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
         }
         
         this.userService.updateUserStatusBatch(user.getUsers());
-        super.addMessage(attrs, "禁用成功");
+        super.addMessage(attrs,MessageStatus.SUC, "禁用成功");
         return "redirect:/sys/system/user";
     }
 	

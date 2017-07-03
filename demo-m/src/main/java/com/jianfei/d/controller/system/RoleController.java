@@ -19,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+import com.jianfei.d.common.vo.MessageStatus;
 import com.jianfei.d.controller.base.BaseController;
 import com.jianfei.d.entity.system.Role;
 import com.jianfei.d.service.system.MenuService;
@@ -68,7 +70,7 @@ public class RoleController extends BaseController{
         
         role.filterResource(); //去除空元素
         this.roleService.save(role);
-        super.addMessage(attrs, "保存角色成功");
+        super.addMessage(attrs,MessageStatus.SUC, "保存角色成功");
         return "redirect:/sys/system/role";
     }
     
@@ -97,7 +99,7 @@ public class RoleController extends BaseController{
         
         role.filterResource(); //去除空元素
         this.roleService.update(role);
-        super.addMessage(attrs, "角色更新成功");
+        super.addMessage(attrs,MessageStatus.SUC, "角色更新成功");
         return "redirect:/sys/system/role";
     }
     
@@ -105,10 +107,10 @@ public class RoleController extends BaseController{
     public String delete(@PathVariable("pid") Long id, RedirectAttributes attrs){
         try{
             this.roleService.delete(id);
-            super.addMessage(attrs, "角色删除成功");
+            super.addMessage(attrs,MessageStatus.SUC, "角色删除成功");
         }
         catch(Exception e){
-            super.addMessage(attrs, "角色删除失败，有用户正在使用当前角色");
+            super.addMessage(attrs,MessageStatus.SUC, "角色删除失败，有用户正在使用当前角色");
         }
         return "redirect:/sys/system/role";
     }

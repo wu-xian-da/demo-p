@@ -57,7 +57,7 @@ public class MenuController extends BaseController{
         }
         
         this.menuService.save(menu);
-        super.addMessage(attrs, "菜单保存成功");
+        super.addMessage(attrs,MessageStatus.SUC, "菜单保存成功");
         return "redirect:/sys/system/menu";
     }
     
@@ -76,7 +76,7 @@ public class MenuController extends BaseController{
         }
         
         this.menuService.update(menu);
-        super.addMessage(attrs, "菜单更新成功");
+        super.addMessage(attrs,MessageStatus.SUC, "菜单更新成功");
         return "redirect:/sys/system/menu";
     }
     
@@ -84,7 +84,7 @@ public class MenuController extends BaseController{
     public String delete(@PathVariable("pid") Long id, RedirectAttributes attrs){
         try{
             this.menuService.delete(id);
-            super.addMessage(attrs, "菜单删除成功");
+            super.addMessage(attrs,MessageStatus.SUC, "菜单删除成功");
         }
         catch(Exception e){
             super.addMessage(attrs,MessageStatus.ERROR, "当前菜单已绑定角色，请先解除绑定");

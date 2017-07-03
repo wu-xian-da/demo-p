@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jianfei.d.common.vo.MessageStatus;
 import com.jianfei.d.controller.base.BaseController;
 import com.jianfei.d.entity.common.InfoStatus;
 import com.jianfei.d.entity.info.ImgNews;
@@ -86,7 +87,7 @@ public class ImgNewsController extends BaseController{
 			news.setCheckTime(new Date());
 		}
 		this.imgNewsService.updateImgNewsStatusBatch(imgNews.getImgNews());
-		super.addMessage(attrs, "审核通过成功");
+		super.addMessage(attrs,MessageStatus.SUC ,"审核通过成功");
 		return "";
 	}
 	
@@ -104,7 +105,7 @@ public class ImgNewsController extends BaseController{
 			news.setCheckTime(new Date());
 		}
 		this.imgNewsService.updateImgNewsStatusBatch(imgNews.getImgNews());
-		super.addMessage(attrs, "下刊成功");
+		super.addMessage(attrs,MessageStatus.SUC ,"下刊成功");
 		return "";
 	}
 	
@@ -122,7 +123,7 @@ public class ImgNewsController extends BaseController{
 			news.setCheckTime(new Date());
 		}
 		this.imgNewsService.updateImgNewsStatusBatch(imgNews.getImgNews());
-		super.addMessage(attrs, "上刊成功");
+		super.addMessage(attrs,MessageStatus.SUC, "上刊成功");
 		return "";
 	}
 	
