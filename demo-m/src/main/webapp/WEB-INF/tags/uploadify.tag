@@ -25,10 +25,10 @@ $(function(){
 				return;
 			}
 			
-			var item = '<img style="width:90px;height:60px;" src="' + dataObj.url +'" />' +
+			var item = '<img style="width:180px;height:120px; border:1px solid #ccc; margin-top:10px;" src="' + dataObj.url +'" />' +
 						'<input type="hidden" name="${hiddenName}" value="'+dataObj.url+'">';
 			$('#${moduleName }_box').html(item);
-			window._resize();
+			window._resize('.infomation-management-edit');
 		}
 	}));
 });

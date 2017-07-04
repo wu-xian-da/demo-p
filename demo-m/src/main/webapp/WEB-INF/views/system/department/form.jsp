@@ -5,7 +5,7 @@
 	<div class="col-md-12">
 		<div class="box information-management-edit">
 			<h2>${empty department.id ? "新增" : "编辑" }信息</h2>
-			<form method="post">
+			<form method="post" id="department_form">
 			<input type="hidden" name="id" value="${department.id }">
 		
 		<div class="row">
@@ -13,10 +13,10 @@
 				<hr>
 				<div class="row row-list">
 					<div class="col-md-1">
-						<label>信息名称：</label>
+						<label>部门名称：</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" name="name" value="${department.name }" class="form-control" placeholder="信息名称">
+						<input type="text" name="name" value="${department.name }" class="form-control {required:true,maxlength:50}" placeholder="部门名称">
 					</div>
 				</div>
 	
@@ -40,7 +40,7 @@
 						<label>显示序号：</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" name="sort" value="${department.sort }" class="form-control" placeholder="显示序号">
+						<input type="text" name="sort" value="${department.sort }" class="form-control {required:true,digits:true,maxlength:4}" placeholder="显示序号">
 					</div>
 				</div>
 	
@@ -60,3 +60,11 @@
 	
 		</div>
 	</div>
+	
+<script type="text/javascript">
+	$("#department_form").validate({
+		errorPlacement: function(error,element){
+			error.appendTo(element.parent());
+		}
+	});
+</script>

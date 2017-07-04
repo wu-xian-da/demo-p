@@ -5,7 +5,7 @@
 					<div class="col-md-12">
 						<div class="box information-management-edit sysmanage-user-add">
 							<h2>${empty user.id ? "新增" : "编辑" }用户</h2>
-							<form method="post">
+							<form method="post" id="user_form">
 							<input type="hidden" name="id" value="${user.id }">
 							
 							<div class="row">
@@ -16,7 +16,7 @@
 											<label>登录名：</label>
 										</div>
 										<div class="col-md-8">
-											<input type="text" name="loginName" value="${user.loginName }" class="form-control" placeholder="用户名">
+											<input type="text" name="loginName" value="${user.loginName }" class="form-control {required:true,maxlength:20}" placeholder="用户名">
 										</div>
 									</div>
 
@@ -25,7 +25,7 @@
 											<label>真实姓名：</label>
 										</div>
 										<div class="col-md-8">
-											<input type="text" name="name" value="${user.name }" class="form-control" placeholder="真实姓名">
+											<input type="text" name="name" value="${user.name }" class="form-control {required:true,maxlength:20}" placeholder="真实姓名">
 										</div>
 									</div>
 
@@ -44,7 +44,7 @@
 												<label>密码：</label>
 											</div>
 											<div class="col-md-8">
-												<input type="password" name="password" class="form-control" placeholder="密码">
+												<input type="password" name="password" class="form-control {required:true,minlength:6,maxlength:30}" placeholder="密码">
 											</div>
 										</div>
 	
@@ -53,7 +53,7 @@
 												<label>重复密码：</label>
 											</div>
 											<div class="col-md-8">
-												<input type="password" name="rePassword" class="form-control" placeholder="重复密码">
+												<input type="password" name="rePassword" class="form-control {required:true,minlength:6,maxlength:30,equalTo:'#password'}" placeholder="重复密码">
 											</div>
 										</div>
 									</c:if>
@@ -98,3 +98,10 @@
 						</div>
 					</div>
 				</div>
+<script type="text/javascript">
+	$("#role_form").validate({
+		errorPlacement: function(error,element){
+			error.appendTo(element.parent());
+		}
+	});
+</script>

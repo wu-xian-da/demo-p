@@ -71,7 +71,7 @@
 											<label>显示序号：</label>
 										</div>
 										<div class="col-md-8">
-											<input type="text" name="sort" value="${menu.sort }" class="form-control" placeholder="显示序号">
+											<input type="text" name="sort" value="${menu.sort }" class="form-control {required:true,digits:true,maxlength:4}" placeholder="显示序号">
 										</div>
 									</div>
 									

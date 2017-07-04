@@ -6,7 +6,7 @@
 						<div class="box information-management-edit sysmanage-role-add">
 							<h2>${empty role.id ? "新增" : "编辑" }角色</h2>
 							
-							<form method="post">
+							<form method="post" id="role_form">
 							<input type="hidden" name="id" value="${role.id }">
 							<input type="hidden" name="oldName" value="${role.name }">
 							
@@ -18,7 +18,7 @@
 											<label>角色名称：</label>
 										</div>
 										<div class="col-md-8">
-											<input type="text" name="name" value="${role.name }" class="form-control" placeholder="角色名称">
+											<input type="text" name="name" value="${role.name }" class="form-control {required:true,maxlength:20}" placeholder="角色名称">
 										</div>
 									</div>
 
@@ -31,7 +31,7 @@
 											<c:forEach items="${menus }" var="p">
 												<div class="row">
 													<div class="col-md-12">
-														<label><input type="checkbox"  name="menus[${menuIndex }].id" value="${p.id }"
+														<label><input type="checkbox" is-child="true" data-parent="${p.id }" name="menus[${menuIndex }].id" value="${c.id }"
 															<c:if test="${functions:in(role.menus, p)}">checked</c:if>>${p.name }</label>
 														<c:set var="menuIndex" value="${menuIndex + 1 }" />
 													</div>
@@ -69,3 +69,10 @@
 				</div>
 			</div>
 		</div>
+<script type="text/javascript">
+	$("#role_form").validate({
+		errorPlacement: function(error,element){
+			error.appendTo(element.parent());
+		}
+	});
+</script>
