@@ -28,18 +28,20 @@
 		
         <!-- 设置但JDBC类型为空时,某些驱动程序 要指定值,default:OTHER，插入空值时不需要指定类型 -->
         <setting name="jdbcTypeForNull" value="NULL"/>
+        
+        <setting name="logImpl" value="LOG4J"/>
 	</settings>
 	
 	<typeHandlers>
-		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.jianfei.w.entity.common.MenuType"/>
-		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.jianfei.w.entity.common.UserStatus"/> 
+		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.jianfei.d.entity.common.MenuType"/>
+		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.jianfei.d.entity.common.UserStatus"/> 
 	</typeHandlers>
 	
-	<objectFactory type="com.jianfei.w.base.interceptor.PageObjectFactory" />
-	<objectWrapperFactory type="com.jianfei.w.base.interceptor.PageObjectWrapperFactory" />
+	<objectFactory type="com.jianfei.d.base.interceptor.PageObjectFactory" />
+	<objectWrapperFactory type="com.jianfei.d.base.interceptor.PageObjectWrapperFactory" />
 	
 	<plugins>
-	    <plugin interceptor="com.jianfei.w.base.interceptor.PageInterceptor"></plugin>
+	    <plugin interceptor="com.jianfei.d.base.interceptor.PageInterceptor"></plugin>
 	</plugins>
 </configuration>
 

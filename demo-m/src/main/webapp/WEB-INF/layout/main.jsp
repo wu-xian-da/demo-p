@@ -8,12 +8,12 @@
 <head>
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<script src="${baseStatic }/js/jquery.min.js" type="text/javascript"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@ include file="/WEB-INF/include/css.jsp" %>
 <title>贵阳机场智慧管理平台</title>
 <sitemesh:head/>
 
-<script src="${baseStatic }/js/jquery.min.js" type="text/javascript"></script>
 <script>
 var context_path_ = '${base}';
 var sid_s = '${cookie.sid.value}';

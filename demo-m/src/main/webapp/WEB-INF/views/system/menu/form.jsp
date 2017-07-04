@@ -6,7 +6,7 @@
 					<div class="col-md-12">
 						<div class="box information-management-edit">
 							<h2>${empty menu.id ? "新增" : "编辑" }信息</h2>
-							<form method="post">
+							<form method="post" id="menu_form">
 							<input type="hidden" name="id" value="${menu.id }">
 							
 							<div class="row">
@@ -17,7 +17,7 @@
 											<label>权限名称：</label>
 										</div>
 										<div class="col-md-8">
-											<input type="text" name="name" value="${menu.name }" class="form-control" placeholder="权限名称">
+											<input type="text" name="name" value="${menu.name }" class="form-control {required:true,maxlength:20}" placeholder="权限名称">
 										</div>
 									</div>
 									
@@ -26,7 +26,7 @@
 											<label>权限URL：</label>
 										</div>
 										<div class="col-md-8">
-											<input type="text" name="href" value="${menu.href }" class="form-control" placeholder="权限URL">
+											<input type="text" name="href" value="${menu.href }" class="form-control {maxlength:200}" placeholder="权限URL">
 										</div>
 									</div>
 									
@@ -35,7 +35,7 @@
 											<label>权限标识符：</label>
 										</div>
 										<div class="col-md-8">
-											<input type="text" name="permission" value="${menu.permission }" class="form-control" placeholder="权限标识符">
+											<input type="text" name="permission" value="${menu.permission }" class="form-control {maxlength:80}" placeholder="权限标识符">
 										</div>
 									</div>
 									
@@ -99,3 +99,10 @@
 						</div>
 					</div>
 				</div>
+<script type="text/javascript">
+	$("#menu_form").validate({
+		errorPlacement: function (error, element){
+			error.appendTo(element.parent());  
+		}
+	});
+</script>

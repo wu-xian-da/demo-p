@@ -28,6 +28,7 @@ $(function(){
 			var item = '<img style="width:90px;height:60px;" src="' + dataObj.url +'" />' +
 						'<input type="hidden" name="${hiddenName}" value="'+dataObj.url+'">';
 			$('#${moduleName }_box').html(item);
+			window._resize();
 		}
 	}));
 });
