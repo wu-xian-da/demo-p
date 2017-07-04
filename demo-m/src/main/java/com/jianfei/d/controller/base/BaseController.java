@@ -75,9 +75,9 @@ public abstract class BaseController {
         List<Menu> userMenus = ((List<Menu>)SessionUtils.getSessionAttribute(Constants.USER_MENUS));
         for(Menu m : userMenus){
             if(m.getHref().equals(baseUrl)){
-               List<Menu> a = m.getChilds();
-               if (a.size() > 0 && a.get(0).getChilds().size() > 0) {
-            	   return "redirect:"+a.get(0).getChilds().get(0).getHref();
+               List<Menu> childs = m.getChilds();
+               if (childs.size() > 0) {
+            	   return "redirect:"+childs.get(0).getHref();
                }
             }
         }

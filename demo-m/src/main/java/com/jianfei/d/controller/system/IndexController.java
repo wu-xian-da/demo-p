@@ -14,7 +14,7 @@ import com.jianfei.d.controller.base.BaseController;
  * 模块首页
  * @author changchun.wu
  */
-@Controller("SystemIndex")
+@Controller("SystemIndexController")
 public class IndexController extends BaseController {
 	
 	@GetMapping("/sys/system")

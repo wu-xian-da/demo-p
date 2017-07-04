@@ -8,6 +8,7 @@ package com.jianfei.d.controller.log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jianfei.d.controller.base.BaseController;
@@ -30,15 +31,20 @@ public class LogController extends BaseController {
 	@Autowired
 	private LogAccessService logAccessService;
 	
+	@GetMapping
+	public String index(){
+		return super.getBaseIndex("/sys/log");
+	}
+	
 	@RequestMapping("/login")
 	public String login(Model model,LogLogin log){
 		model.addAttribute("page",this.logLoginService.findPage(log));
-		return "system/log/login";
+		return "log/login";
 	}
 	
 	@RequestMapping("/access")
 	public String access(Model model,LogAccess log){
 		model.addAttribute("page", this.logAccessService.findPage(log));
-		return "system/log/access";
+		return "log/access";
 	}
 }
