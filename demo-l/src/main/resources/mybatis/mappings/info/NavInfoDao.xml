@@ -148,4 +148,10 @@
   	</foreach>
   </update>
   
+  <select id="getListByNavId" resultType="com.jianfei.d.entity.info.NavInfo" parameterType="java.lang.Long">
+  	select <include refid="Base_Column_List"></include>
+  	from tb_nav_info i,tb_nav_base n
+  	where i.nav_id = n.id and i.nav_id = #{navId}
+  </select>
+  
 </mapper>

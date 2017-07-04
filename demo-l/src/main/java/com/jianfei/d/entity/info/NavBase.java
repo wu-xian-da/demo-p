@@ -19,6 +19,7 @@ import com.jianfei.d.base.annotation.FormQuery;
 import com.jianfei.d.base.entity.BaseEntity;
 import com.jianfei.d.entity.common.NavLevel;
 import com.jianfei.d.entity.common.NavStatus;
+import com.jianfei.d.entity.common.NavType;
 /***
  * 栏目基础实体类
  * @author changchun.wu
@@ -38,7 +39,7 @@ public class NavBase extends BaseEntity {
 	private String navName;//名称
 
 	@NotBlank(message="栏目类型不能为空")
-    private Integer navType;//类型(1:下辖二级菜单;2:无二级菜单;3:URL外链)
+    private NavType navType;//类型(1:下辖二级菜单;2:无二级菜单;3:URL外链)
 
     private NavLevel navLevel;//层级(1:一级栏目;2:二级栏目;)
 

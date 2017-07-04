@@ -12,6 +12,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
@@ -27,6 +28,24 @@ import com.jianfei.d.entity.system.Menu;
 public abstract class BaseController {
     
     protected Logger log = LoggerFactory.getLogger(getClass());
+    
+    /**
+     * 添加Flash消息
+     * @param message
+     */
+    protected void addMessage(Model model, String... messages) {
+        StringBuilder sb = new StringBuilder();
+        for (String message : messages){
+            sb.append(message).append(messages.length>1?"<br/>":"");
+        }
+        if(model instanceof RedirectAttributes){
+            RedirectAttributes redirectAttributes = (RedirectAttributes)model;
+            redirectAttributes.addFlashAttribute(Constants.MESSAGE, new Message(sb.toString(), MessageStatus.SUC));
+        }
+        else{
+            model.addAttribute(Constants.MESSAGE, new Message(sb.toString(), MessageStatus.SUC));
+        }
+    }
     
     /**
      * 添加Flash消息

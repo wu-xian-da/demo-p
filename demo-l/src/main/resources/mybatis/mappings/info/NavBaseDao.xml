@@ -111,4 +111,14 @@
          UPDATE tb_nav_base set nav_status = #{navBase.navStatus} where id = #{navBase.id}
       </foreach>
   </update>
+  
+  <select id="getListByParentId" parameterType="java.lang.Long" resultType="com.jianfei.d.entity.info.NavBase">
+  	select <include refid="Base_Column_List"></include>
+  		,
+  		pn.id AS "parent.id",
+  		pn.nav_name AS "parent.navName",
+  	from tb_nav_base n
+  	LEFT JOIN tb_nav_base pn ON n.parent.id = pn.id
+  	where n.parent_id = #{parentId}
+  </select>
 </mapper>
