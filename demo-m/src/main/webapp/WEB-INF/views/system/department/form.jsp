@@ -4,7 +4,7 @@
 <div id="app-main-container" class="white-bg">
 	<div class="col-md-12">
 		<div class="box information-management-edit">
-			<h2>新增信息</h2>
+			<h2>${empty department.id ? "新增" : "编辑" }信息</h2>
 			<form method="post">
 			<input type="hidden" name="id" value="${department.id }">
 		

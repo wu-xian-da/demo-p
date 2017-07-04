@@ -34,5 +34,9 @@ public class RoleService extends CrudService<RoleDao,Role>{
 	public Integer getCountByRoleName(Role role){
 		return this.dao.getCountByRoleName(role);
 	}
+	
+	public Role getRoleMenus(Long id){
+		return this.dao.getRoleMenus(id);
+	}
 
 }

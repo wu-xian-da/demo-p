@@ -24,6 +24,7 @@ import com.jianfei.d.common.utils.PasswordHelper;
 import com.jianfei.d.common.utils.SessionUtils;
 import com.jianfei.d.entity.common.UserStatus;
 import com.jianfei.d.entity.system.User;
+import com.jianfei.d.service.system.RoleService;
 import com.jianfei.d.service.system.UserService;
 
 /**
@@ -35,6 +36,9 @@ public class ShiroDbRealm extends AuthorizingRealm{
 	@Autowired
     private UserService userService;
     
+	@Autowired
+	private RoleService roleService;
+	
     @Autowired
     private PasswordHelper passwordHelper;
 	 /**
@@ -48,7 +52,8 @@ public class ShiroDbRealm extends AuthorizingRealm{
         User user = this.validateUser(token);
         token.setPassword(user.getPassword().toCharArray());
         //this.loginSuccess(user); //登陆成功后业务处理
-        
+        user.setRole(this.roleService.getRoleMenus(user.getRole().getId()));
+        SessionUtils.setSessionAttribute(Constants.USER_MENUS, user.getRole().getUserMenus());
         return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
     }
 
@@ -59,13 +64,14 @@ public class ShiroDbRealm extends AuthorizingRealm{
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
         User user = (User) principals.getPrimaryPrincipal();
         if (user != null) {
-            user = this.userService.findByLoginName(user.getLoginName());
+            //user = this.userService.findByLoginName(user.getLoginName());
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-            if(user.getRole() != null){ //权限
+           /* if(user.getRole() != null){ //权限
                 List<String> perms = user.getRole().getStringPermissions();
                 info.addStringPermissions(perms);
                 SessionUtils.setSessionAttribute(Constants.USER_PERMS, perms);
-            }
+            }*/
+            info.addStringPermissions(user.getRole().getUserPermissions());
             return info;
         }
         return null;

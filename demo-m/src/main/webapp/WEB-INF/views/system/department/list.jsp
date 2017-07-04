@@ -4,6 +4,7 @@
 <div id="app-main-container" class="white-bg">
 		<div class="col-md-12">
 			<div class="box information-management-box">
+				<%@ include file="/WEB-INF/include/message.jsp"%>
 				<form method="post">
 				<div class="from-gy-controls">
 					<div class="form-inline">

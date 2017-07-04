@@ -4,6 +4,7 @@
 <div id="app-main-container" class="white-bg">
 					<div class="col-md-12">
 						<div class="box information-management-box">
+						<%@ include file="/WEB-INF/include/message.jsp" %>
 							<h3>条件检索</h3>
 							<form method="post">
 							<div class="from-gy-controls">

@@ -4,7 +4,7 @@
 <div id="app-main-container" class="white-bg">
 					<div class="col-md-12">
 						<div class="box information-management-edit sysmanage-role-add">
-							<h2>新增角色</h2>
+							<h2>${empty role.id ? "新增" : "编辑" }角色</h2>
 							
 							<form method="post">
 							<input type="hidden" name="id" value="${role.id }">
@@ -37,7 +37,7 @@
 													</div>
 												</div>
 												<c:if test="${fn:length(p.childs) > 0 }">
-													<div class="row">
+													<div class="row sysmanage-role-child">
 														<div class="col-md-12">
 															<c:forEach items="${p.childs }" var="c">
 																<label><input type="checkbox" name="menus[${menuIndex }].id" value="${c.id }"

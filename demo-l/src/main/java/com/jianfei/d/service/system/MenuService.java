@@ -19,4 +19,8 @@ public class MenuService extends CrudService<MenuDao,Menu>{
 	public List<Menu> getParent(){
 		return this.dao.getParent();
 	}
+	
+	public List<Menu> findParentChild(){
+		return this.dao.findParentChild();
+	}
 }

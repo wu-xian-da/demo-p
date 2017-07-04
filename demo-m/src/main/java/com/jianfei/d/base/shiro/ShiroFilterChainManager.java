@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
 import org.apache.shiro.web.filter.mgt.NamedFilterList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class ShiroFilterChainManager {
 	}
 
 	public void initFilterChains(List<Menu> menus) {
- /*filterChainManager.getFilterChains().clear();
+		filterChainManager.getFilterChains().clear();
         
         if (defaultFilterChains != null) {
             filterChainManager.getFilterChains().putAll(defaultFilterChains);
@@ -48,6 +49,6 @@ public class ShiroFilterChainManager {
                 filterChainManager.addToChain(m.getHref(), "perms", m.getPermission());
             }
         }
-        filterChainManager.addToChain("/sys/**", "user");*/		
+        filterChainManager.addToChain("/sys/**", "user");
 	}
 }

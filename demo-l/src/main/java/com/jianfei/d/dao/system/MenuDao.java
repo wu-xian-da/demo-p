@@ -14,4 +14,6 @@ public interface MenuDao extends CrudDao<Menu> {
 	
 	public List<Menu> getParent();
 	
+	public List<Menu> findParentChild();
+	
 }

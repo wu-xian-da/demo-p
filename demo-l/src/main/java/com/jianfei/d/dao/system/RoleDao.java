@@ -16,4 +16,6 @@ public interface RoleDao extends CrudDao<Role> {
 	
 	public Integer getCountByRoleName(Role role);
 	
+	public Role getRoleMenus(Long id);
+	
 }

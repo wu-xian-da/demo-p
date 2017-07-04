@@ -1,6 +1,7 @@
 <%@ taglib prefix="sitemesh" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/WEB-INF/include/taglib.jsp"%>
+<c:set var="currentUrl" value="${pageContext.request.servletPath }"/>
 
 <!DOCTYPE html>
 <html>

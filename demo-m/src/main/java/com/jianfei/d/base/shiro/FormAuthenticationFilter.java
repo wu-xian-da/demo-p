@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -50,14 +51,21 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
     }
 
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request,ServletResponse response) throws Exception {
-        HttpServletRequest httpRequest = WebUtils.getHttpRequest(request);
-        this.logLoginService.save(new LogLogin(getUsername(request),request.getParameterMap().toString(),new Date(),httpRequest.getHeader(UA),HttpUtils.getRemoteAddr(httpRequest),LoginStatus.Success));
-        return super.onLoginSuccess(token, subject, request, response);
+    	this.saveLogLogin(request,LoginStatus.Success);
+    	return super.onLoginSuccess(token, subject, request, response);
     }
 
-    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request,ServletResponse response) {
-    	 HttpServletRequest httpRequest = WebUtils.getHttpRequest(request);
-	     this.logLoginService.save(new LogLogin(getUsername(request),request.getParameterMap().toString(),new Date(),httpRequest.getHeader(UA),HttpUtils.getRemoteAddr(httpRequest),LoginStatus.Fail));  
-        return super.onLoginFailure(token, e, request, response);
+    private void saveLogLogin(ServletRequest request, LoginStatus status) {
+		ShiroHttpServletRequest httpRequest = (ShiroHttpServletRequest) request;
+		try {
+			this.logLoginService.save(new LogLogin(getUsername(request),request.getParameterMap().toString(),new Date(),httpRequest.getHeader(UA),HttpUtils.getRemoteAddr(httpRequest),status));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request,ServletResponse response) {
+    	this.saveLogLogin(request, LoginStatus.Fail); 
+		return super.onLoginFailure(token, e, request, response);
     }
 }

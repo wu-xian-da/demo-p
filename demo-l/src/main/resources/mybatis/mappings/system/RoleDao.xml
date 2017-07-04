@@ -6,6 +6,7 @@
 		<result property="name" column="name"/>
 		<collection property="menus" ofType="com.jianfei.d.entity.system.Menu">
 			<id property="id" column="menu_id"/>
+			<id property="name" column="menu_name"/>
 		</collection>
 	</resultMap>
 	
@@ -14,6 +15,20 @@
 		<result property="name" column="name"/>
 		<collection property="users" ofType="com.jianfei.d.entity.system.User">
 			<id property="loginName" column="loginName"/>
+		</collection>
+	</resultMap>
+	
+	<resultMap type="com.jianfei.d.entity.system.Role" id="roleMenuMap">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<collection property="menus" ofType="com.jianfei.d.entity.system.Menu">
+			<id property="id" column="menu_id"/>
+			<id property="name" column="menu_name"/>
+			<id property="parent.id" column="menu_parent"/>
+			<id property="permission" column="permission"/>
+			<id property="type" column="menu_type"/>
+			<id property="href" column="href"/>
+			<id property="icon" column="icon"/>
 		</collection>
 	</resultMap>
 	
@@ -61,5 +76,15 @@
 			<if test="name != null and name != ''">a.name like CONCAT('%',#{name},'%')</if>
 		</where>
 		ORDER BY a.id DESC
+	</select>
+	
+	<select id="getRoleMenus" resultMap="roleMenuMap">
+		select 
+			a.id,a.name,b.menu_id,c.name AS menu_name,c.parent_id AS menu_parent,c.permission,c.type AS menu_type,c.href,c.icon
+		from t_role a
+		LEFT JOIN t_role_menu b ON b.role_id = a.id
+		LEFT JOIN t_menu c ON b.menu_id = c.id
+		where a.id = #{id}
+		ORDER BY c.parent_id,c.sort
 	</select>
 </mapper>

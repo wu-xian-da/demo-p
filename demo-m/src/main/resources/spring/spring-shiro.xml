@@ -31,15 +31,15 @@
             </map>
         </property>
 		<property name="filterChainDefinitions">
-			<!-- 
+
 			<value>
 				/login = authc
 				/logout = logout
 			</value>
-			 -->
-			 <value>
+
+			 <!-- <value>
 			 	/** = anon
-			 </value>
+			 </value> -->
 		</property>
 	</bean>
 	

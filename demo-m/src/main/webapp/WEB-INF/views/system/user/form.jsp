@@ -4,7 +4,7 @@
 <div id="app-main-container" class="white-bg">
 					<div class="col-md-12">
 						<div class="box information-management-edit sysmanage-user-add">
-							<h2>新增用户</h2>
+							<h2>${empty user.id ? "新增" : "编辑" }用户</h2>
 							<form method="post">
 							<input type="hidden" name="id" value="${user.id }">
 							

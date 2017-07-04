@@ -15,7 +15,7 @@
 		<div class="logo-title">智慧管理平台</div>
 		<nav class="navbar-collapse bs-navbar-collapse">
 			<ul class="navbar-nav navbar-navigation">
-				<li class="navbar-navigation-usermanage"><a
+				<!-- <li class="navbar-navigation-usermanage"><a
 					href="./user-management.html">会员管理</a></li>
 				<li class="navbar-navigation-infomanage active"
 					class="navbar-navigation-infomanage"><a
@@ -24,7 +24,13 @@
 					href="./information-push-pending.html">信息推送</a></li>
 				<li class="navbar-navigation-coustomer"><a href="#">在线客服</a></li>
 				<li class="navbar-navigation-sysmanage"><a
-					href="./sysmanage-user.html">系统管理</a></li>
+					href="./sysmanage-user.html">系统管理</a></li> -->
+					
+				<c:forEach items="${userMenus }" var="menu">
+					<li <c:if test="${fn:startsWith(currentUrl, menu.href)}">class="active"</c:if>>
+						<a href="${base }${menu.href}"><img src="${menu.icon }">${menu.name }</a>
+					</li>
+				</c:forEach>
 			</ul>
 
 			<ul class="navbar-nav navbar-right nav-signout">

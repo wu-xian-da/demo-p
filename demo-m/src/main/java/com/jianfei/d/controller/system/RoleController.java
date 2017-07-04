@@ -46,7 +46,7 @@ public class RoleController extends BaseController{
     private UserService userService;
     
     private void setModel(Model model){
-        model.addAttribute("menus", this.menuService.findAll());
+        model.addAttribute("menus", this.menuService.findParentChild());
     }
 
     @GetMapping("/create")

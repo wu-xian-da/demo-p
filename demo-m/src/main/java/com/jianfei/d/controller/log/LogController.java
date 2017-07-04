@@ -3,7 +3,7 @@
   *@author changchun.wu
   *2017年7月3日下午2:45:21
   */
-package com.jianfei.d.controller.system;
+package com.jianfei.d.controller.log;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

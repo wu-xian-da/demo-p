@@ -44,7 +44,7 @@ public class Role extends BaseEntity{
 	 * 获取权限字符串
 	 * @return
 	 */
-	public List<String> getStringPermissions(){
+	public List<String> getUserPermissions(){
 		List<String> permissions = new ArrayList<String>();
 		for (Menu r : menus) {
 			if (StringUtils.isNotBlank(r.getPermission())) {
@@ -58,10 +58,10 @@ public class Role extends BaseEntity{
 	 * 获取用户父类菜单,供系统后台树形展示
 	 * @return
 	 */
-	public List<Menu> getUserParentMenu(){
+	public List<Menu> getUserMenus(){
 		List<Menu> parentMenus = new ArrayList<Menu>();
 		for (Menu m : menus) {
-			if (m.getParent() == null && m.getType() == MenuType.MENU) {
+			if((m.getParent() == null || m.getParent().getId() == -1) && m.getType() == MenuType.MENU){
 				setChildrenMenus(m);//寻找当前菜单的子菜单
 				parentMenus.add(m);
 			}
@@ -70,13 +70,14 @@ public class Role extends BaseEntity{
 	}
 
 	private void setChildrenMenus(Menu parent) {
-		List<Menu> children = new ArrayList<Menu>();
-		for (Menu menu : menus) {
-			if (menu.getType() == MenuType.MENU && menu.getParent() != null && parent.getId() == menu.getParent().getId()) {
-				children.add(menu);
-				setChildrenMenus(menu);
+		List<Menu> childs = new ArrayList<Menu>();
+		for (Menu m : menus) {
+			if(m.getType() == MenuType.MENU && m.getParent() != null && parent.getId() == m.getParent().getId()){
+				childs.add(m);
+				setChildrenMenus(m);
 			}
 		}
+		parent.setChilds(childs);
 	}
 	
 	/****
