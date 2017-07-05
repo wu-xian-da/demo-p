@@ -8,7 +8,7 @@
     n.status status, 
     n.check_time checkTime, 
     n.push_status pushStatus, 
-    n.content content
+    n.content content,
     n.create_time createTime, 
     n.update_time updateTime
   </sql>

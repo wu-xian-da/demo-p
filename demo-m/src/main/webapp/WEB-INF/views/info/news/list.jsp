@@ -51,9 +51,9 @@
 
 			<div class="operation-box">
 				<button type="button" class="btn btn-gy btn-new"><i></i>下刊</button>
-				<button type="button" class="btn btn-gy btn-recovery"><i></i>恢复上刊</button>
+				<button type="button" class="btn btn-gy btn-recovery"><i></i>上刊</button>
 				<button type="button" class="btn btn-gy btn-push"><i></i>信息推送</button>
-				<a href="./information-management-photo-add.html" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
+				<a href="${base }/sys/info/news/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
 				<button type="button" class="btn btn-gy btn-adpot"><span class="glyphicon glyphicon-ok"></span>审核通过</button>
 			</div>
 
