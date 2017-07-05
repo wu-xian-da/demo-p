@@ -33,8 +33,8 @@ public class ImgNews extends BaseEntity {
 	 */
 	private static final long serialVersionUID = -4395341929777662474L;
 	
-	@NotBlank(message="图片标题不能为空")
-	@Length(max=500,message="图片标题长度不能超过500")
+	//@NotBlank(message="图片标题不能为空")
+	//@Length(max=500,message="图片标题长度不能超过500")
 	@FormQuery
 	private String title;//图片标题
 

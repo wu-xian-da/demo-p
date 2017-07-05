@@ -37,8 +37,8 @@ public class Notice extends BaseEntity {
 	 */
 	private static final long serialVersionUID = -889210723462472954L;
 
-	@NotBlank(message="紧急公告标题不能为空")
-	@Length(max=500, message="紧急公告标题长度不能超过500")
+	//@NotBlank(message="紧急公告标题不能为空")
+	//@Length(max=500, message="紧急公告标题长度不能超过500")
 	@FormQuery
 	private String title;
 	

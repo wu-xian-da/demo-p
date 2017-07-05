@@ -5,8 +5,11 @@
 	<div class="col-md-12">
 		<div class="box information-management-edit">
 		
-			<h2>新增信息</h2>
+			<h2>${empty navInfo.id ? "新增" : "编辑" }信息</h2>
 
+ 			<form id="navInfo_form" method="post">
+			<!-- hidden -->
+			<input type="hidden" name="id" value="${navInfo.id }" />
 			<div class="row">
 				<div class="col-md-12">
 
@@ -18,7 +21,7 @@
 						</div>
 
 						<div class="col-md-8">
-							<input type="text" class="form-control" placeholder="信息名称">
+							<input type="text" name="title" value="${navInfo.title}" class="form-control" placeholder="信息名称">
 						</div>
 					</div>
 
@@ -28,13 +31,13 @@
 						</div>
 
 						<div class="col-md-8">
-							<select class="form-control">
-								<option value="">请选择(单选)</option>
-								<option value="">紧急通知</option>
-								<option value="">航班动态</option>
-								<option value="">机场向导</option>
-								<option value="">机场服务</option>
-								<option value="">机场交通</option>
+							<select class="form-control" name="navId">
+								<option value="">---请选择(单选)---</option>
+								<c:forEach items="${navList}" var="nav">
+									<option value="${nav.id}"
+										<c:if test="${nav.id eq navInfo.navId }">selected="selected"</c:if>
+									></option>
+								</c:forEach>
 							</select>
 						</div>
 					</div>
@@ -45,15 +48,13 @@
 						</div>
 
 						<div class="col-md-8">
-							<label class="radio-inline">
-							  <input type="radio" name="" value="文章类"> 文章类
-							</label>
-							<label class="radio-inline">
-							  <input type="radio" name="" value="交通类"> 交通类
-							</label>
-							<label class="radio-inline">
-							  <input type="radio" name="" value="xx类"> xx类
-							</label>
+							<c:forEach items="${infoType}" var="infoType">
+								<label class="radio-inline">
+									<input type="radio" name="type" value="${infoType }"
+										<c:if test="${infoType eq navInfo.type }">checked="checked"</c:if>
+									>${infoType.name }
+								</label>
+							</c:forEach>
 						</div>
 					</div>
 	
@@ -62,22 +63,27 @@
 				  			<label>信息内容：</label>
 				  		</div>
 				  		<div class="col-md-8">
-				  			<div id="editor"></div>
+				  			<div id="editor">${navInfo.content }</div>
 				  		</div>
 			  	    </div>
 
 				  	<div class="row row-list">
 				  		<div class="col-md-1"></div>
 				  		<div class="col-md-8">
-				  			<div class="operation-box">
-								<button type="button" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-ok-sign"></span>保存</button>
-							</div>
+				  			<button type="submit" class="btn btn-gy btn-query">
+								<span class="glyphicon glyphicon-ok-sign"></span>
+								保存
+							</button>
+							<button type="button" onclick="javascript:history.back();" class="btn btn-gy btn-sort">
+								<span class="glyphicon glyphicon-arrow-left"></span>
+								返回
+							</button>
 				  		</div>
 				  	</div>
 				  	
 				</div>
 			</div>
-			
+			</form>
 		</div>
 	</div>
 </div>
