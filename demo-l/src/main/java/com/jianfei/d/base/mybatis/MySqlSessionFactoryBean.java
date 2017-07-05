@@ -12,7 +12,10 @@ import static org.springframework.util.StringUtils.hasLength;
 import static org.springframework.util.StringUtils.tokenizeToStringArray;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -30,6 +33,8 @@ import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.mapping.Environment;
+import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.reflection.factory.ObjectFactory;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
@@ -50,6 +55,9 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.NestedIOException;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
+
+import com.jianfei.d.base.mybatis.interceptor.PageInterceptor;
+import com.jianfei.d.entity.common.Page;
 
 
 public class MySqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, InitializingBean, ApplicationListener<ApplicationEvent> {
@@ -525,11 +533,47 @@ public class MySqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, 
         LOGGER.debug("Property 'mapperLocations' was not specified or no matching resources found");
       }
     }
-
+    
+    List<Interceptor> interceptors = configuration.getInterceptors();
+    for (Interceptor interceptor : interceptors) {
+		if (interceptor instanceof PageInterceptor) {
+			this.setPageInterceptorPageId((PageInterceptor)interceptor,configuration.getMappedStatements());
+		}
+	}
     return this.sqlSessionFactoryBuilder.build(configuration);
   }
 
-  /**
+  private void setPageInterceptorPageId(PageInterceptor pageInterceptor, Collection<MappedStatement> mappedStatements){
+	  try{
+		  for(Object obj : mappedStatements){
+			  if(obj instanceof MappedStatement){
+				  MappedStatement ms = (MappedStatement)obj;
+				  if(ms.getSqlCommandType() == SqlCommandType.SELECT){
+					  String id = ms.getId();
+					  String className = id.substring(0, id.lastIndexOf("."));
+					  String methodName = id.substring(id.lastIndexOf(".") + 1);
+					  try {
+						  Class<?> daoClass = Class.forName(className);
+						  Method daoClassMethods[] = daoClass.getMethods();
+						  for (Method method : daoClassMethods) {
+							  if (method.getName().equals(methodName) && method.getReturnType() == Page.class) {
+								  pageInterceptor.addPageId(id);
+							  }
+						  }
+					  } catch (Exception e) {
+						  e.printStackTrace();
+					  }
+				  }
+			  }
+		  }
+	  }
+	  catch(Exception e){
+		  e.printStackTrace();
+	  }
+	
+  }
+
+/**
    * {@inheritDoc}
    */
   @Override

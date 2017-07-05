@@ -36,7 +36,7 @@ public class PageInterceptor implements Interceptor {
     private final String PAGE_SQL = "%s limit %s,%s";
 
     private final Set<String> cacheMapperPageId = new HashSet<>();
-    private final Set<String> cacheMapperNotPageId = new HashSet<>();
+    //private final Set<String> cacheMapperNotPageId = new HashSet<>();
     
 
     public Object intercept(Invocation invocation) throws Throwable {
@@ -70,27 +70,6 @@ public class PageInterceptor implements Interceptor {
             if (cacheMapperPageId.contains(id)) {
                 return Plugin.wrap(target, this);
             }
-
-            if (cacheMapperNotPageId.contains(id)) {
-                return target;
-            }
-
-            String className = id.substring(0, id.lastIndexOf("."));
-            String methodName = id.substring(id.lastIndexOf(".") + 1);
-            try {
-                Class<?> daoClass = Class.forName(className);
-                Method daoClassMethods[] = daoClass.getMethods();
-                for (Method method : daoClassMethods) {
-                    if (method.getName().equals(methodName) && method.getReturnType() == Page.class) {
-                        //针对Mybatis Mapper 返回值为Page类型的 进行分页拦截代理
-                        cacheMapperPageId.add(id);
-                        return Plugin.wrap(target, this);
-                    }
-                }
-                cacheMapperNotPageId.add(id);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
         return target;
     }
@@ -98,4 +77,8 @@ public class PageInterceptor implements Interceptor {
     public void setProperties(Properties properties) {
 
     }
+
+	public void addPageId(String id) {
+		this.cacheMapperPageId.add(id);
+	}
 }
