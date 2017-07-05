@@ -1,5 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/taglib.jsp"%>
+<style>
+	.uploadify{
+		display: inline-block
+	}
+</style>
 
 <div id="app-main-container" class="white-bg">
 	<div class="col-md-4 sysmanage-site-box-wrap">
@@ -63,10 +68,10 @@
 								<!-- 回显图片 -->
 						        <c:choose>
 						        	<c:when test="${not empty navBase.navIcon }">
-						        		<img id="navIconView" src="${navBase.navIcon }" alt="">
+						        		<img id="navIconView" src="${navBase.navIcon }" alt="" style="width:75px;height:77px;">
 						        	</c:when>
 						        	<c:otherwise>
-						        		<img id="navIconView" src="${baseStatic }/img/login-logo.png" alt="">
+						        		<img id="navIconView" src="${baseStatic }/img/login-logo.png" alt="" style="width:75px;height:77px;">
 						        	</c:otherwise>
 						        </c:choose>
 								<input type="file" id="navIconFile" name="navIconFile" />
@@ -117,10 +122,10 @@
 								   <!-- 回显图片 -->
 								    <c:choose>
 							        	<c:when test="${not empty navBase.navSecondMenu.menuHeadIcon }">
-							        		<img id="menuHeadIconView" src="${navBase.navSecondMenu.menuHeadIcon }" alt="">
+							        		<img id="menuHeadIconView" src="${navBase.navSecondMenu.menuHeadIcon }" alt="" style="width:75px;height:77px;">
 							        	</c:when>
 							        	<c:otherwise>
-							        		<img id="menuHeadIconView" src="${baseStatic }/img/login-logo.png" alt="">
+							        		<img id="menuHeadIconView" src="${baseStatic }/img/login-logo.png" alt="" style="width:75px;height:77px;">
 							        	</c:otherwise>
 							        </c:choose>
 								    <input type="file" id="menuHeadIconFile" name="menuHeadIconFile" />
@@ -420,6 +425,7 @@
 		var navIconUploadifyPro = deepClone(uploadifyPro);
 		navIconUploadifyPro.sizeLimit = "100k";
 		navIconUploadifyPro.buttonText = "上传图标";
+		navIconUploadifyPro.buttonClass = "btn btn-gy btn-upload";
         navIconUploadifyPro.onUploadSuccess = dealNavIconUpload;
 		
 		var menuHeadIconUploadifyPro = deepClone(uploadifyPro);
