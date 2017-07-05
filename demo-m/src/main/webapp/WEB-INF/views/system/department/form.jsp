@@ -25,7 +25,8 @@
 						<label>所属部门：</label>
 					</div>
 					<div class="col-md-8">
-						<sys:smartselect moduleId="department-form-div" />
+						<sys:smartselect hiddenName="parent.id" message="请选择所属部门" moduleId="department-form-div" 
+						treeData="${departmentTree }" hiddenValue="${department.parent.id }" />
 					</div>
 				</div>
 	

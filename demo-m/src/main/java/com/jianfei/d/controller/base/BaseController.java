@@ -6,6 +6,7 @@
 package com.jianfei.d.controller.base;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,10 +20,12 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.alibaba.fastjson.JSONObject;
 import com.jianfei.d.common.config.Constants;
 import com.jianfei.d.common.utils.SessionUtils;
 import com.jianfei.d.common.vo.Message;
 import com.jianfei.d.common.vo.MessageStatus;
+import com.jianfei.d.entity.common.TreeVo;
 import com.jianfei.d.entity.system.Menu;
 
 public abstract class BaseController {
@@ -84,12 +87,37 @@ public abstract class BaseController {
         return null;
     }
     
-    @InitBinder  
+    @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(Date.class, 
-                new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
-        
-        binder.setAutoGrowCollectionLimit(Integer.MAX_VALUE);  
+        binder.setAutoGrowCollectionLimit(2048);
+        //日期转换
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true)); 
+    }
+    
+    protected String buildTree(List<TreeVo> tree){
+        if(tree == null || tree.isEmpty()){
+            return null;
+        }
+        List<String> list = new ArrayList<String>();
+        for(TreeVo parent : tree){
+            int level = 1;
+            list.add(JSONObject.toJSONString(parent, TreeVo.parentFilter));
+            if(parent.getChilds() != null && !parent.getChilds().isEmpty()){
+                this.buildChild(parent.getChilds(), list, level);
+            }
+        }
+        return list.toString();
+    }
+    
+    private void buildChild(List<TreeVo> childs, List<String> list, int level){
+        for(TreeVo child : childs){
+            child.setLevel(++level);
+            list.add(JSONObject.toJSONString(child, TreeVo.childFilter));
+            if(child.getChilds() != null && !child.getChilds().isEmpty()){
+                this.buildChild(child.getChilds(), list, level);
+            }
+        }
     }
     
 }

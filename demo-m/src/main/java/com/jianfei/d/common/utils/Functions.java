@@ -7,7 +7,9 @@ package com.jianfei.d.common.utils;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 
 public class Functions {
@@ -52,6 +54,12 @@ public class Functions {
         return false;
     }
 
+    public static String listToString (List<Long> ids){
+    	if (ids == null || ids.isEmpty()) {
+			return null;
+		}
+    	return StringUtils.join(ids.toArray(),",");
+    }
 }
 
 

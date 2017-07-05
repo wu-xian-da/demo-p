@@ -123,8 +123,13 @@ public class Page<T> {
 		if (fieldValue != null) {
 			//String fieldValueStr = fieldValue.toString();
 			String fieldValueStr = null;
-			if (fieldValue.getClass() == Date.class) {
+			if (fieldValue instanceof Date) {
 				fieldValueStr = JodaUtil.format((Date)fieldValue);
+			} else if (fieldValue instanceof List) {
+				List<Object> list =(List<Object>) fieldValue;
+				for (int i = 0; i < list.size(); i++) {
+					params.add(key+"["+i+"]="+list.get(i).toString());
+				}
 			} else {
 				fieldValueStr = fieldValue.toString();
 			}

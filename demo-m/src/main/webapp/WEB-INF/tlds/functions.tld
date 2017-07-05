@@ -27,4 +27,11 @@
         <function-class>com.jianfei.w.common.utils.Functions</function-class>
         <function-signature>boolean equals(java.lang.Iterable,java.lang.String)</function-signature>
     </function>
+    
+    <function>
+    	<description>id to string</description>
+    	<name>listToString</name>
+    	<function-class>com.jianfei.w.common.utils.Functions</function-class>
+    	<function-signature>String listToString(java.util.List)</function-signature>
+    </function>
 </taglib>

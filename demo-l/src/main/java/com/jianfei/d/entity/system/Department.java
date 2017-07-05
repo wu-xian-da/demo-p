@@ -5,6 +5,8 @@
   */
 package com.jianfei.d.entity.system;
 
+import java.util.List;
+
 import org.hibernate.validator.constraints.NotBlank;
 
 import lombok.Getter;
@@ -25,8 +27,10 @@ public class Department extends BaseEntity{
 	@FormQuery
 	private String name;//部门名称
 	
-	@FormQuery("parent.id")
 	private Department parent;//上级部门
 	
 	private Integer sort = 1;//排序号(默认1)
+	
+	@FormQuery
+	private List<Long> departments;
 }

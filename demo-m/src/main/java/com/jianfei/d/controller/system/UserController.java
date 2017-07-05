@@ -54,7 +54,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
     
     private void setModel(Model model){
         model.addAttribute("roles", this.roleService.findAll());
-        model.addAttribute("departments", this.departmentService.findAll());
+        model.addAttribute("departmentsTree", super.buildTree(this.departmentService.findTree()));
     }
 
 	@GetMapping("/create")
