@@ -22,7 +22,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Page<T> {
-	private int pageNo;
+	
+	private int[] defaultPageSizeSelect = {10,20,30,50};
+	
+	private int pageNo;//当前页码
 	
 	private int pageSize;
 	
