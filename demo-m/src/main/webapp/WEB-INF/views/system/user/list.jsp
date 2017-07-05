@@ -60,18 +60,20 @@
 									</thead>
 									<tbody>
 										<c:forEach items="${page.data }" var="d">
+										<c:if test="${d.loginName ne admin }">
 											<tr>
-												<td><input type="checkbox" name="userCheck" data-id="${d.id }" data-name="${d.loginName }"></td>
+												<td><input type="checkbox" name="userCheck" data-id="${d.id}" data-name="${d.loginName}"></td>
 												<td>${d.loginName }</td>
 												<td>${d.name }</td>
 												<td>${d.role.name }</td>
 												<td>${d.department.name }</td>
 												<td>${d.status.name }</td>
 												<td><fmt:formatDate value="${d.createDate}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
-												<td><a href="${base }/sys/system/user/update/${d.id}" class="edit"><i></i>编辑</a> 
-												<a href="${base }/sys/system/user/delete/${d.id}" onclick="javascript:return confirmDel();"
+												<td><a href="${base}/sys/system/user/update/${d.id}" class="edit"><i></i>编辑</a> 
+													<a href="${base}/sys/system/user/delete/${d.id}" onclick="javascript:return confirmDel();"
 													class="delete"><i></i>删除</a></td>
 											</tr>
+										</c:if>
 										</c:forEach>
 									</tbody>
 								</table>

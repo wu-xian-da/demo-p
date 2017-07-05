@@ -9,6 +9,7 @@ import java.util.Date;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +23,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+
 import com.jianfei.d.common.config.Constants;
 import com.jianfei.d.common.utils.PasswordHelper;
+import com.jianfei.d.common.utils.SessionUtils;
 import com.jianfei.d.common.vo.MessageStatus;
 import com.jianfei.d.entity.common.UserStatus;
 import com.jianfei.d.entity.system.User;
@@ -153,6 +157,39 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
 	    model.addAttribute("admin", Constants.ADMIN);
 	    this.setModel(model);
         return "system/user/list";
+    }
+	
+	/****
+	 * 修改密码
+	 * @param user
+	 * @param attrs
+	 * @return
+	 */
+    @PostMapping("/modifyPassword")
+    public String modifyPassword(User user, RedirectAttributes attrs) {
+        if(StringUtils.isBlank(user.getPassword()) || StringUtils.isBlank(user.getRePassword()) || StringUtils.isBlank(user.getReTwoPassword())){
+            super.addMessage(attrs, MessageStatus.ERROR, "密码不能为空");
+            return "redirect:/sys/index";
+        }
+        
+        if(!user.getRePassword().equals(user.getReTwoPassword())){
+            super.addMessage(attrs, MessageStatus.ERROR, "两次新密码输入不一致");
+            return "redirect:/sys/index";
+        }
+        
+        User sessionUser = SessionUtils.getUser();
+        String saltPass = passwordHelper.getNewPassword(user.getPassword(), sessionUser.getCredentialsSalt());
+        if(!sessionUser.getPassword().equals(saltPass)){
+            super.addMessage(attrs, MessageStatus.ERROR, "旧密码输入不正确");
+            return "redirect:/sys/index";
+        }
+        
+        sessionUser.setPassword(user.getPassword());
+        passwordHelper.encryptPassword(sessionUser);
+        
+        this.userService.modifyPassword(sessionUser);
+        super.addMessage(attrs, "密码修改成功");
+        return "redirect:/sys/index";
     }
 }
 

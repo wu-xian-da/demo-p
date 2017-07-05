@@ -27,5 +27,9 @@ public class UserService extends CrudService<UserDao, User> {
 	public User findByLoginName(String loginName){
 		return this.dao.findByLoginName(loginName);
 	}
+	
+	public int modifyPassword(User user){
+		return this.dao.modifyPassword(user);
+	}
 
 }

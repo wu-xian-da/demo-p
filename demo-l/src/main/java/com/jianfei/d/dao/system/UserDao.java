@@ -17,4 +17,6 @@ public interface UserDao extends CrudDao<User> {
 	public int updateUserStatusBatch(List<User> users);
 	
 	public User findByLoginName(String loginName);
+	
+	public int modifyPassword(User user);
 }

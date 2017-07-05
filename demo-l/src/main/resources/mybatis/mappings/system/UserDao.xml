@@ -52,6 +52,14 @@
 		</foreach>
 	</update>
 	
+	<update id="modifyPassword">
+		update t_user
+		<set>
+			password = #{password},salt = #{salr}
+		</set>
+		where id = #{id}
+	</update>
+	
 	<delete id="delete">
 		delete from t_user where id = #{id}
 	</delete>

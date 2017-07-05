@@ -62,6 +62,8 @@ public class User extends BaseEntity{
 	/****vo start****/
 	private String rePassword;//重复密码
 	
+	private String reTwoPassword;
+	
 	private List<User> users;//启用,禁用,密码初始化使用
 	
 	public void filterUsers(){
