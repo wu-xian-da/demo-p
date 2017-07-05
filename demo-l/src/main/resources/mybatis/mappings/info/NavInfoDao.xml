@@ -107,16 +107,20 @@
   </update>
   
   <select id="get" resultType="com.jianfei.d.entity.info.NavInfo" parameterType="java.lang.Long" >
-    select 
-    	<include refid="Base_Column_List" />
+    select <include refid="Base_Column_List" />
+    	,
+    	n.id AS "navBase.id",
+    	n.nav_name AS "navBase.navName"
     from tb_nav_info i, tb_nav_base n
     where i.nav_id = n.id
     and i.id = #{id}
   </select>
   
   <select id="findPage" resultType="com.jianfei.d.entity.info.NavInfo" >
-    select 
-    	<include refid="Base_Column_List" />
+    select <include refid="Base_Column_List" />
+    	,
+    	n.id AS "navBase.id",
+    	n.nav_name AS "navBase.navName"
     from tb_nav_info i, tb_nav_base n
     where i.nav_id = n.id
     <if test="null != title">
@@ -150,6 +154,9 @@
   
   <select id="getListByNavId" resultType="com.jianfei.d.entity.info.NavInfo" parameterType="java.lang.Long">
   	select <include refid="Base_Column_List"></include>
+  		,
+    	n.id AS "navBase.id",
+    	n.nav_name AS "navBase.navName"
   	from tb_nav_info i,tb_nav_base n
   	where i.nav_id = n.id and i.nav_id = #{navId}
   </select>

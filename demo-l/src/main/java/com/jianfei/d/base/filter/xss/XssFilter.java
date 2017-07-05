@@ -19,7 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * 特殊字符过滤
  * @author changchun.wu
  */
-@WebFilter(urlPatterns="/*",filterName="filter0")
+/*@WebFilter(urlPatterns="/*",filterName="filter0")*/
 public class XssFilter extends OncePerRequestFilter{
 
 	@Override
