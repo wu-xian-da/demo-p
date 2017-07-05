@@ -39,7 +39,7 @@
 						  
 						  <div class="form-group">
 						    <label>所属栏目：</label>
-						    <select name="parentId" class="form-control">
+						    <select id="parentId" name="parentId" class="form-control" onchange="dealNavType(this.id);">
 						    	<option value="">---请选择---</option>
 						    	<c:forEach items="${parentNavList }" var="nav">
 						    		<option value="${nav.id }"
@@ -438,5 +438,18 @@
 		
 		//上传图标
         $("#navIconFile").uploadify(navIconUploadifyPro);
+		
+		dealNavType('parentId');
 	});
+	
+	function dealNavType(id){
+		var pNav = $("#"+id+"option:checked").val();
+		if (pNav) {
+			//隐藏
+			$("#navType option[value='XXEJCD']").hide();
+		} else {
+			//展示
+			$("#navType option[value='XXEJCD']").show();
+		}
+	}
 </script>
