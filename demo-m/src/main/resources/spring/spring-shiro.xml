@@ -35,11 +35,9 @@
 			<value>
 				/login = authc
 				/logout = logout
+				/static/** = anon
+				/sys/info/** = anon
 			</value>
-
-			 <!-- <value>
-			 	/** = anon
-			 </value> -->
 		</property>
 	</bean>
 	
