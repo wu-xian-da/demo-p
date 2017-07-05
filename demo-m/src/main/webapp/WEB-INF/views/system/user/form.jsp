@@ -63,11 +63,8 @@
 											<label>所属部门：</label>
 										</div>
 										<div class="col-md-8">
-											<select class="form-control" name="department.id">
-												<c:forEach items="${departments }" var="d">
-												  	<option value="${d.id }" <c:if test="${d.id eq user.department.id }">selected="selected"</c:if>>${d.name }</option>
-												  </c:forEach>
-											</select>
+											<sys:smartselect hiddenName="department.id" message="请选择所属部门"
+											moduleId="user-department" treeData="${departmentsTree }" hiddenValue="${user.department.id }"/>
 										</div>
 									</div>
 

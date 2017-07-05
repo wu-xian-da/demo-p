@@ -184,7 +184,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
             return "redirect:/sys/index";
         }
         
-        sessionUser.setPassword(user.getPassword());
+        sessionUser.setPassword(user.getRePassword());
         passwordHelper.encryptPassword(sessionUser);
         
         this.userService.modifyPassword(sessionUser);

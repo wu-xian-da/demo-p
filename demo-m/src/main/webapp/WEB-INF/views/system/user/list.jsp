@@ -26,12 +26,8 @@
 
 								  <div class="form-group">
 								    <label>归属部门：</label>
-								    <select class="form-control" name="department.id">
-										  <option value="">全部</option>
-										  <c:forEach items="${departments }" var="d">
-										  	<option value="${d.id }" <c:if test="${d.id eq page.entity.department.id }">selected="selected"</c:if>>${d.name }</option>
-										  </c:forEach>
-									</select>
+								     <sys:smartselect hiddenName="departments" message="请选择部门" multiple="true"
+								    	moduleId="user-department-tree" treeData="${departmentsTree }" hiddenValue="${page.entity.departments }" />
 								  </div>
 								</div>
 							</div>

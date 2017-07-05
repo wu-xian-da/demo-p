@@ -50,8 +50,7 @@ public class User extends BaseEntity{
 	@FormQuery("role.id")
 	private Role role;//角色
 	
-	@FormQuery("department.id")
-	private Department department;//不墨迹
+	private Department department;//部门
 	
 	private UserStatus status = UserStatus.OPEN;//启用,禁用
 	
@@ -60,6 +59,9 @@ public class User extends BaseEntity{
 	private String salt;//加密密码的盐
 	
 	/****vo start****/
+	@FormQuery
+	private List<Long> departents;
+	
 	private String rePassword;//重复密码
 	
 	private String reTwoPassword;

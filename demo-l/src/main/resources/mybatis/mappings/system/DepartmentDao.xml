@@ -56,10 +56,10 @@
 		select <include refid="DepartmentColumns"></include>
 		from t_department a LEFT JOIN t_department b ON a.parent_id = b.id
 		<where>
-			<if test="name != null">a.name like CONCAT('%',#{name},'%')</if>
+			<if test="name != null and name != ''">a.name like CONCAT('%',#{name},'%')</if>
 			<if test="departments != null and departments.size() > 0">AND a.id IN
-				<foreach collection="departments" item="departmentId" open="(" separator="," close=")">
-					#{departmentId}
+				<foreach collection="departments" item="dId" open="(" separator="," close=")">
+					#{dId}
 				</foreach>
 			</if>
 		</where>
