@@ -41,6 +41,9 @@
 						    			<c:if test="${nav.id eq navBase.parentId }">
 						    				selected="selected"
 						    			</c:if>
+						    			<c:if test="${nav.id eq navBase.id}">
+						    				hidden="hidden"
+						    			</c:if>
 						    		>${nav.navName }</option>
 						    	</c:forEach>
 						    </select>
@@ -60,7 +63,7 @@
 								<!-- 回显图片 -->
 						        <c:choose>
 						        	<c:when test="${not empty navBase.navIcon }">
-						        		<img id="navIconView" src="${imgViewBase }${navBase.navIcon }" alt="">
+						        		<img id="navIconView" src="${navBase.navIcon }" alt="">
 						        	</c:when>
 						        	<c:otherwise>
 						        		<img id="navIconView" src="${baseStatic }/img/login-logo.png" alt="">
@@ -114,7 +117,7 @@
 								   <!-- 回显图片 -->
 								    <c:choose>
 							        	<c:when test="${not empty navBase.navSecondMenu.menuHeadIcon }">
-							        		<img id="menuHeadIconView" src="${imgViewBase }${navBase.navSecondMenu.menuHeadIcon }" alt="">
+							        		<img id="menuHeadIconView" src="${navBase.navSecondMenu.menuHeadIcon }" alt="">
 							        	</c:when>
 							        	<c:otherwise>
 							        		<img id="menuHeadIconView" src="${baseStatic }/img/login-logo.png" alt="">
@@ -388,9 +391,9 @@
 	
 	function dealNavIconUpload(file, data, response) {
 	  	  var result = eval("(" + data + ")");
-		  alert("11111:" + result.url);
+		  //alert("11111:" + result.url);
 	      if(result.status){
-	           $("#navIconView").attr("src", imgViewBase + result.url);
+	           $("#navIconView").attr("src",result.url);
 	           $("#navIcon").val(result.url);
 	      }else{
 	           alert(result.message);
@@ -399,9 +402,9 @@
 	
 	function dealMenuHeadIconUpload(file, data, response) {
 		var result = eval("(" + data + ")");
-		 alert("222222:" + result.url);
+		 //alert("222222:" + result.url);
           if(result.status){
-	           $("#menuHeadIconView").attr("src", imgViewBase + result.url);
+	           $("#menuHeadIconView").attr("src",result.url);
 	           $("#menuHeadIcon").val(result.url);
           }else{
                alert(result.message);
