@@ -64,11 +64,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
 	}
 
 	@PostMapping("/create")
-	public String create(@Valid User user, BindingResult result, Model model, RedirectAttributes attrs) {
-	    if(result.hasErrors()){
-	        setModel(model);
-            return "system/user/form";
-        }
+	public String create(User user, BindingResult result, Model model, RedirectAttributes attrs) {
 	    
 	    //判断登陆名是否重复
 	    User temp = this.userService.findByLoginName(user.getLoginName());
@@ -93,21 +89,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
 	}
 	
 	@PostMapping("/update/{pid}")
-    public String update(@Valid User user, BindingResult result, Model model, RedirectAttributes attrs) {
-        if(result.hasErrors()){
-            boolean tag = false;
-            for(FieldError f : result.getFieldErrors()){
-                if(f.getField().equals("password") || f.getField().equals("salt")){
-                    continue;
-                }
-                tag = true;
-            }
-            if(tag){
-                setModel(model);
-                return "system/user/form";
-            }
-        }
-        
+    public String update(User user, BindingResult result, Model model, RedirectAttributes attrs) {
         userService.save(user);
         super.addMessage(attrs,MessageStatus.SUC, "更新用户成功");
         return "redirect:/sys/system/user";

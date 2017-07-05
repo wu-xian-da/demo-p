@@ -30,23 +30,23 @@ public class User extends BaseEntity{
 	 */
 	private static final long serialVersionUID = 238935356827842071L;
 	
-	@NotBlank(message="真实姓名不能为空")
-	@Length(max=20,message="真实姓名长度不能超过20")
+	//@NotBlank(message="真实姓名不能为空")
+	//@Length(max=20,message="真实姓名长度不能超过20")
 	private String name;//真实姓名
 	
-	@Length(max=20,message="登录名长度不能超过20")
-	@NotBlank(message="登录名不能为空")
+	//@Length(max=20,message="登录名长度不能超过20")
+	//@NotBlank(message="登录名不能为空")
 	@FormQuery
 	private String loginName;//登录名
 	
-	@Length(max=20,message="联系电话长度不能超过20")
+	//@Length(max=20,message="联系电话长度不能超过20")
 	private String tel;
 	
-	@NotBlank(message="密码不能为空")
-	@Length(max=32,min=6,message="密码长度(6-32)位")
+	//@NotBlank(message="密码不能为空")
+	//@Length(max=32,min=6,message="密码长度(6-32)位")
 	private String password;//密码
 	
-	@NotNull
+	//@NotNull
 	@FormQuery("role.id")
 	private Role role;//角色
 	

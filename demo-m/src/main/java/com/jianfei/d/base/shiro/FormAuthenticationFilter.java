@@ -58,7 +58,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
     private void saveLogLogin(ServletRequest request, LoginStatus status) {
 		ShiroHttpServletRequest httpRequest = (ShiroHttpServletRequest) request;
 		try {
-			this.logLoginService.save(new LogLogin(getUsername(request),request.getParameterMap().toString(),new Date(),httpRequest.getHeader(UA),HttpUtils.getRemoteAddr(httpRequest),status));
+			this.logLoginService.save(new LogLogin(getUsername(request),new Date(),httpRequest.getHeader(UA),HttpUtils.getRemoteAddr(httpRequest),status));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -48,10 +48,7 @@ public class DepartmentController extends BaseController{
     }
     
     @PostMapping("/create")
-    public String create(@Valid Department department, BindingResult result, Model model, RedirectAttributes attrs){
-        if(result.hasErrors()){
-            return "system/department/form";
-        }
+    public String create(Department department,BindingResult result,Model model,RedirectAttributes attrs){
         
         this.departmentService.save(department);
         super.addMessage(attrs,MessageStatus.SUC, "部门保存成功");
@@ -67,10 +64,7 @@ public class DepartmentController extends BaseController{
     }
     
     @PostMapping("/update/{pid}")
-    public String update(@Valid Department department, BindingResult result, Model model, RedirectAttributes attrs){
-        if(result.hasErrors()){
-            return "system/department/form";
-        }
+    public String update(Department department,BindingResult result,Model model,RedirectAttributes attrs){
         
         this.departmentService.update(department);
         super.addMessage(attrs,MessageStatus.SUC, "部门更新成功");

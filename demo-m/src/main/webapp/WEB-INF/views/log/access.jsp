@@ -30,7 +30,7 @@
 											<th>序号</th>
 											<th>登录名</th>
 											<th>请求地址</th>
-											<!-- <th>请求参数</th> -->
+											<th>请求参数</th>
 											<th>IP</th>
 											<th>时间</th>
 										</tr>
@@ -41,7 +41,7 @@
 												<td>${page.beginIndex + stat.count}</td>
 												<td>${d.user.loginName }</td>
 												<td>${d.requestUrl }</td>
-												<%-- <td>${d.params }</td> --%>
+												<td>${d.params }</td>
 												<td>${d.ip }</td>
 												<td><fmt:formatDate value="${d.date }" pattern="yyyy-MM-dd HH:m" type="date"/></td>
 											</tr>

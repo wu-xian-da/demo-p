@@ -29,8 +29,8 @@ public class Role extends BaseEntity{
 	 */
 	private static final long serialVersionUID = 1145176634332206976L;
 	
-	@NotBlank(message="名称不能为空")
-	@Length(max=20,message="长度不能超过20")
+	//@NotBlank(message="名称不能为空")
+	//@Length(max=20,message="长度不能超过20")
 	@FormQuery
 	private String name;//角色名称
 	
@@ -38,7 +38,7 @@ public class Role extends BaseEntity{
 	
 	private List<Menu> menus;
 	
-	private List<User> users;
+	private List<String> users;
 	
 	/***
 	 * 获取权限字符串

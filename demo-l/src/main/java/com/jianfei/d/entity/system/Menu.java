@@ -32,21 +32,21 @@ public class Menu extends BaseEntity{
 	
 	static final String ID2 = "id";
 	
-	@NotBlank(message = "名称不能为空")
-	@Length(max = 50,message = "长度不能超过50")
+	//@NotBlank(message = "名称不能为空")
+	//@Length(max = 50,message = "长度不能超过50")
 	private String name;//资源名称
 	
-	@Length(max = 200,message = "长度不能超过200")
+	//@Length(max = 200,message = "长度不能超过200")
 	private String href;//资源路径
 	
-	@NotNull(message = "类型不能为空")
+	//@NotNull(message = "类型不能为空")
 	private MenuType type;
 	
-	@Length(max=80,message="长度不能超过80")
+	//@Length(max=80,message="长度不能超过80")
 	private String permission;//权限字符串
 	
-	@NotNull(message="排序号不能为空")
-	@Digits(integer=4,fraction=0,message="超过4位数字最大限制")
+	//@NotNull(message="排序号不能为空")
+	//@Digits(integer=4,fraction=0,message="超过4位数字最大限制")
 	private Integer sort = 1;//排序号
 	
 	private String icon;//图标

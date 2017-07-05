@@ -13,8 +13,8 @@
 	<resultMap type="com.jianfei.d.entity.system.Role" id="roleMapPage">
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
-		<collection property="users" ofType="com.jianfei.d.entity.system.User">
-			<id property="loginName" column="loginName"/>
+		<collection property="users" ofType="java.lang.String" column="loginName">
+			<id column="loginName"/>
 		</collection>
 	</resultMap>
 	

@@ -29,10 +29,11 @@
 										<tr>
 											<th>序号</th>
 											<th>登录名</th>
-											<th>请求参数</th>
 											<th>UA</th>
 											<th>IP</th>
 											<th>时间</th>
+											<th>状态</th>
+											<th>UA</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -44,6 +45,8 @@
 												<td>${d.userAgent }</td>
 												<td>${d.ip }</td>
 												<td><fmt:formatDate value="${d.date }" pattern="yyyy-MM-dd HH:mm" type="date"/></td>
+												<td>${d.status }</td>
+												<td>${d.userAgent }</td>
 										</c:forEach>
 									</tbody>
 								</table>

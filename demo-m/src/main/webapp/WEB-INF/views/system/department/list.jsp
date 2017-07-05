@@ -29,7 +29,6 @@
 				<div class="operation-box">
 					<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
 					<a href="${base }/sys/system/department/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
-					<button type="button" class="btn btn-gy btn-sort"><span class="glyphicon glyphicon-resize-vertical"></span>排序</button>
 				</div>
 				</form>
 

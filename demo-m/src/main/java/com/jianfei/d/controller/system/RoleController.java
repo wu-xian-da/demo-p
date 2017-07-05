@@ -56,18 +56,17 @@ public class RoleController extends BaseController{
     }
 
     @PostMapping("/create")
-    public String create(@Valid Role role, BindingResult result, Model model, RedirectAttributes attrs) {
-        if(result.hasErrors()){
-            setModel(model);
-            return "system/role/form";
-        }
+    public String create(Role role,BindingResult result,Model model,RedirectAttributes attrs){
         Integer count = this.roleService.getCountByRoleName(role);
         if(count != null && count > 0){
             super.addError(result, "role", "name", "角色名称已存在，请更换");
             setModel(model);
             return "system/role/form";
         }
-        
+        if (role.getMenus() == null || role.getMenus().isEmpty()) {
+			super.addMessage(attrs,MessageStatus.WARN, "角色没有选择授权信息");
+			return "redirect:/sys/system/role";
+		}
         role.filterResource(); //去除空元素
         this.roleService.save(role);
         super.addMessage(attrs,MessageStatus.SUC, "保存角色成功");
@@ -83,11 +82,8 @@ public class RoleController extends BaseController{
     }
     
     @PostMapping("/update/{pid}")
-    public String update(@Valid Role role, BindingResult result, Model model, RedirectAttributes attrs){
-        if(result.hasErrors()){
-            setModel(model);
-            return "system/role/form";
-        }
+    public String update(Role role, BindingResult result, Model model, RedirectAttributes attrs){
+      
         if(!role.getName().equals(role.getOldName())){
             Integer count = this.roleService.getCountByRoleName(role);
             if(count != null && count > 0){
@@ -96,7 +92,9 @@ public class RoleController extends BaseController{
                 return "system/role/form";
             }
         }
-        
+        if (role.getMenus() == null || role.getMenus().isEmpty()) {
+			super.addMessage(attrs, MessageStatus.WARN, "角色没有选择授权信息");
+		}
         role.filterResource(); //去除空元素
         this.roleService.update(role);
         super.addMessage(attrs,MessageStatus.SUC, "角色更新成功");

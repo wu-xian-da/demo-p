@@ -25,7 +25,7 @@ public class LogLogin extends BaseEntity {
 	@FormQuery
 	private String loginName;
 	
-	private String params;
+	//private String params;
 	
 	private Date date;
 	

@@ -34,7 +34,7 @@
 											<label>联系电话：</label>
 										</div>
 										<div class="col-md-8">
-											<input type="text" name="tel" value="${user.tel }" class="form-control" placeholder="联系电话">
+											<input type="text" name="tel" value="${user.tel }" class="form-control {maxlength:20}" placeholder="联系电话">
 										</div>
 									</div>
 									
@@ -102,6 +102,9 @@
 	$("#role_form").validate({
 		errorPlacement: function(error,element){
 			error.appendTo(element.parent());
+		},
+		invalidHandler:function(form,validator){
+			window._resize('.sysmanage-user-add');
 		}
 	});
 </script>

@@ -51,10 +51,7 @@ public class MenuController extends BaseController{
     }
     
     @PostMapping("/create")
-    public String create(@Valid Menu menu, BindingResult result, Model model, RedirectAttributes attrs){
-        if(result.hasErrors()){
-            return "system/menu/form";
-        }
+    public String create(Menu menu,BindingResult result,Model model,RedirectAttributes attrs){ 
         
         this.menuService.save(menu);
         super.addMessage(attrs,MessageStatus.SUC, "菜单保存成功");
@@ -70,10 +67,7 @@ public class MenuController extends BaseController{
     }
     
     @PostMapping("/update/{pid}")
-    public String update(@Valid Menu menu, BindingResult result, Model model, RedirectAttributes attrs){
-        if(result.hasErrors()){
-            return "system/menu/form";
-        }
+    public String update(Menu menu,BindingResult result,Model model,RedirectAttributes attrs){
         
         this.menuService.update(menu);
         super.addMessage(attrs,MessageStatus.SUC, "菜单更新成功");

@@ -5,7 +5,7 @@
 		insert into t_log_login(
 			loginName,date,userAgent,params,ip,status
 		) values (
-			#{loginName},#{date},#{userAgent},#{params},#{ip},#{status}
+			#{loginName},#{date},#{userAgent},#{ip},#{status}
 		)
 	</insert>
 	
@@ -15,7 +15,6 @@
 			a.loginName,
 			a.date,
 			a.userAgent,
-			a.params,
 			a.ip,
 			a.status
 		FROM t_log_login a

@@ -67,12 +67,30 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
 <script type="text/javascript">
 	$("#role_form").validate({
 		errorPlacement: function(error,element){
 			error.appendTo(element.parent());
 		}
+	});
+	
+	$(function(){
+		//父节点
+		$('input[is-parent="true"]').on('click',function(){
+			var parent_status = $(this).prop('checked');
+			$('input[data-parent='+$(this).val()+']').each(function(){
+				$(this).prop("checked",parent_status);
+			});
+		});
+		
+		//子节点
+		$('input[is-child="true"]').on('click',function(){
+			var parent_id = $(this).data("parent");
+			if($(this).prop("checked")){
+				$('input[value='+parent_id+']').each(function(){
+					$(this).prop("checked",true);
+				});
+			}
+		});
 	});
 </script>
