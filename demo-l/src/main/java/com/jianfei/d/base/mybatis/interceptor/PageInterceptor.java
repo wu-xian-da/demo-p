@@ -3,7 +3,7 @@
   *@author changchun.wu
   *2017年6月23日下午4:49:07
   */
-package com.jianfei.d.base.interceptor;
+package com.jianfei.d.base.mybatis.interceptor;
 
 import java.lang.reflect.Method;
 import java.sql.PreparedStatement;
