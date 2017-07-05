@@ -33,12 +33,12 @@ public class NavBase extends BaseEntity {
 	 */
 	private static final long serialVersionUID = -7195497965682548835L;
 	
-	@NotBlank(message="栏目名称不能为空")
-	@Length(max=200,message="栏目名称长度不能超过200")
+	//@NotBlank(message="栏目名称不能为空")
+	//@Length(max=200,message="栏目名称长度不能超过200")
 	@FormQuery
 	private String navName;//名称
 
-	@NotBlank(message="栏目类型不能为空")
+	//@NotBlank(message="栏目类型不能为空")
     private NavType navType;//类型(1:下辖二级菜单;2:无二级菜单;3:URL外链)
 
     private NavLevel navLevel;//层级(1:一级栏目;2:二级栏目;)

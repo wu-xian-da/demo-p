@@ -11,7 +11,7 @@
 				<div class="form-inline">
 				  <div class="form-group">
 				    <label>栏目名称：</label>
-				    <input type="text" class="form-control" placeholder="公告名称">
+				    <input type="text" class="form-control" placeholder="栏目名称...">
 				  </div>
 				  <div class="form-group">
 				    <label>归属栏目：</label>
@@ -31,7 +31,9 @@
 				<button type="button" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
 				<button type="button" class="btn btn-gy btn-recovery"><i></i>取消展示</button>
 				<button type="button" class="btn btn-gy btn-push"><i></i>恢复展示</button>
-				<a href="./information-management-add.html" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
+				<a href="${base}/sys/info/nav/create" class="btn btn-gy btn-add">
+					<span class="glyphicon glyphicon-plus-sign"></span>新增
+				</a>
 			</div>
 
 			<div class="box-table">
