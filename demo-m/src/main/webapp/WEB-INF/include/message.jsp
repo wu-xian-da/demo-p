@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/taglib.jsp"%>
 
-<!-- 消息提醒 -->
+<!-- 消息提醒  ${message.info}-->
 <!-- 
 <div class="alert alert-auto alert-warning alert-dismissible fade in" role="alert">警告</div>
 

@@ -4,6 +4,9 @@
 <div id="app-main-container" class="white-bg">
 					<div class="col-md-12">
 						<div class="box information-management-edit sysmanage-user-add">
+						
+						<%@ include file="/WEB-INF/include/message.jsp" %>
+						
 							<h2>${empty user.id ? "新增" : "编辑" }用户</h2>
 							<form method="post" id="user_form">
 							<input type="hidden" name="id" value="${user.id }">
@@ -16,7 +19,8 @@
 											<label>登录名：</label>
 										</div>
 										<div class="col-md-8">
-											<input type="text" name="loginName" value="${user.loginName }" class="form-control {required:true,maxlength:20}" placeholder="用户名">
+											<input type="text" name="loginName"  <c:if test="${not empty user.loginName }">readonly="readonly"</c:if>
+											value="${user.loginName }" class="form-control {required:true,maxlength:20}" placeholder="用户名">
 										</div>
 									</div>
 

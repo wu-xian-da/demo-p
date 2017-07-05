@@ -54,12 +54,17 @@ public abstract class BaseController {
      * 添加Flash消息
      * @param message
      */
-    protected void addMessage(RedirectAttributes redirectAttributes,MessageStatus status ,String... messages) {
+    protected void addMessage(Model model,MessageStatus status ,String... messages) {
         StringBuilder sb = new StringBuilder();
         for (String message : messages){
             sb.append(message).append(messages.length>1?"<br/>":" ");
         }
-        redirectAttributes.addFlashAttribute(Constants.MESSAGE,new Message(sb.toString(),status));
+        if (model instanceof RedirectAttributes) {
+			RedirectAttributes redirectAttributes = (RedirectAttributes) model;
+			redirectAttributes.addFlashAttribute(Constants.MESSAGE,new Message(sb.toString(), status));
+		} else {
+			model.addAttribute(Constants.MESSAGE,new Message(sb.toString(), status));
+		}
     }
     
     /**

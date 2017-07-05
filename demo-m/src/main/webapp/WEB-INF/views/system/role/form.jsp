@@ -4,6 +4,9 @@
 <div id="app-main-container" class="white-bg">
 					<div class="col-md-12">
 						<div class="box information-management-edit sysmanage-role-add">
+						
+						<%@ include file="/WEB-INF/include/message.jsp" %>
+						
 							<h2>${empty role.id ? "新增" : "编辑" }角色</h2>
 							
 							<form method="post" id="role_form">

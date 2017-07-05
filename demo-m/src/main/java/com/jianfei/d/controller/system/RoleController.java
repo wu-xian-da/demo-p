@@ -59,7 +59,7 @@ public class RoleController extends BaseController{
     public String create(Role role,BindingResult result,Model model,RedirectAttributes attrs){
         Integer count = this.roleService.getCountByRoleName(role);
         if(count != null && count > 0){
-            super.addError(result, "role", "name", "角色名称已存在，请更换");
+            super.addMessage(model, MessageStatus.WARN, "角色名称已存在，请更换");
             setModel(model);
             return "system/role/form";
         }
@@ -87,7 +87,7 @@ public class RoleController extends BaseController{
         if(!role.getName().equals(role.getOldName())){
             Integer count = this.roleService.getCountByRoleName(role);
             if(count != null && count > 0){
-                super.addError(result, "role", "name", "角色名称已存在，请更换");
+                super.addMessage(attrs, MessageStatus.WARN, "角色名称已存在，请更换");
                 setModel(model);
                 return "system/role/form";
             }
@@ -105,10 +105,10 @@ public class RoleController extends BaseController{
     public String delete(@PathVariable("pid") Long id, RedirectAttributes attrs){
         try{
             this.roleService.delete(id);
-            super.addMessage(attrs,MessageStatus.SUC, "角色删除成功");
+            super.addMessage(attrs, "角色删除成功");
         }
         catch(Exception e){
-            super.addMessage(attrs,MessageStatus.SUC, "角色删除失败，有用户正在使用当前角色");
+            super.addMessage(attrs,MessageStatus.ERROR, "角色删除失败，有用户正在使用当前角色");
         }
         return "redirect:/sys/system/role";
     }
