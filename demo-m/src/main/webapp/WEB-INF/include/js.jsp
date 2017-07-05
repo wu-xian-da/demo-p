@@ -3,3 +3,4 @@
 
 <script type="text/javascript" src="${baseStatic }/js/main.js"></script>
 <script type="text/javascript" src="${baseStatic }/js/common.js"></script>
+<script type="text/javascript" src="${baseStatic }/js/jquery.smartselect.min.js"></script>

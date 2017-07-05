@@ -13,7 +13,7 @@
 
 	<description>Spring公共配置</description>
 	
-	<context:component-scan base-package="com.jianfei.w">
+	<context:component-scan base-package="com.jianfei.d">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 

@@ -36,18 +36,18 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath:mybatis/mappings/**/*.xml" />
 		<property name="configLocation" value="classpath:mybatis/config.xml" />
-		<property name="typeAliasesPackage" value="com.jianfei.w.entity" />
-		<property name="typeAliasesSuperType" value="com.jianfei.w.base.entity.BaseEntity" />
+		<property name="typeAliasesPackage" value="com.jianfei.d.entity" />
+		<!-- <property name="typeAliasesSuperType" value="com.jianfei.d.base.entity.BaseEntity" /> -->
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.jianfei.w.dao" />
+		<property name="basePackage" value="com.jianfei.d.dao" />
 	</bean>
 	
 	<aop:aspectj-autoproxy/>
 	
 	   <aop:config>
-	       <aop:pointcut id="appService" expression="execution(* com.jianfei.w.service..*Service.*(..))"/>
+	       <aop:pointcut id="appService" expression="execution(* com.jianfei.d.service..*Service.*(..))"/>
 	       <aop:advisor advice-ref="txAdvice" pointcut-ref="appService"/>
 	   </aop:config>
 	

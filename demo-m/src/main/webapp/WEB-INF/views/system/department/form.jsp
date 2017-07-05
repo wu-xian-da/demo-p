@@ -25,13 +25,7 @@
 						<label>所属部门：</label>
 					</div>
 					<div class="col-md-8">
-						<select class="form-control" name="parent.id">
-							<option value="" >请选择</option>
-							<c:forEach items="${parents }" var="d">
-								<option value="${d.id }"
-								<c:if test="${department.parent.id eq d.id }">selected="selected"</c:if>>${d.name }</option>
-							</c:forEach>
-						</select>
+						<sys:smartselect moduleId="department-form-div" />
 					</div>
 				</div>
 	

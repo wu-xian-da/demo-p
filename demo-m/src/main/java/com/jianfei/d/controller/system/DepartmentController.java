@@ -38,7 +38,7 @@ public class DepartmentController extends BaseController{
     private DepartmentService departmentService;
     
     private void setModel(Model model){
-        model.addAttribute("parents", this.departmentService.getParent());
+        model.addAttribute("tree", this.departmentService.findTree());
     }
     
     @GetMapping("/create")

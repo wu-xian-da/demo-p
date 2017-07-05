@@ -9,6 +9,12 @@
 		b.name AS "parent.name",
 	</sql>
 	
+	<resultMap type="com.jianfei.d.entity.common.TreeVo" id="DepartmentTree">
+		<id property="value" column="id"/>
+		<result property="label" column="name"/>
+		<collection property="childs" column="id" ofType="com.jianfei.d.entity.common.TreeVo" select="findChild"></collection>
+	</resultMap>
+	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		insert into t_department (
 			name,
@@ -38,12 +44,12 @@
 		from t_department a LEDFT JOIN t_department b ON a.parent_id = b.id where a.id = #{id}
 	</select>
 	
-	<select id="getParent" resultType="com.jianfei.d.entity.system.Department">
+	<select id="findTree" resultMap="DepartmentTree">
 		select id,name from t_department where parent_id = 1
 	</select>
 	
-	<select id="findAll" resultType="com.jianfei.d.entity.system.Department">
-		select a.id,a.name from t_department a ORDER BY a.id DESC
+	<select id="findChild" resultMap="DepartmentTree">
+		select id,name from t_department where parent_id = #{id}
 	</select>
 	
 	<select id="findPage" resultType="com.jianfei.d.entity.system.Department">
