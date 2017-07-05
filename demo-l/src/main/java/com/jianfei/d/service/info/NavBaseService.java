@@ -46,9 +46,9 @@ public class NavBaseService extends CrudService<NavBaseDao, NavBase> {
 	public int addNav(NavBase navBase){
 		//一级,二级栏目处理
 		if (navBase.getParentId() != null && navBase.getParentId().intValue() >0) {
-			navBase.setNavLevel(NavLevel.YJLM);
-		} else {
 			navBase.setNavLevel(NavLevel.EJLM);
+		} else {
+			navBase.setNavLevel(NavLevel.YJLM);
 		}
 		int result = this.dao.insert(navBase);
 		if (result > 0) {
@@ -80,9 +80,9 @@ public class NavBaseService extends CrudService<NavBaseDao, NavBase> {
 	public int updateNav(NavBase navBase) {
 		//一级、二级栏目处理
 		if(null != navBase.getParentId() && navBase.getParentId().intValue() > 0){
-			navBase.setNavLevel(NavLevel.YJLM);
-		}else{
 			navBase.setNavLevel(NavLevel.EJLM);
+		}else{
+			navBase.setNavLevel(NavLevel.YJLM);
 		}
 				
 		int result = this.dao.update(navBase);
@@ -110,7 +110,7 @@ public class NavBaseService extends CrudService<NavBaseDao, NavBase> {
             	NavUrl navUrl = navUrlDao.getByNavId(navBase.getId());
             	if(null != navUrl){
             		navBase.getNavUrl().setNavId(navBase.getId());
-            		result = navUrlDao.update(navBase.getNavUrl());
+            		result = navUrlDao.updateByNavId(navBase.getNavUrl());
             	}else{
             		navBase.getNavUrl().setNavId(navBase.getId());
             		result = navUrlDao.insert(navBase.getNavUrl());

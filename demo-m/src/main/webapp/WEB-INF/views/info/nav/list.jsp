@@ -7,40 +7,56 @@
 		    <%@ include file="/WEB-INF/include/message.jsp" %>
 		    
 			<h3>条件检索</h3>
-			<div class="from-gy-controls">
-				<div class="form-inline">
-				  <div class="form-group">
-				    <label>栏目名称：</label>
-				    <input type="text" class="form-control" placeholder="栏目名称...">
-				  </div>
-				  <div class="form-group">
-				    <label>归属栏目：</label>
-				    <select class="form-control">
-						  <option>全部</option>
-						  <option>航班动态</option>
-						  <option>机场向导</option>
-						  <option>机场向导</option>
-						  <option>机场交通</option>
-						</select>
-				  </div>
-
+			<form method="post">
+				<div class="from-gy-controls">
+					<div class="form-inline">
+					  <div class="form-group">
+					    <label>栏目名称：</label>
+					    <input type="text" name="navName" value="${page.entity.navName }" class="form-control" placeholder="公告名称...">
+					  </div>
+					  <div class="form-group">
+					    <label>归属栏目：</label>
+					    <select name="parent.id" class="form-control">
+					    	<option value="">---请选择---</option>
+					    	<c:forEach items="${parentNavList }" var="nav">
+					    		<option value="${nav.id }"
+					    			<c:if test="${nav.id eq page.entity.parent.id }">
+					    				selected="selected"
+					    			</c:if>
+					    		>${nav.navName }</option>
+					    	</c:forEach>
+					    </select>
+					  </div>
+	
+					</div>
 				</div>
-			</div>
-
-			<div class="operation-box">
-				<button type="button" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
-				<button type="button" class="btn btn-gy btn-recovery"><i></i>取消展示</button>
-				<button type="button" class="btn btn-gy btn-push"><i></i>恢复展示</button>
-				<a href="${base}/sys/info/nav/create" class="btn btn-gy btn-add">
-					<span class="glyphicon glyphicon-plus-sign"></span>新增
-				</a>
-			</div>
+	
+				<div class="operation-box">
+					<button type="submit" class="btn btn-gy btn-query">
+						<span class="glyphicon glyphicon-search"></span>
+						查询
+					</button>
+					<button id="navShow" type="button" class="btn btn-gy btn-push">
+						<i></i>
+						展示/恢复展示
+					</button>
+					<button id="navHide" type="button" class="btn btn-gy btn-recovery">
+						<i></i>
+						取消展示
+					</button>
+					
+					<a href="${base }/sys/info/nav/create" class="btn btn-gy btn-add">
+						<span class="glyphicon glyphicon-plus-sign"></span>
+						新增
+					</a>
+				</div>
+			</form>
 
 			<div class="box-table">
 				<table class="table">
 					<thead>
 						<tr>
-							<th><input type="checkbox"></th>
+							<th><input type="checkbox" id="checkAll"></th>
 							<th class="dleft">栏目名称</th>
 							<th>上级栏目</th>
 							<th>栏目类型</th>
@@ -50,15 +66,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td class="dleft">航班动态</td>
-							<td>贵阳机场</td>
-							<td>URL外链</td>
-							<td>2</td>
-							<td>展示</td>
-							<td><a href="./information-management-edit.html" class="edit"><i></i>编辑</a> <a href="#" class="delete"><i></i>删除</a></td>
-						</tr>
+					    <c:forEach items="${page.data }" var="navBase">
+							<tr>
+								<td><input type="checkbox" name="navCheck" data-id="${navBase.id }"></td>
+								<td class="dleft">${navBase.navName }</td>
+								<td>${navBase.parent.navName }</td>
+								<td>${navBase.navType.name }</td>
+								<td>${navBase.navOrderNum }</td>
+								<td>${navBase.navStatus.name }</td>
+								<td>
+									<a href="${base }/sys/info/nav/update/${navBase.id}" class="edit"><i></i>编辑</a> 
+									<a href="${base }/sys/info/nav/delete/${navBase.id}" class="delete"><i></i>删除</a>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 
@@ -69,3 +90,42 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+$(function(){
+	$("#checkAll").on("click", function(){
+		if($(this).is(":checked")){
+			$("[name=navCheck]").prop("checked", true);
+		}
+		else{
+			$("[name=navCheck]").prop("checked", false);
+		}
+	});
+	
+	$('#navShow').on("click", function(){
+		var checkArr = $('input[name=navCheck]:checked');
+		if(checkArr.length == 0){
+			alert("请勾选需要操作的数据");
+			return;
+		}
+		var navBases = [];
+		checkArr.each(function(i){
+			navBases.push("navBases[" + i + "].id=" + $(this).data("id"));
+		});
+		window.location.href = "${base}/sys/info/nav/show?" + navBases.join('&');
+	});
+	
+	$('#navHide').on("click", function(){
+		var checkArr = $('input[name=navCheck]:checked');
+		if(checkArr.length == 0){
+			alert("请勾选需要操作的数据");
+			return;
+		}
+		var navBases = [];
+		checkArr.each(function(i){
+			navBases.push("navBases[" + i + "].id=" + $(this).data("id"));
+		});
+		window.location.href = "${base}/sys/info/nav/hide?" + navBases.join('&');
+	});
+});
+</script>

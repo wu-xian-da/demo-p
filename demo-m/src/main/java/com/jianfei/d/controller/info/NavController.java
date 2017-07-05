@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jianfei.d.common.config.FileConfig;
 import com.jianfei.d.controller.base.BaseController;
 import com.jianfei.d.entity.common.NavStatus;
 import com.jianfei.d.entity.common.NavType;
@@ -59,9 +60,14 @@ public class NavController extends BaseController{
 	@Autowired
 	private NavInfoService navInfoService;
 	
+	@Autowired
+	private FileConfig fileConfig;
+	
 	private void setBases(Model model){
 		//栏目类型
 		model.addAttribute("navType", NavType.values());
+		//图片上传回显前缀
+		model.addAttribute("imgViewBase",fileConfig.getMapping());
 	}
 	
 	/**
