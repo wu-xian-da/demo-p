@@ -110,7 +110,7 @@ public class NavBaseService extends CrudService<NavBaseDao, NavBase> {
             	NavUrl navUrl = navUrlDao.getByNavId(navBase.getId());
             	if(null != navUrl){
             		navBase.getNavUrl().setNavId(navBase.getId());
-            		result = navUrlDao.update(navBase.getNavUrl());
+            		result = navUrlDao.updateByNavId(navBase.getNavUrl());
             	}else{
             		navBase.getNavUrl().setNavId(navBase.getId());
             		result = navUrlDao.insert(navBase.getNavUrl());

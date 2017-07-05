@@ -11,6 +11,9 @@
 			<!-- hidden -->
 			<input type="hidden" name="id" value="${navBase.id }" />
 			
+			<!-- 图片上传的显示区域 -->
+			<div id="fileQueue"></div>
+			
 			<div class="row">
 				<div class="col-md-12">
 					<div class="from-gy-controls">
@@ -54,11 +57,18 @@
 						<div class="form-inline">
 						  <div class="form-group">
 						    <label>栏目图标：</label>
-								<img src="./public/img/login-logo.png" alt="">
-								<button type="button" class="btn btn-gy btn-upload">
-									<span class="glyphicon glyphicon-upload"></span>
-									上传图标
-								</button>
+								<!-- 回显图片 -->
+						        <c:choose>
+						        	<c:when test="${not empty navBase.navIcon }">
+						        		<img id="navIconView" src="${imgViewBase }${navBase.navIcon }" alt="">
+						        	</c:when>
+						        	<c:otherwise>
+						        		<img id="navIconView" src="${baseStatic }/img/login-logo.png" alt="">
+						        	</c:otherwise>
+						        </c:choose>
+								<input type="file" id="navIconFile" name="navIconFile" />
+								<!-- hidden -->
+								<input type="hidden" id="navIcon" name="navIcon" value="${navBase.navIcon }" /> 
 						  </div>
 						</div>
 					</div>
@@ -101,11 +111,18 @@
 								<div class="form-inline">
 								  <div class="form-group">
 								    <label>栏目头标：</label>
-								    <img src="./public/img/login-logo.png" alt="">
-										<button type="button" class="btn btn-gy btn-upload">
-											<span class="glyphicon glyphicon-upload"></span>
-											上传图标
-										</button>
+								   <!-- 回显图片 -->
+								    <c:choose>
+							        	<c:when test="${not empty navBase.navSecondMenu.menuHeadIcon }">
+							        		<img id="menuHeadIconView" src="${imgViewBase }${navBase.navSecondMenu.menuHeadIcon }" alt="">
+							        	</c:when>
+							        	<c:otherwise>
+							        		<img id="menuHeadIconView" src="${baseStatic }/img/login-logo.png" alt="">
+							        	</c:otherwise>
+							        </c:choose>
+								    <input type="file" id="menuHeadIconFile" name="menuHeadIconFile" />
+									<!-- hidden -->
+									<input type="hidden" id="menuHeadIcon" name="navSecondMenu.menuHeadIcon" />
 								  </div>
 								</div>
 							</div>
@@ -302,7 +319,7 @@
 		</div>
 	</div>
 </div>
-
+<%@ include file="/WEB-INF/include/uploadify.jsp" %>
 <script type="text/javascript">
 	function showTypeContentDiv(id){
 		var selectVal = $("#"+id).val();
@@ -365,4 +382,52 @@
 			$("#"+showContentDivId + " .show-content-thumb-wrap img").attr("src", ctx + imgSrc);
 		}
 	}
+	
+	//图片显示前缀
+	var imgViewBase = '${imgViewBase }';
+	
+	function dealNavIconUpload(file, data, response) {
+	  	  var result = eval("(" + data + ")");
+		  alert("11111:" + result.url);
+	      if(result.status){
+	           $("#navIconView").attr("src", imgViewBase + result.url);
+	           $("#navIcon").val(result.url);
+	      }else{
+	           alert(result.message);
+	      }
+	}
+	
+	function dealMenuHeadIconUpload(file, data, response) {
+		var result = eval("(" + data + ")");
+		 alert("222222:" + result.url);
+          if(result.status){
+	           $("#menuHeadIconView").attr("src", imgViewBase + result.url);
+	           $("#menuHeadIcon").val(result.url);
+          }else{
+               alert(result.message);
+          }
+	}
+	
+	$(document).ready(function(){
+		uploadifyPro.auto = true;
+		uploadifyPro.multi = false;
+		uploadifyPro.fileExt = "*.gif;*.jpg;*.jpeg;*.png;*.bmp;*.ico";
+		uploadifyPro.buttonClass = "btn btn-gy btn-upload";
+		
+		var navIconUploadifyPro = deepClone(uploadifyPro);
+		navIconUploadifyPro.sizeLimit = "100k";
+		navIconUploadifyPro.buttonText = "上传图标";
+        navIconUploadifyPro.onUploadSuccess = dealNavIconUpload;
+		
+		var menuHeadIconUploadifyPro = deepClone(uploadifyPro);
+		menuHeadIconUploadifyPro.sizeLimit = "200k";
+		menuHeadIconUploadifyPro.buttonText = "上传头标";
+		menuHeadIconUploadifyPro.onUploadSuccess = dealMenuHeadIconUpload;
+		
+		//上传二级栏目头标
+		$("#menuHeadIconFile").uploadify(menuHeadIconUploadifyPro);
+		
+		//上传图标
+        $("#navIconFile").uploadify(navIconUploadifyPro);
+	});
 </script>
