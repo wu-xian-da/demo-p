@@ -1,11 +1,18 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/taglib.jsp"%>
 
+<style>
+	span.error{
+		display: block;
+		background-position: 0 3px;
+	}
+</style>
+
 <div id="app-main-container" class="white-bg">
 	<div class="col-md-12">
 		<div class="box information-management-edit">
 			<h2>${empty notice.id ? "添加" : "编辑" }公告</h2>
-			<form id="navInfo_form" method="post">
+			<form id="notice_form" method="post">
 			<!-- hidden -->
 			<input type="hidden" name="id" value="${notice.id }" />
 				<div class="row">
@@ -17,7 +24,7 @@
 							</div>
 		
 							<div class="col-md-8">
-								<input name="title" value="${notice.title }" type="text" class="form-control" placeholder="紧急公告">
+								<input name="title" value="${notice.title }" type="text" class="form-control {required:true, maxlength:500, messages:{required:'紧急公告为必填字段，请填写', maxlength:'紧急公告的最大长度为500字符，请确认'}}" placeholder="紧急公告">
 							</div>
 						</div>
 		
@@ -53,6 +60,13 @@
 
 <%@ include file="/WEB-INF/include/ckeditor.jsp" %>
 <script type="text/javascript">
+	//校验
+	$("#notice_form").validate({
+		errorPlacement: function (error, element){
+			error.appendTo(element.parent());  
+		}
+	});
+	
 	if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
 		CKEDITOR.tools.enableHtml5Elements( document );
 	

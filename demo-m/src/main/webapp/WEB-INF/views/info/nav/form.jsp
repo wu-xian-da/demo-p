@@ -30,7 +30,7 @@
 						<div class="form-inline">
 						  <div class="form-group">
 						    <label>栏目名称：</label>
-						    <input type="text" name="navName" value="${navBase.navName }" class="form-control {required:true, maxlength:200, messages:{required:'栏目名称为必填字段，请填写', maxlength:'栏目名称的最大长度为200字符，请确认'}}" placeholder="栏目名称">
+						     <input type="text" name="navName" value="${navBase.navName }" class="form-control {required:true,maxlength:200,messages:{required:'栏目名称为必填字段，请填写',maxlength:'栏目名称的最大长度为200字符，请确认'}}" placeholder="栏目名称">
 						  </div>
 						</div>
 					</div>
@@ -226,7 +226,7 @@
 								<div class="form-inline">
 								  <div class="form-group">
 								    <label>URL：</label>
-								    <input type="text" name="navUrl.url" value="${navBase.navUrl.url }" class="form-control {required:true, url:true, maxLength:500, messages:{required:'URL为必填字段，请填写', maxlength:'URL的最大长度为200字符，请确认'}}" placeholder="URL">
+								    <input type="text" name="navUrl.url" value="${navBase.navUrl.url }" class="form-control {required:true,url:true,maxlength:500,messages:{required:'URL为必填字段，请填写',url:'网址格式不正确，请确认',maxlength:'URL最大长度为500字符，请确认'}}" placeholder="URL">
 								  </div>
 								</div>
 							</div>

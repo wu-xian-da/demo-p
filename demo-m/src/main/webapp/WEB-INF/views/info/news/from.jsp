@@ -64,11 +64,11 @@
 				  	</div>
 					<div class="row row-list">
 						<div class="col-md-1">
-							<label>排序：</label>
+							<label>显示序号：</label>
 						</div>
 
 						<div class="col-md-8">
-							<input name="orderNum" type="text" class="form-control"  placeholder="排序" value="${news.orderNum }">
+							<input name="orderNum" type="text" class="form-control"  placeholder="显示序号" value="${news.orderNum }">
 						</div>
 					</div>
 				  	<div class="row row-list">

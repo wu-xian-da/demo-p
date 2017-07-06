@@ -75,7 +75,7 @@
 								<td><span class="info-status">${notice.status.name}</span></td>
 								<td>
 									<a href="${base}/sys/info/notice/update/${notice.id}" class="edit"><i></i>编辑</a> 
-									<a href="${base}/sys/info/notice/delete/${notice.id}" class="delete"><i></i>删除</a>
+									<a href="${base}/sys/info/notice/delete/${notice.id}" onclick="javascript:return confirmDel();" class="delete"><i></i>删除</a>
 								</td>
 							</tr>
 						</c:forEach>
