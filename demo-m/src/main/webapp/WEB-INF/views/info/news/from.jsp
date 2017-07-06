@@ -1,6 +1,13 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/taglib.jsp"%>
 
+<style>
+	span.error{
+		display: block;
+		background-position: 0 3px;
+	}
+</style>
+
 <div id="app-main-container" class="white-bg">
 	<div class="col-md-12">
 		<div class="box information-management-edit">
@@ -22,7 +29,7 @@
 						</div>
 
 						<div class="col-md-8">
-							<input type="text" name="title" value="${news.title }" class="form-control" placeholder="图片标题">
+							<input name="title" type="text" class="form-control {required:true, maxlength:500, messages:{required:'图片标题为必填字段，请填写', maxlength:'图片标题的最大长度为500字符，请确认'}}" placeholder="图片标题" value="${news.title }">
 						</div>
 					</div>
 
@@ -82,6 +89,13 @@
 <%@ include file="/WEB-INF/include/ckeditor.jsp" %>
 <%@ include file="/WEB-INF/include/uploadify.jsp" %>
 <script type="text/javascript">
+	//校验
+	$("#news_form").validate({
+		errorPlacement:function(error,element){
+			error.appendTo(element.parent());
+		}
+	});
+
 if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
 	CKEDITOR.tools.enableHtml5Elements( document );
 

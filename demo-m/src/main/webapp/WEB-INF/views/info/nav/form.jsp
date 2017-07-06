@@ -4,6 +4,11 @@
 	.uploadify{
 		display: inline-block
 	}
+	
+	span.error{
+		display: block;
+		background-position: 0 3px;
+	}
 </style>
 
 <div id="app-main-container" class="white-bg">
@@ -25,7 +30,7 @@
 						<div class="form-inline">
 						  <div class="form-group">
 						    <label>栏目名称：</label>
-						    <input type="text" name="navName" value="${navBase.navName }" class="form-control" placeholder="栏目名称">
+						    <input type="text" name="navName" value="${navBase.navName }" class="form-control {required:true, maxlength:200, messages:{required:'栏目名称为必填字段，请填写', maxlength:'栏目名称的最大长度为200字符，请确认'}}" placeholder="栏目名称">
 						  </div>
 						</div>
 					</div>
@@ -89,7 +94,7 @@
 						<div class="form-inline">
 						  <div class="form-group">
 						    <label>栏目类型：</label>
-						    <select id="navType" name="navType" onchange="showTypeContentDiv(this.id);" class="form-control">
+						    <select id="navType" name="navType" onchange="showTypeContentDiv(this.id);" class="form-control {required:true, messages:{required:'请选择栏目类型'}}">
 						    	<option value="">---请选择---</option>
 						    	<c:forEach items="${navTypes }" var="type">
 						    		<option value="${type}"
@@ -142,7 +147,7 @@
 								<div class="form-inline">
 								  <div class="form-group">
 								    <label>列表模版：</label>
-								    <select id="nav_menuListTemplateId" name="navSecondMenu.menuListTemplateId" class="form-control" onchange="showTemplates(this.id, 'list', 'show_template_l_list', 'show_template_l_content');">
+								   	<select id="nav_menuListTemplateId" name="navSecondMenu.menuListTemplateId" class="form-control {required:true, messages:{required:'请选择列表模板'}}" onchange="showTemplates(this.id, 'list', 'show_template_l_list', 'show_template_l_content');">
 								    	<option value="">---请选择---</option>
 								    	<c:forEach items="${listTemplates }" var="menuListTemp">
 								    		<option value="${menuListTemp.id }" data-src="${menuListTemp.imgPath }"
@@ -192,7 +197,7 @@
 								<div class="form-inline">
 								  <div class="form-group">
 								    <label>内容模版：</label>
-								    <select id="nav_contentTemplateId" name="navContent.contentTemplateId" class="form-control" onchange="showTemplate(this.id, 'content', 'show_template_c_content');">
+								    <select id="nav_contentTemplateId" name="navContent.contentTemplateId" class="form-control {required:true, messages:{required:'请选择内容模板'}}" onchange="showTemplate(this.id, 'content', 'show_template_c_content');">
 							    		<option value="">---请选择---</option>
 							    		<c:forEach items="${contentTemplates }" var="contentTemp">
 								    		<option value="${contentTemp.id }" data-src="${contentTemp.imgPath }"
@@ -221,7 +226,7 @@
 								<div class="form-inline">
 								  <div class="form-group">
 								    <label>URL：</label>
-								    <input type="text" name="navUrl.url" value="${navBase.navUrl.url }" class="form-control" placeholder="URL">
+								    <input type="text" name="navUrl.url" value="${navBase.navUrl.url }" class="form-control {required:true, url:true, maxLength:500, messages:{required:'URL为必填字段，请填写', maxlength:'URL的最大长度为200字符，请确认'}}" placeholder="URL">
 								  </div>
 								</div>
 							</div>
@@ -234,7 +239,7 @@
 								<div class="form-inline">
 								  <div class="form-group">
 								    <label>页面打开方式：</label>
-								    <select name="navUrl.target" class="form-control">
+								    <select name="navUrl.target" class="form-control {required:true, messages:{required:'请选择页面打开方式'}}">
 								    	<option value="">---请选择---</option>
 								    	<option value="_self"
 								    	    <c:if test="${navBase.navUrl.target eq '_self'}"> selected="selected" </c:if>
@@ -329,6 +334,13 @@
 </div>
 <%@ include file="/WEB-INF/include/uploadify.jsp" %>
 <script type="text/javascript">
+	//校验
+	$("#navBase_form").validate({
+		errorPlacement:function(error,element){
+			error.appendTo(element.parent());
+		}
+	});
+	
 	function showTypeContentDiv(id){
 		var selectVal = $("#"+id).val();
 		if(selectVal){
@@ -439,17 +451,24 @@
 		//上传图标
         $("#navIconFile").uploadify(navIconUploadifyPro);
 		
-		dealNavType('parentId');
 	});
 	
 	function dealNavType(id){
-		var pNav = $("#"+id+"option:checked").val();
+		var pNav = $("#"+id+"option:selected").val();
 		if (pNav) {
 			//隐藏
 			$("#navType option[value='XXEJCD']").hide();
 			//已选择导航类型为"下辖二级菜单"的下拉框还原
-			$("#navType option[value='']").attr("checked",true);
-			$("#navType option:checked").html("---请选择---");
+			$("#navType option[value='']").prop("selected","selected");
+			//内容维护区域
+			$("#xxejcd_div").hide();
+			$("#wejcd_div").hide();
+			$("#urlwl_div").hide();
+			
+			//模板显示区域
+			$("#show_template_l_list").hide();
+			$("#show_template_l_content").hide();
+			$("#show_template_c_content").hide();
 		} else {
 			//展示
 			$("#navType option[value='XXEJCD']").show();

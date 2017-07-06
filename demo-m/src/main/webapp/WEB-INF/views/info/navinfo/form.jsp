@@ -1,6 +1,13 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/taglib.jsp"%>
 
+<style>
+	span.error{
+		display: block;
+		background-position: 0 3px;
+	}
+</style>
+
 <div id="app-main-container" class="white-bg">
 	<div class="col-md-12">
 		<div class="box information-management-edit">
@@ -22,7 +29,7 @@
 						</div>
 
 						<div class="col-md-8">
-							<input name="title" value="${navInfo.title }" type="text" class="form-control" placeholder="信息名称">
+							<input name="title" value="${navInfo.title }" type="text" class="form-control {required:true, maxlength:500, messages:{required:'信息名称为必填字段，请填写', maxlength:'信息名称的最大长度为200字符，请确认'}}" placeholder="信息名称">
 						</div>
 					</div>
 
@@ -32,7 +39,7 @@
 						</div>
 
 						<div class="col-md-8">
-							<select name="navId" class="form-control">
+							<select name="navId" class="form-control {required:true, messages:{required:'请选择所属栏目'}}">
 								<option value="">---请选择(单选)---</option>
 								<c:forEach items="${navList }" var="nav">
 									<option value="${nav.id }"
@@ -96,6 +103,13 @@
 
 <%@ include file="/WEB-INF/include/ckeditor.jsp" %>
 <script type="text/javascript">
+	//校验
+	$("#navInfo_form").validate({
+		errorPlacement:function(error,element){
+			error.appendTo(element.parent());
+		}
+	});
+
 	if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
 		CKEDITOR.tools.enableHtml5Elements( document );
 	
