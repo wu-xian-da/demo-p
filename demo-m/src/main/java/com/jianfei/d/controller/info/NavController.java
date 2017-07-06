@@ -99,13 +99,8 @@ public class NavController extends BaseController{
 	}
 	
 	@PostMapping("/create")
-	public String create(@Valid NavBase navBase,BindingResult result,Model model,RedirectAttributes attrs){
-		if (result.hasErrors()) {
-			setBases(model);
-			setParentNav(model);
-			setTemplates(model);
-			return "info/nav/form";
-		}
+	public String create(NavBase navBase,BindingResult result,Model model,RedirectAttributes attrs){
+		
 		int r = navBaseService.addNav(navBase);
 		if (r > 0) {
 			super.addMessage(attrs, "保存栏目成功");
@@ -133,14 +128,7 @@ public class NavController extends BaseController{
 	}
 	
 	@PostMapping("/update/{pid}")
-	public String update(@Valid NavBase navBase,BindingResult result,Model model,RedirectAttributes attrs){
-		if (result.hasErrors()) {
-			setBases(model);
-			setParentNav(model);
-			setTemplates(model);
-			
-			return "info/nav/form";
-		}
+	public String update(NavBase navBase,BindingResult result,Model model,RedirectAttributes attrs){
 		
 		int r = navBaseService.updateNav(navBase);
 		if (r > 0) {

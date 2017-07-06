@@ -45,10 +45,8 @@ public class ImgNewsController extends BaseController{
 	}
 
 	@PostMapping("/create")
-	public String create(@Valid ImgNews imgNew,BindingResult result,Model model,RedirectAttributes attrs){
-		if (result.hasErrors()) {
-			return "info/news/form";
-		}
+	public String create(ImgNews imgNew,BindingResult result,Model model,RedirectAttributes attrs){
+
 		//初始化状态
 		imgNew.setStatus(InfoStatus.DSH);
 		int r = imgNewsService.save(imgNew);
@@ -67,10 +65,8 @@ public class ImgNewsController extends BaseController{
 	}
 	
 	@PostMapping("/update/{pid}")
-	public String update(@Valid ImgNews imgNew,BindingResult result,Model model,RedirectAttributes attrs){
-		if (result.hasErrors()) {
-			return "info/news/form";
-		}
+	public String update(ImgNews imgNew,BindingResult result,Model model,RedirectAttributes attrs){
+		
 		int r = imgNewsService.update(imgNew);
 		if (r > 0) {
 			super.addMessage(attrs, "修改图片新闻成功");

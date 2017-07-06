@@ -45,11 +45,8 @@ public class NoticeController extends BaseController {
 	}
 	
 	@PostMapping("/create")
-	public String create(@Valid Notice notice,BindingResult result,Model model,RedirectAttributes attrs){
-		if (result.hasErrors()) {
-			
-			return "info/notice/form";
-		}
+	public String create(Notice notice,BindingResult result,Model model,RedirectAttributes attrs){
+		
 		notice.setStatus(InfoStatus.DSH);
 		int r = noticeService.save(notice);
 		if (r > 0) {
@@ -67,11 +64,8 @@ public class NoticeController extends BaseController {
 	}
 	
 	@PostMapping("/update/{pid}")
-	public String update(@Valid Notice notice,BindingResult result,Model model,RedirectAttributes attrs){
-		if (result.hasErrors()) {
-
-			return "info/notice/form";
-		}
+	public String update(Notice notice,BindingResult result,Model model,RedirectAttributes attrs){
+		
 		int r = noticeService.update(notice);
 		if (r > 0) {
 			super.addMessage(attrs, "修改紧急公告成功");
