@@ -50,6 +50,7 @@ public class NoticeController extends BaseController {
 			
 			return "info/notice/form";
 		}
+		notice.setStatus(InfoStatus.DSH);
 		int r = noticeService.save(notice);
 		if (r > 0) {
 			super.addMessage(attrs, "保存紧急公告成功");
