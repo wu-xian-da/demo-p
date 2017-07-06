@@ -30,6 +30,8 @@ public class NavContent extends BaseEntity {
     private Long contentTemplateId;//内容模板ID
 
     private Long navId;//所属基础栏目ID
+    
+    private String navName;//所属栏目名称
 
     private Date createTime;
 

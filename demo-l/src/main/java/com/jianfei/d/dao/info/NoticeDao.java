@@ -21,5 +21,7 @@ public interface NoticeDao extends CrudDao<Notice> {
 	
 	public List<Notice> getListByStatus(InfoStatus status);
 	
+	public List<Notice> getTopNByStatus(InfoStatus status);
+	
 	//web end
 }

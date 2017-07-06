@@ -161,11 +161,20 @@ public class NavBaseService extends CrudService<NavBaseDao, NavBase> {
 	
 	//web begin
 	/****
-	 * 获取一级展示导航
+	 * 获取一级展示导航列表
 	 * @return
 	 */
-	public List<NavBase> getShowNavList(){
-		return this.dao.getShowNavList();
+	public List<NavBase> getShowFirstNavList(){
+		return this.dao.getShowFirstNavList();
+	}
+	
+	/***
+	 * 获取一级展示导航详情
+	 * @param id
+	 * @return
+	 */
+	public NavBase getShowFirstNavById(Long id){
+		return this.dao.getShowFirstNavById(id);
 	}
 	
 	/**

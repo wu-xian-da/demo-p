@@ -22,7 +22,9 @@ public interface NavBaseDao extends CrudDao<NavBase> {
 	
 	//web begin
 	
-	public List<NavBase> getShowNavList();
+	public List<NavBase> getShowFirstNavList();
+	
+	public NavBase getShowFirstNavById(Long id);
 	
 	public List<NavBase> getShowSecNavListByParentId(Long parentId);
 	

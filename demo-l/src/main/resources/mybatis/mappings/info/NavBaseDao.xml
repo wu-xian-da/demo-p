@@ -126,7 +126,7 @@
   </select>
   
   <!-- web begin -->
-  <select id="getShowNavList" resultType="com.jianfei.d.entity.info.NavBase">
+  <select id="getShowFirstNavList" resultType="com.jianfei.d.entity.info.NavBase">
   	select <include refid="Base_Column_List"></include>
   		,
   		u.url "navUrl.url",
@@ -134,16 +134,27 @@
   	from tb_nav_base n
   	left join tb_base_url u
   	on n.id = u.nav_id
-  	where nav_level = 0
-  	and nav_status = 0
-  	order by nav_order_num DESC
+  	where n.nav_level = 0
+  	and n.nav_status = 0
+  	order by nav_order_num DESC,n.create_time DESC
   </select>
+  
+  <select id="getShowFirstNavById" parameterType="java.lang.Long" resultType="com.jianfei.d.entity.info.NavBase" >
+  	SELECT <include refid="Base_Column_List" />
+ 		, 
+ 		sm.menu_head_icon "navSecondMenu.menuHeadIcon"
+	FROM tb_nav_base n
+	LEFT JOIN tb_nav_second_menu sm
+	ON n.id = sm.nav_id
+	where n.id = #{id}
+   </select>
   
   <select id="getShowSecNavListByParentId" parameterType="java.lang.Long" resultType="com.jianfei.d.entity.info.NavBase">
   	select <include refid="Base_Column_List"></include>
   	from tb_nav_base n 
   	where n.parent_id = #{parentId}
   	and n.nav_status = 0
+  	ORDER BY n.nav_order_num DESC, n.create_time DESC
   </select>
   <!-- web end -->
 </mapper>

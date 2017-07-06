@@ -104,11 +104,13 @@
     select 
     	<include refid="Base_Column_List" />
     	,
+    	n.nav_name navName,
     	ct.id AS "contentTemplate.id",
     	ct.name AS "contentTemplate.name",
     	ct.img_path AS "contentTemplate.imgPath",
     	ct.file_path AS "contentTemplate.filePath"
     from tb_nav_content c
+    LEFT JOIN tb_nav_base n on c.nav_id = n.id
     LEFT JOIN tb_template ct ON c.content_template_id = ct.id
     where c.nav_id = #{navId}
   </select>

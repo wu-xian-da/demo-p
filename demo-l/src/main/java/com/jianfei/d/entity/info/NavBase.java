@@ -63,6 +63,10 @@ public class NavBase extends BaseEntity {
     private NavContent navContent = null;//无二级菜单内容
     
     private NavUrl navUrl = null;//URL外链内容
+    
+    private Template listTemplate = null;//栏目列表页模板
+    
+    private Template contentTemplate = null;//栏目内容页模板
 
     //取消展示、恢复展示
     private List<NavBase> navBases = null;

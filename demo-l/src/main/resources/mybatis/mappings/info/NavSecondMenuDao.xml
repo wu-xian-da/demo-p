@@ -123,6 +123,7 @@
     select 
     	<include refid="Base_Column_List" />
     	,
+    	n.nav_name navName,
 		lt.id AS "menuListTemplate.id",
     	lt.name AS "menuListTemplate.name",
     	lt.img_path AS "menuListTemplate.imgPath",
@@ -132,6 +133,7 @@
     	ct.img_path AS "menuContentTemplate.imgPath",
     	ct.file_path AS "menuContentTemplate.filePath"
 		FROM tb_nav_second_menu m
+		LEFT JOIN tb_nav_base n ON m.nav_id = n.id
 		LEFT JOIN tb_template lt ON m.menu_list_template_id = lt.id
 		LEFT JOIN tb_template ct ON m.menu_content_template_id = ct.id
     where m.nav_id = #{navId}

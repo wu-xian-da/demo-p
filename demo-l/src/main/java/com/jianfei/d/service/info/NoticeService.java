@@ -44,5 +44,9 @@ public class NoticeService extends CrudService<NoticeDao, Notice> {
 	public List<Notice> getListByStatus(InfoStatus status){
 		return this.dao.getListByStatus(status);
 	}
+	
+	public List<Notice> getTopNByStatus(InfoStatus status){
+		return this.dao.getTopNByStatus(status);
+	}
 	//web end
 }

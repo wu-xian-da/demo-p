@@ -33,6 +33,8 @@ public class NavSecondMenu extends BaseEntity{
 	
 	private Long navId;//所属基础栏目id
 	
+	private String navName;//所属栏目名称
+	
 	private Date createTime;
 	
 	private Date updateTime;

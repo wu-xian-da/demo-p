@@ -157,7 +157,8 @@
   	select <include refid="Base_Column_List"></include>
   	from tb_img_news n
   	where n.status = #{status}
-  	order by n.order_num DESC
+  	order by n.order_num DESC,n.check_time DESC
+  	Limit 0,5
   </select>
   <!-- web end -->
 </mapper>
