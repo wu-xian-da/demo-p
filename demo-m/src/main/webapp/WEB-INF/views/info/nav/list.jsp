@@ -76,7 +76,7 @@
 								<td>${navBase.navStatus.name }</td>
 								<td>
 									<a href="${base }/sys/info/nav/update/${navBase.id}" class="edit"><i></i>编辑</a> 
-									<a href="${base }/sys/info/nav/delete/${navBase.id}" class="delete"><i></i>删除</a>
+									<a href="${base }/sys/info/nav/delete/${navBase.id}" onclick="javascript:return confirmDel();" class="delete"><i></i>删除</a>
 								</td>
 							</tr>
 						</c:forEach>
