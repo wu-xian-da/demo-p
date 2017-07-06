@@ -49,8 +49,8 @@
 			<div class="operation-box">
 				<button type="button" class="btn btn-gy btn-new" id="noticeXK"><i></i>下刊</button>
 				<button type="button" class="btn btn-gy btn-recovery" id="noticeHFSK"><i></i>恢复上刊</button>
-				<a href="${base}/sys/info/notice/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
 				<button type="button" class="btn btn-gy btn-adpot" id="noticeSHTG"><span class="glyphicon glyphicon-ok"></span>审核通过</button>
+				<a href="${base}/sys/info/notice/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
 			</div>
 
 			<div class="box-table">
