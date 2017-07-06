@@ -124,4 +124,24 @@
   	LEFT JOIN tb_nav_base pn ON n.parent.id = pn.id
   	where n.parent_id = #{parentId}
   </select>
+  
+  <select id="getShowNavList" resultType="com.jianfei.d.entity.info.NavBase">
+  	select <include refid="Base_Column_List"></include>
+  		,
+  		u.url "navUrl.url",
+  		u.target "navUrl.target"
+  	from tb_nav_base n
+  	left join tb_base_url u
+  	on n.id = u.nav_id
+  	where nav_level = 0
+  	and nav_status = 0
+  	order by nav_order_num DESC
+  </select>
+  
+  <select id="getShowSecNavListByParentId" parameterType="java.lang.Long" resultType="com.jianfei.d.entity.info.NavBase">
+  	select <include refid="Base_Column_List"></include>
+  	from tb_nav_base n 
+  	where n.parent_id = #{parentId}
+  	and n.nav_status = 0
+  </select>
 </mapper>

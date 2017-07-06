@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.jianfei.d.base.service.CrudService;
 import com.jianfei.d.dao.info.ImgNewsDao;
+import com.jianfei.d.entity.common.InfoStatus;
 import com.jianfei.d.entity.info.ImgNews;
 
 @Service
@@ -33,4 +34,15 @@ public class ImgNewsService extends CrudService<ImgNewsDao, ImgNews> {
 	public int updateImgNewsPushStatusBatch(List<ImgNews> imgNews){
 		return this.dao.updateImgNewsPushStatusBatch(imgNews);
 	}
+	
+	//web begin
+	/***
+	 * 根据状态,获取数据
+	 * @param status
+	 * @return
+	 */
+	public List<ImgNews> getListByStatus(InfoStatus status){
+		return this.dao.getListByStatus(status);
+	}
+	//web end
 }

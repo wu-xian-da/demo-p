@@ -44,6 +44,8 @@ public class ImgNews extends BaseEntity {
     private InfoStatus status;//状态(1:待审核;2:审核通过;3:已上刊;4:已下刊)
 
     private Date checkTime;//发布时间(审核时间)
+    
+    private Integer orderNum;
 
     private InfoPushStatus pushStatus = InfoPushStatus.WTS;//推送状态(1:已推送;2:未推送)
     

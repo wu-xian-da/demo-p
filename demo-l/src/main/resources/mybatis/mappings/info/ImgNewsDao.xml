@@ -7,6 +7,7 @@
     n.img_path imgPath, 
     n.status status, 
     n.check_time checkTime, 
+    n.order_num orderNum,
     n.push_status pushStatus, 
     n.content content,
     n.create_time createTime, 
@@ -27,6 +28,9 @@
       </if>
       <if test="checkTime != null" >
         check_time,
+      </if>
+      <if test="orderNum != null">
+      	order_num,
       </if>
       <if test="pushStatus != null" >
         push_status,
@@ -50,6 +54,9 @@
       </if>
       <if test="checkTime != null" >
         #{checkTime},
+      </if>
+      <if test="orderNum != null">
+      	#{orderNum}
       </if>
       <if test="pushStatus != null" >
         #{pushStatus},
@@ -82,6 +89,9 @@
       </if>
       <if test="checkTime != null" >
         check_time = #{checkTime},
+      </if>
+      <if test="orderNum != null">
+      	order_num = #{orderNum},
       </if>
       <if test="pushStatus != null" >
         push_status = #{pushStatus},
@@ -141,4 +151,11 @@
          where id = #{imgNew.id}
       </foreach>
   </update>
+  
+  <select id="getListByStatus" resultType="com.jianfei.d.entity.info.ImgNews">
+  	select <include refid="Base_Column_List"></include>
+  	from tb_img_news n
+  	where n.status = #{status}
+  	order by n.order_num DESC
+  </select>
 </mapper>

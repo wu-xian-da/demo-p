@@ -19,5 +19,13 @@ public interface NavBaseDao extends CrudDao<NavBase> {
 	public int updateNavBaseStatusBatch(List<NavBase> navBase);
 	
 	public List<NavBase> getleafList();
+	
+	//web begin
+	
+	public List<NavBase> getShowNavList();
+	
+	public List<NavBase> getShowSecNavListByParentId(Long parentId);
+	
+	//web end
 
 }
