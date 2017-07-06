@@ -14,6 +14,7 @@
 		        <c:forEach items="${imgNewsList }" var="imgNews">
 		        	 <div class="swiper-slide">
 		        	    <a href="${base }/web/news/toDetail/${imgNews.id}">
+		        	    	<!-- <img src="${cdnDomain }${imgNews.imgPath }" alt="${imgNews.title }"> -->
 		        	 		<img src="${imgNews.imgPath }" alt="${imgNews.title }">
 		        	 		<h3>${imgNews.title }</h3>
 		        	 	</a>
