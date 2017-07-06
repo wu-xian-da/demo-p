@@ -141,7 +141,10 @@
   <update id="updateNavInfoStatusBatch" parameterType="java.util.List">
   	  <foreach collection="list" item="navInfo" index="index" separator=";">
          UPDATE tb_nav_info
-         set status = #{navInfo.status}
+         <set>
+         	<if test="navInfo.status != null">status = #{navInfo.status},</if>
+         	<if test="navInfo.checkTime != null">check_time = #{navInfo.checkTime},</if>
+         </set>
          where id = #{navInfo.id}
       </foreach>
   </update>

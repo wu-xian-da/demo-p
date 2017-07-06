@@ -118,7 +118,7 @@
 										<i></i>
 										编辑
 									</a> 
-									<a href="${base }/sys/info/navinfo/delete/${navInfo.id}" class="delete">
+									<a href="${base }/sys/info/navinfo/delete/${navInfo.id}" onclick="javascript:return confirmDel();" class="delete">
 										<i></i>
 										删除
 									</a>

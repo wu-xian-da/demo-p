@@ -45,10 +45,10 @@ public class ImgNewsController extends BaseController{
 	}
 
 	@PostMapping("/create")
-	public String create(@Valid ImgNews imgNew,BindingResult result,Model model,RedirectAttributes attrs){
-		if (result.hasErrors()) {
-			return "info/news/form";
-		}
+	public String create(ImgNews imgNew,BindingResult result,Model model,RedirectAttributes attrs){
+
+		//初始化状态
+		imgNew.setStatus(InfoStatus.DSH);
 		int r = imgNewsService.save(imgNew);
 		if (r > 0) {
 			super.addMessage(attrs,"保存图片新闻成功");
@@ -65,10 +65,8 @@ public class ImgNewsController extends BaseController{
 	}
 	
 	@PostMapping("/update/{pid}")
-	public String update(@Valid ImgNews imgNew,BindingResult result,Model model,RedirectAttributes attrs){
-		if (result.hasErrors()) {
-			return "info/news/form";
-		}
+	public String update(ImgNews imgNew,BindingResult result,Model model,RedirectAttributes attrs){
+		
 		int r = imgNewsService.update(imgNew);
 		if (r > 0) {
 			super.addMessage(attrs, "修改图片新闻成功");
@@ -99,7 +97,7 @@ public class ImgNewsController extends BaseController{
 	public String checkSHTG(ImgNews imgNews,RedirectAttributes attrs){
 		imgNews.fileterImgNewss();
 		for (ImgNews news : imgNews.getImgNews()) {
-			news.setStatus(InfoStatus.SHTG);
+			news.setStatus(InfoStatus.YSK);
 			news.setCheckTime(new Date());
 		}
 		int result = imgNewsService.updateImgNewsStatusBatch(imgNews.getImgNews());
@@ -139,7 +137,7 @@ public class ImgNewsController extends BaseController{
 	 * @param attrs
 	 * @return
 	 */
-	@GetMapping("/check/ysk")
+	/*@GetMapping("/check/ysk")
 	public String checkYSK(ImgNews imgNews,RedirectAttributes attrs){
 		imgNews.fileterImgNewss();
 		for (ImgNews news : imgNews.getImgNews()) {
@@ -153,7 +151,7 @@ public class ImgNewsController extends BaseController{
 			super.addMessage(attrs, "批量上刊失败,请重试!");
 		}
 		return "redirect:/sys/info/news";
-	}
+	}*/
 	
 	//恢复上刊
 	@GetMapping("/check/hfsk")

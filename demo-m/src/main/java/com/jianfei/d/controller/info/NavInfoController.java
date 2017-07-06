@@ -58,11 +58,8 @@ public class NavInfoController extends BaseController {
 	}
 
 	@PostMapping("/create")
-	public String create(@Valid NavInfo navInfo,BindingResult result,Model model,RedirectAttributes attrs){
-		if (result.hasErrors()) {
-			setBases(model);
-			return "info/navinfo/form";
-		}
+	public String create(NavInfo navInfo,BindingResult result,Model model,RedirectAttributes attrs){
+		
 		navInfo.setStatus(InfoStatus.DSH);
 		int r = navInfoService.save(navInfo);
 		if (r > 0) {
@@ -81,11 +78,8 @@ public class NavInfoController extends BaseController {
 	}
 	
 	@PostMapping("/update/{pid}")
-	public String update(@Valid NavInfo navInfo,BindingResult result,Model model,RedirectAttributes attrs){
-		if (result.hasErrors()) {
-			setBases(model);
-			return "info/navinfo/form";
-		}
+	public String update(NavInfo navInfo,BindingResult result,Model model,RedirectAttributes attrs){
+		
 		int r = navInfoService.update(navInfo);
 		if (r > 0) {
 			super.addMessage(attrs, "修改栏目信息成功");
@@ -155,7 +149,7 @@ public class NavInfoController extends BaseController {
 	 * @param attrs
 	 * @return
 	 */
-	@GetMapping("/check/ysk")
+	/*@GetMapping("/check/ysk")
 	public String checkYSK(NavInfo navInfo,RedirectAttributes attrs){
 		navInfo.fileterNavInfos();
 		for (NavInfo n : navInfo.getInfos()) {
@@ -168,7 +162,7 @@ public class NavInfoController extends BaseController {
 			super.addMessage(attrs, "批量上刊失败,请重试!");
 		}
 		return "redirect:/sys/info/navinfo";
-	}
+	}*/
 	
 	//恢复上刊
 	@GetMapping("/check/hfsk")

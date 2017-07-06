@@ -5,7 +5,11 @@
 	<div class="col-md-12">
 		<div class="box information-management-edit">
 		
-			<h2>添加信息</h2>
+			<h2>${empty news.id ? "新增" : "编辑" }图片新闻</h2>
+			
+			<form id="news_form" method="post">
+			<!-- hidden -->
+			<input type="hidden" name="id" value="${news.id}"/>
 
 			<div class="row">
 				<div class="col-md-12">
@@ -18,7 +22,7 @@
 						</div>
 
 						<div class="col-md-8">
-							<input type="text" class="form-control" placeholder="图片标题">
+							<input type="text" name="title" value="${news.title }" class="form-control" placeholder="图片标题">
 						</div>
 					</div>
 
@@ -28,7 +32,18 @@
 						</div>
 
 						<div class="col-md-8">
-							<button type="button" class="btn btn-gy btn-upload"><span class="glyphicon glyphicon-upload"></span>上传图片</button>
+							 <!-- 回显图片 -->
+							 <c:choose>
+							 	<c:when test="${not empty news.imgPath }">
+							 		<img id="imgPathView" src="${news.imgPath }" alt="" style="width:75px;height:77px;">
+							 	</c:when>
+							 	<c:otherwise>
+							 		<img id="imgPathView" src="${baseStatic }/img/no_pic.png" alt="" style="width:75px;height:77px;">
+							 	</c:otherwise>
+							 </c:choose>
+							 <input type="file" id="imgPathFile" name="imgPathFile" />
+							 <!-- hidden -->
+							 <input type="hidden" id="imgPath" name="imgPath" value="${news.imgPath }" />
 						</div>
 					</div>
 
@@ -37,7 +52,7 @@
 				  			<label>新闻内容：</label>
 				  		</div>
 				  		<div class="col-md-8">
-				  			<div id="editor"></div>
+				  			<textarea name="content" id="editor">${news.content }</textarea>
 				  		</div>
 				  	</div>
 	
@@ -47,14 +62,19 @@
 				  		</div>
 				  		<div class="col-md-8">
 				  			<div class="operation-box">
-									<button type="button" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-ok-sign"></span>保存</button>
-								</div>
+								<button type="submit" class="btn btn-gy btn-query">
+									<span class="glyphicon glyphicon-ok-sign"></span>保存
+								</button>
+								<button type="button" onclick="javascript:history.back();" class="btn btn-gy btn-sort">
+									<span class="glyphicon glyphicon-arrow-left"></span>返回
+								</button>
+							</div>
 				  		</div>
 				  	</div>
 
 				</div>
 			</div>
-
+			</form>
 		</div>
 	</div>
 </div>
@@ -125,5 +145,28 @@ if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
 
 CKEDITOR.on('instanceReady', function (e) {
 	resize();
+});
+
+function dealImgNewsUpload(file,data,response){
+	var result = eval("("+data+")");
+	if (result.status) {
+		$("#imgPathView").attr("src",result.url);
+		$("#imgPath").val(result.url);
+	} else {
+		alert(result.message);
+	}
+};
+
+$(document).ready(function(){
+	uploadifyPro.auto = true;
+	uploadifyPro.multi = false;
+	uploadifyPro.fileExt = "*.gif;*.jpg;*.jpeg;*.png;*.bmp;*.ico";
+	uploadifyPro.buttonClass = "btn btn-gy btn-upload";
+	uploadifyPro.sizeLimit = "200k";
+	uploadifyPro.buttonText = "上传图片";
+	uploadifyPro.onUploadSuccess = dealImgNewsUpload;
+		
+	//上传二级栏目头标
+	$("#imgPathFile").uploadify(uploadifyPro);
 });
 </script>

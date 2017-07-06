@@ -45,11 +45,9 @@ public class NoticeController extends BaseController {
 	}
 	
 	@PostMapping("/create")
-	public String create(@Valid Notice notice,BindingResult result,Model model,RedirectAttributes attrs){
-		if (result.hasErrors()) {
-			
-			return "info/notice/form";
-		}
+	public String create(Notice notice,BindingResult result,Model model,RedirectAttributes attrs){
+		
+		notice.setStatus(InfoStatus.DSH);
 		int r = noticeService.save(notice);
 		if (r > 0) {
 			super.addMessage(attrs, "保存紧急公告成功");
@@ -66,11 +64,8 @@ public class NoticeController extends BaseController {
 	}
 	
 	@PostMapping("/update/{pid}")
-	public String update(@Valid Notice notice,BindingResult result,Model model,RedirectAttributes attrs){
-		if (result.hasErrors()) {
-
-			return "info/notice/form";
-		}
+	public String update(Notice notice,BindingResult result,Model model,RedirectAttributes attrs){
+		
 		int r = noticeService.update(notice);
 		if (r > 0) {
 			super.addMessage(attrs, "修改紧急公告成功");
@@ -92,81 +87,81 @@ public class NoticeController extends BaseController {
 	}
 	
 	//审核通过
-		@GetMapping("/check/shtg")
-		public String checkSHTG(Notice notice, RedirectAttributes attrs){
-			notice.fileterNotices();
-			
-			for (Notice n : notice.getNotices()) {
-				n.setStatus(InfoStatus.SHTG);
-				n.setCheckTime(new Date());
-			}
-			
-			int result = noticeService.updateNoticeStatusBatch(notice.getNotices());
-			if(result > 0){
-				super.addMessage(attrs, "批量审核通过成功");
-			}else{
-				super.addMessage(attrs, "批量审核通过失败，请重试！");
-			}
-			
-			return "redirect:/sys/info/notice";
+	@GetMapping("/check/shtg")
+	public String checkSHTG(Notice notice, RedirectAttributes attrs){
+		notice.fileterNotices();
+		
+		for (Notice n : notice.getNotices()) {
+			n.setStatus(InfoStatus.YSK);
+			n.setCheckTime(new Date());
 		}
 		
-		//下刊
-		@GetMapping("/check/yxk")
-		public String checkYXK(Notice notice, RedirectAttributes attrs){
-			notice.fileterNotices();
-			
-			for (Notice n : notice.getNotices()) {
-				n.setStatus(InfoStatus.YXK);
-			}
-			
-			int result = noticeService.updateNoticeStatusBatch(notice.getNotices());
-			if(result > 0){
-				super.addMessage(attrs, "批量下刊成功");
-			}else{
-				super.addMessage(attrs, "批量下刊失败，请重试！");
-			}
-			
-			return "redirect:/sys/info/notice";
+		int result = noticeService.updateNoticeStatusBatch(notice.getNotices());
+		if(result > 0){
+			super.addMessage(attrs, "批量审核通过成功");
+		}else{
+			super.addMessage(attrs, "批量审核通过失败，请重试！");
 		}
 		
-		//上刊
-		@GetMapping("/check/ysk")
-		public String checkYSK(Notice notice, RedirectAttributes attrs){
-			notice.fileterNotices();
-			
-			for (Notice n : notice.getNotices()) {
-				n.setStatus(InfoStatus.YSK);
-			}
-			
-			int result = noticeService.updateNoticeStatusBatch(notice.getNotices());
-			if(result > 0){
-				super.addMessage(attrs, "批量上刊成功");
-			}else{
-				super.addMessage(attrs, "批量上刊失败，请重试！");
-			}
-			
-			return "redirect:/sys/info/notice";
+		return "redirect:/sys/info/notice";
+	}
+	
+	//下刊
+	@GetMapping("/check/yxk")
+	public String checkYXK(Notice notice, RedirectAttributes attrs){
+		notice.fileterNotices();
+		
+		for (Notice n : notice.getNotices()) {
+			n.setStatus(InfoStatus.YXK);
 		}
 		
-		//恢复上刊
-		@GetMapping("/check/hfsk")
-		public String checkHFSK(Notice notice, RedirectAttributes attrs){
-			notice.fileterNotices();
-			
-			for (Notice n : notice.getNotices()) {
-				n.setStatus(InfoStatus.YSK);
-			}
-			
-			int result = noticeService.updateNoticeStatusBatch(notice.getNotices());
-			if(result > 0){
-				super.addMessage(attrs, "批量恢复上刊成功");
-			}else{
-				super.addMessage(attrs, "批量恢复上刊失败，请重试！");
-			}
-			
-			return "redirect:/sys/info/notice";
+		int result = noticeService.updateNoticeStatusBatch(notice.getNotices());
+		if(result > 0){
+			super.addMessage(attrs, "批量下刊成功");
+		}else{
+			super.addMessage(attrs, "批量下刊失败，请重试！");
 		}
+		
+		return "redirect:/sys/info/notice";
+	}
+	
+	//上刊
+	/*@GetMapping("/check/ysk")
+	public String checkYSK(Notice notice, RedirectAttributes attrs){
+		notice.fileterNotices();
+		
+		for (Notice n : notice.getNotices()) {
+			n.setStatus(InfoStatus.YSK);
+		}
+		
+		int result = noticeService.updateNoticeStatusBatch(notice.getNotices());
+		if(result > 0){
+			super.addMessage(attrs, "批量上刊成功");
+		}else{
+			super.addMessage(attrs, "批量上刊失败，请重试！");
+		}
+		
+		return "redirect:/sys/info/notice";
+	}*/
+	
+	//恢复上刊
+	@GetMapping("/check/hfsk")
+	public String checkHFSK(Notice notice, RedirectAttributes attrs){
+		notice.fileterNotices();
+		
+		for (Notice n : notice.getNotices()) {
+			n.setStatus(InfoStatus.YSK);
+		}
+		
+		int result = noticeService.updateNoticeStatusBatch(notice.getNotices());
+		if(result > 0){
+			super.addMessage(attrs, "批量恢复上刊成功");
+		}else{
+			super.addMessage(attrs, "批量恢复上刊失败，请重试！");
+		}
+		
+		return "redirect:/sys/info/notice";
+	}
 	
 	@RequestMapping
 	public String list(Model model,Notice notice){

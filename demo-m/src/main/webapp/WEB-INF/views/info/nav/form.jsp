@@ -425,7 +425,7 @@
 		var navIconUploadifyPro = deepClone(uploadifyPro);
 		navIconUploadifyPro.sizeLimit = "100k";
 		navIconUploadifyPro.buttonText = "上传图标";
-		navIconUploadifyPro.buttonClass = "btn btn-gy btn-upload";
+		//navIconUploadifyPro.buttonClass = "btn btn-gy btn-upload";
         navIconUploadifyPro.onUploadSuccess = dealNavIconUpload;
 		
 		var menuHeadIconUploadifyPro = deepClone(uploadifyPro);
