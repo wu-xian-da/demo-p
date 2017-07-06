@@ -101,7 +101,7 @@ $(function(){
 			$("[name=navCheck]").prop("checked", false);
 		}
 	});
-	
+	//恢复展示
 	$('#navShow').on("click", function(){
 		var checkArr = $('input[name=navCheck]:checked');
 		if(checkArr.length == 0){
@@ -112,9 +112,10 @@ $(function(){
 		checkArr.each(function(i){
 			navBases.push("navBases[" + i + "].id=" + $(this).data("id"));
 		});
-		window.location.href = "${base}/sys/info/nav/show?" + navBases.join('&');
+		window.location.href = "${base}/sys/info/nav/hfshow?" + navBases.join('&');
 	});
 	
+	//取消展示
 	$('#navHide').on("click", function(){
 		var checkArr = $('input[name=navCheck]:checked');
 		if(checkArr.length == 0){

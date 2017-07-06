@@ -23,7 +23,7 @@
 					   	<option value="">全部(单选)</option>
 						<c:forEach items="${infoStatus }" var="status">
 							<option value="${status }"
-								<c:if test="${status eq page.entity.status }"></c:if>
+								<c:if test="${status eq page.entity.status }">selected="selected"</c:if>
 							>${status.name }</option>
 						</c:forEach> 	
 					</select>
@@ -53,9 +53,9 @@
 			</form>
 			
 			<div class="operation-box">
-				<button type="button" class="btn btn-gy btn-new"><i></i>下刊</button>
-				<button type="button" class="btn btn-gy btn-recovery"><i></i>恢复上刊</button>
-				<button type="button" class="btn btn-gy btn-adpot"><span class="glyphicon glyphicon-ok"></span>审核通过</button>
+				<button id="newsXK" type="button" class="btn btn-gy btn-new"><i></i>下刊</button>
+				<button id="newsHFSK" type="button" class="btn btn-gy btn-recovery"><i></i>恢复上刊</button>
+				<button id="newSHTG" type="button" class="btn btn-gy btn-adpot"><span class="glyphicon glyphicon-ok"></span>审核通过</button>
 				<a href="${base }/sys/info/news/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
 				
 			</div>
@@ -64,7 +64,7 @@
 				<table class="table table-photo-news">
 					<thead>
 						<tr>
-							<th><input type="checkbox"></th>
+							<th><input type="checkbox" id="checkAll"></th>
 							<th>新闻名称</th>
 							<th>图片</th>
 							<th>发布时间</th>
@@ -75,7 +75,7 @@
 					<tbody>
 						<c:forEach items="${page.data }" var="news">
 							<tr>
-								<td><input type="checkbox"></td>
+								<td><input type="checkbox" name="newsCheck" data-id="${news.id }"></td>
 								<td>${news.title }</td>
 								<td>
 								    <c:choose>
@@ -126,4 +126,57 @@
 
 		flatpickr(".flatpickr");
 	}
+	
+	$(function(){
+		$("#checkAll").on("click", function(){
+			if($(this).is(":checked")){
+				$("[name=newsCheck]").prop("checked", true);
+			}
+			else{
+				$("[name=newsCheck]").prop("checked", false);
+			}
+		});
+		
+		//下刊
+		$('#newsXK').on("click", function(){
+			var checkArr = $('input[name=newsCheck]:checked');
+			if(checkArr.length == 0){
+				alert("请勾选需要操作的数据");
+				return;
+			}
+			var newss = [];
+			checkArr.each(function(i){
+				newss.push("imgNewss[" + i + "].id=" + $(this).data("id"));
+			});
+			window.location.href = "${base}/sys/info/news/check/yxk?" + newss.join('&');
+		});
+		
+		//恢复上刊
+		$('#newsHFSK').on("click", function(){
+			var checkArr = $('input[name=newsCheck]:checked');
+			if(checkArr.length == 0){
+				alert("请勾选需要操作的数据");
+				return;
+			}
+			var newss = [];
+			checkArr.each(function(i){
+				newss.push("imgNewss[" + i + "].id=" + $(this).data("id"));
+			});
+			window.location.href = "${base}/sys/info/news/check/hfsk?" + newss.join('&');
+		});
+		
+		// 审核通过
+		$('#newsSHTG').on("click", function(){
+			var checkArr = $('input[name=newsCheck]:checked');
+			if(checkArr.length == 0){
+				alert("请勾选需要操作的数据");
+				return;
+			}
+			var newss = [];
+			checkArr.each(function(i){
+				newss.push("imgNewss[" + i + "].id=" + $(this).data("id"));
+			});
+			window.location.href = "${base}/sys/info/news/check/shtg?" + newss.join('&');
+		});
+	});
 </script>

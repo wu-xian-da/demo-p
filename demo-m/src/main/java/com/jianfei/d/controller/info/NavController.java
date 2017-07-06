@@ -180,7 +180,7 @@ public class NavController extends BaseController{
 	 * @param attrs
 	 * @return
 	 */
-	@GetMapping("/show")
+	/*@GetMapping("/show")
 	public String show(NavBase navBase,RedirectAttributes attrs){
 		navBase.filterNavBases();
 		for (NavBase nav : navBase.getNavBases()) {
@@ -193,7 +193,7 @@ public class NavController extends BaseController{
 			super.addMessage(attrs, "批量展示栏目失败,请重试!");
 		}
 		return "redirect:/sys/info/nav";
-	}
+	}*/
 	
 	/***
 	 * 恢复展示

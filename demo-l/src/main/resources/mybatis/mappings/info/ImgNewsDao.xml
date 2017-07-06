@@ -126,7 +126,10 @@
   <update id="updateImgNewsStatusBatch" parameterType="java.util.List">
   	  <foreach collection="list" item="imgNew" index="index" separator=";">
          UPDATE tb_img_news
-         set status = #{imgNew.status}
+         <set>
+         	<if test="imgNew.status != null">status = #{imgNew.status},</if>
+         	<if test="imgNew.checkTime != null">check_time = #{imgNew.checkTime},</if>
+         </set>
          where id = #{imgNew.id}
       </foreach>
   </update>
