@@ -155,7 +155,7 @@ public class NavInfoController extends BaseController {
 	 * @param attrs
 	 * @return
 	 */
-	@GetMapping("/check/ysk")
+	/*@GetMapping("/check/ysk")
 	public String checkYSK(NavInfo navInfo,RedirectAttributes attrs){
 		navInfo.fileterNavInfos();
 		for (NavInfo n : navInfo.getInfos()) {
@@ -168,7 +168,7 @@ public class NavInfoController extends BaseController {
 			super.addMessage(attrs, "批量上刊失败,请重试!");
 		}
 		return "redirect:/sys/info/navinfo";
-	}
+	}*/
 	
 	//恢复上刊
 	@GetMapping("/check/hfsk")

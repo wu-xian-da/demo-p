@@ -41,7 +41,7 @@ public class ImgNews extends BaseEntity {
     private String imgPath;//图片路径
 
     @FormQuery
-    private InfoStatus status = InfoStatus.DSH;//状态(1:待审核;2:审核通过;3:已上刊;4:已下刊)
+    private InfoStatus status;//状态(1:待审核;2:审核通过;3:已上刊;4:已下刊)
 
     private Date checkTime;//发布时间(审核时间)
 

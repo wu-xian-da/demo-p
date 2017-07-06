@@ -11,7 +11,7 @@ package com.jianfei.d.entity.common;
  */
 public enum InfoStatus {
 	
-	DSH("待审核"),SHTG("审核通过"),YSK("已上刊"),YXK("已下刊");
+	DSH("待审核"),YSK("已上刊"),YXK("已下刊");
 
 	private String name;
 	
