@@ -38,7 +38,7 @@
 							 		<img id="imgPathView" src="${news.imgPath }" alt="" style="width:75px;height:77px;">
 							 	</c:when>
 							 	<c:otherwise>
-							 		<img id="imgPathView" src="${baseStatic }/img/login-logo.png" alt="" style="width:75px;height:77px;">
+							 		<img id="imgPathView" src="${baseStatic }/img/no_pic.png" alt="" style="width:75px;height:77px;">
 							 	</c:otherwise>
 							 </c:choose>
 							 <input type="file" id="imgPathFile" name="imgPathFile" />

@@ -83,7 +83,7 @@
 								    		<img src="${news.imgPath }" alt="">
 								    	</c:when>
 								    	<c:otherwise>
-								    		<img src="${baseStatic }/img/n-1.png" alt="">
+								    		<img src="${baseStatic }/img/no_pic.png" alt="">
 								    	</c:otherwise>
 								    </c:choose>
 								</td>

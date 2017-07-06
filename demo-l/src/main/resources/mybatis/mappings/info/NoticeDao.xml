@@ -116,7 +116,10 @@
   <update id="updateNoticeStatusBatch" parameterType="java.util.List">
   	  <foreach collection="list" item="notice" index="index" separator=";">
          UPDATE tb_notice
-         set status = #{notice.status}
+         <set>
+         	<if test="notice.status != null">status = #{notice.status},</if>
+         	<if test="notice.checkTime != null">check_time = #{notice.checkTime},</if>
+         </set>
          where id = #{notice.id}
       </foreach>
   </update>
