@@ -121,7 +121,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
             passwordHelper.encryptPassword(u);//加密密码
         }
         this.userService.initPasswordBatch(user.getUsers());
-        super.addMessage(attrs,MessageStatus.SUC, user.getLoginName() + "密码初始化成功, 默认为：" + Constants.INIT_PASSWORD);
+        super.addMessage(attrs, "密码初始化成功, 默认为：" + Constants.INIT_PASSWORD);
         return "redirect:/sys/system/user";
     }
 	
