@@ -38,7 +38,7 @@
 					</button>
 					<button id="navShow" type="button" class="btn btn-gy btn-push">
 						<i></i>
-						展示/恢复展示
+						恢复展示
 					</button>
 					<button id="navHide" type="button" class="btn btn-gy btn-recovery">
 						<i></i>

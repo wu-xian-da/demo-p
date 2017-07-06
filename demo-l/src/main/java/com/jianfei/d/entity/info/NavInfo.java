@@ -44,7 +44,7 @@ public class NavInfo extends BaseEntity {
 	private InfoType type;//类型(1:交通类,2:文章类)
 	
 	@FormQuery
-	private InfoStatus status = InfoStatus.DSH;//状态(1:待审核,2:审核通过,3:已上刊,4:已下刊)
+	private InfoStatus status;//状态(1:待审核,2:审核通过,3:已上刊,4:已下刊)
 	
 	private Long navId;//所属栏目id
 	

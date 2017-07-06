@@ -104,8 +104,8 @@
         LEFT JOIN tb_nav_base pn
         ON n.parent_id = pn.id
 	WHERE 1 = 1
-	AND (n.nav_type = 0 AND n.nav_level = 1) 
-	OR (n.nav_type = 1 AND n.nav_level = 0)
+	AND n.nav_type = 1
+	AND (n.nav_level = 0 OR n.nav_level = 1)
 	AND n.nav_status = 0
   </select>
   

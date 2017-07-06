@@ -84,7 +84,7 @@
 
 			<div class="operation-box">
 				<button id="infoXK" type="button" class="btn btn-gy btn-new"><i></i>下刊</button>
-				<button id="infoSK" type="button" class="btn btn-gy btn-recovery"><i></i>上刊/恢复上刊</button>
+				<button id="infoHFSK" type="button" class="btn btn-gy btn-recovery"><i></i>恢复上刊</button>
 				<button id="infoSHTG" type="button" class="btn btn-gy btn-adpot"><span class="glyphicon glyphicon-ok"></span>审核通过</button>
 				<a href="${base }/sys/info/navinfo/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
 			</div>
@@ -162,7 +162,7 @@ $(function(){
 	});
 	
 	// 上刊/恢复上刊
-	$('#infoSK').on("click", function(){
+	$('#infoHFSK').on("click", function(){
 		var checkArr = $('input[name=infoCheck]:checked');
 		if(checkArr.length == 0){
 			alert("请勾选需要操作的数据");
@@ -172,7 +172,7 @@ $(function(){
 		checkArr.each(function(i){
 			infos.push("infos[" + i + "].id=" + $(this).data("id"));
 		});
-		window.location.href = "${base}/sys/info/navinfo/check/ysk?" + infos.join('&');
+		window.location.href = "${base}/sys/info/navinfo/check/hfsk?" + infos.join('&');
 	});
 	
 	// 审核通过
@@ -187,6 +187,7 @@ $(function(){
 			infos.push("infos[" + i + "].id=" + $(this).data("id"));
 		});
 		window.location.href = "${base}/sys/info/navinfo/check/shtg?" + infos.join('&');
+		
 	});
 });
 </script>

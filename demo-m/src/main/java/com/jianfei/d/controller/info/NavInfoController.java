@@ -63,6 +63,7 @@ public class NavInfoController extends BaseController {
 			setBases(model);
 			return "info/navinfo/form";
 		}
+		navInfo.setStatus(InfoStatus.DSH);
 		int r = navInfoService.save(navInfo);
 		if (r > 0) {
 			super.addMessage(attrs, "保存栏目信息成功");
@@ -106,7 +107,7 @@ public class NavInfoController extends BaseController {
 	}
 	
 	/****
-	 * 审核通过
+	 * 审核通过即上刊
 	 * @param imgNews
 	 * @param attrs
 	 * @return
@@ -115,7 +116,7 @@ public class NavInfoController extends BaseController {
 	public String checkSHTG(NavInfo navInfo,RedirectAttributes attrs){
 		navInfo.fileterNavInfos();
 		for (NavInfo n : navInfo.getInfos()) {
-			n.setStatus(InfoStatus.SHTG);
+			n.setStatus(InfoStatus.YSK);
 			n.setCheckTime(new Date());
 		}
 		int result = navInfoService.updateNavInfoStatusBatch(navInfo.getInfos());

@@ -157,7 +157,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-md-12">
 							<div class="from-gy-controls">
 								<div class="form-inline">
@@ -177,7 +177,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				
 				<div id="wejcd_div" class="column-type-list" 
@@ -298,7 +298,7 @@
 				</div>
 			</div>
 
-			<div id="show_template_l_content" class="col-md-4 col-md-offset-1"
+			<!-- <div id="show_template_l_content" class="col-md-4 col-md-offset-1"
 				<c:choose>
 			    	<c:when test="${navBase.navType eq 'XXEJCD' }">style="display:block;"</c:when>
 			    	<c:otherwise>style="display:none;"</c:otherwise>
@@ -308,7 +308,7 @@
 				<div class="show-content-thumb-wrap">
 					<img src="${base }${navBase.navSecondMenu.menuContentTemplate.imgPath}" alt="${navBase.navSecondMenu.menuContentTemplate.name}">
 				</div>
-			</div>
+			</div> -->
 			<!-- 下辖二级菜单 模板显示区域  end -->
 			
 			<!-- 无二级菜单 模板显示区域  begin -->
@@ -447,6 +447,9 @@
 		if (pNav) {
 			//隐藏
 			$("#navType option[value='XXEJCD']").hide();
+			//已选择导航类型为"下辖二级菜单"的下拉框还原
+			$("#navType option[value='']").attr("checked",true);
+			$("#navType option:checked").html("---请选择---");
 		} else {
 			//展示
 			$("#navType option[value='XXEJCD']").show();
