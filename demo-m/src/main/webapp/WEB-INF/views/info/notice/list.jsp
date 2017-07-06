@@ -5,47 +5,47 @@
 	<div class="col-md-12">
 		<div class="box information-management-box">
 			<h3>条件检索</h3>
-			
-			<div class="from-gy-controls">
-				<div class="form-inline">
-				  <div class="form-group">
-				    <label>公告名称：</label>
-				    <input type="text" class="form-control" placeholder="公告名称">
-				  </div>
-				  <div class="form-group">
-				    <label>信息状态：</label>
-				    <select class="form-control">
-						  <option>全部(单选)</option>
-						  <option>待审核</option>
-						  <option>已上刊</option>
-						  <option>已下刊</option>
-						</select>
-				  </div>
-
-				  <div class="form-group">
-				    <label>发布时间：</label>
-				    <div class="date-time-box">
-				    	<input type="text" class="form-control flatpickr">
-				    	<i class="date-time-icon"></i>
-				    </div>
-				    至
-				   	<div class="date-time-box">
-				   		<input type="text" class="form-control flatpickr">
-				   		<i class="date-time-icon"></i>
-				   	</div>
-				  </div>
-
-					<div class="form-group">
-						<div class="operation-box operation-head-box">
-							<button type="button" class="btn btn-gy btn-recovery" id="#"><span class="glyphicon glyphicon-search"></span>查询</button>
+			<form method="post">
+				<div class="from-gy-controls">
+					<div class="form-inline">
+					  <div class="form-group">
+					    <label>公告名称：</label>
+					    <input name="title" value="${page.entity.title }" type="text" class="form-control" placeholder="公告名称">
+					  </div>
+					  <div class="form-group">
+					    <label>信息状态：</label>
+					    <select name="status" class="form-control">
+							  <option value="">全部(单选)</option>
+							  	<c:forEach items="${infoStatuss }" var="status">
+								  	  <option value="${status }"
+								  	  	  <c:if test="${page.entity.status eq status}">
+								  	  	      selected="selected"
+								  	  	  </c:if>
+								  	  >${status.name }</option>
+								 </c:forEach>
+							</select>
+					  </div>
+	
+					  <div class="form-group">
+					    <label>发布时间：</label>
+					    <div class="date-time-box">
+					    	<input name="beginCheckTime" value="${page.entity.beginCheckTime }" type="text" class="form-control flatpickr">
+					    	<i class="date-time-icon"></i>
+					    </div>
+					    至
+					   	<div class="date-time-box">
+					   		<input name="endCheckTime" value="${page.entity.endCheckTime }" type="text" class="form-control flatpickr">
+					   		<i class="date-time-icon"></i>
+					   	</div>
+					  </div>
+						<div class="form-group">
+							<div class="operation-box operation-head-box">
+								<button type="submit" class="btn btn-gy btn-recovery"><span class="glyphicon glyphicon-search"></span>查询</button>
+							</div>
 						</div>
 					</div>
-
-
-
 				</div>
-			</div>
-
+			</form>
 			<div class="operation-box">
 				<button type="button" class="btn btn-gy btn-new" id="noticeXK"><i></i>下刊</button>
 				<button type="button" class="btn btn-gy btn-recovery" id="noticeHFSK"><i></i>恢复上刊</button>
@@ -60,7 +60,6 @@
 						<tr>
 							<th><input type="checkbox" id="checkAll"></th>
 							<th>紧急公告名称</th>
-							<th>是否推送</th>
 							<th>发布时间</th>
 							<th>信息状态</th>
 							<th>管理</th>
@@ -72,8 +71,7 @@
 							<tr>
 								<td><input type="checkbox" name="noticeCheck" data-id="${notice.id}"></td>
 								<td>${notice.title}</td>
-								<td>${notice.pushStatus.name}</td>
-								<td>${notice.checkTime}</td>
+								<td><fmt:formatDate value="${notice.checkTime}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 								<td><span class="info-status">${notice.status.name}</span></td>
 								<td>
 									<a href="${base}/sys/info/notice/update/${notice.id}" class="edit"><i></i>编辑</a> 

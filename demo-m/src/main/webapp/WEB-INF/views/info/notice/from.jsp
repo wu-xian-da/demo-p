@@ -4,41 +4,49 @@
 <div id="app-main-container" class="white-bg">
 	<div class="col-md-12">
 		<div class="box information-management-edit">
-			<h2>添加公告</h2>
-
-			<div class="row">
-				<div class="col-md-12">
-					<hr>
-					<div class="row row-list">
-						<div class="col-md-1">
-							<label>紧急公告：</label>
-						</div>
-	
-						<div class="col-md-8">
-							<input type="text" class="form-control" placeholder="紧急公告">
-						</div>
-					</div>
-	
-					<div class="row row-list">
-				  		<div class="col-md-1">
-				  			<label>公告内容：</label>
-				  		</div>
-				  		<div class="col-md-8">
-				  			<div id="editor"></div>
-				  		</div>
-				  	</div>
-				  	<div class="row row-list">
-				  		<div class="col-md-1">
-	
-				  		</div>
-				  		<div class="col-md-8">
-				  			<div class="operation-box">
-								<button type="button" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-ok-sign"></span>保存</button>
+			<h2>${empty notice.id ? "添加" : "编辑" }公告</h2>
+			<form id="navInfo_form" method="post">
+			<!-- hidden -->
+			<input type="hidden" name="id" value="${notice.id }" />
+				<div class="row">
+					<div class="col-md-12">
+						<hr>
+						<div class="row row-list">
+							<div class="col-md-1">
+								<label>紧急公告：</label>
 							</div>
-				  		</div>
-				  	</div>
+		
+							<div class="col-md-8">
+								<input name="title" value="${notice.title }" type="text" class="form-control" placeholder="紧急公告">
+							</div>
+						</div>
+		
+						<div class="row row-list">
+					  		<div class="col-md-1">
+					  			<label>公告内容：</label>
+					  		</div>
+					  		<div class="col-md-8">
+					  			<textarea name="content" id="editor">${notice.content }</textarea>
+					  		</div>
+					  	</div>
+					  	<div class="row row-list">
+					  		<div class="col-md-1">
+		
+					  		</div>
+					  		<div class="col-md-8">
+					  			<div class="operation-box">
+									<button type="submit" class="btn btn-gy btn-query">
+										<span class="glyphicon glyphicon-ok-sign"></span>保存
+									</button>
+									<button type="button" onclick="javascript:history.back();" class="btn btn-gy btn-sort">
+										<span class="glyphicon glyphicon-arrow-left"></span>返回
+									</button>
+								</div>
+					  		</div>
+					  	</div>
+					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </div>
