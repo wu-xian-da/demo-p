@@ -131,4 +131,12 @@
          where id = #{notice.id}
       </foreach>
   </update>
+  
+  <!-- web begin -->
+  	<select id="getListByStatus" resultType="com.jianfei.d.entity.info.Notice">
+  		select <include refid="Base_Column_List" />
+    from tb_notice n
+    where n.status = #{status}
+  	</select>
+  <!-- web end -->
 </mapper>

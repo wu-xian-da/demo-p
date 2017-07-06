@@ -125,6 +125,7 @@
   	where n.parent_id = #{parentId}
   </select>
   
+  <!-- web begin -->
   <select id="getShowNavList" resultType="com.jianfei.d.entity.info.NavBase">
   	select <include refid="Base_Column_List"></include>
   		,
@@ -144,4 +145,5 @@
   	where n.parent_id = #{parentId}
   	and n.nav_status = 0
   </select>
+  <!-- web end -->
 </mapper>

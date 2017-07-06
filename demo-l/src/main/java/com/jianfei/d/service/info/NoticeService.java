@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.jianfei.d.base.service.CrudService;
 import com.jianfei.d.dao.info.NoticeDao;
+import com.jianfei.d.entity.common.InfoStatus;
 import com.jianfei.d.entity.info.Notice;
 
 @Service
@@ -33,4 +34,15 @@ public class NoticeService extends CrudService<NoticeDao, Notice> {
 	public int updateNoticePushStatusBatch(List<Notice> notices){
 		return this.dao.updateNoticePushStatusBatch(notices);
 	}
+	
+	//web begin
+	/***
+	 * 根据状态获取数据
+	 * @param status
+	 * @return
+	 */
+	public List<Notice> getListByStatus(InfoStatus status){
+		return this.dao.getListByStatus(status);
+	}
+	//web end
 }

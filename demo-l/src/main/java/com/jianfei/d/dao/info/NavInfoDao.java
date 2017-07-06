@@ -6,6 +6,7 @@
 package com.jianfei.d.dao.info;
 
 import java.util.List;
+import java.util.Map;
 
 import com.jianfei.d.base.dao.CrudDao;
 import com.jianfei.d.entity.info.NavInfo;
@@ -17,5 +18,11 @@ public interface NavInfoDao extends CrudDao<NavInfo> {
 	public int updateNavInfoStatusBatch(List<NavInfo> navInfo);
 	
 	public int updateNavInfoPushStatusBatch(List<NavInfo> navInfos);
+	
+	//web begin
+	
+	public List<NavInfo> getListByNavIdAndStatus(Map<String, Object> map);
+	
+	//web end
 
 }

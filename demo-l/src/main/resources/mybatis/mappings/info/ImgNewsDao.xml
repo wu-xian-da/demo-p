@@ -152,10 +152,12 @@
       </foreach>
   </update>
   
+  <!-- web begin -->
   <select id="getListByStatus" resultType="com.jianfei.d.entity.info.ImgNews">
   	select <include refid="Base_Column_List"></include>
   	from tb_img_news n
   	where n.status = #{status}
   	order by n.order_num DESC
   </select>
+  <!-- web end -->
 </mapper>

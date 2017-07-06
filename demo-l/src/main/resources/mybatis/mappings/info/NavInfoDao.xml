@@ -164,4 +164,16 @@
   	where i.nav_id = n.id and i.nav_id = #{navId}
   </select>
   
+  <!-- web begin -->
+  <select id="getListByNavIdAndStatus" resultType="com.jianfei.d.entity.info.NavInfo" parameterType="java.util.Map">
+  	select <include refid="Base_Column_List" />
+    	,
+    	n.id AS "navBase.id",
+    	n.nav_name AS "navBase.navName"
+    from tb_nav_info i, tb_nav_base n
+    where i.nav_id = n.id
+    and i.nav_id = #{navId}
+    and i.status = #{status}
+  </select>
+  <!-- web end -->
 </mapper>
