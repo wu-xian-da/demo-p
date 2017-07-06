@@ -42,6 +42,7 @@
 	        <a href="javascript:void(0);">
 	        	</c:otherwise>
 	        </c:choose>
+	        	<!-- <h3><img src="${cdnDomain }${nav.navIcon }" alt="${nav.navName }"></h3> -->
 				<h3><img src="${nav.navIcon }" alt="${nav.navName }"></h3>
 				<p>${nav.navName }</p>
 			</a>
