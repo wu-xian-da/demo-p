@@ -45,11 +45,11 @@
 	</select>
 	
 	<select id="findTree" resultMap="DepartmentTree">
-		select id,name from t_department where parent_id = 1
+		select id,name from t_department where parent_id = 1 ORDER BY sort
 	</select>
 	
 	<select id="findChild" resultMap="DepartmentTree">
-		select id,name from t_department where parent_id = #{id}
+		select id,name from t_department where parent_id = #{id} ORDER BY sort
 	</select>
 	
 	<select id="findPage" resultType="com.jianfei.d.entity.system.Department">

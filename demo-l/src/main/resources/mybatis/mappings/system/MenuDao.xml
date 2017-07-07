@@ -57,7 +57,7 @@
 	</select>
 	
 	<select id="findTree" resultMap="MenuTree">
-		select id,name from t_menu where parent_id = -1
+		select id,name from t_menu where parent_id = -1 ORDER BY sort
 	</select>
 	
 	<select id="findMenuForRole" resultMap="menuMap">
@@ -71,12 +71,14 @@
 		SELECT id, name
 		FROM t_menu
 		WHERE parent_id=#{id} and type=0
+		ORDER BY sort
 	</select>
 	
 	<select id="findMenuChild" resultMap="menuMap">
 		SELECT id, name
 		FROM t_menu
 		WHERE parent_id=#{id}
+		ORDET BY sort
  	</select>
 	
 	<select id="findAll" resultType="com.jianfei.d.entity.system.Menu">
