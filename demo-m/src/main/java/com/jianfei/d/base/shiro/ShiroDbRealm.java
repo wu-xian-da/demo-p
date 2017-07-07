@@ -104,7 +104,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
             throw new AuthenticationException("账号异常,请联系管理员");
         }
         
-        if(user == null || user.getStatus() == UserStatus.CLOSE){
+        if(user == null){
             throw new UnknownAccountException("账号不存在, 请确认");
         }
         if (user.getStatus() == UserStatus.CLOSE) {
