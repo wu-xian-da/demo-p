@@ -23,7 +23,7 @@ import com.jianfei.d.service.info.NavBaseService;
  * @author changchun.wu
  */
 @Controller
-@RequestMapping("/nav")
+@RequestMapping("/web/nav")
 public class NavController extends BaseController{
 	
 	@Autowired

@@ -29,7 +29,7 @@ import com.jianfei.d.service.info.NavSecondMenuService;
  * @author changchun.wu
  */
 @Controller
-@RequestMapping("/info")
+@RequestMapping("/web/info")
 public class InfoController extends BaseController{
 	
 	@Autowired
