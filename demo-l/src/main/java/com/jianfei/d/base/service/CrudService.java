@@ -80,6 +80,9 @@ public abstract class CrudService<D extends CrudDao<T>,T extends BaseEntity> ext
 	 * @param entity
 	 */
 	public int save(T entity) {
+		if (entity.getId() != null) {
+			return dao.update(entity);
+		}
 	    return dao.insert(entity);
 	}
 	
