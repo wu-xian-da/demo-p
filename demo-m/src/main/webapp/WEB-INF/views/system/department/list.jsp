@@ -23,7 +23,9 @@
 
 				<div class="operation-box">
 					<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
+					<shiro:hasPermission name="department:create">
 					<a href="${base }/sys/system/department/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
+					</shiro:hasPermission>
 				</div>
 				</form>
 
@@ -46,9 +48,13 @@
 									<td>${d.parent.name }</td>
 									<td>${d.sort }</td>
 									<td>
-									<a href="${base }/sys/system/department/update/${d.id}" class="edit"><i></i>编辑</a> 
+									<shiro:hasPermission name="department:update">
+									<a href="${base }/sys/system/department/update/${d.id}" class="edit"><i></i>编辑</a>
+									</shiro:hasPermission>
+									<shiro:hasPermission name="department:delete">
 									<a href="${base }/sys/system/department/delete/${d.id}" onclick="javascript:return confirmDel();"
-										class="delete"><i></i>删除</a></td>
+										class="delete"><i></i>删除</a>
+									</shiro:hasPermission></td>
 								</tr>
 							</c:forEach>
 						</tbody>

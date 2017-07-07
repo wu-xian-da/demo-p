@@ -5,9 +5,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 	<meta name="renderer" content="webkit">
-   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>贵阳机场智慧管理平台</title>
+	<shiro:user>
+		<script type="text/javascript">
+			window.location.href = "${base}/sys/index";
+		</script>
+	</shiro:user>
 </head>
 <body>
 	<style type="text/css">

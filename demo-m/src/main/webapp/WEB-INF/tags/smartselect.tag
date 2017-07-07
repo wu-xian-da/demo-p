@@ -36,8 +36,10 @@ $(function(){
 			labelTemplate: '#个选中项'
 		},
 		toolbar: false,
-		data: ${treeData},
+		data: ${empty treeData ? [] : treeData},
+		<c:if test="${not empty hiddenValue && hiddenValue ne -1}">
 		initialValues:[${multiple ? functions:listToString(hiddenValue) : hiddenValue}],
+		</c:if>
 		callback: {
 	        onOptionSelected: [getSelects],
 	        onOptionDeselected: [getSelects]

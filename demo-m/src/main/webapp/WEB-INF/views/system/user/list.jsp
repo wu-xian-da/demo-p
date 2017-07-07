@@ -33,10 +33,18 @@
 							</div>
 							<div class="operation-box">
 								<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
+								<shiro:hasPermission name="user:open">
 								<button type="button" class="btn btn-gy btn-new" id="user_open"><i></i>启用</button>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="user:close">
 								<button type="button" class="btn btn-gy btn-recovery" id="user_close"><i></i>禁用</button>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="user:init">
 								<button type="button" class="btn btn-gy btn-push" id="user_init"><i></i>密码重置</button>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="user:create">
 								<a href="${base }/sys/system/user/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
+								</shiro:hasPermission>
 							</div>
 							</form>
 
@@ -65,9 +73,15 @@
 												<td>${d.department.name }</td>
 												<td>${d.status.name }</td>
 												<td><fmt:formatDate value="${d.createDate}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
-												<td><a href="${base}/sys/system/user/update/${d.id}" class="edit"><i></i>编辑</a> 
+												<td>
+													<shiro:hasPermission name="user:update">
+													<a href="${base}/sys/system/user/update/${d.id}" class="edit"><i></i>编辑</a> 
+													</shiro:hasPermission>
+													<shiro:hasPermission name="user:delete">
 													<a href="${base}/sys/system/user/delete/${d.id}" onclick="javascript:return confirmDel();"
-													class="delete"><i></i>删除</a></td>
+													class="delete"><i></i>删除</a>
+													</shiro:hasPermission>
+												</td>
 											</tr>
 										</c:if>
 										</c:forEach>
