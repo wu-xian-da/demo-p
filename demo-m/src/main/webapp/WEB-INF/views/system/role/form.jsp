@@ -125,8 +125,19 @@
 		});
 		
 		$('input[type="checkbox"]').on('click',function(){
+			var _statusP = $(this).prop("checked");
 			$('input[data-p='+$(this).val()+']').each(function(){
-				$(this).click();
+				var _statusC = $(this).prop("checked");
+				if(_statusP){
+					if(!_statusC){
+						$(this).click();
+					}
+				}
+				else{
+					if(_statusC){
+						$(this).click();
+					}
+				}
 			});
 	 	});
 	});
