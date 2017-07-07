@@ -21,7 +21,7 @@ import com.jianfei.d.service.info.ImgNewsService;
  * @author changchun.wu
  */
 @Controller
-@RequestMapping("/news")
+@RequestMapping("/web/news")
 public class ImgNewsController extends BaseController{
 
 	@Autowired

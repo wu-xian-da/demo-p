@@ -47,10 +47,18 @@
 				</div>
 			</form>
 			<div class="operation-box">
+				<shiro:hasPermission name="info:notice:xk">
 				<button type="button" class="btn btn-gy btn-new" id="noticeXK"><i></i>下刊</button>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="info:notice:hfsk">
 				<button type="button" class="btn btn-gy btn-recovery" id="noticeHFSK"><i></i>恢复上刊</button>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="info:notice:shtg">
 				<button type="button" class="btn btn-gy btn-adpot" id="noticeSHTG"><span class="glyphicon glyphicon-ok"></span>审核通过</button>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="info:notice:add">
 				<a href="${base}/sys/info/notice/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
+				</shiro:hasPermission>
 			</div>
 
 			<div class="box-table">
@@ -74,8 +82,12 @@
 								<td><fmt:formatDate value="${notice.checkTime}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 								<td><span class="info-status">${notice.status.name}</span></td>
 								<td>
+									<shiro:hasPermission name="info:notice:update">
 									<a href="${base}/sys/info/notice/update/${notice.id}" class="edit"><i></i>编辑</a>
+									</shiro:hasPermission>
+									<shiro:hasPermission name="info:notice:delete">
 									<a href="${base}/sys/info/notice/delete/${notice.id}" onclick="javascript:return confirmDel();" class="delete"><i></i>删除</a>
+									</shiro:hasPermission>
 								</td>
 							</tr>
 						</c:forEach>

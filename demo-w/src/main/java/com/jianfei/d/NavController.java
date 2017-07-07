@@ -23,7 +23,7 @@ import com.jianfei.d.service.info.NavBaseService;
  * @author changchun.wu
  */
 @Controller
-@RequestMapping("/nav")
+@RequestMapping("/web/nav")
 public class NavController extends BaseController{
 	
 	@Autowired
@@ -31,6 +31,7 @@ public class NavController extends BaseController{
 	
 	@RequestMapping("/toList/{pid}")
 	public ModelAndView toList(@PathVariable("pid") Long id, Model model){
+		//获取上级栏目的"头标"
 		NavBase nav = navBaseService.getShowFirstNavById(id);
 		List<NavBase> secNavList = navBaseService.getShowSecNavListByParentId(id);
 		

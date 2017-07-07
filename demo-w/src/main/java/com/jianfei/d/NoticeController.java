@@ -24,7 +24,7 @@ import com.jianfei.d.service.info.NoticeService;
  * @author changchun.wu
  */
 @Controller
-@RequestMapping("/notice")
+@RequestMapping("/web/notice")
 public class NoticeController extends BaseController{
 	
 	@Autowired

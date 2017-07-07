@@ -27,6 +27,7 @@ import com.jianfei.d.service.info.NoticeService;
  * @author changchun.wu
  */
 @Controller
+@RequestMapping("/web")
 public class HomeController extends BaseController{
 
 	@Autowired

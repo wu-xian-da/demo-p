@@ -29,7 +29,7 @@ import com.jianfei.d.service.info.NavSecondMenuService;
  * @author changchun.wu
  */
 @Controller
-@RequestMapping("/info")
+@RequestMapping("/web/info")
 public class InfoController extends BaseController{
 	
 	@Autowired
@@ -47,10 +47,10 @@ public class InfoController extends BaseController{
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/toList/{secNavId}")
-	public ModelAndView toList(@PathVariable("secNavId") Long secNavId, Model model){
-		//获取渲染列表模板
-		NavSecondMenu navSec = navSecondMenuService.getByNavId(secNavId);
+	@RequestMapping("/toList/{navId}/{secNavId}")
+	public ModelAndView toList(@PathVariable("navId") Long navId,@PathVariable("secNavId") Long secNavId, Model model){
+		//获取上级栏目定义的渲染列表模板
+		NavSecondMenu navSec = navSecondMenuService.getByNavId(navId);
 		List<NavInfo> infoList = navInfoService.getListByNavIdAndStatus(secNavId, InfoStatus.YSK);
 		
 		model.addAttribute("navSec", navSec);
@@ -73,7 +73,7 @@ public class InfoController extends BaseController{
 	 */
 	@RequestMapping("/toDetail/{navSecId}/{infoId}")
 	public ModelAndView toDetail(@PathVariable("navSecId") Long navSecId,@PathVariable("infoId") Long infoId, Model model){
-		//获取渲染内容模板
+		//获取信息所属栏目定义的渲染内容模板
 		NavContent navContent = navContentService.getByNavId(navSecId);
 		NavInfo infoDetail = navInfoService.get(infoId);
 		
@@ -97,7 +97,7 @@ public class InfoController extends BaseController{
 	 */
 	@RequestMapping("/toContent/{navId}")
 	public ModelAndView toContent(@PathVariable("navId") Long navId,Model model){
-		//获取渲染内容模板
+		//获取栏目定义的渲染内容模板
 		NavContent navContent = navContentService.getByNavId(navId);
 		List<NavInfo> infoList = navInfoService.getListByNavIdAndStatus(navId, InfoStatus.YSK);
 		model.addAttribute("navContent",navContent);

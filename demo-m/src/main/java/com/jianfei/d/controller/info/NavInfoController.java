@@ -34,7 +34,7 @@ import com.jianfei.d.service.info.NavInfoService;
  * @author changchun.wu
  */
 @Controller
-@RequestMapping(value="/sys/info/navinfo")
+@RequestMapping(value="/sys/info/ninfo")
 public class NavInfoController extends BaseController {
 	
 	@Autowired
@@ -54,7 +54,7 @@ public class NavInfoController extends BaseController {
 	@GetMapping("/create")
 	public String createForm(Model model){
 		setBases(model);
-		return "info/navinfo/form";
+		return "info/ninfo/form";
 	}
 
 	@PostMapping("/create")
@@ -67,14 +67,14 @@ public class NavInfoController extends BaseController {
 		} else {
 			super.addMessage(attrs, "保存栏目信息失败,请重试!");
 		}
-		return "redirect:/sys/info/navinfo";
+		return "redirect:/sys/info/ninfo";
 	}
 	
 	@GetMapping("/update/{pid}")
 	public String updateForm(@PathVariable("pid") Long id,Model model){
 		setBases(model);
 		model.addAttribute("navInfo",navInfoService.get(id));
-		return "info/navinfo/form";
+		return "info/ninfo/form";
 	}
 	
 	@PostMapping("/update/{pid}")
@@ -86,7 +86,7 @@ public class NavInfoController extends BaseController {
 		} else {
 			super.addMessage(attrs, "修改栏目信息失败,请重试!");
 		}
-		return "redirect:/sys/info/navinfo";
+		return "redirect:/sys/info/ninfo";
 	}
 	
 	@GetMapping("/delete/{pid}")
@@ -97,7 +97,7 @@ public class NavInfoController extends BaseController {
 		} else {
 			super.addMessage(attrs, "删除栏目信息失败,请重试!");
 		}
-		return "redirect:/sys/info/navinfo";
+		return "redirect:/sys/info/ninfo";
 	}
 	
 	/****
@@ -119,7 +119,7 @@ public class NavInfoController extends BaseController {
 		} else {
 			super.addMessage(attrs, "批量审核通过失败,请重试!");
 		}
-		return "redirect:/sys/info/navinfo";
+		return "redirect:/sys/info/ninfo";
 	}
 	
 	/***
@@ -140,7 +140,7 @@ public class NavInfoController extends BaseController {
 		} else {
 			super.addMessage(attrs, "批量下刊失败,请重试!");
 		}
-		return "redirect:/sys/info/navinfo";
+		return "redirect:/sys/info/ninfo";
 	}
 	
 	/****
@@ -161,7 +161,7 @@ public class NavInfoController extends BaseController {
 		} else {
 			super.addMessage(attrs, "批量上刊失败,请重试!");
 		}
-		return "redirect:/sys/info/navinfo";
+		return "redirect:/sys/info/ninfo";
 	}*/
 	
 	//恢复上刊
@@ -180,7 +180,7 @@ public class NavInfoController extends BaseController {
 			super.addMessage(attrs, "批量恢复上刊失败，请重试！");
 		}
 	
-		return "redirect:/sys/info/navinfo";
+		return "redirect:/sys/info/ninfo";
 	}
 	
 	@RequestMapping
@@ -188,6 +188,6 @@ public class NavInfoController extends BaseController {
 		setBases(model);
 		model.addAttribute("infoStatuss",InfoStatus.values());
 		model.addAttribute("page",navInfoService.findPage(navInfo));
-		return "info/navinfo/list";
+		return "info/ninfo/list";
 	}
 }
