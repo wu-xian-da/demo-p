@@ -41,7 +41,7 @@ public class MenuController extends BaseController{
     
     private void setModel(Model model){
         model.addAttribute("types", MenuType.values());
-        model.addAttribute("parents", this.menuService.getParent());
+        model.addAttribute("menuTree", super.buildTree(this.menuService.findTree()));
     }
     
     @GetMapping("/create")

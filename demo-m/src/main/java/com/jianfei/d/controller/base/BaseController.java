@@ -109,7 +109,7 @@ public abstract class BaseController {
             int level = 1;
             list.add(JSONObject.toJSONString(parent, TreeVo.parentFilter));
             if(parent.getChilds() != null && !parent.getChilds().isEmpty()){
-                this.buildChild(parent.getChilds(), list, level);
+                this.buildChild(parent.getChilds(), list, level+1);
             }
         }
         return list.toString();
@@ -117,10 +117,10 @@ public abstract class BaseController {
     
     private void buildChild(List<TreeVo> childs, List<String> list, int level){
         for(TreeVo child : childs){
-            child.setLevel(++level);
+            child.setLevel(level);
             list.add(JSONObject.toJSONString(child, TreeVo.childFilter));
             if(child.getChilds() != null && !child.getChilds().isEmpty()){
-                this.buildChild(child.getChilds(), list, level);
+                this.buildChild(child.getChilds(), list, level+1);
             }
         }
     }

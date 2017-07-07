@@ -57,12 +57,7 @@
 											<label>上级权限：</label>
 										</div>
 										<div class="col-md-8">
-											<select class="form-control" name="parent.id">
-												<option value="" >请选择</option>
-												<c:forEach items="${parents }" var="d">
-													<option value="${d.id }" <c:if test="${menu.parent.id eq d.id }">selected="selected"</c:if>>${d.name }</option>
-												</c:forEach>
-											</select>
+											<sys:smartselect hiddenName="parent.id" message="请选择上级权限" moduleId="menu-tree" treeData="${menuTree }" hiddenValue="${menu.parent.id }"></sys:smartselect>
 										</div>
 									</div>
 

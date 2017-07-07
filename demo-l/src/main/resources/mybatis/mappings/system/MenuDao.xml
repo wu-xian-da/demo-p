@@ -21,6 +21,13 @@
 		</collection>
 	</resultMap>
 	
+	<resultMap type="com.jianfei.d.entity.common.TreeVo" id="MenuTree">
+		<id property="value" column="id"/>
+		<result property="label" column="name"/>
+		<collection property="childs" column="id" ofType="com.jianfei.d.entity.common.TreeVo" select="findChild">
+		</collection>
+	</resultMap>
+	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		insert into t_menu(
 			name,href,permission,type,sort,icon
@@ -51,7 +58,7 @@
 		where a.id = #{id}
 	</select>
 	
-	<select id="getParent" resultType="com.jianfei.d.entity.system.Menu">
+	<select id="findTree" resultMap="MenuTree">
 		select id,name from t_menu where parent_id = -1
 	</select>
 	
@@ -60,6 +67,12 @@
 		from (select * from t_menu where parent_id = -1) a
 		LEFT JOIN t_menu b ON a.id = b.parent_id
 		ORDER BY a.sort,b.sort
+	</select>
+	
+	<select id="findChild" resultMap="MenuTree">
+		SELECT id, name
+		FROM t_menu
+		WHERE parent_id=#{id} and type=0
 	</select>
 	
 	<select id="findAll" resultType="com.jianfei.d.entity.system.Menu">
