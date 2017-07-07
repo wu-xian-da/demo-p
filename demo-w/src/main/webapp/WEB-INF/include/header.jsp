@@ -6,4 +6,5 @@
 <meta content="yes" name="apple-mobile-web-app-capable">
 <meta content="black" name="apple-mobile-web-app-status-bar-style">
 <meta name="format-detection" content="telephone=no">
+<link rel="shortcut icon" type="image/x-icon" href="${baseStatic }/img/logo.gif">
 <title>贵州机场集团有限公司</title>
