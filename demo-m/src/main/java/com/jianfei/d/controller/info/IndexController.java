@@ -14,7 +14,7 @@ import com.jianfei.d.controller.base.BaseController;
  * 信息模块
  * @author changchun.wu
  */
-@Controller
+@Controller("InfoIndexController")
 public class IndexController extends BaseController {
 	
 	@GetMapping("/sys/info")
