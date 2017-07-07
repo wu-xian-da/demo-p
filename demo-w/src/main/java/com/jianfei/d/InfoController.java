@@ -7,6 +7,7 @@ package com.jianfei.d;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,10 @@ import com.jianfei.d.service.info.NavContentService;
 import com.jianfei.d.service.info.NavInfoService;
 import com.jianfei.d.service.info.NavSecondMenuService;
 
+/***
+ * 栏目新闻
+ * @author changchun.wu
+ */
 @Controller
 @RequestMapping("/info")
 public class InfoController extends BaseController{
@@ -36,27 +41,76 @@ public class InfoController extends BaseController{
 	@Autowired
 	private NavContentService navContentService;
 	
-	@RequestMapping("/toList/{pid}")
-	public ModelAndView toList(@PathVariable("pid") Long id, Model model){
+	/***
+	 * 二级菜单信息列表
+	 * @param secNavId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/toList/{secNavId}")
+	public ModelAndView toList(@PathVariable("secNavId") Long secNavId, Model model){
 		//获取渲染列表模板
-		NavSecondMenu navSec = navSecondMenuService.getByNavId(id);
-		List<NavInfo> infoList = navInfoService.getListByNavIdAndStatus(id, InfoStatus.YSK);
+		NavSecondMenu navSec = navSecondMenuService.getByNavId(secNavId);
+		List<NavInfo> infoList = navInfoService.getListByNavIdAndStatus(secNavId, InfoStatus.YSK);
 		
 		model.addAttribute("navSec", navSec);
 		model.addAttribute("infoList", infoList);
 		//return new ModelAndView(navSec.getMenuListTemplate().getFilePath());
-		return new ModelAndView("info/list.jsp");
+		//return new ModelAndView("info/list.jsp");
+		String template = navSec.getMenuListTemplate().getFilePath();
+		if (StringUtils.isNoneBlank(template)) {
+			return new ModelAndView(template);
+		} else {
+			return null;
+		}
 	}
 	
-	@RequestMapping("/toDetail/{pid}")
-	public ModelAndView toDetail(@PathVariable("pid") Long id, Model model){
+	/***
+	 * 二级菜单信息详情
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/toDetail/{navSecId}/{infoId}")
+	public ModelAndView toDetail(@PathVariable("navSecId") Long navSecId,@PathVariable("infoId") Long infoId, Model model){
 		//获取渲染内容模板
-		NavContent navContent = navContentService.getByNavId(id);
-		NavInfo infoDetail = navInfoService.get(id);
+		NavContent navContent = navContentService.getByNavId(navSecId);
+		NavInfo infoDetail = navInfoService.get(infoId);
 		
 		model.addAttribute("navContent", navContent);
 		model.addAttribute("infoDetail", infoDetail);
 		//return new ModelAndView(navContent.getContentTemplate().getFilePath());
-		return new ModelAndView("info/detail.jsp");
+		//return new ModelAndView("info/detail.jsp");
+		String template = navContent.getContentTemplate().getFilePath();
+		if (StringUtils.isNoneBlank(template)) {
+			return new ModelAndView(template);
+		} else {
+			return null;
+		}
+	}
+	
+	/***
+	 * 无二级菜单的栏目下有多篇文章的处理
+	 * @param navId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/toContent/{navId}")
+	public ModelAndView toContent(@PathVariable("navId") Long navId,Model model){
+		//获取渲染内容模板
+		NavContent navContent = navContentService.getByNavId(navId);
+		List<NavInfo> infoList = navInfoService.getListByNavIdAndStatus(navId, InfoStatus.YSK);
+		model.addAttribute("navContent",navContent);
+		if (infoList.size() > 1) {
+			model.addAttribute("infoList",infoList);
+		} else if (infoList.size() == 1) {
+			model.addAttribute("infoDetail",infoList.get(0));
+		}
+		String template = navContent.getContentTemplate().getFilePath();
+		if (StringUtils.isNoneBlank(template)) {
+			return new ModelAndView(template);
+		} else {
+			return null;
+		}
 	}
 }

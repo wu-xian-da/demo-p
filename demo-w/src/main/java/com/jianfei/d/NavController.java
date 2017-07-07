@@ -18,6 +18,10 @@ import com.jianfei.d.base.BaseController;
 import com.jianfei.d.entity.info.NavBase;
 import com.jianfei.d.service.info.NavBaseService;
 
+/**
+ * 栏目导航
+ * @author changchun.wu
+ */
 @Controller
 @RequestMapping("/nav")
 public class NavController extends BaseController{

@@ -151,7 +151,11 @@
   
   <select id="getShowSecNavListByParentId" parameterType="java.lang.Long" resultType="com.jianfei.d.entity.info.NavBase">
   	select <include refid="Base_Column_List"></include>
+  	,
+  	u.url "navUrl.url",
+  	u.target "navUrl.target"
   	from tb_nav_base n 
+  	LEFT JOIN tb_nav_url u ON n.id = u.nav_id
   	where n.parent_id = #{parentId}
   	and n.nav_status = 0
   	ORDER BY n.nav_order_num DESC, n.create_time DESC

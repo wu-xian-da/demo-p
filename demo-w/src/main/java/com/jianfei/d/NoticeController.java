@@ -19,6 +19,10 @@ import com.jianfei.d.entity.common.InfoStatus;
 import com.jianfei.d.entity.info.Notice;
 import com.jianfei.d.service.info.NoticeService;
 
+/**
+ * 紧急公告
+ * @author changchun.wu
+ */
 @Controller
 @RequestMapping("/notice")
 public class NoticeController extends BaseController{

@@ -16,6 +16,10 @@ import com.jianfei.d.base.BaseController;
 import com.jianfei.d.entity.info.ImgNews;
 import com.jianfei.d.service.info.ImgNewsService;
 
+/***
+ * 图片新闻
+ * @author changchun.wu
+ */
 @Controller
 @RequestMapping("/news")
 public class ImgNewsController extends BaseController{

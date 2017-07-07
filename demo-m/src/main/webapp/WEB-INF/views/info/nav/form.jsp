@@ -101,6 +101,9 @@
 						    			<c:if test="${type eq navBase.navType}">
 						    			   selected="selected"
 						    			</c:if>
+						    			<c:if test="${not empty navBase.parentId and 'XXEJCD' eq type}">
+						    				style="display:none;"
+						    			</c:if>
 						    		>
 						    		${type.name }</option>
 						    	</c:forEach>

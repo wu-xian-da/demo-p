@@ -22,6 +22,10 @@ import com.jianfei.d.service.info.ImgNewsService;
 import com.jianfei.d.service.info.NavBaseService;
 import com.jianfei.d.service.info.NoticeService;
 
+/**
+ * HOME 页
+ * @author changchun.wu
+ */
 @Controller
 public class HomeController extends BaseController{
 
