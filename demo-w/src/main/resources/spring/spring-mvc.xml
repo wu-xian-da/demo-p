@@ -38,5 +38,5 @@
 	</bean>
 	
 	<!-- 定义无controller的path(view直接映射) -->
-	<mvc:view-controller path="/" view-name="redirect:/index"/>
+	<!-- <mvc:view-controller path="/" view-name="redirect:/index"/> -->
 </beans>

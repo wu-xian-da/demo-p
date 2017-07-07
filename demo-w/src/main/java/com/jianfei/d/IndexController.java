@@ -19,7 +19,7 @@ public class IndexController extends BaseController{
 
 	private static final String ENCODE = "UTF-8";
 	
-	@RequestMapping("/index")   
+	@RequestMapping("/")   
 	public ModelAndView index(HttpServletRequest request){
 		
 		//获取设备推送参数
