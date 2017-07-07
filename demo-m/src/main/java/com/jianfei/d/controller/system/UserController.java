@@ -94,7 +94,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
 	
 	@PostMapping("/update/{pid}")
     public String update(User user, BindingResult result, Model model, RedirectAttributes attrs) {
-        userService.save(user);
+        userService.update(user);
         super.addMessage(attrs,MessageStatus.SUC, "更新用户成功");
         return "redirect:/sys/system/user";
     }
