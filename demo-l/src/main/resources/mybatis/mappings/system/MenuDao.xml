@@ -15,16 +15,14 @@
 	<resultMap type="com.jianfei.d.entity.system.Menu" id="menuMap">
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
-		<collection property="childs" ofType="com.jianfei.d.entity.system.Menu">
-			<id property="id" column="menu_id"/>
-			<id property="name" column="menu_name"/>
+		<collection property="childs" ofType="com.jianfei.d.entity.system.Menu" column="id" select="findMenuChild">
 		</collection>
 	</resultMap>
 	
 	<resultMap type="com.jianfei.d.entity.common.TreeVo" id="MenuTree">
 		<id property="value" column="id"/>
 		<result property="label" column="name"/>
-		<collection property="childs" column="id" ofType="com.jianfei.d.entity.common.TreeVo" select="findChild">
+		<collection property="childs" column="id" ofType="com.jianfei.d.entity.common.TreeVo" select="findTreeChild">
 		</collection>
 	</resultMap>
 	
@@ -62,18 +60,24 @@
 		select id,name from t_menu where parent_id = -1
 	</select>
 	
-	<select id="findParentChild" resultMap="menuMap">
-		select a.id,a.name,b.id AS menu_id,b.name AS menu_name
-		from (select * from t_menu where parent_id = -1) a
-		LEFT JOIN t_menu b ON a.id = b.parent_id
-		ORDER BY a.sort,b.sort
+	<select id="findMenuForRole" resultMap="menuMap">
+		SELECT a.id, a.name
+		FROM t_menu a
+		WHERE a.parent_id=-1 
+		ORDER BY a.sort
 	</select>
 	
-	<select id="findChild" resultMap="MenuTree">
+	<select id="findTreeChild" resultMap="MenuTree">
 		SELECT id, name
 		FROM t_menu
 		WHERE parent_id=#{id} and type=0
 	</select>
+	
+	<select id="findMenuChild" resultMap="menuMap">
+		SELECT id, name
+		FROM t_menu
+		WHERE parent_id=#{id}
+ 	</select>
 	
 	<select id="findAll" resultType="com.jianfei.d.entity.system.Menu">
 		select <include refid="menuColumns"></include>

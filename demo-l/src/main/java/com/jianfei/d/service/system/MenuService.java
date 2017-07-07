@@ -21,7 +21,7 @@ public class MenuService extends CrudService<MenuDao,Menu>{
 		return this.dao.findTree();
 	}
 	
-	public List<Menu> findParentChild(){
-		return this.dao.findParentChild();
+	public List<Menu> findMenuForRole(){
+		return this.dao.findMenuForRole();
 	}
 }

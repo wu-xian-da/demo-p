@@ -15,6 +15,6 @@ public interface MenuDao extends CrudDao<Menu> {
 	
 	public List<TreeVo> findTree();
 	
-	public List<Menu> findParentChild();
+	public List<Menu> findMenuForRole();
 	
 }
