@@ -109,6 +109,7 @@
 										删除
 									</a>
 									</shiro:hasPermission>
+									<a href="javascript:void(0);">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
 								</td>
 							</tr>
 						</c:forEach>

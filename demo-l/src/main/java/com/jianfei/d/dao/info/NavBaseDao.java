@@ -8,6 +8,7 @@ package com.jianfei.d.dao.info;
 import java.util.List;
 
 import com.jianfei.d.base.dao.CrudDao;
+import com.jianfei.d.entity.common.TreeVo;
 import com.jianfei.d.entity.info.NavBase;
 
 public interface NavBaseDao extends CrudDao<NavBase> {
@@ -19,6 +20,9 @@ public interface NavBaseDao extends CrudDao<NavBase> {
 	public int updateNavBaseStatusBatch(List<NavBase> navBase);
 	
 	public List<NavBase> getleafList();
+	
+	//tree data
+	public List<TreeVo> findTree();
 	
 	//web begin
 	

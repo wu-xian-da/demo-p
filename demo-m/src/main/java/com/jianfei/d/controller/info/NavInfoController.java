@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jianfei.d.controller.base.BaseController;
 import com.jianfei.d.entity.common.InfoStatus;
 import com.jianfei.d.entity.common.InfoType;
+import com.jianfei.d.entity.common.TreeVo;
 import com.jianfei.d.entity.info.ImgNews;
 import com.jianfei.d.entity.info.NavBase;
 import com.jianfei.d.entity.info.NavInfo;
@@ -45,10 +46,11 @@ public class NavInfoController extends BaseController {
 	
 	private void setBases(Model model){
 		//所属栏目
-		List<NavBase> navList = navBaseService.getleafList();
+		//List<NavBase> navList = navBaseService.getleafList();
+		List<TreeVo> treeData = navBaseService.findTree();
 		//信息类型
 		model.addAttribute("infoType",InfoType.values());
-		model.addAttribute("navList",navList);
+		model.addAttribute("treeData",treeData);
 	}
 	
 	@GetMapping("/create")

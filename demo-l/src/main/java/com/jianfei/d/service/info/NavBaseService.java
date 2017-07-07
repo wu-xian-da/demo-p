@@ -20,6 +20,7 @@ import com.jianfei.d.dao.info.NavSecondMenuDao;
 import com.jianfei.d.dao.info.NavUrlDao;
 import com.jianfei.d.entity.common.NavLevel;
 import com.jianfei.d.entity.common.NavType;
+import com.jianfei.d.entity.common.TreeVo;
 import com.jianfei.d.entity.info.NavBase;
 import com.jianfei.d.entity.info.NavContent;
 import com.jianfei.d.entity.info.NavSecondMenu;
@@ -157,6 +158,14 @@ public class NavBaseService extends CrudService<NavBaseDao, NavBase> {
 	 */
 	public List<NavBase> getleafList(){
 		return this.dao.getleafList();
+	}
+	
+	/***
+	 * tree data
+	 * @return
+	 */
+	public List<TreeVo> findTree(){
+		return this.dao.findTree();
 	}
 	
 	//web begin

@@ -14,6 +14,12 @@
     n.update_time updateTime
   </sql>
   
+  <resultMap type="com.jianfei.d.entity.common.TreeVo" id="NavTree">
+  	<id property="value" column="id"/>
+  	<result property="label" column="nav_name"/>
+  	<collection property="childs" column="id" ofType="com.jianfei.d.entity.common.TreeVo" select="findChild"></collection>
+  </resultMap>
+  
   <insert id="insert" parameterType="com.jianfei.d.entity.info.NavBase" >
     insert into tb_nav_base
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -123,6 +129,27 @@
   	from tb_nav_base n
   	LEFT JOIN tb_nav_base pn ON n.parent.id = pn.id
   	where n.parent_id = #{parentId}
+  </select>
+  
+  <select id="findTree" resultMap="NavTree">
+  	SELECT 
+	id,
+	nav_name 
+	FROM tb_nav_base
+	WHERE nav_type != 2
+	AND (nav_level = 0 OR nav_level = 1)
+	AND nav_status = 0
+	ORDER BY nav_order_num desc
+  </select>
+  
+  <select id="findChild" resultMap="NavTree">
+  	SELECT 
+	id,
+	nav_name 
+	FROM tb_nav_base
+	WHERE parent_id = #{parentId}
+	AND nav_status = 0
+	ORDER BY nav_order_num desc
   </select>
   
   <!-- web begin -->

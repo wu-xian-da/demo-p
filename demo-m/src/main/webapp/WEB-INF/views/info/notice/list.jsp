@@ -88,6 +88,7 @@
 									<shiro:hasPermission name="info:notice:delete">
 									<a href="${base}/sys/info/notice/delete/${notice.id}" onclick="javascript:return confirmDel();" class="delete"><i></i>删除</a>
 									</shiro:hasPermission>
+									<a href="javascript:void(0);">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
 								</td>
 							</tr>
 						</c:forEach>

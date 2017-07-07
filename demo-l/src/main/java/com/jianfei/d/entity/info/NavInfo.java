@@ -61,6 +61,12 @@ public class NavInfo extends BaseEntity {
 	
 	private Date updateTime;
 	
+	@FormQuery
+	private Date beginCheckTime;//开始时间检索字段
+	
+	@FormQuery
+	private Date endCheckTime;//结束时间检索字段
+	
 	private List<NavInfo> infos = null;//上刊,下刊,审核通过等
 	
 	public void fileterNavInfos(){

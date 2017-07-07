@@ -389,6 +389,8 @@
 	});
 	
 	function showTypeContentDiv(id){
+		//页面左导航背景处理
+		resize();
 		var selectVal = $("#"+id).val();
 		if(selectVal){
 			if("XXEJCD" === selectVal){
@@ -522,4 +524,28 @@
 			$("#navType option[value='XXEJCD']").show();
 		}
 	}
+	
+	var _screen = {
+	   width: $(window).width(),
+	   height: $(window).height()
+	}
+	
+	
+	function resize(){
+			var _leftMenu = $("#left-menu").height();
+			var _appMain = $(".sysmanage-site-box-wrap").height()+100;
+	    var __appMainHeight = _leftMenu > _appMain ? _leftMenu : _appMain;
+	   	var __screenAppMainHeight = parseInt($(window).height() - ($("#top").height()+1));
+	
+	   	__appMainHeight = __appMainHeight > __screenAppMainHeight ? __appMainHeight : __screenAppMainHeight;
+	
+	   	$("#app-main").css({
+		  	height: __appMainHeight + "px"
+	   	});
+	
+	   	console.log(__appMainHeight);
+	}
+	
+	//页面左导航背景处理
+	resize();
 </script>
