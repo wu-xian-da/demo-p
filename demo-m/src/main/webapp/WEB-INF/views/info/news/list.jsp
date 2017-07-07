@@ -53,11 +53,18 @@
 			</form>
 			
 			<div class="operation-box">
+				<shiro:hasPermission name="info:news:xk">
 				<button id="newsXK" type="button" class="btn btn-gy btn-new"><i></i>下刊</button>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="info:news:hfsk">
 				<button id="newsHFSK" type="button" class="btn btn-gy btn-recovery"><i></i>恢复上刊</button>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="info:news:shtg">
 				<button id="newSHTG" type="button" class="btn btn-gy btn-adpot"><span class="glyphicon glyphicon-ok"></span>审核通过</button>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="info:news:add">
 				<a href="${base }/sys/info/news/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
-				
+				</shiro:hasPermission>
 			</div>
 
 			<div class="box-table">
@@ -90,14 +97,18 @@
 								<td><fmt:formatDate value="${news.checkTime}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 								<td><span class="info-status">${news.status.name }</span></td>
 								<td>
+									<shiro:hasPermission name="info:news:update">
 									<a href="${base }/sys/info/news/update/${news.id}" class="edit">
 										<i></i>
 										编辑
 									</a>
+									</shiro:hasPermission>
+									<shiro:hasPermission name="info:news:delete">
 									<a href="${base }/sys/info/news/delete/${news.id}" onclick="javascript:return confirmDel();" class="delete">
 										<i></i>
 										删除
 									</a>
+									</shiro:hasPermission>
 								</td>
 							</tr>
 						</c:forEach>

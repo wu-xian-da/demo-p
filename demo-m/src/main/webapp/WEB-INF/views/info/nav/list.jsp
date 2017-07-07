@@ -36,19 +36,24 @@
 						<span class="glyphicon glyphicon-search"></span>
 						查询
 					</button>
+					<shiro:hasPermission name="info:nav:show">
 					<button id="navShow" type="button" class="btn btn-gy btn-push">
 						<i></i>
 						恢复展示
 					</button>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="info:nav:hide">
 					<button id="navHide" type="button" class="btn btn-gy btn-recovery">
 						<i></i>
 						取消展示
 					</button>
-					
+					</shiro:hasPermission>
+					<shiro:hasPermission name="info:nav:add">
 					<a href="${base }/sys/info/nav/create" class="btn btn-gy btn-add">
 						<span class="glyphicon glyphicon-plus-sign"></span>
 						新增
 					</a>
+					</shiro:hasPermission>
 				</div>
 			</form>
 
@@ -75,8 +80,12 @@
 								<td>${navBase.navOrderNum }</td>
 								<td>${navBase.navStatus.name }</td>
 								<td>
+									<shiro:hasPermission name="info:nav:update">
 									<a href="${base }/sys/info/nav/update/${navBase.id}" class="edit"><i></i>编辑</a> 
+									</shiro:hasPermission>
+									<shiro:hasPermission name="info:nav:delete">
 									<a href="${base }/sys/info/nav/delete/${navBase.id}" onclick="javascript:return confirmDel();" class="delete"><i></i>删除</a>
+									</shiro:hasPermission>
 								</td>
 							</tr>
 						</c:forEach>
