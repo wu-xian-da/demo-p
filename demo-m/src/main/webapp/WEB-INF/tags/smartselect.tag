@@ -9,6 +9,20 @@
 
 <%@ attribute name="multiple" type="java.lang.Boolean" required="false"%>
 
+
+<c:if test="${not empty hiddenValue }">
+	<c:choose>
+		<c:when test="${multiple }">
+			<c:set var="_selectValue" value="${functions:listToString(hiddenValue) }" />
+		</c:when>
+		<c:otherwise>
+			<c:if test="${hiddenValue ne '-1' }">
+				<c:set var="_selectValue" value="${hiddenValue }" />
+			</c:if>
+		</c:otherwise>
+	</c:choose>
+</c:if>
+
 <div id="${moduleId }" style="display: inline-block;"></div>
 <div id="selectValues_hidden_${moduleId }" style="display: none"></div>
 
@@ -37,9 +51,7 @@ $(function(){
 		},
 		toolbar: false,
 		data: ${treeData},
-		<c:if test="${not empty hiddenValue && hiddenValue ne -1}">
-		initialValues:[${multiple ? functions:listToString(hiddenValue) : hiddenValue}],
-		</c:if>
+		initialValues:[${_selectValue}],
 		callback: {
 	        onOptionSelected: [getSelects],
 	        onOptionDeselected: [getSelects]

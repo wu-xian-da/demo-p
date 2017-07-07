@@ -41,7 +41,16 @@
 												<td>${page.beginIndex + stat.count}</td>
 												<td>${d.user.loginName }</td>
 												<td>${d.requestUrl }</td>
-												<td>${d.params }</td>
+												<td>
+													<c:choose>
+														<c:when test="${fn:length(d.params) > 30 }">
+															${fn:substring(d.params, 0, 30)}...
+														</c:when>
+														<c:otherwise>
+															${d.params }
+														</c:otherwise>
+													</c:choose>
+												</td>
 												<td>${d.ip }</td>
 												<td><fmt:formatDate value="${d.date }" pattern="yyyy-MM-dd HH:m" type="date"/></td>
 											</tr>

@@ -108,7 +108,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
             throw new UnknownAccountException("账号不存在, 请确认");
         }
         if (user.getStatus() == UserStatus.CLOSE) {
-        	 throw new LockedAccountException("账号已锁定");
+        	 throw new LockedAccountException("账号已禁用");
 		}
         String newPass = this.passwordHelper.getNewPassword(token.getPassword(), user.getCredentialsSalt());
         if (newPass.equals(user.getPassword())) {
