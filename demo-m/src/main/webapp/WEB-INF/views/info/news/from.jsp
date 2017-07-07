@@ -48,6 +48,8 @@
 							 		<img id="imgPathView" src="${baseStatic }/img/no_pic.png" alt="" style="width:75px;height:77px;">
 							 	</c:otherwise>
 							 </c:choose>
+							 <style>#imgPathFile-button{width:auto;}</style>
+							 
 							 <input type="file" id="imgPathFile" name="imgPathFile" />
 							 <!-- hidden -->
 							 <input type="hidden" id="imgPath" name="imgPath" value="${news.imgPath }" />
@@ -206,6 +208,7 @@ $(document).ready(function(){
 	uploadifyPro.buttonClass = "btn btn-gy btn-upload";
 	uploadifyPro.sizeLimit = "200k";
 	uploadifyPro.buttonText = "上传图片";
+	uploadifyPro.width='75px', //按钮宽度
 	uploadifyPro.onUploadSuccess = dealImgNewsUpload;
 		
 	//上传二级栏目头标

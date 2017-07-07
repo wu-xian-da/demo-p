@@ -76,9 +76,10 @@
 						        		<img id="navIconView" src="${navBase.navIcon }" alt="" style="width:75px;height:77px;">
 						        	</c:when>
 						        	<c:otherwise>
-						        		<img id="navIconView" src="${baseStatic }/img/login-logo.png" alt="" style="width:75px;height:77px;">
+						        		<img id="navIconView" src="${baseStatic }/img/image_add.png" alt="" style="width:75px;height:77px;">
 						        	</c:otherwise>
 						        </c:choose>
+						        <style>#navIconFile-button{width:auto;}</style>
 								<input type="file" id="navIconFile" name="navIconFile" />
 								<!-- hidden -->
 								<input type="hidden" id="navIcon" name="navIcon" value="${navBase.navIcon }" /> 
@@ -135,9 +136,12 @@
 							        		<img id="menuHeadIconView" src="${navBase.navSecondMenu.menuHeadIcon }" alt="" style="width:75px;height:77px;">
 							        	</c:when>
 							        	<c:otherwise>
-							        		<img id="menuHeadIconView" src="${baseStatic }/img/login-logo.png" alt="" style="width:75px;height:77px;">
+							        		<img id="menuHeadIconView" src="${baseStatic }/img/image_add.png" alt="" style="width:75px;height:77px;">
 							        	</c:otherwise>
 							        </c:choose>
+							        
+							        <style>#menuHeadIconFile-button{width:auto;}</style>
+							        
 								    <input type="file" id="menuHeadIconFile" name="menuHeadIconFile" />
 									<!-- hidden -->
 									<input type="hidden" id="menuHeadIcon" name="navSecondMenu.menuHeadIcon" />
@@ -480,12 +484,13 @@
 		var navIconUploadifyPro = deepClone(uploadifyPro);
 		navIconUploadifyPro.sizeLimit = "100k";
 		navIconUploadifyPro.buttonText = "上传图标";
-		//navIconUploadifyPro.buttonClass = "btn btn-gy btn-upload";
+		navIconUploadifyPro.width="145px";
         navIconUploadifyPro.onUploadSuccess = dealNavIconUpload;
 		
 		var menuHeadIconUploadifyPro = deepClone(uploadifyPro);
 		menuHeadIconUploadifyPro.sizeLimit = "200k";
 		menuHeadIconUploadifyPro.buttonText = "上传头标";
+		menuHeadIconUploadifyPro.width="145px";
 		menuHeadIconUploadifyPro.onUploadSuccess = dealMenuHeadIconUpload;
 		
 		//上传二级栏目头标
