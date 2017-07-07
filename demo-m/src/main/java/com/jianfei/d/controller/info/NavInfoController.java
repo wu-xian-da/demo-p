@@ -79,7 +79,7 @@ public class NavInfoController extends BaseController {
 	
 	@PostMapping("/update/{pid}")
 	public String update(NavInfo navInfo,BindingResult result,Model model,RedirectAttributes attrs){
-		
+		navInfo.setStatus(InfoStatus.DSH);
 		int r = navInfoService.update(navInfo);
 		if (r > 0) {
 			super.addMessage(attrs, "修改栏目信息成功");

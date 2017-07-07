@@ -82,6 +82,8 @@
 								<input type="file" id="navIconFile" name="navIconFile" />
 								<!-- hidden -->
 								<input type="hidden" id="navIcon" name="navIcon" value="${navBase.navIcon }" /> 
+								<!-- check tips -->
+								<span id="navIconTips" class="error" style="display: none;">栏目图标必须上传,请确认</span>
 						  </div>
 						</div>
 					</div>
@@ -139,6 +141,8 @@
 								    <input type="file" id="menuHeadIconFile" name="menuHeadIconFile" />
 									<!-- hidden -->
 									<input type="hidden" id="menuHeadIcon" name="navSecondMenu.menuHeadIcon" />
+									<!-- check tips -->
+									<span id="menuHeadIconTips" class="error" style="display:none;">栏目头标必须上传，请确认</span>
 								  </div>
 								</div>
 							</div>
@@ -337,10 +341,46 @@
 </div>
 <%@ include file="/WEB-INF/include/uploadify.jsp" %>
 <script type="text/javascript">
+	//定时清除文件上传控件的校验提示
+	setInterval(function(){
+		var navIconVal = $("#navIcon").val();
+		var menuHeadIconVal = $("#menuHeadIcon").val();
+		if (navIconVal) {
+			$("#navIconTips").hide();
+		}
+		if (menuHeadIconVal) {
+			$("#menuHeadIconTips").hide();
+		}
+	},1000);
 	//校验
 	$("#navBase_form").validate({
 		errorPlacement:function(error,element){
 			error.appendTo(element.parent());
+		},
+		submitHandler:function(form){
+			var flag = true;
+			//栏目图标是否上传的校验
+			var navIconVal = $("#navIcon").val();
+			if (!navIconVal) {
+				$("#navIconTips").show();
+				flag = false;
+			}
+			
+			//栏目头标是否上传的校验
+			var navTypeVal = $("#navType option:selected").val();
+			if("XXEJCD" == navTypeVal){
+           		var menuHeadIconVal = $("#menuHeadIcon").val();
+           	 	if(!menuHeadIconVal){
+           		 	$("#menuHeadIconTips").show();
+           		 	flag = false;
+           	 	}
+            }
+            
+            if(!flag){
+           	 	return false;
+            }
+            
+            form.submit();
 		}
 	});
 	

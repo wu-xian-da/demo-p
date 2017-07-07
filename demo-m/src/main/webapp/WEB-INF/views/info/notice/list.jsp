@@ -29,12 +29,12 @@
 					  <div class="form-group">
 					    <label>发布时间：</label>
 					    <div class="date-time-box">
-					    	<input id="beginCheckTime" name="beginCheckTime" value="${page.entity.beginCheckTime }" type="text" class="form-control flatpickr">
+					    	<input name="beginCheckTime" value="${page.entity.beginCheckTime }" type="text" class="form-control flatpickr">
 					    	<i class="date-time-icon"></i>
 					    </div>
 					    至
 					   	<div class="date-time-box">
-					   		<input id="endCheckTime" name="endCheckTime" value="${page.entity.endCheckTime }" type="text" class="form-control flatpickr">
+					   		<input name="endCheckTime" value="${page.entity.endCheckTime }" type="text" class="form-control flatpickr">
 					   		<i class="date-time-icon"></i>
 					   	</div>
 					  </div>
@@ -72,11 +72,9 @@
 								<td><input type="checkbox" name="noticeCheck" data-id="${notice.id}"></td>
 								<td>${notice.title}</td>
 								<td><fmt:formatDate value="${notice.checkTime}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
-								<td id = "${notice.status}_${notice.id}"><span class="info-status">${notice.status.name}</span></td>
+								<td><span class="info-status">${notice.status.name}</span></td>
 								<td>
 									<a href="${base}/sys/info/notice/update/${notice.id}" class="edit"><i></i>编辑</a>
-									<!-- hidden -->
-									<input type="hidden" value="${notice.id }" /> 
 									<a href="${base}/sys/info/notice/delete/${notice.id}" onclick="javascript:return confirmDel();" class="delete"><i></i>删除</a>
 								</td>
 							</tr>
@@ -155,26 +153,5 @@
 			window.location.href = "${base}/sys/info/notice/check/shtg?" + notices.join('&');
 		});
 		
-		//时间检索验证
-		$('#onclick').on("click",function(){
-			var beginChecktime = $("#beginCheckTime").val();
-			var endChecktime = $("#endCheckTime").val();
-			var d1 = new Date(beginChecktime.replace(/\-/g, "\/"));  
-			var d2 = new Date(endChecktime.replace(/\-/g, "\/"));
-			if(beginChecktime!=""&&endChecktime!=""&&d1 >=d2){
-				alert("开始时间不能大于结束时间！");
-				return false;
-			}
-		});
-		
-		//状态为已上刊时编辑按钮不显示或无用
-		$('.edit').on("click",function(titl){
-			var status = $(this).next(":hidden").val();
-			var ysk =$("#YSK_"+status).val();
-			if(ysk == ''){
-				alert("公告已上刊,不能编辑!");
-				return false;
-			}
-		});
 	});
 </script>

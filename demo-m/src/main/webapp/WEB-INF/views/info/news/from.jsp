@@ -51,6 +51,7 @@
 							 <input type="file" id="imgPathFile" name="imgPathFile" />
 							 <!-- hidden -->
 							 <input type="hidden" id="imgPath" name="imgPath" value="${news.imgPath }" />
+							 <span id="imgPathTips" class="error" style="display:none;">图片必须上传，请确认</span>
 						</div>
 					</div>
 
@@ -97,11 +98,30 @@
 <%@ include file="/WEB-INF/include/ckeditor.jsp" %>
 <%@ include file="/WEB-INF/include/uploadify.jsp" %>
 <script type="text/javascript">
+	//定时清除文件上传控件的校验提示
+	setInterval(function(){
+		var imgPathVal = $("#imgPath").val();
+		
+	    if(imgPathVal){
+	    	$("#imgPathTips").hide();
+	    }
+	}, 1000);
 	//校验
 	$("#news_form").validate({
 		errorPlacement:function(error,element){
 			error.appendTo(element.parent());
+		},
+		submitHandler:function(form){
+			//图片是否上传的校验
+		    var imgPathVal = $("#imgPath").val();
+	    	if(!imgPathVal){
+	    		$("#imgPathTips").show();
+	    		return false;
+	    	}
+		        
+		    form.submit();
 		}
+	
 	});
 
 if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )

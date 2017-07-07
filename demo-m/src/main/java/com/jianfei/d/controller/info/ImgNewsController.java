@@ -66,7 +66,7 @@ public class ImgNewsController extends BaseController{
 	
 	@PostMapping("/update/{pid}")
 	public String update(ImgNews imgNew,BindingResult result,Model model,RedirectAttributes attrs){
-		
+		imgNew.setStatus(InfoStatus.DSH);
 		int r = imgNewsService.update(imgNew);
 		if (r > 0) {
 			super.addMessage(attrs, "修改图片新闻成功");
