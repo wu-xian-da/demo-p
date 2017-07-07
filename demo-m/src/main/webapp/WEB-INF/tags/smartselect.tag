@@ -29,14 +29,14 @@ $(function(){
 	};
 	
 	$("#${moduleId}").smartselect({
-		multiple:${multiple ? multiple : false},
+		multiple:${not empty multiple ? multiple : false},
 		style: {select: 'dropdown-toggle btn gy-select'},
 		text: {
 			selectLabel: '${message}',
 			labelTemplate: '#个选中项'
 		},
 		toolbar: false,
-		data: ${empty treeData ? [] : treeData},
+		data: ${treeData},
 		<c:if test="${not empty hiddenValue && hiddenValue ne -1}">
 		initialValues:[${multiple ? functions:listToString(hiddenValue) : hiddenValue}],
 		</c:if>

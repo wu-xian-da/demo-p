@@ -6,6 +6,7 @@
 package com.jianfei.d.base.interceptor;
 
 import java.util.Date;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,10 +33,21 @@ public class LogAccessInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request,HttpServletResponse response,Object handler,ModelAndView modelAndView) throws Exception{
 		User user = SessionUtils.getUser();
 		try {
-			this.logAccessService.save(new LogAccess(user,new Date(),request.getRequestURI(),request.getParameterMap().toString(),HttpUtils.getRemoteAddr(request)));
+			this.logAccessService.save(new LogAccess(user,new Date(),request.getRequestURI(),this.buildParams(request),HttpUtils.getRemoteAddr(request)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private String buildParams(HttpServletRequest request) {
+		StringBuilder builder = new StringBuilder();
+		Enumeration<String> names = request.getParameterNames();
+		while (names.hasMoreElements()) {
+			String name = (String) names.nextElement();
+			String value = request.getParameter(name);
+			builder.append(name).append("=").append(value).append("|");
+		}
+		return builder.toString();
 	}
 	
 }

@@ -101,10 +101,11 @@ public abstract class BaseController {
     }
     
     protected String buildTree(List<TreeVo> tree){
-        if(tree == null || tree.isEmpty()){
-            return null;
-        }
+        
         List<String> list = new ArrayList<String>();
+        if(tree == null || tree.isEmpty()){
+            return list.toString();
+        }
         for(TreeVo parent : tree){
             int level = 1;
             list.add(JSONObject.toJSONString(parent, TreeVo.parentFilter));
