@@ -4,7 +4,8 @@
 <div id="app-main-container" class="white-bg">
 					<div class="col-md-12">
 						<div class="box information-management-box">
-							<form method="post">
+							<h3>条件检索</h3>
+							<form method="post" action="${base }/sys/log/login">
 							<div class="from-gy-controls">
 								<div class="form-inline">
 								  <div class="form-group">
@@ -15,12 +16,15 @@
 								    <label>IP：</label>
 								    <input type="text" name="ip" value="${page.entity.ip }" class="form-control" placeholder="IP">
 								  </div>
+								  <div class="form-group">
+								  	<div class="operation-box">
+										<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
+									</div>
+								  </div>
 								</div>
 							</div>
 
-							<div class="operation-box">
-								<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
-							</div>
+							
 							</form>
 
 							<div class="box-table">

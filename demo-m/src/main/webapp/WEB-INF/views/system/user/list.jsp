@@ -6,7 +6,7 @@
 						<div class="box information-management-box">
 						<%@ include file="/WEB-INF/include/message.jsp" %>
 							<h3>条件检索</h3>
-							<form method="post">
+							<form method="post" action="${base }/sys/system/user">
 							<div class="from-gy-controls">
 								<div class="form-inline">
 								  <div class="form-group">
@@ -29,10 +29,14 @@
 								     <sys:smartselect hiddenName="departments" message="请选择部门" multiple="true"
 								    	moduleId="user-department-tree" treeData="${departmentsTree }" hiddenValue="${page.entity.departments }" />
 								  </div>
+								  <div class="form-group">
+								  	<div class="operation-box">
+										<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
+									</div>
+								  </div>
 								</div>
 							</div>
 							<div class="operation-box">
-								<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
 								<shiro:hasPermission name="user:open">
 								<button type="button" class="btn btn-gy btn-new" id="user_open"><i></i>启用</button>
 								</shiro:hasPermission>
@@ -64,9 +68,8 @@
 									</thead>
 									<tbody>
 										<c:forEach items="${page.data }" var="d">
-										<c:if test="${d.loginName ne admin }">
 											<tr>
-												<td><input type="checkbox" name="userCheck" data-id="${d.id}" data-name="${d.loginName}"></td>
+												<td><input type="checkbox" name="userCheck" data-id="${d.id }" data-name="${d.loginName }"></td>
 												<td>${d.loginName }</td>
 												<td>${d.name }</td>
 												<td>${d.role.name }</td>
@@ -74,16 +77,16 @@
 												<td>${d.status.name }</td>
 												<td><fmt:formatDate value="${d.createDate}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 												<td>
-													<shiro:hasPermission name="user:update">
-													<a href="${base}/sys/system/user/update/${d.id}" class="edit"><i></i>编辑</a> 
-													</shiro:hasPermission>
-													<shiro:hasPermission name="user:delete">
-													<a href="${base}/sys/system/user/delete/${d.id}" onclick="javascript:return confirmDel();"
-													class="delete"><i></i>删除</a>
-													</shiro:hasPermission>
+												<shiro:hasPermission name="user:update">
+													<a href="${base }/sys/system/user/update/${d.id}" class="edit"><i></i>编辑</a>
+												</shiro:hasPermission>
+												
+												<shiro:hasPermission name="user:delete">
+													<a href="${base }/sys/system/user/delete/${d.id}" onclick="javascript:return confirmDel();"
+														class="delete"><i></i>删除</a>
+												</shiro:hasPermission>
 												</td>
 											</tr>
-										</c:if>
 										</c:forEach>
 									</tbody>
 								</table>

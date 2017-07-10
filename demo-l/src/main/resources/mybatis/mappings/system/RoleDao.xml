@@ -13,9 +13,7 @@
 	<resultMap type="com.jianfei.d.entity.system.Role" id="roleMapPage">
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
-		<collection property="users" ofType="java.lang.String" column="loginName">
-			<id column="loginName"/>
-		</collection>
+		<collection property="users" column="id" ofType="string" select="findUserByRoleId"></collection>
 	</resultMap>
 	
 	<resultMap type="com.jianfei.d.entity.system.Role" id="roleMenuMap">
@@ -70,8 +68,7 @@
 	</select>
 	
 	<select id="findPage" resultMap="roleMapPage">
-		select a.id,a.name,b.loginName from t_role a
-		LEFT JOIN t_user b ON b.role_id = a.id
+		select a.id,a.name from t_role a
 		<where>
 			<if test="name != null and name != ''">a.name like CONCAT('%',#{name},'%')</if>
 		</where>
@@ -86,5 +83,9 @@
 		LEFT JOIN t_menu c ON b.menu_id = c.id
 		where a.id = #{id}
 		ORDER BY c.parent_id,c.sort
+	</select>
+	
+	<select id="findUserByRoleId" resultType="string">
+		select name form t_user where role_id=#{id}
 	</select>
 </mapper>

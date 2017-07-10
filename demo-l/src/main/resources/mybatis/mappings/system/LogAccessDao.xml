@@ -19,7 +19,7 @@
 			a.ip
 		from t_log_access a LEFT JOIN t_user b ON a.user_id = b.id
 		<where>
-			<if test="user != null and user.loginName != null and user.loginName != ''">b.loginName=#{user.loginName}</if>
+			<if test="user != null and user.loginName != null and user.loginName != ''">b.loginName like CONCAT('%',#{user.loginName},'%')</if>
 			<if test="ip != null and ip != ''">AND a.ip = #{ip}</if>
 		</where>
 	</select>

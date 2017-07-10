@@ -5,7 +5,9 @@
 		<div class="col-md-12">
 			<div class="box information-management-box">
 				<%@ include file="/WEB-INF/include/message.jsp"%>
-				<form method="post">
+				
+				<h3>条件检索</h3>
+				<form method="post" action="${base }/sys/system/department">
 				<div class="from-gy-controls">
 					<div class="form-inline">
 					  <div class="form-group">
@@ -14,15 +16,19 @@
 					    class="form-control" placeholder="部门名称">
 					  </div>
 					  <div class="form-group">
-					    <label>归属机构：</label>
-					    <sys:smartselect hiddenName="departments" message="请选择所属机构" moduleId="departm-list" 
+					    <label>归属部门：</label>
+					    <sys:smartselect hiddenName="departments" message="请选择所属部门" moduleId="departm-list" 
 							treeData="${departmentTree }" hiddenValue="${page.entity.departments }" multiple="true"/>
+					  </div>
+					  <div class="form-group">
+					  	<div class="operation-box">
+							<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
+						</div>
 					  </div>
 					</div>
 				</div>
 
 				<div class="operation-box">
-					<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
 					<shiro:hasPermission name="department:create">
 					<a href="${base }/sys/system/department/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
 					</shiro:hasPermission>
@@ -34,8 +40,8 @@
 						<thead>
 							<tr>
 								<th>序号</th>
-								<th>机构名称</th>
-								<th>上级机构</th>
+								<th>部门名称</th>
+								<th>上级部门</th>
 								<th>显示序号</th>
 								<th>管理</th>
 							</tr>

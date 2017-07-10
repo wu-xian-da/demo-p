@@ -5,7 +5,9 @@
 					<div class="col-md-12">
 						<div class="box information-management-box">
 							<%@include file="/WEB-INF/include/message.jsp" %>
-							<form method="post">
+							
+							<h3>条件检索</h3>
+							<form method="post" action="${base }/sys/system/menu">
 							<div class="from-gy-controls">
 								<div class="form-inline">
 								  <div class="form-group">
@@ -16,11 +18,15 @@
 								    <label>权限标识符：</label>
 								    <input type="text" name="permission" value="${page.entity.permission }" class="form-control" placeholder="权限标识符">
 								  </div>
+								  <div class="form-group">
+								  	<div class="operation-box">
+										<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
+									</div>
+								  </div>
 								</div>
 							</div>
 
 							<div class="operation-box">
-								<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
 								<shiro:hasPermission name="menu:create">
 								<a href="${base }/sys/system/menu/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
 								</shiro:hasPermission>

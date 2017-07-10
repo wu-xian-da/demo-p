@@ -19,7 +19,7 @@
 			a.status
 		FROM t_log_login a
 		<where>
-			<if test="loginName != null and loginName != ''">a.loginName=#{loginName} </if>
+			<if test="loginName != null and loginName != ''">a.loginName like CONCAT('%',#{loginName},'%') </if>
 			<if test="ip != null and ip != ''">AND a.ip=#{ip}</if>
 		</where>
 		ORDER BY a.id DESC

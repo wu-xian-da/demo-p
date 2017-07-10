@@ -7,19 +7,23 @@
 							<%@ include file="/WEB-INF/include/message.jsp" %>
 							<h3>条件检索</h3>
 							
-							<form method="post">
+							<form method="post" action="${base }/sys/system/role">
 							<div class="from-gy-controls">
 								<div class="form-inline">
 								  <div class="form-group">
 								    <label>角色名称：</label>
 								    <input type="text" class="form-control" name="name" value="${page.entity.name }" placeholder="角色名称">
 								  </div>
+								  <div class="form-group">
+								  	<div class="operation-box">
+										<button type="submit" class="btn btn-gy btn-query">
+										<span class="glyphicon glyphicon-search"></span>查询</button>
+									</div>
+								  </div>
 								</div>
 							</div>
 
 							<div class="operation-box">
-								<button type="submit" class="btn btn-gy btn-query">
-								<span class="glyphicon glyphicon-search"></span>查询</button>
 								<shiro:hasPermission name="role:create">
 								<a href="${base }/sys/system/role/create" class="btn btn-gy btn-add">
 								<span class="glyphicon glyphicon-plus-sign"></span>新增</a>

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
 import com.jianfei.d.common.vo.MessageStatus;
 import com.jianfei.d.controller.base.BaseController;
 import com.jianfei.d.entity.system.Department;
@@ -73,8 +74,16 @@ public class DepartmentController extends BaseController{
     
     @GetMapping("/delete/{pid}")
     public String delete(@PathVariable("pid") Long id, RedirectAttributes attrs){
-        this.departmentService.delete(id);
-        super.addMessage(attrs,MessageStatus.SUC, "部门删除成功");
+        try {
+			int result = this.departmentService.delete(id);
+			if (result > 0) {
+				super.addMessage(attrs, "部门删除成功");
+			} else {
+				super.addMessage(attrs, MessageStatus.ERROR, "删除失败,当前部门下有用户");
+			}
+		} catch (Exception e) {
+			super.addMessage(attrs, MessageStatus.ERROR, "删除失败,当前部门下有用户");
+		}
         return "redirect:/sys/system/department";
     }
     

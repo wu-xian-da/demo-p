@@ -5,6 +5,7 @@
   */
 package com.jianfei.d.entity.system;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -67,6 +68,8 @@ public class User extends BaseEntity{
 	private String reTwoPassword;
 	
 	private List<User> users;//启用,禁用,密码初始化使用
+	
+	private List<String> isNot = new ArrayList<String>();//排除不显示用户
 	
 	public void filterUsers(){
 		if (users == null) {

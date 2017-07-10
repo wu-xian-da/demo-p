@@ -157,8 +157,8 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
 	
 	@RequestMapping
     public String list(Model model, User user) {
+		user.getIsNot().add(Constants.ADMIN);
 	    model.addAttribute("page", this.userService.findPage(user));
-	    model.addAttribute("admin", Constants.ADMIN);
 	    this.setModel(model);
         return "system/user/list";
     }

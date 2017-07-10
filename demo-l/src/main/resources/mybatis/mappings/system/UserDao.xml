@@ -87,7 +87,13 @@
 		LEFT JOIN t_role b ON a.role_id = b.id
 		LEFT JOIN t_department c ON a.department_ = c.id
 		<where>
-			<if test="loginName != null and loginName != ''">a.loginName like CONCAT('%',#{loginName},'%')</if>
+			<if test="isNot != null and isNot.size() > 0">
+				a.loginName NOT IN
+				<foreach collection="isNot" item="name" open="(" separator="," close=")">
+					#{name}
+				</foreach>
+			</if>
+			<if test="loginName != null and loginName != ''">AND a.loginName like CONCAT('%',#{loginName},'%')</if>
 			<if test="role != null and role.id != null">AND a.role_id = #{role.id}</if>
 			<if test="departments != null and departments.size() > 0">AND a.department_id IN
 				<foreach collection="departments" item="dId" open="(" separator="," close=")">
