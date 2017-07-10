@@ -46,10 +46,11 @@ public class NavInfoController extends BaseController {
 	
 	private void setBases(Model model){
 		//所属栏目
-		//List<NavBase> navList = navBaseService.getleafList();
+		List<NavBase> navList = navBaseService.getleafList();
 		List<TreeVo> treeData = navBaseService.findTree();
 		//信息类型
 		model.addAttribute("infoType",InfoType.values());
+		model.addAttribute("navList",navList);
 		model.addAttribute("treeData",treeData);
 	}
 	
