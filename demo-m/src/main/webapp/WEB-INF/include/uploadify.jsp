@@ -2,4 +2,4 @@
 <%@ include file="/WEB-INF/include/taglib.jsp"%>
 
 <script src="${baseStatic }/js/uploadify/jquery.uploadify.js" type="text/javascript" ></script>
-<script src="${baseStatic }/js/uploadify/uploadify.config.js" type="text/javascript"></script>
+<script src="${baseStatic }/js/uploadify/uploadify.config.js${_version}" type="text/javascript"></script>
