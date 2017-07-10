@@ -40,6 +40,7 @@
     <shiro.version>1.2.3</shiro.version>
     <ehcache.version>2.6.9</ehcache.version>
     <ehcache-web>2.0.4</ehcache-web>
+    <httpclient.version>4.2.1</httpclient.version>
     <jdk.version>1.7</jdk.version>
     <db.name>demo</db.name>
   </properties>
@@ -255,6 +256,19 @@
   			<groupId>mysql</groupId>
   			<artifactId>mysql-connector-java</artifactId>
   			<version>5.1.28</version>
+  		</dependency>
+  		
+  		<!-- httpclient -->
+  		<dependency>
+  			<groupId>org.apache.httpcomponents</groupId>
+  			<artifactId>httpclient</artifactId>
+  			<version>${httpclient.version}</version>
+  			<exclusions>
+  				<exclusion>
+  					<groupId>commons-logging</groupId>
+  					<artifactId>commons-logging</artifactId>
+  				</exclusion>
+  			</exclusions>
   		</dependency>
   	</dependencies>
   </dependencyManagement>
