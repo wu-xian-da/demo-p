@@ -130,7 +130,23 @@
 								<td>${navInfo.type.name}</td>
 								-->
 								<td><fmt:formatDate value="${navInfo.checkTime}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
-								<td>${navInfo.status.name}</td>
+								<td>
+									<span
+										<c:choose>
+									    	<c:when test="${navInfo.status eq 'DSH'}">
+									    	    class="info-status-red"
+									    	</c:when>
+									    	<c:when test="${navInfo.status eq 'YSK'}">
+									    		class="info-status-blue"
+									    	</c:when>
+									    	<c:when test="${navInfo.status eq 'YXK'}">
+									    		class="info-status-gray"
+									    	</c:when>
+									    </c:choose>
+									>
+										${navInfo.status.name}
+									</span>
+								</td>
 								<td>
 								    <shiro:hasPermission name="info:navinfo:update">
 										<a href="${base }/sys/info/ninfo/update/${navInfo.id}" class="edit">

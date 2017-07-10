@@ -84,6 +84,7 @@
 								<input type="file" id="navIconFile" name="navIconFile" />
 								<!-- hidden -->
 								<input type="hidden" id="navIcon" name="navIcon" value="${navBase.navIcon }" /> 
+								<span class="col-sm-offset-3 tips-text">(64px*64px 50K以内)</span>
 								<!-- check tips -->
 								<span id="navIconTips" class="error" style="display: none;">栏目图标必须上传,请确认</span>
 						  </div>
@@ -146,6 +147,7 @@
 								    <input type="file" id="menuHeadIconFile" name="menuHeadIconFile" />
 									<!-- hidden -->
 									<input type="hidden" id="menuHeadIcon" name="navSecondMenu.menuHeadIcon" value="${navBase.navSecondMenu.menuHeadIcon }"/>
+									<span class="col-sm-offset-3 tips-text">（750px*255px 200K以内）</span>
 									<!-- check tips -->
 									<span id="menuHeadIconTips" class="error" style="display:none;">栏目头标必须上传，请确认</span>
 								  </div>
@@ -277,6 +279,7 @@
 						  <div class="form-group">
 						    <label>显示序号：</label>
 						    <input type="text" name="navOrderNum" value="${navBase.navOrderNum }" class="form-control {required:true,digits:true,maxlength:4}" placeholder="显示序号">
+						    <span class="col-sm-offset-3 tips-text">（序号值越大，则越前置显示）</span>
 						  </div>
 						</div>
 					</div>
@@ -485,7 +488,7 @@
 		uploadifyPro.buttonClass = "btn btn-gy btn-upload";
 		
 		var navIconUploadifyPro = deepClone(uploadifyPro);
-		navIconUploadifyPro.sizeLimit = "100k";
+		navIconUploadifyPro.sizeLimit = "50k";
 		navIconUploadifyPro.buttonText = "上传图标";
 		navIconUploadifyPro.width="145px";
         navIconUploadifyPro.onUploadSuccess = dealNavIconUpload;

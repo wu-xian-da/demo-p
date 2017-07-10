@@ -53,6 +53,7 @@
 							 <input type="file" id="imgPathFile" name="imgPathFile" />
 							 <!-- hidden -->
 							 <input type="hidden" id="imgPath" name="imgPath" value="${news.imgPath }" />
+							 <span class="tips-text">（750px*255px 200K以内）</span>
 							 <span id="imgPathTips" class="error" style="display:none;">图片必须上传，请确认</span>
 						</div>
 					</div>
@@ -72,6 +73,7 @@
 
 						<div class="col-md-8">
 							<input name="orderNum" type="text" class="form-control {required:true,digits:true,maxlength:4}"  placeholder="显示序号" value="${news.orderNum }">
+							<div class="col-md-4"><span class="tips-text">(序号值越大，则越前置显示)</span></div>
 						</div>
 					</div>
 				  	<div class="row row-list">
