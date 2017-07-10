@@ -3,7 +3,7 @@
 
 <style>
 	span.error{
-		display: block;
+		display:block;
 		background-position: 0 3px;
 	}
 </style>
@@ -11,62 +11,51 @@
 <div id="app-main-container" class="white-bg">
 	<div class="col-md-12">
 		<div class="box information-management-edit">
-			<h2>${empty notice.id ? "添加" : "编辑" }紧急公告</h2>
-			<form id="notice_form" method="post">
-			<!-- hidden -->
-			<input type="hidden" name="id" value="${notice.id }" />
-				<div class="row">
-					<div class="col-md-12">
-						<hr>
-						<div class="row row-list">
-							<div class="col-md-1">
-								<label>公告名称：</label>
-							</div>
-		
-							<div class="col-md-8">
-								<input name="title" value="${notice.title }" type="text" class="form-control {required:true, maxlength:500, messages:{required:'公告名称为必填字段，请填写', maxlength:'公告名称的最大长度为500字符，请确认'}}" placeholder="公告名称">
-							</div>
+			    
+		    <h2>查看紧急公告</h2>
+
+			<div class="row">
+				<div class="col-md-12">
+					<hr>
+					<div class="row row-list">
+						<div class="col-md-1">
+							<label>公告名称：</label>
 						</div>
-		
-						<div class="row row-list">
-					  		<div class="col-md-1">
-					  			<label>公告内容：</label>
-					  		</div>
-					  		<div class="col-md-8">
-					  			<textarea name="content" id="editor">${notice.content }</textarea>
-					  		</div>
-					  	</div>
-					  	<div class="row row-list">
-					  		<div class="col-md-1">
-		
-					  		</div>
-					  		<div class="col-md-8">
-					  			<div class="operation-box">
-									<button type="submit" class="btn btn-gy btn-query">
-										<span class="glyphicon glyphicon-ok-sign"></span>保存
-									</button>
-									<button type="button" onclick="javascript:history.back();" class="btn btn-gy btn-sort">
-										<span class="glyphicon glyphicon-arrow-left"></span>返回
-									</button>
-								</div>
-					  		</div>
-					  	</div>
+	
+						<div class="col-md-8">
+							<input name="title" value="${notice.title }" type="text" readonly="readonly" class="form-control" >
+						</div>
 					</div>
+	
+					<div class="row row-list">
+				  		<div class="col-md-1">
+				  			<label>公告内容：</label>
+				  		</div>
+				  		<div class="col-md-8">
+				  			<textarea name="content" id="editor">${notice.content }</textarea>
+				  		</div>
+				  	</div>
+				  	<div class="row row-list">
+				  		<div class="col-md-1">
+	
+				  		</div>
+				  		<div class="col-md-8">
+				  			<div class="operation-box">
+								<button type="button" onclick="javascript:history.back();" class="btn btn-gy btn-sort">
+									<span class="glyphicon glyphicon-arrow-left"></span>返回
+								</button>
+							</div>
+				  		</div>
+				  	</div>
 				</div>
-			</form>
+			</div>
+			
 		</div>
 	</div>
 </div>
 
 <%@ include file="/WEB-INF/include/ckeditor.jsp" %>
 <script type="text/javascript">
-	//校验
-	$("#notice_form").validate({
-		errorPlacement: function (error, element){
-			error.appendTo(element.parent());  
-		}
-	});
-	
 	if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
 		CKEDITOR.tools.enableHtml5Elements( document );
 	
@@ -132,5 +121,5 @@
 	
 	CKEDITOR.on('instanceReady', function (e) {
 		resize();
-	})
+	});
 </script>

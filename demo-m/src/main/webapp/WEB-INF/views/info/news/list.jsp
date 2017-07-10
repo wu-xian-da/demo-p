@@ -8,7 +8,7 @@
 		    <%@ include file="/WEB-INF/include/message.jsp" %>
 		    
 			<h3>条件检索</h3>
-			<form method="post">
+			<form method="post" action="${base }/sys/info/news">
 			<div class="from-gy-controls">
 				<div class="form-inline">
 				  
@@ -75,7 +75,8 @@
 							<th>新闻名称</th>
 							<th>图片</th>
 							<th>发布时间</th>
-							<th>信息状态</th>
+							<th>新闻状态</th>
+							<th>显示序号</th>
 							<th>管理</th>
 						</tr>
 					</thead>
@@ -96,6 +97,7 @@
 								</td>
 								<td><fmt:formatDate value="${news.checkTime}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 								<td><span class="info-status">${news.status.name }</span></td>
+								<td>${news.orderNum }</td>
 								<td>
 									<shiro:hasPermission name="info:news:update">
 									<a href="${base }/sys/info/news/update/${news.id}" class="edit">
@@ -109,7 +111,9 @@
 										删除
 									</a>
 									</shiro:hasPermission>
-									<a href="javascript:void(0);">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
+									<shiro:hasPermission name="info:news:detail">
+									<a href="${base }/sys/info/news/detail/${news.id}">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
+									</shiro:hasPermission>
 								</td>
 							</tr>
 						</c:forEach>

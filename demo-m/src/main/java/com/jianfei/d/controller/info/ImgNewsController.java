@@ -172,6 +172,12 @@ public class ImgNewsController extends BaseController{
 		return "redirect:/sys/info/news";
 	}
 	
+	@GetMapping("/detail/{pid}")
+	public String detail(@PathVariable("pid") Long id,Model model){
+		model.addAttribute("news",imgNewsService.get(id));
+		return "info/news/detail";
+	}
+	
 	@RequestMapping
 	public String list(Model model,ImgNews imgNew){
 		setModel(model);

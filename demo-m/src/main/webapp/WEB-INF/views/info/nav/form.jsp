@@ -46,6 +46,7 @@
 						    <label>所属栏目：</label>
 						    <select id="parentId" name="parentId" class="form-control" onchange="dealNavType(this.id);">
 						    	<option value="">---请选择---</option>
+						    	<option value="">无</option>
 						    	<c:forEach items="${parentNavList }" var="nav">
 						    		<option value="${nav.id }"
 						    			<c:if test="${nav.id eq navBase.parentId }">
@@ -144,7 +145,7 @@
 							        
 								    <input type="file" id="menuHeadIconFile" name="menuHeadIconFile" />
 									<!-- hidden -->
-									<input type="hidden" id="menuHeadIcon" name="navSecondMenu.menuHeadIcon" />
+									<input type="hidden" id="menuHeadIcon" name="navSecondMenu.menuHeadIcon" value="${navBase.navSecondMenu.menuHeadIcon }"/>
 									<!-- check tips -->
 									<span id="menuHeadIconTips" class="error" style="display:none;">栏目头标必须上传，请确认</span>
 								  </div>
@@ -275,7 +276,7 @@
 						<div class="form-inline">
 						  <div class="form-group">
 						    <label>显示序号：</label>
-						    <input type="text" name="navOrderNum" value="${navBase.navOrderNum }" class="form-control" placeholder="显示序号">
+						    <input type="text" name="navOrderNum" value="${navBase.navOrderNum }" class="form-control {required:true,digits:true,maxlength:4}" placeholder="显示序号">
 						  </div>
 						</div>
 					</div>

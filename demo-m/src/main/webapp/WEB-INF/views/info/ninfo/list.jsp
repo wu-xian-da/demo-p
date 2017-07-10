@@ -8,36 +8,37 @@
 		    <%@ include file="/WEB-INF/include/message.jsp" %>
 		     
 			<h3>条件检索</h3>
-            <form method="post">
+            <form method="post" action="${base }/sys/info/ninfo">
 			<div class="from-gy-controls">
 				<div class="form-inline">
 						<div class="form-group">
-						    <label>信息名称：</label>
-						    <input type="text" name="title" value="${page.entity.title }" class="form-control" placeholder="信息名称">
+						    <label>文章名称：</label>
+						    <input type="text" name="title" value="${page.entity.title }" class="form-control" placeholder="文章名称">
 					    </div>
 
 						<div class="form-group">
 						    <label>所属栏目：</label>
 						    <select id="navId" name="navBase.id" class="form-control">
-								  <c:forEach items="${treeData }" var="tree">
-								  	  <option value="${tree.value }" data-level="1"
-								  	  	  <c:if test="${page.entity.navBase.id eq tree.value}">
+						    	<option value="">全部(单选)</option>
+							  	<c:forEach items="${treeData }" var="tree">
+							  	  <option value="${tree.value }" data-level="1"
+							  	  	  <c:if test="${(empty tree.childs) and (page.entity.navBase.id eq tree.value)}">
+							  	  	      selected="selected"
+							  	  	  </c:if>
+							  	  >${tree.label }</option>
+							  	  <c:forEach items="${tree.childs }" var="child">
+								  	  	<option value="${child.value }" data-level="2"
+								  	  	   <c:if test="${page.entity.navBase.id eq child.value}">
 								  	  	      selected="selected"
-								  	  	  </c:if>
-								  	  >${tree.label }</option>
-								  	  <c:forEach items="${tree.childs }" var="child">
-									  	  	<option value="${child.value }" data-level="2"
-									  	  	   <c:if test="${page.entity.navBase.id eq child.value}">
-									  	  	      selected="selected"
-									  	  	   </c:if>
-									  	    >${child.label }</option>
-								  	  </c:forEach>
-								  </c:forEach>
+								  	  	   </c:if>
+								  	    >${child.label }</option>
+							  	  </c:forEach>
+							  	</c:forEach>
 							</select>
 						</div>
 
 						<div class="form-group">
-						    <label>信息状态：</label>
+						    <label>文章状态：</label>
 						    <select name="status" class="form-control">
 								  <option value="">全部(单选)</option>
 								  <c:forEach items="${infoStatuss }" var="s">
@@ -107,13 +108,13 @@
 					<thead>
 						<tr>
 							<th><input type="checkbox" id="checkAll"></th>
-							<th>信息名称</th>
+							<th>文章名称</th>
 							<th>所属栏目</th>
 							<!-- 2017-04-20 17:25 注释，原因：目前不需要此字段
 							<th>信息类型</th>
 							-->
 							<th>发布时间</th>
-							<th>信息状态</th>
+							<th>文章状态</th>
 							<th>管理</th>
 						</tr>
 					</thead>
@@ -144,8 +145,9 @@
 											删除
 										</a>
 									</shiro:hasPermission>
-									
-									<a href="javascript:void(0);">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
+									<shiro:hasPermission name="	info:navinfo:detail">
+									<a href="${base }/sys/info/ninfo/detail/${navInfo.id}">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
+									</shiro:hasPermission>
 								</td>
 							</tr>
 						</c:forEach>

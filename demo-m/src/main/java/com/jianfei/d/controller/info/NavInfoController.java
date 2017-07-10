@@ -46,10 +46,11 @@ public class NavInfoController extends BaseController {
 	
 	private void setBases(Model model){
 		//所属栏目
-		//List<NavBase> navList = navBaseService.getleafList();
+		List<NavBase> navList = navBaseService.getleafList();
 		List<TreeVo> treeData = navBaseService.findTree();
 		//信息类型
 		model.addAttribute("infoType",InfoType.values());
+		model.addAttribute("navList",navList);
 		model.addAttribute("treeData",treeData);
 	}
 	
@@ -183,6 +184,13 @@ public class NavInfoController extends BaseController {
 		}
 	
 		return "redirect:/sys/info/ninfo";
+	}
+	
+	@GetMapping("/detail/{pid}")
+	public String detail(@PathVariable("pid") Long id,Model model){
+		setBases(model);
+		model.addAttribute("navInfo",navInfoService.get(id));
+		return "info/ninfo/detail";
 	}
 	
 	@RequestMapping
