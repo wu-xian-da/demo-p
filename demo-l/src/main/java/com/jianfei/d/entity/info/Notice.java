@@ -47,7 +47,7 @@ public class Notice extends BaseEntity {
 	
 	private Date checkTime;//发布时间
 	
-	private InfoPushStatus pushStatus = InfoPushStatus.WTS;//推送状态(1:已推送,2:未推送)
+	private InfoPushStatus pushStatus = InfoPushStatus.DCL;//推送状态(1:已推送,2:未推送)
 	
 	private String content;//内容
 	

@@ -152,6 +152,16 @@
       </foreach>
   </update>
   
+  <select id="getListByIds">
+  	select 
+    	<include refid="Base_Column_List" />
+    from tb_img_news n
+    where n.id in
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+	  #{item.id}  
+	</foreach>  
+  </select>
+  
   <!-- web begin -->
   <select id="getListByStatus" resultType="com.jianfei.d.entity.info.ImgNews">
   	select <include refid="Base_Column_List"></include>

@@ -17,6 +17,9 @@ public interface NoticeDao extends CrudDao<Notice> {
 	
 	public int updateNoticePushStatusBatch(List<Notice> notices);
 	
+	//信息推送模块
+	public List<Notice> getListByIds(List<Notice> notices);
+	
 	//web begin
 	
 	public List<Notice> getListByStatus(InfoStatus status);

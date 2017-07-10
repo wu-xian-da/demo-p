@@ -35,6 +35,16 @@ public class NoticeService extends CrudService<NoticeDao, Notice> {
 		return this.dao.updateNoticePushStatusBatch(notices);
 	}
 	
+	/******
+	 * 信息模块
+	 * 根据多个id，查询数据
+	 * @param notices
+	 * @return
+	 */
+	public List<Notice> getListByIds(List<Notice> notices){
+		return this.dao.getListByIds(notices);
+	}
+	
 	//web begin
 	/***
 	 * 根据状态获取数据

@@ -41,6 +41,16 @@ public class NavInfoService extends CrudService<NavInfoDao, NavInfo> {
 		return this.dao.updateNavInfoPushStatusBatch(navInfos);
 	}
 	
+	/****
+	 * 信息模块
+	 * 根据多个id,查询数据
+	 * @param navInfos
+	 * @return
+	 */
+	public List<NavInfo> getListByIds(List<NavInfo> navInfos){
+		return this.dao.getListByIds(navInfos);
+	}
+	
 	//web begin
 	/**
 	 * 根据状态,获取某一栏目下的信息数据

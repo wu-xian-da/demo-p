@@ -12,7 +12,7 @@ package com.jianfei.d.entity.common;
  */
 public enum InfoPushStatus {
 	
-	YTS("已推送"),WTS("未推送");
+	YTS("已推送"),DCL("待处理");
 	
 	private String name;
 	

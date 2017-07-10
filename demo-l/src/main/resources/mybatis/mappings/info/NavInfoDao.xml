@@ -166,6 +166,15 @@
   	where i.nav_id = n.id and i.nav_id = #{navId}
   </select>
   
+  <select id="getListByIds">
+  	select <include refid="Base_Column_List" />
+    from tb_nav_info i
+    where i.id in
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+	  #{item.id}  
+	</foreach>  
+   </select>
+  
   <!-- web begin -->
   <select id="getListByNavIdAndStatus" resultType="com.jianfei.d.entity.info.NavInfo" parameterType="java.util.Map">
   	select <include refid="Base_Column_List" />
@@ -176,6 +185,7 @@
     where i.nav_id = n.id
     and i.nav_id = #{navId}
     and i.status = #{status}
+    ORDER BY i.check_time DESC
   </select>
   <!-- web end -->
 </mapper>

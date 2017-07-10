@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jianfei.d.dao.push.InfoPushDao">
+
+<sql id="Base_Column_List" >
+    id id, 
+    info_name infoName, 
+    info_type infoType, 
+    info_img infoImg, 
+    push_status pushStatus, 
+    push_time pushTime, 
+    create_time createTime, 
+    update_time updateTime, 
+    push_range pushRange,
+    info_content infoContent
+  </sql>
+  
+  <insert id="insert" parameterType="com.jianfei.d.entity.push.InfoPush" >
+    insert into tb_push_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="infoName != null" >
+        info_name,
+      </if>
+      <if test="infoType != null" >
+        info_type,
+      </if>
+      <if test="infoImg != null" >
+        info_img,
+      </if>
+      <if test="pushStatus != null" >
+        push_status,
+      </if>
+      <if test="pushTime != null" >
+        push_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="pushRange != null" >
+        push_range,
+      </if>
+      <if test="infoContent != null" >
+        info_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="infoName != null" >
+        #{infoName},
+      </if>
+      <if test="infoType != null" >
+        #{infoType},
+      </if>
+      <if test="infoImg != null" >
+        #{infoImg},
+      </if>
+      <if test="pushStatus != null" >
+        #{pushStatus},
+      </if>
+      <if test="pushTime != null" >
+        #{pushTime},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+      <if test="pushRange != null" >
+        #{pushRange},
+      </if>
+      <if test="infoContent != null" >
+        #{infoContent},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertBatch">
+  	 INSERT INTO insert into tb_push_info(info_name, info_type, info_content, push_status)
+	 VALUES 
+	 <foreach collection="list" item="item" separator=",">
+		(#{item.info_name}, #{item.info_type}, #{item.info_content}, #{item.push_status})
+	 </foreach>
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from tb_push_info
+    where id = #{id}
+  </delete>
+  
+  <update id="update" parameterType="com.jianfei.d.entity.push.InfoPush" >
+    update tb_push_info
+    <set >
+      <if test="infoName != null" >
+        info_name = #{infoName},
+      </if>
+      <if test="infoType != null" >
+        info_type = #{infoType},
+      </if>
+      <if test="infoImg != null" >
+        info_img = #{infoImg},
+      </if>
+      <if test="pushStatus != null" >
+        push_status = #{pushStatus},
+      </if>
+      <if test="pushTime != null" >
+        push_time = #{pushTime},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="pushRange != null" >
+        push_range = #{pushRange},
+      </if>
+      <if test="infoContent != null" >
+        info_content = #{infoContent},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  
+  <select id="get" resultType="com.jianfei.d.entity.push.InfoPush" parameterType="java.lang.Long" >
+    select 
+    	<include refid="Base_Column_List" />
+    from tb_push_info
+    where id = #{id}
+  </select>
+  
+  <select id="findPage" resultType="com.jianfei.d.entity.push.InfoPush" >
+    select 
+    	<include refid="Base_Column_List" />
+    from tb_push_info pi
+    <if test="null != infoName">
+    	and pi.info_name like CONCAT('%',#{infoName},'%') 
+    </if>
+    <if test="null != infoType">
+    	and pi.info_type = #{infoType}
+    </if>
+    <if test="null != pushStatus">
+    	and pi.push_status = #{pushStatus}
+    </if>
+    <if test="null != beginCreateTime and '' != beginCreateTime">
+        and DATE_FORMAT(pi.create_time, '%Y-%m-%d')  <![CDATA[>=]]> #{beginCreateTime}
+    </if>
+    <if test="null != endCreateTime and '' != endCreateTime">
+        and DATE_FORMAT(pi.create_time, '%Y-%m-%d')  <![CDATA[<=]]> #{endCreateTime}
+    </if>
+    <if test="null != beginPushTime and '' != beginPushTime">
+        and DATE_FORMAT(pi.create_time, '%Y-%m-%d')  <![CDATA[>=]]> #{beginPushTime}
+    </if>
+    <if test="null != endPushTime and '' != endPushTime">
+        and DATE_FORMAT(pi.push_time, '%Y-%m-%d')  <![CDATA[<=]]> #{endPushTime}
+    </if>
+    order by pi.push_status desc, pi.create_time desc
+  </select>
+
+</mapper>

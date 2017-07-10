@@ -17,9 +17,14 @@ public interface ImgNewsDao extends CrudDao<ImgNews> {
 	
 	public int updateImgNewsPushStatusBatch(List<ImgNews> imgNews);
 	
+	//信息推送模块
+	public List<ImgNews> getListByIds(List<ImgNews> imgNewss);
+	
 	//web begin
 	
 	public List<ImgNews> getListByStatus(InfoStatus status);
 	
 	//web end
+	
+	
 }

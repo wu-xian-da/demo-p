@@ -132,17 +132,28 @@
       </foreach>
   </update>
   
+  <select id="getListByIds">
+  	select <include refid="Base_Column_List" />
+    from tb_notice n
+    where n.id in
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+	  #{item.id}  
+	</foreach>  
+   </select>
+  
   <!-- web begin -->
   	<select id="getListByStatus" resultType="com.jianfei.d.entity.info.Notice">
   		select <include refid="Base_Column_List" />
     	from tb_notice n
     	where n.status = #{status}
+    	ORDER BY n.check_time DESC
   	</select>
   	
   	<select id="getTopNByStatus" resultType="com.jianfei.d.entity.info.Notice" >
     	select <include refid="Base_Column_List" />
     	from tb_notice n
    	 	where n.status = #{status}
+   	 	ORDER BY n.check_time DESC
     	limit 0, 5
   	</select>
   	

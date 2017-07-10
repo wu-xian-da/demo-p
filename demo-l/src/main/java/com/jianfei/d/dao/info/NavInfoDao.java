@@ -19,6 +19,9 @@ public interface NavInfoDao extends CrudDao<NavInfo> {
 	
 	public int updateNavInfoPushStatusBatch(List<NavInfo> navInfos);
 	
+	//信息推送模块
+	public List<NavInfo> getListByIds(List<NavInfo> navInfos);
+	
 	//web begin
 	
 	public List<NavInfo> getListByNavIdAndStatus(Map<String, Object> map);

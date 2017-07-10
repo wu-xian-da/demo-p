@@ -35,6 +35,16 @@ public class ImgNewsService extends CrudService<ImgNewsDao, ImgNews> {
 		return this.dao.updateImgNewsPushStatusBatch(imgNews);
 	}
 	
+	/****
+	 * 信息推送
+	 * 根据多个id查询数据
+	 * @param imgNewss
+	 * @return
+	 */
+	public List<ImgNews> getListByIds(List<ImgNews> imgNewss){
+		return this.dao.getListByIds(imgNewss);
+	}
+	
 	//web begin
 	/***
 	 * 根据状态,获取数据
