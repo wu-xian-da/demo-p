@@ -96,7 +96,23 @@
 								    </c:choose>
 								</td>
 								<td><fmt:formatDate value="${news.checkTime}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
-								<td><span class="info-status">${news.status.name }</span></td>
+								<td>
+									<span
+										<c:choose>
+									    	<c:when test="${news.status eq 'DSH'}">
+									    	    class="info-status info-status-red"
+									    	</c:when>
+									    	<c:when test="${news.status eq 'YSK'}">
+									    		class="info-status info-status-blue"
+									    	</c:when>
+									    	<c:when test="${news.status eq 'YXK'}">
+									    		class="info-status info-status-gray"
+									    	</c:when>
+									    </c:choose>
+									>
+										${news.status.name }
+									</span>
+								</td>
 								<td>${news.orderNum }</td>
 								<td>
 									<shiro:hasPermission name="info:news:update">

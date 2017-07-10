@@ -80,7 +80,23 @@
 								<td><input type="checkbox" name="noticeCheck" data-id="${notice.id}"></td>
 								<td>${notice.title}</td>
 								<td><fmt:formatDate value="${notice.checkTime}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
-								<td><span class="info-status">${notice.status.name}</span></td>
+								<td>
+									<span
+										<c:choose>
+									    	<c:when test="${notice.status eq 'DSH'}">
+									    	    class="info-status info-status-red"
+									    	</c:when>
+									    	<c:when test="${notice.status eq 'YSK'}">
+									    		class="info-status info-status-blue"
+									    	</c:when>
+									    	<c:when test="${notice.status eq 'YXK'}">
+									    		class="info-status info-status-gray"
+									    	</c:when>
+									    </c:choose>
+									>
+										${notice.status.name}
+									</span>
+							    </td>
 								<td>
 									<shiro:hasPermission name="info:notice:update">
 									<a href="${base}/sys/info/notice/update/${notice.id}" class="edit"><i></i>编辑</a>
