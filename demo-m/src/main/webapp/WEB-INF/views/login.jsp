@@ -45,7 +45,7 @@
 				<h3>用户登录</h3>
 				<form method="post">
 					<div class="login-input-control">
-						<input type="text" name="username" class="user-input" value="用户名" /> <span class="user-icon"></span>
+						<input type="text" name="username" class="user-input" value="${empty param.username ? '用户名' : param.username }" /> <span class="user-icon"></span>
 					</div>
 	
 					<div class="login-input-control">

@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alibaba.fastjson.JSONObject;
@@ -27,10 +28,16 @@ import com.jianfei.d.common.vo.Message;
 import com.jianfei.d.common.vo.MessageStatus;
 import com.jianfei.d.entity.common.TreeVo;
 import com.jianfei.d.entity.system.Menu;
+import com.jianfei.d.entity.system.User;
 
 public abstract class BaseController {
     
     protected Logger log = LoggerFactory.getLogger(getClass());
+    
+    @ModelAttribute("sessionUser")
+    public User gerSessionUser(){
+    	return SessionUtils.getUser();
+    }
     
     /**
      * 添加Flash消息

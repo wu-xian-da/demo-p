@@ -71,7 +71,11 @@
 	
 	<select id="findByLoginName" resultType="com.jianfei.d.entity.system.User">
 		select <include refid="userColumns"></include>
-		from t_user a where a.loginName = #{loginName}
+		,
+		c.name AS "department.name"
+		from t_user a 
+		LEFT JOIN t_department c ON a.department_id = c.id
+		where a.loginName = #{loginName}
 	</select>
 	
 	<select id="findPage" resultType="com.jianfei.d.entity.system.User">

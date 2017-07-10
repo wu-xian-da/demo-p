@@ -1,7 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/taglib.jsp"%>
 
-<%@ include file="/WEB-INF/include/message.jsp"%>
 <script>
 	document.addEventListener("DOMContentLoaded", function(){
        var appMain = document.getElementById("app-main");

@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
 
 
 
@@ -29,6 +32,7 @@ import com.jianfei.d.common.config.Constants;
 import com.jianfei.d.common.utils.PasswordHelper;
 import com.jianfei.d.common.utils.SessionUtils;
 import com.jianfei.d.common.vo.MessageStatus;
+import com.jianfei.d.common.vo.PasswordVo;
 import com.jianfei.d.entity.common.UserStatus;
 import com.jianfei.d.entity.system.User;
 import com.jianfei.d.service.system.DepartmentService;
@@ -166,30 +170,33 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
 	 * @return
 	 */
     @PostMapping("/modifyPassword")
-    public String modifyPassword(User user, RedirectAttributes attrs) {
+    @ResponseBody
+    public PasswordVo modifyPassword(User user, RedirectAttributes attrs) {
+    	PasswordVo vo = new PasswordVo();
         if(StringUtils.isBlank(user.getPassword()) || StringUtils.isBlank(user.getRePassword()) || StringUtils.isBlank(user.getReTwoPassword())){
-            super.addMessage(attrs, MessageStatus.ERROR, "密码不能为空");
-            return "redirect:/sys/index";
+            vo.setMessage("密码不能为空");
+            return vo;
         }
         
         if(!user.getRePassword().equals(user.getReTwoPassword())){
-            super.addMessage(attrs, MessageStatus.ERROR, "两次新密码输入不一致");
-            return "redirect:/sys/index";
+            vo.setMessage("两次新密码输入不一致");
+            return vo;
         }
         
         User sessionUser = SessionUtils.getUser();
         String saltPass = passwordHelper.getNewPassword(user.getPassword(), sessionUser.getCredentialsSalt());
         if(!sessionUser.getPassword().equals(saltPass)){
-            super.addMessage(attrs, MessageStatus.ERROR, "旧密码输入不正确");
-            return "redirect:/sys/index";
+            vo.setMessage("旧密码输入不正确");
+            return vo;
         }
         
         sessionUser.setPassword(user.getRePassword());
         passwordHelper.encryptPassword(sessionUser);
         
         this.userService.modifyPassword(sessionUser);
-        super.addMessage(attrs, "密码修改成功");
-        return "redirect:/sys/index";
+        vo.setMessage("密码修改成功");
+        vo.setResult(Boolean.TRUE);
+        return vo;
     }
 }
 

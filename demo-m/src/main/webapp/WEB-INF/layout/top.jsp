@@ -24,14 +24,23 @@
 				</c:forEach>
 			</ul>
 			
-			<ul class="navbar-nav navbar-right nav-signout">
-				<li id="change-password" data-toggle="modal" data-target="#change-password-modal">
-				<i class="glyphicon glyphicon-user"></i><a href="javascript:void(0);">修改密码</a></li>
-				<li><i class="glyphicon glyphicon-off"></i><a href="${base }/logout">安全退出</a></li>
-			</ul>
-			
-			<jsp:useBean id="now" class="java.util.Date" />   
-			<div class="navbar-nav navbar-right nav-week-tips">今天是<fmt:formatDate value="${now }" pattern="yyyy年MM月dd日" type="date" /></div>
+			<div class="navbar-nav navbar-right nav-signout">
+   				<div class="nav-signout-user">
+   				欢迎 <span>${sessionUser.loginName }</span>
+   				(${sessionUser.department.name }) 
+   				</div>
+   				<div>
+   					<ul class="navbar-right">
+   						<li id="change-password" data-toggle="modal" data-target="#change-password-modal">
+   						<i class="glyphicon glyphicon-user"></i><a href="javascript:void(0);">修改密码</a></li>
+   						<li><i class="glyphicon glyphicon-off"></i><a href="${base }/logout" onclick="javascript:return confirmDel('退出');">安全退出</a></li>
+   					</ul>
+   					<jsp:useBean id="now" class="java.util.Date" />   
+   					<div class="navbar-right nav-week-tips">
+   						今天是<fmt:formatDate value="${now }" pattern="yyyy年MM月dd日" type="date" />
+   					</div>
+   				</div>
+    		</div>
 		</nav>
 	</div>
 </div>
@@ -45,21 +54,21 @@
     				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     				<h4 class="modal-title">修改密码</h4>
     			</div>
-    			<form id="pass-modify-form" method="post" action="${base }/sys/system/user/modifyPassword">
+    			<form id="pass-modify-form" method="post">
 	    			<div class="modal-body">
 	    					<div class="form-group form-inline">
 	    						<label class="control-label">旧密码:</label>
-	    						<input type="password" name="password" class="form-control {required:true,minlength:6,maxlength:30}">
+	    						<input type="password" name="password" class="form-control">
 	    					</div>
 	
 	    					<div class="form-group form-inline">
 	    						<label class="control-label">新密码:</label>
-	    						<input type="password" id="rePassword" name="rePassword" class="form-control {required:true,minlength:6,maxlength:30}">
+	    						<input type="password" id="rePassword" name="rePassword" class="form-control">
 	    					</div>
 	
 	    					<div class="form-group form-inline">
 	    						<label class="control-label">重复一次:</label>
-	    						<input type="password" name="reTwoPassword" class="form-control {required:true,minlength:6,maxlength:30,equalTo:'#rePassword'}">
+	    						<input type="password" name="reTwoPassword" class="form-control">
 	    					</div>
 	    			</div>
 	    			<div class="modal-footer">
@@ -72,9 +81,36 @@
     </div>
     
     <script type="text/javascript">
-	$("#pass-modify-form").validate({
-		errorPlacement: function (error, element){
-			error.appendTo(element.parent());  
-		}
+    $(function(){
+		$("#pass-modify-form").validate({
+			rules: {
+				password: {required:true, maxlength:20},
+				rePassword: {required:true, minlength:6, maxlength:20},
+				reTwoPassword: {required:true, minlength:6, maxlength:20, equalTo:'#rePassword'}
+			},
+			messages: {
+				password: {required: '请填写密码', maxlength: '不能超过20个字符'},
+				rePassword: {required: '请填写新密码', minlength: '不能少于6个字符', maxlength: '不能超过20个字符'},
+				reTwoPassword: {required: '请填写确认新密码', minlength: '不能少于6个字符', maxlength: '不能超过20个字符', equalTo: '两次密码不一致'}
+			},
+			submitHandler:function(form){
+				var param = $("#pass-modify-form").serialize(); 
+			    $.ajax({ 
+					url: "${base }/sys/system/user/modifyPassword",
+					type: "post", 
+					dataType: "json",
+					data: param, 
+					success: function(data){
+						alert(data.message);
+						if(data.result){
+							setTimeout(function(){
+								window.location.reload();
+							}, 1000);
+						}
+					}
+			    });
+			}
+		});
+		
 	});
 </script>

@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jianfei.d.controller.base.BaseController;
 import com.jianfei.d.service.system.UserService;
 
 @Controller
-public class IndexController {
+public class IndexController extends BaseController{
 
 	@Autowired
     private UserService userSerivce;
