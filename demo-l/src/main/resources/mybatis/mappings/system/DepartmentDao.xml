@@ -28,9 +28,9 @@
 	</insert>
 	
 	<delete id="delete">
-		delete from t_department a where a.id=#{id}
-		ANS NOT EXISTS (SELECT id FROM t_user where department_id=a.id)
-		ANS NOT EXISTS (SELECT x.id FROM t_department x where a.id=x.parent_id)
+		delete a from t_department a where a.id=#{id}
+		AND NOT EXISTS (SELECT 1 FROM t_user x where x.department_id=#{id})
+		AND NOT EXISTS (SELECT * FROM (SELECT 1 FROM t_department x where x.parent_id=#{id}) T)
 	</delete>
 	
 	<update id="update">

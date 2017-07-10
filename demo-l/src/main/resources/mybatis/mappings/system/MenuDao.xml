@@ -37,8 +37,8 @@
 	</insert>
 	
 	<delete id="delete">
-		delete from t_menu a where a.id=#{id}
-		ANS NOT EXISTS (SELECT x.id FROM t_menu x where a.id=x.parent_id)
+		delete a from t_menu a where a.id=#{id}
+		AND NOT EXISTS (SELECT * FROM t_menu x where a.id=x.parent_id (select 1 from t_menu x where x.parent_id=#{id}) T)
 	</delete>
 	
 	<update id="update">
