@@ -29,7 +29,7 @@
 						</div>
 
 						<div class="col-md-8">
-							<input name="title" value="${navInfo.title }" type="text" class="form-control {required:true, maxlength:500, messages:{required:'信息名称为必填字段，请填写', maxlength:'信息名称的最大长度为200字符，请确认'}}" placeholder="信息名称">
+							<input name="title" value="${navInfo.title }" type="text" class="form-control {required:true, maxlength:500, messages:{required:'文章名称为必填字段，请填写', maxlength:'文章名称的最大长度为200字符，请确认'}}" placeholder="文章名称">
 						</div>
 					</div>
 
