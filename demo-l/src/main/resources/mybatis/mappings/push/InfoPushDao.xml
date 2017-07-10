@@ -150,4 +150,19 @@
     order by pi.push_status desc, pi.create_time desc
   </select>
 
+	<update id="updatePushStatusById" parameterType="java.util.Map" >
+	    update tb_push_info
+	    <set >
+	      <if test="pushStatus != null" >
+	        push_status = #{pushStatus},
+	      </if>
+	      <if test="pushTime != null" >
+	        push_time = #{pushTime},
+	      </if>
+	      <if test="updateTime != null" >
+	        update_time = #{updateTime},
+	      </if>
+	    </set>
+	    where id = #{id}
+    </update>
 </mapper>
