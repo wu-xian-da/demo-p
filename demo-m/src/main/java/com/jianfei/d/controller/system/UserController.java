@@ -77,7 +77,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
 	    //判断登陆名是否重复
 	    User temp = this.userService.findByLoginName(user.getLoginName());
         if(temp != null){
-            super.addMessage(model, MessageStatus.WARN, "登陆名已存在，请更换");
+            super.addMessage(model, MessageStatus.WARN, "登陆名已存在，请更换!");
             setModel(model);
             return "system/user/form";
         }
