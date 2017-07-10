@@ -406,7 +406,7 @@
   			
   			<!-- manager config -->
   			<managerBaseUrl>D:/upload</managerBaseUrl>
-  			<webDomain>127.0.0.1:9090</webDomain>
+  			<webDomain>127.0.0.1:8888</webDomain>
   			<siteName>建飞科联</siteName>
   			<manager.pool.init>5</manager.pool.init>
   			<manager.pool.minIdle>5</manager.pool.minIdle>
@@ -420,6 +420,24 @@
   			<web.pool.maxActive>10</web.pool.maxActive>
   		</properties>
   	</profile>
+  	
+  	<profile>
+  		<id>prod</id>
+  		<properties>
+  			<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+  			<jdbc.url>jdbc:mysql://172.31.34.150/demo?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull</jdbc.url>
+  			<jdbc.username>witplat</jdbc.username>
+  			<jdbc.password>EYjxU!69tJTy#R51</jdbc.password>
+  			
+  			<!-- manager config -->
+  			<managerBaseUrl>/data/services/www/upload</managerBaseUrl>
+  			<webDomain></webDomain>
+  			<manager.pool.init>5</manager.pool.init>
+  			<manager.pool.minIdle>5</manager.pool.minIdle>
+  			<manager.pool.maxActive>10</manager.pool.maxActive>
+  		</properties>
+  	</profile>
+  	
   	<profile>
   		<id>test</id>
   		<properties>
@@ -437,7 +455,7 @@
 
 			<!-- manager config -->
 			<managerBaseUrl>/application/guiyang/upload</managerBaseUrl>
-			<webDomain>127.0.0.1:9090</webDomain>
+			<webDomain>127.0.0.1:8888</webDomain>
 			<manager.pool.init>5</manager.pool.init>
 			<manager.pool.minIdle>5</manager.pool.minIdle>
 			<manager.pool.maxActive>10</manager.pool.maxActive>
