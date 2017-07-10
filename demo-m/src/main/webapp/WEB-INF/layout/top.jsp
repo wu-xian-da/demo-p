@@ -26,7 +26,7 @@
 			
 			<div class="navbar-nav navbar-right nav-signout">
    				<div class="nav-signout-user">
-   				欢迎 <span>${sessionUser.loginName }</span>
+   				欢迎 <span>${sessionUser.name }</span>
    				(${sessionUser.department.name }) 
    				</div>
    				<div>
