@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jianfei.d.common.config.FileConfig;
 import com.jianfei.d.controller.base.BaseController;
 import com.jianfei.d.entity.common.InfoStatus;
 import com.jianfei.d.entity.common.InfoType;
@@ -43,6 +44,9 @@ public class NavInfoController extends BaseController {
 	
 	@Autowired
 	private NavBaseService navBaseService;
+	
+	@Autowired
+	private FileConfig fileConfig;
 	
 	private void setBases(Model model){
 		//所属栏目
@@ -198,6 +202,7 @@ public class NavInfoController extends BaseController {
 		setBases(model);
 		model.addAttribute("infoStatuss",InfoStatus.values());
 		model.addAttribute("page",navInfoService.findPage(navInfo));
+		model.addAttribute("webBaseUrl", fileConfig.getWebBaseUrl().startsWith("http://")?fileConfig.getWebBaseUrl():"http://"+fileConfig.getWebBaseUrl());
 		return "info/ninfo/list";
 	}
 }

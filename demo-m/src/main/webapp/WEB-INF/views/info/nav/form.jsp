@@ -288,7 +288,7 @@
 			<div class="operation-box">
 				<button type="submit" class="btn btn-gy btn-query">
 					<span class="glyphicon glyphicon-ok-sign"></span>
-					保存
+					提交
 				</button>
 				<button type="button" onclick="javascript:history.back();" class="btn btn-gy btn-sort">
 					<span class="glyphicon glyphicon-arrow-left"></span>

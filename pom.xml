@@ -407,6 +407,7 @@
   			<!-- manager config -->
   			<managerBaseUrl>D:/upload</managerBaseUrl>
   			<webDomain>127.0.0.1:8888</webDomain>
+  			<webBaseUrl>127.0.0.1:8888</webBaseUrl>
   			<siteName>建飞科联</siteName>
   			<manager.pool.init>5</manager.pool.init>
   			<manager.pool.minIdle>5</manager.pool.minIdle>
@@ -432,6 +433,7 @@
   			<!-- manager config -->
   			<managerBaseUrl>/data/services/www/upload</managerBaseUrl>
   			<webDomain></webDomain>
+  			<webBaseUrl>http://219.143.16.157:8091</webBaseUrl>
   			<manager.pool.init>5</manager.pool.init>
   			<manager.pool.minIdle>5</manager.pool.minIdle>
   			<manager.pool.maxActive>10</manager.pool.maxActive>
@@ -456,6 +458,7 @@
 			<!-- manager config -->
 			<managerBaseUrl>/application/guiyang/upload</managerBaseUrl>
 			<webDomain>127.0.0.1:8888</webDomain>
+			<webBaseUrl>http://192.168.110.32:5008</webBaseUrl>
 			<manager.pool.init>5</manager.pool.init>
 			<manager.pool.minIdle>5</manager.pool.minIdle>
 			<manager.pool.maxActive>10</manager.pool.maxActive>

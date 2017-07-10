@@ -60,7 +60,7 @@
 				<button id="newsHFSK" type="button" class="btn btn-gy btn-recovery"><i></i>恢复上刊</button>
 				</shiro:hasPermission>
 				<shiro:hasPermission name="info:news:shtg">
-				<button id="newSHTG" type="button" class="btn btn-gy btn-adpot"><span class="glyphicon glyphicon-ok"></span>审核通过</button>
+				<button id="newSHTG" type="button" class="btn btn-gy btn-adpot"><span class="glyphicon glyphicon-ok"></span>上刊</button>
 				</shiro:hasPermission>
 				<shiro:hasPermission name="info:news:add">
 				<a href="${base }/sys/info/news/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
@@ -112,7 +112,7 @@
 									</a>
 									</shiro:hasPermission>
 									<shiro:hasPermission name="info:news:detail">
-									<a href="${base }/sys/info/news/detail/${news.id}">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
+									<a href="${webBaseUrl }/web/news/toDetail/${news.id}" target="_blank">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;预览</a>
 									</shiro:hasPermission>
 								</td>
 							</tr>

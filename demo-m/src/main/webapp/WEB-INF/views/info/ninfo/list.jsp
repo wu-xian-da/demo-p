@@ -91,7 +91,7 @@
 				<shiro:hasPermission name="info:navinfo:shtg">
 					<button id="infoSHTG" type="button" class="btn btn-gy btn-adpot">
 						<span class="glyphicon glyphicon-ok"></span>
-						审核通过
+						上刊
 					</button>
 				</shiro:hasPermission>
 				
@@ -146,7 +146,7 @@
 										</a>
 									</shiro:hasPermission>
 									<shiro:hasPermission name="	info:navinfo:detail">
-									<a href="${base }/sys/info/ninfo/detail/${navInfo.id}">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
+									<a href="${webBaseUrl }/web/info/toDetail/${navInfo.navId}/${navInfo.id}" target="_blank">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;预览</a>
 									</shiro:hasPermission>
 								</td>
 							</tr>

@@ -7,8 +7,6 @@ package com.jianfei.d.controller.info;
 
 import java.util.Date;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jianfei.d.common.config.FileConfig;
 import com.jianfei.d.controller.base.BaseController;
 import com.jianfei.d.entity.common.InfoStatus;
 import com.jianfei.d.entity.info.ImgNews;
@@ -34,6 +33,9 @@ public class ImgNewsController extends BaseController{
 	
 	@Autowired
 	private ImgNewsService imgNewsService;
+	
+	@Autowired
+	private FileConfig fileConfig;
 	
 	private void setModel(Model model){
 		model.addAttribute("infoStatuss",InfoStatus.values());
@@ -182,6 +184,7 @@ public class ImgNewsController extends BaseController{
 	public String list(Model model,ImgNews imgNew){
 		setModel(model);
 		model.addAttribute("page", imgNewsService.findPage(imgNew));
+		model.addAttribute("webBaseUrl",fileConfig.getWebBaseUrl().startsWith("http://")?fileConfig.getWebBaseUrl():"http://"+fileConfig.getWebBaseUrl());
 		return "info/news/list";
 	}
 }

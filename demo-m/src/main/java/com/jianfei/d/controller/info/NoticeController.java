@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jianfei.d.common.config.FileConfig;
 import com.jianfei.d.controller.base.BaseController;
 import com.jianfei.d.entity.common.InfoStatus;
 import com.jianfei.d.entity.info.Notice;
@@ -34,6 +35,9 @@ public class NoticeController extends BaseController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
+	@Autowired
+	private FileConfig fileConfig;
 	
 	private void setBases(Model model){
 		model.addAttribute("infoStatuss",InfoStatus.values());
@@ -173,6 +177,7 @@ public class NoticeController extends BaseController {
 	public String list(Model model,Notice notice){
 		setBases(model);
 		model.addAttribute("page",noticeService.findPage(notice));
+		model.addAttribute("webBaseUrl", fileConfig.getWebBaseUrl().startsWith("http://")?fileConfig.getWebBaseUrl():"http://"+fileConfig.getWebBaseUrl());
 		return "info/notice/list";
 	}
 }

@@ -54,7 +54,7 @@
 				<button type="button" class="btn btn-gy btn-recovery" id="noticeHFSK"><i></i>恢复上刊</button>
 				</shiro:hasPermission>
 				<shiro:hasPermission name="info:notice:shtg">
-				<button type="button" class="btn btn-gy btn-adpot" id="noticeSHTG"><span class="glyphicon glyphicon-ok"></span>审核通过</button>
+				<button type="button" class="btn btn-gy btn-adpot" id="noticeSHTG"><span class="glyphicon glyphicon-ok"></span>上刊</button>
 				</shiro:hasPermission>
 				<shiro:hasPermission name="info:notice:add">
 				<a href="${base}/sys/info/notice/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
@@ -89,7 +89,7 @@
 									<a href="${base}/sys/info/notice/delete/${notice.id}" onclick="javascript:return confirmDel();" class="delete"><i></i>删除</a>
 									</shiro:hasPermission>
 									<shiro:hasPermission name="info:notice:detail">
-									<a href="${base}/sys/info/notice/detail/${notice.id}">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
+									<a href="${webBaseUrl }/web/notice/toDetail/${notice.id}" target="_blank">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;预览</a>
 									</shiro:hasPermission>
 								</td>
 							</tr>

@@ -22,5 +22,8 @@ public class FileConfig {
     @Value("#{settings['file.mapping']}")
     private String mapping;
     
+    @Value("#{settings['web.base.url']}")
+    private String webBaseUrl;
+    
 }
 
