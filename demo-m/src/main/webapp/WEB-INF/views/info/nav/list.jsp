@@ -27,15 +27,16 @@
 					    	</c:forEach>
 					    </select>
 					  </div>
-	
+					  <div class="form-group">
+					  	<button type="submit" class="btn btn-gy btn-query">
+							<span class="glyphicon glyphicon-search"></span>查询
+						</button>
+					  </div>
 					</div>
 				</div>
 	
 				<div class="operation-box">
-					<button type="submit" class="btn btn-gy btn-query">
-						<span class="glyphicon glyphicon-search"></span>
-						查询
-					</button>
+					
 					<shiro:hasPermission name="info:nav:show">
 					<button id="navShow" type="button" class="btn btn-gy btn-push">
 						<i></i>
@@ -63,7 +64,7 @@
 						<tr>
 							<th><input type="checkbox" id="checkAll"></th>
 							<th class="dleft">栏目名称</th>
-							<th>上级栏目</th>
+							<th>归属栏目</th>
 							<th>栏目类型</th>
 							<th>显示序号</th>
 							<th>栏目状态</th>

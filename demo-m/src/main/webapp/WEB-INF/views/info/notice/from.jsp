@@ -11,7 +11,7 @@
 <div id="app-main-container" class="white-bg">
 	<div class="col-md-12">
 		<div class="box information-management-edit">
-			<h2>${empty notice.id ? "添加" : "编辑" }公告</h2>
+			<h2>${empty notice.id ? "添加" : "编辑" }紧急公告</h2>
 			<form id="notice_form" method="post">
 			<!-- hidden -->
 			<input type="hidden" name="id" value="${notice.id }" />
@@ -20,11 +20,11 @@
 						<hr>
 						<div class="row row-list">
 							<div class="col-md-1">
-								<label>紧急公告：</label>
+								<label>公告名称：</label>
 							</div>
 		
 							<div class="col-md-8">
-								<input name="title" value="${notice.title }" type="text" class="form-control {required:true, maxlength:500, messages:{required:'紧急公告为必填字段，请填写', maxlength:'紧急公告的最大长度为500字符，请确认'}}" placeholder="紧急公告">
+								<input name="title" value="${notice.title }" type="text" class="form-control {required:true, maxlength:500, messages:{required:'公告名称为必填字段，请填写', maxlength:'公告名称的最大长度为500字符，请确认'}}" placeholder="公告名称">
 							</div>
 						</div>
 		

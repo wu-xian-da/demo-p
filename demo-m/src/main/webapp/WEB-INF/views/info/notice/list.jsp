@@ -13,7 +13,7 @@
 					    <input name="title" value="${page.entity.title }" type="text" class="form-control" placeholder="公告名称">
 					  </div>
 					  <div class="form-group">
-					    <label>信息状态：</label>
+					    <label>公告状态：</label>
 					    <select name="status" class="form-control">
 							  <option value="">全部(单选)</option>
 							  	<c:forEach items="${infoStatuss }" var="status">
@@ -69,7 +69,7 @@
 							<th><input type="checkbox" id="checkAll"></th>
 							<th>紧急公告名称</th>
 							<th>发布时间</th>
-							<th>信息状态</th>
+							<th>公告状态</th>
 							<th>管理</th>
 						</tr>
 					</thead>

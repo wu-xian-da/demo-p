@@ -104,11 +104,11 @@
     <if test="null != status">
         and n.status = #{status}
     </if>
-    <if test="null != beginCheckTime">
-        and n.check_time  <![CDATA[>=]]> #{beginCheckTime}
+    <if test="null != beginCheckTime and '' != beginCheckTime">
+        and DATE_FORMAT(n.check_time, '%Y-%m-%d')  <![CDATA[>=]]> #{beginCheckTime}
     </if>
-    <if test="null != endCheckTime">
-        and n.check_time <![CDATA[<=]]> #{endCheckTime}
+    <if test="null != endCheckTime and '' != endCheckTime">
+        and DATE_FORMAT(n.check_time, '%Y-%m-%d')  <![CDATA[<=]]> #{endCheckTime}
     </if>
     order by n.status asc, n.create_time desc
   </select>

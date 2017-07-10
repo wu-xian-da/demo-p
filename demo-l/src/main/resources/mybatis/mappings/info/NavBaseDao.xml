@@ -133,11 +133,11 @@
   
   <select id="findTree" resultMap="NavTree">
   	SELECT 
-	id,
-	nav_name 
+		id,
+		nav_name 
 	FROM tb_nav_base
 	WHERE nav_type != 2
-	AND (nav_level = 0 OR nav_level = 1)
+	AND nav_level = 0
 	AND nav_status = 0
 	ORDER BY nav_order_num desc
   </select>

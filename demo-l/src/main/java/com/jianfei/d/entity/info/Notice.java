@@ -56,10 +56,10 @@ public class Notice extends BaseEntity {
 	private Date updateTime;
 	
 	@FormQuery
-	private Date beginCheckTime;//时间检索字段
+	private String beginCheckTime;//时间检索字段
 	
 	@FormQuery
-	private Date endCheckTime;//时间检索字段
+	private String endCheckTime;//时间检索字段
 	
 	/*public void setBeginCheckTime(String beginCheckTime){
 		this.beginCheckTime = beginCheckTime;

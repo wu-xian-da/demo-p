@@ -75,7 +75,8 @@
 							<th>新闻名称</th>
 							<th>图片</th>
 							<th>发布时间</th>
-							<th>信息状态</th>
+							<th>新闻状态</th>
+							<th>显示序号</th>
 							<th>管理</th>
 						</tr>
 					</thead>
@@ -96,6 +97,7 @@
 								</td>
 								<td><fmt:formatDate value="${news.checkTime}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 								<td><span class="info-status">${news.status.name }</span></td>
+								<td>${news.orderNum }</td>
 								<td>
 									<shiro:hasPermission name="info:news:update">
 									<a href="${base }/sys/info/news/update/${news.id}" class="edit">

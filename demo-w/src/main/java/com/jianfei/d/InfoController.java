@@ -53,7 +53,8 @@ public class InfoController extends BaseController{
 		NavSecondMenu navSec = navSecondMenuService.getByNavId(navId);
 		List<NavInfo> infoList = navInfoService.getListByNavIdAndStatus(secNavId, InfoStatus.YSK);
 		
-		model.addAttribute("navSec", navSec);
+		//信息所属的二级栏目ID
+		model.addAttribute("secNavId",secNavId);
 		model.addAttribute("infoList", infoList);
 		//return new ModelAndView(navSec.getMenuListTemplate().getFilePath());
 		//return new ModelAndView("info/list.jsp");

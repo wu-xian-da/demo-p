@@ -71,7 +71,7 @@
 						</div>
 
 						<div class="col-md-8">
-							<input name="orderNum" type="text" class="form-control"  placeholder="显示序号" value="${news.orderNum }">
+							<input name="orderNum" type="text" class="form-control {required:true,digits:true,maxlength:4}"  placeholder="显示序号" value="${news.orderNum }">
 						</div>
 					</div>
 				  	<div class="row row-list">
