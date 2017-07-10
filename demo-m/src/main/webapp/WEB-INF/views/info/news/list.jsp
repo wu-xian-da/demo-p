@@ -8,7 +8,7 @@
 		    <%@ include file="/WEB-INF/include/message.jsp" %>
 		    
 			<h3>条件检索</h3>
-			<form method="post">
+			<form method="post" action="${base }/sys/info/news">
 			<div class="from-gy-controls">
 				<div class="form-inline">
 				  
@@ -111,7 +111,9 @@
 										删除
 									</a>
 									</shiro:hasPermission>
-									<a href="javascript:void(0);">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
+									<shiro:hasPermission name="info:news:detail">
+									<a href="${base }/sys/info/news/detail/${news.id}">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
+									</shiro:hasPermission>
 								</td>
 							</tr>
 						</c:forEach>

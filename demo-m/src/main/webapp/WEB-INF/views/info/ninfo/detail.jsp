@@ -3,7 +3,7 @@
 
 <style>
 	span.error{
-		display: block;
+		display:block;
 		background-position: 0 3px;
 	}
 </style>
@@ -12,12 +12,8 @@
 	<div class="col-md-12">
 		<div class="box information-management-edit">
 		
-			<h2>${empty navInfo.id ? "新增" : "编辑" }文章</h2>
+			<h2>查看文章</h2>
 
-            <form id="navInfo_form" method="post">
-			<!-- hidden -->
-			<input type="hidden" name="id" value="${navInfo.id }" />
-			
 			<div class="row">
 				<div class="col-md-12">
 
@@ -29,7 +25,7 @@
 						</div>
 
 						<div class="col-md-8">
-							<input name="title" value="${navInfo.title }" type="text" class="form-control {required:true, maxlength:500, messages:{required:'信息名称为必填字段，请填写', maxlength:'信息名称的最大长度为200字符，请确认'}}" placeholder="信息名称">
+							<input name="title" value="${navInfo.title }" type="text" readonly="readonly" class="form-control">
 						</div>
 					</div>
 
@@ -39,7 +35,7 @@
 						</div>
 
 						<div class="col-md-8">
-							<select name="navId" class="form-control {required:true, messages:{required:'请选择所属栏目'}}">
+							<select name="navId" class="form-control" disabled="disabled">
 								<option value="">---请选择(单选)---</option>
 								<c:forEach items="${navList }" var="nav">
 									<option value="${nav.id }"
@@ -52,6 +48,7 @@
 						</div>
 					</div>
 
+                    <!-- 2017-04-20 17:25 注释，原因：目前不需要此字段
 					<div class="row row-list">
 						<div class="col-md-1">
 							<label>文章类型：</label>
@@ -69,6 +66,7 @@
 						    </c:forEach>
 						</div>
 					</div>
+					-->
 	
 					<div class="row row-list">
 				  		<div class="col-md-1">
@@ -82,10 +80,6 @@
 				  	<div class="row row-list">
 				  		<div class="col-md-1"></div>
 				  		<div class="col-md-8">
-							<button type="submit" class="btn btn-gy btn-query">
-								<span class="glyphicon glyphicon-ok-sign"></span>
-								保存
-							</button>
 							<button type="button" onclick="javascript:history.back();" class="btn btn-gy btn-sort">
 								<span class="glyphicon glyphicon-arrow-left"></span>
 								返回
@@ -95,7 +89,6 @@
 				  	
 				</div>
 			</div>
-			</form>
 			
 		</div>
 	</div>
@@ -103,13 +96,6 @@
 
 <%@ include file="/WEB-INF/include/ckeditor.jsp" %>
 <script type="text/javascript">
-	//校验
-	$("#navInfo_form").validate({
-		errorPlacement:function(error,element){
-			error.appendTo(element.parent());
-		}
-	});
-
 	if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
 		CKEDITOR.tools.enableHtml5Elements( document );
 	

@@ -7,7 +7,7 @@
 		    <%@ include file="/WEB-INF/include/message.jsp" %>
 		    
 			<h3>条件检索</h3>
-			<form method="post">
+			<form method="post" action="${base }/sys/info/nav">
 				<div class="from-gy-controls">
 					<div class="form-inline">
 					  <div class="form-group">

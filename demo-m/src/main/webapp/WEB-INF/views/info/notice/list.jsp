@@ -5,7 +5,7 @@
 	<div class="col-md-12">
 		<div class="box information-management-box">
 			<h3>条件检索</h3>
-			<form method="post">
+			<form method="post" action="${base }/sys/info/notice">
 				<div class="from-gy-controls">
 					<div class="form-inline">
 					  <div class="form-group">
@@ -88,7 +88,9 @@
 									<shiro:hasPermission name="info:notice:delete">
 									<a href="${base}/sys/info/notice/delete/${notice.id}" onclick="javascript:return confirmDel();" class="delete"><i></i>删除</a>
 									</shiro:hasPermission>
-									<a href="javascript:void(0);">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
+									<shiro:hasPermission name="info:notice:detail">
+									<a href="${base}/sys/info/notice/detail/${notice.id}">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
+									</shiro:hasPermission>
 								</td>
 							</tr>
 						</c:forEach>

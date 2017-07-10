@@ -163,6 +163,12 @@ public class NoticeController extends BaseController {
 		return "redirect:/sys/info/notice";
 	}
 	
+	@GetMapping("/detail/{pid}")
+	public String detail(@PathVariable("pid") Long id ,Model model){
+		model.addAttribute("notice",noticeService.get(id));
+		return "info/notice/detail";
+	}
+	
 	@RequestMapping
 	public String list(Model model,Notice notice){
 		setBases(model);

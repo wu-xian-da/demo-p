@@ -186,6 +186,13 @@ public class NavInfoController extends BaseController {
 		return "redirect:/sys/info/ninfo";
 	}
 	
+	@GetMapping("/detail/{pid}")
+	public String detail(@PathVariable("pid") Long id,Model model){
+		setBases(model);
+		model.addAttribute("navInfo",navInfoService.get(id));
+		return "info/ninfo/detail";
+	}
+	
 	@RequestMapping
 	public String list(Model model,NavInfo navInfo){
 		setBases(model);
