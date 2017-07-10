@@ -126,6 +126,14 @@
 		
 		$('input[type="checkbox"]').on('click',function(){
 			var _statusP = $(this).prop("checked");
+			
+			//父节点
+			var parent_v = $(this).data("p");
+			if(parent_v != null && parent_v != '' && _statusP){
+				$('input[value='+parent_v+']').prop("checked", true);
+			}
+			
+			//子节点
 			$('input[data-p='+$(this).val()+']').each(function(){
 				var _statusC = $(this).prop("checked");
 				if(_statusP){
