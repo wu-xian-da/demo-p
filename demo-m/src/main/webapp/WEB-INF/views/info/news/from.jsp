@@ -208,7 +208,7 @@ $(document).ready(function(){
 	uploadifyPro.multi = false;
 	uploadifyPro.fileExt = "*.gif;*.jpg;*.jpeg;*.png;*.bmp;*.ico";
 	uploadifyPro.buttonClass = "btn btn-gy btn-upload";
-	uploadifyPro.sizeLimit = "200k";
+	uploadifyPro.fileSizeLimit = "200k";
 	uploadifyPro.buttonText = "上传图片";
 	uploadifyPro.width='75px', //按钮宽度
 	uploadifyPro.onUploadSuccess = dealImgNewsUpload;

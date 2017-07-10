@@ -488,13 +488,13 @@
 		uploadifyPro.buttonClass = "btn btn-gy btn-upload";
 		
 		var navIconUploadifyPro = deepClone(uploadifyPro);
-		navIconUploadifyPro.sizeLimit = "50k";
+		navIconUploadifyPro.fileSizeLimit = "50k";
 		navIconUploadifyPro.buttonText = "上传图标";
 		navIconUploadifyPro.width="145px";
         navIconUploadifyPro.onUploadSuccess = dealNavIconUpload;
 		
 		var menuHeadIconUploadifyPro = deepClone(uploadifyPro);
-		menuHeadIconUploadifyPro.sizeLimit = "200k";
+		menuHeadIconUploadifyPro.fileSizeLimit = "200k";
 		menuHeadIconUploadifyPro.buttonText = "上传头标";
 		menuHeadIconUploadifyPro.width="145px";
 		menuHeadIconUploadifyPro.onUploadSuccess = dealMenuHeadIconUpload;
