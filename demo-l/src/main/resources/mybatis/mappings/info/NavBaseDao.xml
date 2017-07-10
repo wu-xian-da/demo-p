@@ -84,6 +84,7 @@
     from tb_nav_base n left join tb_nav_base pn on n.parent_id = pn.id where 1 = 1
     <if test="null != navName">and n.nav_name like CONCAT('%',#{navName},'%')</if>
     <if test="null != parent and null != parent.id">and n.parent_id = #{parent.id}</if>
+    <if test="null != navType">and n.nav_type = #{navType}</if>
     ORDER BY n.nav_order_num DESC,n.create_time desc
   </select>
   

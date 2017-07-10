@@ -28,6 +28,19 @@
 					    </select>
 					  </div>
 					  <div class="form-group">
+					    <label>栏目类型：</label>
+					    <select name="navType" class="form-control">
+					    	<option value="">---请选择---</option>
+					    	<c:forEach items="${navTypes }" var="navType">
+					    		<option value="${navType }"
+					    			<c:if test="${navType eq page.entity.navType }">
+					    				selected="selected"
+					    			</c:if>
+					    		>${navType.name }</option>
+					    	</c:forEach>
+					    </select>
+					  </div>
+					  <div class="form-group">
 					  	<button type="submit" class="btn btn-gy btn-query">
 							<span class="glyphicon glyphicon-search"></span>查询
 						</button>
