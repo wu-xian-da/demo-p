@@ -32,7 +32,7 @@
                <c:forEach items="${secNavList }" var="secNav">
                     <c:choose>
                     	<c:when test="${'URLWL' eq secNav.navType }">
-                    		<a href="${secNav.navUrl.url }" target="${secNav.navUrl.target }">
+                    		<a href="${secNav.navUrl.url }" target="${secNav.navUrl.target }" >
 			               		<img src="${secNav.navIcon}" alt="${secNav.navName}">
 			               		<p>${secNav.navName}</p>
 			               		<span class="new-arrow"></span>
