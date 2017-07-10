@@ -74,7 +74,11 @@
 												<td>${d.name }</td>
 												<td>${d.role.name }</td>
 												<td>${d.department.name }</td>
-												<td>${d.status.name }</td>
+												<td>
+													<span 
+														<c:if test="${d.status eq 'OPEN'}">class="info-status info-status-blue"</c:if>
+													>${d.status.name }</span>
+												</td>
 												<td><fmt:formatDate value="${d.createDate}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 												<td>
 												<shiro:hasPermission name="user:update">

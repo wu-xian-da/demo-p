@@ -104,8 +104,9 @@ public class Page<T> {
 				continue;
 			}
 			
-			FormQuery query = field.getAnnotation(FormQuery.class);
-			if (query != null) {
+			//AbstractProcessor
+			if (field.isAnnotationPresent(FormQuery.class)) {
+				FormQuery query = field.getAnnotation(FormQuery.class);
 				String[] keys = query.value();
 				if (keys == null || keys.length == 0) {//简单属性
 					this.converObjToString(params,field.getName(),fieldValue);
