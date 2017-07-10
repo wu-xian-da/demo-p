@@ -81,7 +81,7 @@ public class MenuController extends BaseController{
             super.addMessage(attrs,MessageStatus.SUC, "菜单删除成功");
         }
         catch(Exception e){
-            super.addMessage(attrs,MessageStatus.ERROR, "当前菜单已绑定角色，请先解除绑定");
+            super.addMessage(attrs,MessageStatus.ERROR, "当前菜单已绑定角色或子菜单，请先解除绑定");
         }
         return "redirect:/sys/system/menu";
     }

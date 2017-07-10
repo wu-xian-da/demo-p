@@ -79,10 +79,10 @@ public class DepartmentController extends BaseController{
 			if (result > 0) {
 				super.addMessage(attrs, "部门删除成功");
 			} else {
-				super.addMessage(attrs, MessageStatus.ERROR, "删除失败,当前部门下有用户");
+				super.addMessage(attrs, MessageStatus.ERROR, "删除失败,当前部门下有用户或有子部门");
 			}
 		} catch (Exception e) {
-			super.addMessage(attrs, MessageStatus.ERROR, "删除失败,当前部门下有用户");
+			super.addMessage(attrs, MessageStatus.ERROR, "删除失败,当前部门下有用户或有子部门");
 		}
         return "redirect:/sys/system/department";
     }

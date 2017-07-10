@@ -29,7 +29,8 @@
 	
 	<delete id="delete">
 		delete from t_department a where a.id=#{id}
-		and NOT EXISTS (SELECT id FROM t_user where department_id=a.id)
+		ANS NOT EXISTS (SELECT id FROM t_user where department_id=a.id)
+		ANS NOT EXISTS (SELECT x.id FROM t_department x where a.id=x.parent_id)
 	</delete>
 	
 	<update id="update">
