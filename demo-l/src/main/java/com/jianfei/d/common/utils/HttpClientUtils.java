@@ -66,18 +66,14 @@ public class HttpClientUtils {
 		HttpProtocolParams.setUserAgent(params, "HttpComponents/1.1");
 		HttpProtocolParams.setUseExpectContinue(params, true);
 		
-		params.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,
-				REQUEST_TIMEOUT);
+		params.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,REQUEST_TIMEOUT);
 		params.setParameter(CoreConnectionPNames.SO_TIMEOUT, SO_TIMEOUT);
-		params.setParameter(ClientPNames.CONN_MANAGER_TIMEOUT,
-				CONN_MANAGER_TIMEOUT);
+		params.setParameter(ClientPNames.CONN_MANAGER_TIMEOUT,CONN_MANAGER_TIMEOUT);
 
 		// 设置访问协议
 		SchemeRegistry schreg = new SchemeRegistry();
-		schreg.register(new Scheme("http", 80, PlainSocketFactory
-				.getSocketFactory()));
-		schreg.register(new Scheme("https", 443, SSLSocketFactory
-				.getSocketFactory()));
+		schreg.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
+		schreg.register(new Scheme("https", 443, SSLSocketFactory.getSocketFactory()));
 
 		// 多连接的线程安全的管理器
 		PoolingClientConnectionManager pccm = new PoolingClientConnectionManager(
@@ -181,39 +177,8 @@ public class HttpClientUtils {
 		HttpPost post = new HttpPost(url);
 		HttpEntity entityRos = null;
 		try {
-			StringEntity s = new StringEntity(jsonStr);  
-            s.setContentEncoding("UTF-8");  
-            s.setContentType("application/json");  
-            post.setEntity(s);  
-			// 发送请求
-			HttpResponse httpResponse = httpClient.execute(post);
-			// 获取返回数据
-			entityRos = httpResponse.getEntity();
-			result = EntityUtils.toString(entityRos, Consts.UTF_8);
-		} catch (UnsupportedEncodingException e) {
-			logger.error("参数异常******", e);
-		} catch (ClientProtocolException e) {
-			logger.error("ClientProtocol异常******", e);
-		} catch (IOException e) {
-			logger.error("IO异常******", e);
-		} catch (Exception e) {
-			logger.error("异常******", e);
-		} finally {
-			EntityUtils.consumeQuietly(entityRos);
-			post.releaseConnection();
-		}
-		return result;
-	}
-	
-	public static String testGY(String url,  String jsonStr) {
-		String result = null;
-		HttpPost post = new HttpPost(url);
-		
-		HttpEntity entityRos = null;
-		try {
-			StringEntity s = new StringEntity(jsonStr);  
-            s.setContentEncoding("UTF-8");  
-            s.setContentType("application/json");  
+			StringEntity s = new StringEntity(jsonStr,"UTF-8");  
+            s.setContentType("application/json");    
             post.setEntity(s);  
 			// 发送请求
 			HttpResponse httpResponse = httpClient.execute(post);
