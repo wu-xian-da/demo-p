@@ -24,6 +24,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.jianfei.d.common.vo.AccessTokenResultVO;
 import com.jianfei.d.common.vo.AddMaterialResultVO;
 import com.jianfei.d.common.vo.MassSendAllResultVO;
+import com.jianfei.d.common.vo.MediaUploadResultVO;
 import com.jianfei.d.common.vo.UploadImgResultVO;
 import com.jianfei.d.common.vo.UploadNewsResultVO;
 
@@ -38,6 +39,9 @@ public class WeChatMsgSendUtils {
 	
 	//获取授权URL
 		private static final String GET_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token";
+		
+		//上传临时素材URL
+		private static final String MEDIA_UPLOAD_URL = "https://api.weixin.qq.com/cgi-bin/media/upload";
 		
 		//上传永久素材URL
 		private static final String MATERIAL_ADD_MATERIAL_URL = "https://api.weixin.qq.com/cgi-bin/material/add_material";
@@ -74,6 +78,33 @@ public class WeChatMsgSendUtils {
 			
 			if(null != accessTokenResult && StringUtils.isNotBlank(accessTokenResult.getAccess_token())){
 				return accessTokenResult.getAccess_token();
+			}else{
+				return "";
+			}
+		}
+		
+		/******
+		 * 上传临时素材
+		 * @param accessToken 授权码
+		 * @param absoluteMeterialPath  素材绝对路径
+		 * @param type 媒体文件类型，分别有图片（image）、语音（voice）、视频（video）和缩略图（thumb）
+		 * @return thumb_media_id 新增的临时素材的thumb_media_id
+		 */
+		public static String mediaUpload(String accessToken, String meterialAbsolutePath, String type){
+			MediaUploadResultVO mediaUploadResult = null;
+			String url = MEDIA_UPLOAD_URL + "?access_token="+accessToken+"&type="+type;
+			String result = postImgFile(url, meterialAbsolutePath);
+			
+			if(StringUtils.isNotBlank(result)){
+				try{
+					mediaUploadResult = JSONObject.parseObject(result, MediaUploadResultVO.class);
+				}catch(Exception e){
+					logger.error("wechat media upload result parse error:::" + e);
+					logger.error("wechat media upload result:::" + result);
+				}
+			}
+			if(null != mediaUploadResult && StringUtils.isNotBlank(mediaUploadResult.getThumb_media_id())){
+				return mediaUploadResult.getThumb_media_id();
 			}else{
 				return "";
 			}
