@@ -86,7 +86,7 @@ public class InfoPushService extends CrudService<InfoPushDao, InfoPush> {
 				}
 			}
 			
-			newsMediaId = WeChatMsgSendUtils.uploadNews(accessToken, infoPush.getInfoName(), thumbMediaId, showCoverPic, "", htmlCodes, "");
+			newsMediaId = WeChatMsgSendUtils.uploadNews(accessToken, infoPush.getInfoName(), thumbMediaId, showCoverPic, "","", htmlCodes, "");
 			if(StringUtils.isBlank(newsMediaId)){
 				return 10004;
 			}
