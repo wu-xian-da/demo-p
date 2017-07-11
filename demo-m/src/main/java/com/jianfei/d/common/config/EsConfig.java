@@ -24,9 +24,13 @@ import com.jianfei.d.common.utils.JodaUtil;
 @Component
 public class EsConfig {
     
-    private static final String URL = "/%s/%s/_search?size=%d";
+    public static final String AUTH_PREFIX = "/log/auth/";
+    
+    private static final String URL = "/%s/%s/_search?from=%d&size=%d";
     
     private static final String DATE_PATTERN = "yyyy.MM.dd";
+    
+    private static final int DEFAULT_FROM = 0;
     
     private static final int DEFAULT_SIZE = 0;
     
@@ -53,31 +57,31 @@ public class EsConfig {
     private int dayNum;
     
     public String getUrl(){
-        return this.getUrl(DEFAULT_SIZE);
+        return this.getUrl(DEFAULT_FROM,DEFAULT_SIZE);
     }
     
-    public String getUrl(int size){
+    public String getUrl(int from, int size){
         String date = JodaUtil.format(new Date(), DATE_PATTERN);
-        return this.getUrl(size, this.indexNamePrefix + date);
+        return this.getUrl(from, size, this.indexNamePrefix + date);
     }
     
     public String getUrl(String day){
         if(StringUtils.isBlank(day)){
             return this.getUrl();
         }
-        return this.getUrl(DEFAULT_SIZE, this.indexNamePrefix + day);
+        return this.getUrl(DEFAULT_FROM, DEFAULT_SIZE, this.indexNamePrefix + day);
     }
     
-    public String getUrl(int size, int days){
+    public String getUrl(int days){
         List<String> indexs = new ArrayList<String>();
         for(int i = days - 1; i >= 0; i--){
             indexs.add(this.indexNamePrefix + JodaUtil.getMinusDays(i, DATE_PATTERN));
         }
-        return this.getUrl(size, StringUtils.join(indexs, ","));
+        return this.getUrl(DEFAULT_FROM, DEFAULT_SIZE, StringUtils.join(indexs, ","));
     }
     
-    public String getUrl(int size, String indexName){
-        return String.format(URL, indexName, this.typeName, size);
+    public String getUrl(int from, int size, String indexName){
+    	return String.format(URL, indexName, this.typeName, from, size);
     }
     
     public HttpHost[] getHttpHosts(){
@@ -97,10 +101,5 @@ public class EsConfig {
         HttpHost []arrayHost = new HttpHost[hosts.size()];
         return hosts.toArray(arrayHost);
     }
-
-	public String getUrl(int i, int j, String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
 

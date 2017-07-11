@@ -60,6 +60,7 @@ public class ElasticsearchRestService {
             
             if(response.getStatusLine().getStatusCode() < 300){
                 String responseJson = EntityUtils.toString(response.getEntity(), Constants.ENCODING);
+                System.out.println(responseJson);
                 return JSON.parseObject(responseJson, c);
             }
         }

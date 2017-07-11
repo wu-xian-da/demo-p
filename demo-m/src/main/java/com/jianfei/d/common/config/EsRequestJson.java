@@ -45,14 +45,14 @@ public class EsRequestJson {
     
     
     public static final String AUTH_LIST = "{"
-            + "\"query\": "
-            + "{\"bool\": {"
-                + "\"should\":["
+            + "\"query\": {"
+            	+ "\"bool\": {"
+                	+ "\"should\":["
                         + "{\"match\": {\"url\": {\"query\": \"/log/auth/sms\", \"operator\": \"and\"}}},"
                         + "{\"match\": {\"url\": {\"query\": \"/log/auth/wx\", \"operator\": \"and\"}}}"
-                   + "]"
-               + "}"
-        + "}}";
+                    + "]"
+               + ", \"must\": {\"regexp\": {\"url\": {\"value\": \".*13855178829.*\"}}}"
+        + "}}}";
     
     
     
@@ -61,9 +61,9 @@ public class EsRequestJson {
             + "\"entirys\": {"
                 + "\"adjacency_matrix\": {"
                     + "\"filters\": {"
-                    + "\"wx\": "
+                    + "\"微信\": "
                         + "{\"match\": {\"url\": {\"query\": \"/log/auth/wx\", \"operator\": \"and\"}}},"
-                    + "\"sms\": "
+                    + "\"短信\": "
                         + "{\"match\": {\"url\": {\"query\": \"/log/auth/sms\", \"operator\": \"and\"}}}"
                     + "}"
                 + "}"

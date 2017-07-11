@@ -18,11 +18,11 @@ public class JodaUtil extends DateUtils {
 	
 	private final static String YYYY_MM_DD = "yyyy-MM-dd";
 	
-	private final static String YYYY_MM_DDHH_mm_ss = "yyyy-MM-dd HH:mm:ss";
+	public final static String YYYY_MM_DDHH_mm_ss = "yyyy-MM-dd HH:mm:ss";
+	
+	public final static String HHMMSS_START = "00:00:00";
 
-	public static String HHMMSS_START;
-
-	public static String HHMMSS_END;
+	public final static String HHMMSS_END = "23:59:59";
 	
 	public static Date parseDate(String dateStr){
 		DateTime dt = DateTime.parse(dateStr);

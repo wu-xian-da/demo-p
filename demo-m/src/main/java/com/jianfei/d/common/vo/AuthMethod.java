@@ -5,27 +5,40 @@
   */
 package com.jianfei.d.common.vo;
 
+import com.jianfei.d.common.config.EsConfig;
+
 import lombok.Getter;
 
 @Getter
 public enum AuthMethod {
 
-	SMS("短信认证"),WX("微信认证");
+	SMS("sms","短信认证"),WX("wx","微信认证");
 	
 	private String name;
 
+	private String key;
+	
+	private String value;
+	
+	AuthMethod(String key, String value){
+		this.key = key;
+		this.value = value;
+    }
+	
 	private AuthMethod(String name) {
 		this.name = name;
 	}
 
-	public String getKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public static AuthMethod getAuthMethodByUrl(String url) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public static AuthMethod getAuthMethodByUrl(String url){
+        if(url == null){
+            return null;
+        }
+        for(AuthMethod method : AuthMethod.values()){
+            if(url.startsWith(EsConfig.AUTH_PREFIX + method.getKey())){
+                return method;
+            }
+        }
+        return null;
+    }
 	
 }

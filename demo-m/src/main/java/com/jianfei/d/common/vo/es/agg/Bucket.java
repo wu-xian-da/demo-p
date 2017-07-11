@@ -30,7 +30,7 @@ public class Bucket {
         int _indexChar = key.indexOf(".");
         if(_indexChar > 0){
             String date = key.substring(_indexChar + 1);
-            return date.replaceAll(".", "月") + "日";
+            return date.replace(".", "月") + "日";
         }
         return null;
     }
