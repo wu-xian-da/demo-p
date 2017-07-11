@@ -9,11 +9,11 @@
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.jianfei.d.entity.common.MenuType"/>
 	</typeHandlers>
 
-	<objectFactory type="com.jianfei.d.base.interceptor.PageObjectFactory" />
-	<objectWrapperFactory type="com.jianfei.d.base.interceptor.PageObjectWrapperFactory" />
+	<objectFactory type="com.jianfei.d.base.mybatis.interceptor.PageObjectFactory" />
+	<objectWrapperFactory type="com.jianfei.d.base.mybatis.interceptor.PageObjectWrapperFactory" />
 	
 	<plugins>
-	    <plugin interceptor="com.jianfei.d.base.interceptor.PageInterceptor"></plugin>
+	    <plugin interceptor="com.jianfei.d.base.mybatis.interceptor.PageInterceptor"></plugin>
 	</plugins>
 	
 	<environments default="development">
