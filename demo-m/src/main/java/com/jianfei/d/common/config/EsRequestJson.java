@@ -1,0 +1,98 @@
+/**
+  *project demo-m
+  *@author changchun.wu
+  *2017年7月11日下午4:57:31
+  */
+package com.jianfei.d.common.config;
+
+public class EsRequestJson {
+    
+    public static final String DAY_HOUR = "{"
+                                + "\"query\": {\"match\": {\"url\": {"
+                                + "\"query\": \"/log/index\","
+                                + "\"operator\": \"and\""
+                            + "}"
+                            + "}},"
+                            + "\"aggs\": {"
+                                + "\"entirys\": {"
+                                    + "\"date_histogram\": {"+ 
+                                        "\"field\": \"@timestamp\","
+                                        + "\"interval\": \"2h\","
+                                        + "\"format\": \"HH\""
+                                    + "}"
+                                + "}"
+                            + "}"
+                            + "}";
+    
+    
+    
+    
+    public static final String DEVICE_TYPE = "{"
+                                            + "\"query\": {\"match\": {\"url\": {"
+                                            + "\"query\": \"/log/index\","
+                                            + "\"operator\": \"and\""
+                                        + "}"
+                                        + "}},"
+                                        + "\"aggs\": {"
+                                            + "\"entirys\": {"
+                                                + "\"terms\": {"+ 
+                                                    "\"field\": \"ua.device.keyword\","
+                                                    + "\"size\": 20"
+                                                + "}"
+                                            + "}"
+                                        + "}"
+                                        + "}";
+    
+    
+    public static final String AUTH_LIST = "{"
+            + "\"query\": "
+            + "{\"bool\": {"
+                + "\"should\":["
+                        + "{\"match\": {\"url\": {\"query\": \"/log/auth/sms\", \"operator\": \"and\"}}},"
+                        + "{\"match\": {\"url\": {\"query\": \"/log/auth/wx\", \"operator\": \"and\"}}}"
+                   + "]"
+               + "}"
+        + "}}";
+    
+    
+    
+    public static final String AUTH_METHODS = "{"
+            + "\"aggs\": {"
+            + "\"entirys\": {"
+                + "\"adjacency_matrix\": {"
+                    + "\"filters\": {"
+                    + "\"wx\": "
+                        + "{\"match\": {\"url\": {\"query\": \"/log/auth/wx\", \"operator\": \"and\"}}},"
+                    + "\"sms\": "
+                        + "{\"match\": {\"url\": {\"query\": \"/log/auth/sms\", \"operator\": \"and\"}}}"
+                    + "}"
+                + "}"
+            + "}"
+        + "}"
+        + "}";
+    
+    
+    public static final String DAY_RANGE = "{" + 
+                                            "\"query\": {" +
+                                            "\"match\": {"
+                                                + "\"url\": {"
+                                                    + "\"query\": \"/log/index\", "
+                                                    + "\"operator\": \"and\""
+                                                + "}"
+                                            + "}"
+                                      + "},"
+                                     + "\"aggs\": {"
+                                         + "\"entirys\": {"
+                                             + "\"terms\": {"
+                                                 + "\"field\": \"_index\","
+                                                 + "\"size\": 15,"
+                                                 + "\"order\": {"
+                                                     + "\"_term\": \"asc\""
+                                                 + "}"
+                                                 + "}"
+                                           + "}"
+                                     + "}"
+                                   + "}";
+    
+}
+
