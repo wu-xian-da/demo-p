@@ -9,6 +9,7 @@ import java.util.Date;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 /**
  * 日期工具类
@@ -66,6 +67,20 @@ public class JodaUtil extends DateUtils {
 		DateTime dt = new DateTime(new Date());
 		return dt.toString("dd");
 	}
+	
+	public static String getMinusDays(int days, String pattren) {  
+        DateTime dt = new DateTime(new Date());
+        if(days == 0){
+            return dt.toString(pattren);
+        }
+        
+        DateTime minDay = dt.minusDays(days);
+       return minDay.toString(pattren);
+    }
+    
+    public static int getDays(String start, String end) {  
+        return Days.daysBetween(DateTime.parse(start), DateTime .parse(end)).getDays();
+    }
 	
 	public static void main(String[] args) {
 		System.out.println(formatHHmmss(getMorning(new Date())));
