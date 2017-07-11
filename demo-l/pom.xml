@@ -152,13 +152,21 @@
   	<dependency>
   		<groupId>org.apache.httpcomponents</groupId>
   		<artifactId>httpclient</artifactId>
-  		<exclusions>
-  			<exclusion>
-  				<groupId>commons-logging</groupId>
-  				<artifactId>commons-longging</artifactId>
-  			</exclusion>
-  		</exclusions>
   	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.apache.httpcomponents</groupId>
+  		<artifactId>httpcore</artifactId>
+  	</dependency>
+  	
+  	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpasyncclient</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpcore-nio</artifactId>
+	</dependency>
   	
   	<dependency>
   		<groupId>junit</groupId>
