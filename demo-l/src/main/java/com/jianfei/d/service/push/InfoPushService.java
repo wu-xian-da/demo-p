@@ -62,16 +62,15 @@ public class InfoPushService extends CrudService<InfoPushDao, InfoPush> {
 			if(InfoPushType.TPXW.equals(infoPush.getInfoType())){
 				//封面图片
 				thumbMediaId = WeChatMsgSendUtils.mediaUpload(accessToken, baseURL+infoPush.getInfoImg() , "thumb");
-					if(StringUtils.isBlank(thumbMediaId)){
-						return 10002;
-					}
-				}else{
-					//封面图片无
-					showCoverPic = 0;
-					thumbMediaId = WeChatMsgSendUtils.mediaUpload(accessToken, baseURL+"/static/img/no_pic.png" , "thumb");
-					if(StringUtils.isBlank(thumbMediaId)){
-						return 10002;
-					}
+				if(StringUtils.isBlank(thumbMediaId)){
+					return 10002;
+				}
+			}else{
+				//封面图片无
+				showCoverPic = 0;
+				thumbMediaId = WeChatMsgSendUtils.mediaUpload(accessToken, baseURL+"/static/img/thumb_pic_default.jpg" , "thumb");
+				if(StringUtils.isBlank(thumbMediaId)){
+					return 10002;
 				}
 			}
 			
@@ -87,7 +86,7 @@ public class InfoPushService extends CrudService<InfoPushDao, InfoPush> {
 				}
 			}
 			
-			newsMediaId = WeChatMsgSendUtils.uploadNews(accessToken, infoPush.getInfoName(), thumbMediaId, showCoverPic, "", "", htmlCodes, "");
+			newsMediaId = WeChatMsgSendUtils.uploadNews(accessToken, infoPush.getInfoName(), thumbMediaId, showCoverPic, "", htmlCodes, "");
 			if(StringUtils.isBlank(newsMediaId)){
 				return 10004;
 			}
