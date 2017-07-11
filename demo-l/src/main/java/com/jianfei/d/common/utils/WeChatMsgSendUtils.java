@@ -27,6 +27,7 @@ import com.jianfei.d.common.vo.MassSendAllResultVO;
 import com.jianfei.d.common.vo.MediaUploadResultVO;
 import com.jianfei.d.common.vo.UploadImgResultVO;
 import com.jianfei.d.common.vo.UploadNewsResultVO;
+import com.jianfei.d.common.utils.HttpClientUtils;
 
 
 public class WeChatMsgSendUtils {
@@ -177,23 +178,16 @@ public class WeChatMsgSendUtils {
 	 * @param contentSourceUrl 图文消息的原文地址，即点击“阅读原文”后的URL
 	 * @return media_id 媒体文件/图文消息上传后获取的唯一标识
 	 */
-	public static String uploadNews(String accessToken, String title, String imgMediaId, String author, String digest, String content, String contentSourceUrl){
+	public static String uploadNews(String accessToken, String title, String thumbMediaId, int showCoverPic, String author, String digest, String content, String contentSourceUrl){
 		UploadNewsResultVO uploadNewsResult = null;
 		
 		StringBuffer body = new StringBuffer("{\"articles\": [{");
 			body.append("\"title\":").append("\"" + title + "\"");
 			body.append(",");
-			if(StringUtils.isNotBlank(imgMediaId)){
-				body.append("\"thumb_media_id\":").append("\"" + imgMediaId + "\"");
-				body.append(",");
-				body.append("\"show_cover_pic\":").append(1);//展示封面素材
-				body.append(",");
-			}else{
-				body.append("\"thumb_media_id\":").append("\"" + "" + "\"");
-				body.append(",");
-				body.append("\"show_cover_pic\":").append(0);//不展示封面素材
-				body.append(",");
-			}
+			body.append("\"thumb_media_id\":").append("\"" + thumbMediaId + "\"");
+			body.append(",");
+			body.append("\"show_cover_pic\":").append(showCoverPic);//展示封面素材
+			body.append(",");
 			body.append("\"author\":").append("\"" + author + "\"");
 			body.append(",");
 			body.append("\"digest\":").append("\"" + digest + "\"");
@@ -201,10 +195,8 @@ public class WeChatMsgSendUtils {
 			body.append("\"content\":").append("\"" + content + "\"");
 			body.append(",");
 			body.append("\"content_source_url\":").append("\"" + contentSourceUrl + "\"");
-		body.append("},]}");
+		body.append("}]}");
 		String result = HttpClientUtils.post(MEDIA_UPLOAD_NEWS_URL + "?access_token=" + accessToken, body.toString());
-		System.out.println("uploadNews body = " + body.toString());
-		System.out.println("uploadNews result = " + result);
 		
 		if(StringUtils.isNotBlank(result)){
 			try{
@@ -353,7 +345,7 @@ public class WeChatMsgSendUtils {
 		System.out.println("htmlCodes=" + htmlCodes);
 		//替换文本中的图片路径 end
 		
-		String newsMediaId = uploadNews(accessToken, "标题", imgMediaId, "作者", "摘要", "内容", "http://www.baidu.com");
+		String newsMediaId = uploadNews(accessToken, "标题", imgMediaId, 1,"作者", "摘要", "内容", "http://www.baidu.com");
 		System.out.println("newsMediaId=" + newsMediaId);
 		
 		boolean flag = msgMassSendAll(accessToken, newsMediaId);
