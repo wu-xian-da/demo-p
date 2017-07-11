@@ -152,7 +152,7 @@
       </foreach>
   </update>
   
-  <select id="getListByIds">
+  <select id="getListByIds" resultType="com.jianfei.d.entity.info.ImgNews">
   	select 
     	<include refid="Base_Column_List" />
     from tb_img_news n

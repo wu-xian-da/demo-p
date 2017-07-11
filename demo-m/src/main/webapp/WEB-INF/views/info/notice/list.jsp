@@ -56,6 +56,7 @@
 				<shiro:hasPermission name="info:notice:shtg">
 				<button type="button" class="btn btn-gy btn-adpot" id="noticeSHTG"><span class="glyphicon glyphicon-ok"></span>上刊</button>
 				</shiro:hasPermission>
+				<button id="noticePush" type="button" class="btn btn-gy btn-push"><i></i>信息推送</button>
 				<shiro:hasPermission name="info:notice:add">
 				<a href="${base}/sys/info/notice/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
 				</shiro:hasPermission>
@@ -78,7 +79,10 @@
 						<c:forEach items="${page.data }" var="notice">
 							<tr>
 								<td><input type="checkbox" name="noticeCheck" data-id="${notice.id}"></td>
-								<td>${notice.title}</td>
+								<td>
+									${notice.title}
+									<c:if test="${notice.pushStatus eq 'YTS'}"><span class="glyphicon glyphicon-open"></span></c:if>
+								</td>
 								<td><fmt:formatDate value="${notice.checkTime}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 								<td>
 									<span
@@ -182,6 +186,20 @@
 				notices.push("notices[" + i + "].id=" + $(this).data("id"));
 			});
 			window.location.href = "${base}/sys/info/notice/check/shtg?" + notices.join('&');
+		});
+		
+		// 批量推送
+		$('#noticePush').on("click", function(){
+			var checkArr = $('input[name=noticeCheck]:checked');
+			if(checkArr.length == 0){
+				alert("请勾选需要操作的数据");
+				return;
+			}
+			var notices = [];
+			checkArr.each(function(i){
+				notices.push("notices[" + i + "].id=" + $(this).data("id"));
+			});
+			window.location.href = "${base}/sys/info/notice/push?" + notices.join('&');
 		});
 		
 	});

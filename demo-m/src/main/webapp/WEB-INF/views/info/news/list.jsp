@@ -62,6 +62,7 @@
 				<shiro:hasPermission name="info:news:shtg">
 				<button id="newSHTG" type="button" class="btn btn-gy btn-adpot"><span class="glyphicon glyphicon-ok"></span>上刊</button>
 				</shiro:hasPermission>
+				<button id="newsPush" type="button" class="btn btn-gy btn-push"><i></i>信息推送</button>
 				<shiro:hasPermission name="info:news:add">
 				<a href="${base }/sys/info/news/create" class="btn btn-gy btn-add"><span class="glyphicon glyphicon-plus-sign"></span>新增</a>
 				</shiro:hasPermission>
@@ -84,7 +85,10 @@
 						<c:forEach items="${page.data }" var="news">
 							<tr>
 								<td><input type="checkbox" name="newsCheck" data-id="${news.id }"></td>
-								<td>${news.title }</td>
+								<td>
+									${news.title }
+									<c:if test="${news.pushStatus eq 'YTS'}"><span class="glyphicon glyphicon-open"></span></c:if>
+								</td>
 								<td>
 								    <c:choose>
 								    	<c:when test="${not empty news.imgPath }">
@@ -209,6 +213,20 @@
 				newss.push("imgNewss[" + i + "].id=" + $(this).data("id"));
 			});
 			window.location.href = "${base}/sys/info/news/check/shtg?" + newss.join('&');
+		});
+		
+		// 批量推送
+		$('#newsPush').on("click", function(){
+			var checkArr = $('input[name=newsCheck]:checked');
+			if(checkArr.length == 0){
+				alert("请勾选需要操作的数据");
+				return;
+			}
+			var newss = [];
+			checkArr.each(function(i){
+				newss.push("imgNewss[" + i + "].id=" + $(this).data("id"));
+			});
+			window.location.href = "${base}/sys/info/news/push?" + newss.join('&');
 		});
 	});
 </script>

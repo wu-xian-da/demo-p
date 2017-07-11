@@ -132,7 +132,7 @@
       </foreach>
   </update>
   
-  <select id="getListByIds">
+  <select id="getListByIds" resultType="com.jianfei.d.entity.info.Notice">
   	select <include refid="Base_Column_List" />
     from tb_notice n
     where n.id in

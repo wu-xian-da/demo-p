@@ -94,7 +94,7 @@
 						上刊
 					</button>
 				</shiro:hasPermission>
-				
+				<button id="navInfoPush" type="button" class="btn btn-gy btn-push"><i></i>信息推送</button>
 				<shiro:hasPermission name="info:navinfo:add">
 					<a href="${base }/sys/info/ninfo/create" class="btn btn-gy btn-add">
 						<span class="glyphicon glyphicon-plus-sign"></span>
@@ -124,6 +124,7 @@
 								<td><input type="checkbox" name="infoCheck" data-id="${navInfo.id }"></td>
 								<td>
 									${navInfo.title }
+									<c:if test="${navInfo.pushStatus eq 'YTS'}"><span class="glyphicon glyphicon-open"></span></c:if>
 								</td>
 								<td>${navInfo.navBase.navName }</td>
 								<!-- 2017-04-20 17:25 注释，原因：目前不需要此字段
@@ -246,6 +247,20 @@ $(function(){
 		});
 		window.location.href = "${base}/sys/info/ninfo/check/shtg?" + infos.join('&');
 	});
+	
+	//批量推送
+	$('#navInfoPush').on("click", function(){
+		var checkArr = $('input[name=infoCheck]:checked');
+		if(checkArr.length == 0){
+			alert("请勾选需要操作的数据");
+			return;
+		}
+		var infos = [];
+		checkArr.each(function(i){
+			infos.push("infos[" + i + "].id=" + $(this).data("id"));
+		});
+		window.location.href = "${base}/sys/info/ninfo/push?" + infos.join('&');
+	});
 });
 
 $(document).ready(function(){
@@ -260,4 +275,6 @@ $(document).ready(function(){
 	    toolbar: false
 	});
 });
+
+
 </script>

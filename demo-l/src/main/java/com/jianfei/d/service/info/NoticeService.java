@@ -5,17 +5,41 @@
   */
 package com.jianfei.d.service.info;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jianfei.d.base.service.CrudService;
 import com.jianfei.d.dao.info.NoticeDao;
+import com.jianfei.d.dao.push.InfoPushDao;
+import com.jianfei.d.entity.common.InfoPushStatus;
+import com.jianfei.d.entity.common.InfoPushType;
 import com.jianfei.d.entity.common.InfoStatus;
 import com.jianfei.d.entity.info.Notice;
+import com.jianfei.d.entity.push.InfoPush;
 
 @Service
 public class NoticeService extends CrudService<NoticeDao, Notice> {
+	
+	@Autowired
+	private InfoPushDao infoPushDao;
+	
+	private List<InfoPush> dealPushData(List<Notice> noticeList){
+		List<InfoPush> infoPushList = new ArrayList<InfoPush>();
+		InfoPush infoPush = null;
+		for (Notice notice : noticeList) {
+			notice.setPushStatus(InfoPushStatus.YTS);
+			
+			infoPush = new InfoPush();
+			infoPush.setInfoName(notice.getTitle());
+			infoPush.setInfoType(InfoPushType.TZGG);
+			infoPush.setInfoContent(notice.getContent());
+			infoPushList.add(infoPush);
+		}
+		return infoPushList;
+	}
 	
 	/***
 	 * 批量修改状态
@@ -32,7 +56,10 @@ public class NoticeService extends CrudService<NoticeDao, Notice> {
 	 * @return
 	 */
 	public int updateNoticePushStatusBatch(List<Notice> notices){
-		return this.dao.updateNoticePushStatusBatch(notices);
+		List<Notice> noticeList = this.dao.getListByIds(notices);
+		infoPushDao.insertBatch(this.dealPushData(noticeList));
+		this.dao.updateNoticePushStatusBatch(noticeList);
+		return 1;
 	}
 	
 	/******

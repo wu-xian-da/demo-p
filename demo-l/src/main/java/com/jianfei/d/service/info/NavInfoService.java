@@ -5,19 +5,43 @@
   */
 package com.jianfei.d.service.info;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jianfei.d.base.service.CrudService;
 import com.jianfei.d.dao.info.NavInfoDao;
+import com.jianfei.d.dao.push.InfoPushDao;
+import com.jianfei.d.entity.common.InfoPushStatus;
+import com.jianfei.d.entity.common.InfoPushType;
 import com.jianfei.d.entity.common.InfoStatus;
 import com.jianfei.d.entity.info.NavInfo;
+import com.jianfei.d.entity.push.InfoPush;
 
 @Service
 public class NavInfoService extends CrudService<NavInfoDao, NavInfo> {
+	
+	@Autowired
+	private InfoPushDao infoPushDao;
+	
+	private List<InfoPush> dealPushData(List<NavInfo> navInfoList){
+		List<InfoPush> infoPushList = new ArrayList<InfoPush>();
+		InfoPush infoPush = null;
+		for(NavInfo navInfo : navInfoList){
+			navInfo.setPushStatus(InfoPushStatus.YTS);
+			
+			infoPush = new InfoPush();
+			infoPush.setInfoName(navInfo.getTitle());
+			infoPush.setInfoType(InfoPushType.LMWZ);
+			infoPush.setInfoContent(navInfo.getContent());
+			infoPushList.add(infoPush);
+		}
+		return infoPushList;
+	}
 	
 	/***
 	 * 获取某一栏目下的栏目信息
@@ -37,8 +61,16 @@ public class NavInfoService extends CrudService<NavInfoDao, NavInfo> {
 		return this.dao.updateNavInfoStatusBatch(navInfo);
 	}
 	
+	/****
+	 * 批量修改推送状态
+	 * @param navInfos
+	 * @return
+	 */
 	public int updateNavInfoPushStatusBatch(List<NavInfo> navInfos){
-		return this.dao.updateNavInfoPushStatusBatch(navInfos);
+		List<NavInfo> navInfoList = this.dao.getListByIds(navInfos);
+		infoPushDao.insertBatch(this.dealPushData(navInfoList));
+		this.dao.updateNavInfoPushStatusBatch(navInfoList);
+		return 1;
 	}
 	
 	/****

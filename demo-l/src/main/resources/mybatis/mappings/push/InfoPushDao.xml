@@ -16,7 +16,7 @@
   </sql>
   
   <insert id="insert" parameterType="com.jianfei.d.entity.push.InfoPush" >
-    insert into tb_push_info
+    insert into tb_info_push
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="infoName != null" >
         info_name,
@@ -72,20 +72,20 @@
   </insert>
   
   <insert id="insertBatch">
-  	 INSERT INTO insert into tb_push_info(info_name, info_type, info_content, push_status)
+  	 INSERT INTO tb_info_push(info_name, info_type,info_img, info_content, push_status)
 	 VALUES 
 	 <foreach collection="list" item="item" separator=",">
-		(#{item.info_name}, #{item.info_type}, #{item.info_content}, #{item.push_status})
+		(#{item.infoName}, #{item.infoType},#{item.infoImg}, #{item.info_content}, #{item.push_status})
 	 </foreach>
   </insert>
   
   <delete id="delete" parameterType="java.lang.Long" >
-    delete from tb_push_info
+    delete from tb_info_psuh
     where id = #{id}
   </delete>
   
   <update id="update" parameterType="com.jianfei.d.entity.push.InfoPush" >
-    update tb_push_info
+    update tb_info_push
     <set >
       <if test="infoName != null" >
         info_name = #{infoName},
@@ -118,19 +118,23 @@
   <select id="get" resultType="com.jianfei.d.entity.push.InfoPush" parameterType="java.lang.Long" >
     select 
     	<include refid="Base_Column_List" />
-    from tb_push_info
+    from tb_info_push
     where id = #{id}
   </select>
   
   <select id="findPage" resultType="com.jianfei.d.entity.push.InfoPush" >
     select 
     	<include refid="Base_Column_List" />
-    from tb_push_info pi
+    from tb_info_push pi
+    where 1 = 1
     <if test="null != infoName">
     	and pi.info_name like CONCAT('%',#{infoName},'%') 
     </if>
     <if test="null != infoType">
     	and pi.info_type = #{infoType}
+    </if>
+    <if test="null != pushRange">
+    	and pi.push_range = #{pushRange}
     </if>
     <if test="null != pushStatus">
     	and pi.push_status = #{pushStatus}
@@ -151,8 +155,11 @@
   </select>
 
 	<update id="updatePushStatusById" parameterType="java.util.Map" >
-	    update tb_push_info
+	    update tb_info_push
 	    <set >
+    	  <if test="pushRange != null">
+    		push_range = #{pushRange},
+    	  </if>
 	      <if test="pushStatus != null" >
 	        push_status = #{pushStatus},
 	      </if>

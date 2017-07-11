@@ -174,6 +174,25 @@ public class ImgNewsController extends BaseController{
 		return "redirect:/sys/info/news";
 	}
 	
+	/***
+	 * 推送模块
+	 * 批量推送
+	 * @param imgNews
+	 * @param attrs
+	 * @return
+	 */
+	@GetMapping("/push")
+	public String push(ImgNews imgNews,RedirectAttributes attrs){
+		imgNews.fileterImgNewss();
+		int result = imgNewsService.updateImgNewsPushStatusBatch(imgNews.getImgNews());
+		if (result > 0) {
+			super.addMessage(attrs, "批量推送成功");
+		} else {
+			super.addMessage(attrs, "批量推送失败,请重试!");
+		}
+		return "redirect:/sys/info/news";
+	}
+	
 	@GetMapping("/detail/{pid}")
 	public String detail(@PathVariable("pid") Long id,Model model){
 		model.addAttribute("news",imgNewsService.get(id));
@@ -187,4 +206,6 @@ public class ImgNewsController extends BaseController{
 		model.addAttribute("webBaseUrl",fileConfig.getWebBaseUrl().startsWith("http://")?fileConfig.getWebBaseUrl():"http://"+fileConfig.getWebBaseUrl());
 		return "info/news/list";
 	}
+	
+	
 }

@@ -173,6 +173,24 @@ public class NoticeController extends BaseController {
 		return "info/notice/detail";
 	}
 	
+	/****
+	 * 推送模块---批量推送
+	 * @param notice
+	 * @param attrs
+	 * @return
+	 */
+	@GetMapping("/push")
+	public String push(Notice notice,RedirectAttributes attrs){
+		notice.fileterNotices();
+		int result = noticeService.updateNoticePushStatusBatch(notice.getNotices());
+		if (result > 0) {
+			super.addMessage(attrs, "批量推送成功");
+		} else {
+			super.addMessage(attrs, "批量推送失败,请重试!");
+		}
+		return "redirect:/sys/info/notice";
+	}
+	
 	@RequestMapping
 	public String list(Model model,Notice notice){
 		setBases(model);

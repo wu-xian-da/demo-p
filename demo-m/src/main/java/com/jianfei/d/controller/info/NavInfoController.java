@@ -190,6 +190,24 @@ public class NavInfoController extends BaseController {
 		return "redirect:/sys/info/ninfo";
 	}
 	
+	/***
+	 * 推送模块---批量推送
+	 * @param navInfo
+	 * @param attrs
+	 * @return
+	 */
+	@GetMapping("/push")
+	public String push(NavInfo navInfo,RedirectAttributes attrs){
+		navInfo.fileterNavInfos();
+		int result = navInfoService.updateNavInfoPushStatusBatch(navInfo.getInfos());
+		if (result > 0) {
+			super.addMessage(attrs, "批量推送成功");
+		} else {
+			super.addMessage(attrs, "批量推送失败,请重试!");
+		}
+		return "redirect:/sys/info/ninfo";
+	}
+	
 	@GetMapping("/detail/{pid}")
 	public String detail(@PathVariable("pid") Long id,Model model){
 		setBases(model);
