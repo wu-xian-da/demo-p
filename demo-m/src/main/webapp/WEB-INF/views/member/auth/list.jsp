@@ -66,7 +66,7 @@
 												<td>${a.access.requestId }</td>
 												<td>${a.access.code }</td>
 												<td>
-													<fmt:formatDate value="${a.access.timestamp }" pattern="yyyy-MM-dd HH:mm" type="date" />
+													<fmt:formatDate value="${a.access.timestamp }" timeZone="GMT" pattern="yyyy-MM-dd HH:mm" type="date" />
 												</td>
 												<td>普通会员</td>
 												<td>${a.access.auth.value }</td>
