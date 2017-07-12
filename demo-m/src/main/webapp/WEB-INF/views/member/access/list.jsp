@@ -59,7 +59,6 @@
 			         data: {date:date},
 			         dataType: "json",
 			         success: function(data){
-			        	 console.log(data);
 			        	var list = data.aggs.entirys.buckets;
 			        	var everyDayData = formatData(list);
 						createPieChart("设备类型",everydayStatisticsChart,everyDayData);
@@ -86,7 +85,6 @@
 		});
 		
 		function createPieChart(title, chart, data){
-			console.log(data);
 			var option = {
 			    title : {
 			        text: title,
@@ -106,20 +104,26 @@
 			    legend: {
 			        orient: 'vertical',
 			        bottom:'0',
-			        right: '20',
+			        right: '0',
 			        data: data.title
 			    },
 			    series : [{
 			            name: '访问来源',
 			            type: 'pie',
 			            radius : '65%',
-			            center: ['30%', '55%'],
+			            center: ['34%', '55%'],
 			            label:{
 			            	normal:{
 			            		position:"outside",
 			            		formatter:"{d}%"
 			            	}
 			            },
+			            labelLine:{
+       		            	normal:{
+       		            		length2:5,
+       		            		length:10
+        	 	            }
+        	 	        },
 			            data: data.data
 			        }
 			    ]
@@ -249,7 +253,7 @@
 			            },
 			            data:[
 						<c:forEach items="${days.aggs.entirys.buckets }" var="b" varStatus="stat">
-							${b.count }<c:if test="${!stat.last }">,</c:if>
+							${days.aggs.entirys.buckets[startIndex - stat.index].count }<c:if test="${!stat.last }">,</c:if>
 						</c:forEach>
 			                  ]
 			        }
