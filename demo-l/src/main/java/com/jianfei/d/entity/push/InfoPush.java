@@ -31,6 +31,7 @@ public class InfoPush extends BaseEntity{
 
     private String infoImg;
 
+    @FormQuery
     private InfoPushStatus pushStatus = InfoPushStatus.DCL;
 
     private Date pushTime;

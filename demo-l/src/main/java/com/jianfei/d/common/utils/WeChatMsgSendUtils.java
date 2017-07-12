@@ -107,7 +107,12 @@ public class WeChatMsgSendUtils {
 		if(null != mediaUploadResult && StringUtils.isNotBlank(mediaUploadResult.getThumb_media_id())){
 			return mediaUploadResult.getThumb_media_id();
 		}else{
-			return "";
+			if (StringUtils.isNotBlank(result) && -1 != result.indexOf("40006")) {
+				//资源超过大小限制(64K)
+				return "meidaSizeError";
+			} else {
+				return "";
+			}
 		}
 	}
 	
@@ -220,7 +225,7 @@ public class WeChatMsgSendUtils {
 	 * @param mediaId
 	 */
 	
-	public static boolean msgMassSendAll(String accessToken, String newsMediaId){
+	public static String msgMassSendAll(String accessToken, String newsMediaId){
 		MassSendAllResultVO massSendAllResult = null;
 		
         //添加参数  
@@ -239,9 +244,12 @@ public class WeChatMsgSendUtils {
 		}
 		
 		if(null != massSendAllResult && (0 == massSendAllResult.getErrcode())){
-			return true;
-		}else{
-			return false;
+			return "yes";
+		} else if (null != massSendAllResult && (45028 == massSendAllResult.getErrcode())) {
+			//超过群发接口限制
+			return "limit";
+		} else{
+			return "no";
 		}
 	}
 	
@@ -348,8 +356,8 @@ public class WeChatMsgSendUtils {
 		String newsMediaId = uploadNews(accessToken, "标题", imgMediaId, 1,"作者", "摘要", "内容", "http://www.baidu.com");
 		System.out.println("newsMediaId=" + newsMediaId);
 		
-		boolean flag = msgMassSendAll(accessToken, newsMediaId);
-		if(flag){
+		String s = (String) msgMassSendAll(accessToken, newsMediaId);
+		if(s != null){
 			System.out.println("发送成功！");
 		}else{
 			System.out.println("发送失败！");

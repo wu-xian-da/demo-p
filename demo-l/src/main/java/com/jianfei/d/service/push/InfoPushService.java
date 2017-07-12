@@ -44,7 +44,7 @@ public class InfoPushService extends CrudService<InfoPushDao, InfoPush> {
 	 * 微信具体推送
 	 * @param pushId
 	 * @param pushRange
-	 * @return(10000:推送成功;10001:获取微信授权失败;10002:上传封面图片失败;10003:上传富文本中图片失败;10004:上传图文消息素材失败;10005:群发消息失败)
+	 * @return(10000:推送成功;10001:获取微信授权失败;10002:上传封面图片失败;10003:上传富文本中图片失败;10004:上传图文消息素材失败;10005:群发消息失败;10006:群发消息接口调用，超过次数限制;10007:封面资源文件大小超过限制;)
 	 */
 	public int push(Long pushId, String pushRange, String baseURL){
 		InfoPush infoPush = this.dao.get(pushId);
@@ -53,7 +53,7 @@ public class InfoPushService extends CrudService<InfoPushDao, InfoPush> {
 		int showCoverPic = 1;
 		String imgUrl = "";
 		String newsMediaId = "";
-		boolean flag = false;
+		String sendResult = "";
 		
 		String accessToken = WeChatMsgSendUtils.getAccessToken();
 		if(StringUtils.isBlank(accessToken)){
@@ -62,16 +62,20 @@ public class InfoPushService extends CrudService<InfoPushDao, InfoPush> {
 			if(InfoPushType.TPXW.equals(infoPush.getInfoType())){
 				//封面图片
 				thumbMediaId = WeChatMsgSendUtils.mediaUpload(accessToken, baseURL+infoPush.getInfoImg() , "thumb");
-				if(StringUtils.isBlank(thumbMediaId)){
-					return 10002;
-				}
+			
 			}else{
 				//封面图片无
 				showCoverPic = 0;
 				thumbMediaId = WeChatMsgSendUtils.mediaUpload(accessToken, baseURL+"/static/img/thumb_pic_default.jpg" , "thumb");
-				if(StringUtils.isBlank(thumbMediaId)){
-					return 10002;
-				}
+				
+			}
+			if (StringUtils.isBlank(thumbMediaId)) {
+				return 10002;
+			}
+			
+			//封面资源文件大小超过限制
+			if (StringUtils.isNotBlank(thumbMediaId) && "meidaSizeError".equals(thumbMediaId)) {
+				return 10007;
 			}
 			
 			//替换富文本中的图片路径 begin
@@ -91,8 +95,8 @@ public class InfoPushService extends CrudService<InfoPushDao, InfoPush> {
 				return 10004;
 			}
 			
-			flag = WeChatMsgSendUtils.msgMassSendAll(accessToken, newsMediaId);
-			if(!flag){
+			sendResult = WeChatMsgSendUtils.msgMassSendAll(accessToken, newsMediaId);
+			if(StringUtils.isNotBlank(sendResult) && "no".equals(sendResult)){
 				//发送失败，休眠1s，再发一次
 				try {
 					Thread.sleep(1000);
@@ -100,12 +104,14 @@ public class InfoPushService extends CrudService<InfoPushDao, InfoPush> {
 					
 				}
 				
-				flag = WeChatMsgSendUtils.msgMassSendAll(accessToken, newsMediaId);
+				sendResult = WeChatMsgSendUtils.msgMassSendAll(accessToken, newsMediaId);
 			}
 		}
 		
-		if(!flag){
+		if(StringUtils.isNotBlank(sendResult) && "no".equals(sendResult)){
 			return 10005;
+		}else if(StringUtils.isNotBlank(sendResult) && "limit".equals(sendResult)){
+			return 10006;
 		}else{
 			this.updatePushStatusById(pushId, pushRange, InfoPushStatus.YTS, new Date(), new Date());
 			return 10000;
