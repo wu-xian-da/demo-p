@@ -67,7 +67,7 @@
 						<div class="col-md-8">
 							<label class="checkbox-inline">
 							  <input type="checkbox" 
-							  	<c:if test="${infoPush.pushRange eq 'wechat'}">
+							  	<c:if test="${fn:contains(infoPush.pushRange, 'wechat')}">
 							  		checked="checked"
 							  	</c:if>
 							  value="wechat"> 微信公众号

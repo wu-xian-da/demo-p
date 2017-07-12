@@ -36,8 +36,8 @@
 					   <label>推送范围：</label>
 					   <select name="pushRange" class="form-control">
 						  <option value="">全部</option>
-						  <option value="wechat"
-						  	   <c:if test="${page.entity.pushRange eq 'wechat'}">
+						  <option value="wechat,"
+						  	   <c:if test="${fn:contains(page.entity.pushRange, 'wechat')}">
 							  		selected="selected"
 							   </c:if>
 						  >微信公众号</option>
@@ -93,7 +93,7 @@
 							<td>${d.infoType.name }</td>
 							<td>
 							    <c:choose>
-							    	<c:when test="${d.pushRange eq 'wechat'}">
+							    	<c:when test="${fn:contains(d.pushRange, 'wechat')}">
 							    		微信公众号
 							    	</c:when>
 							    	<c:otherwise>
