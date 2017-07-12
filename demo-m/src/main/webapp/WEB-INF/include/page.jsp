@@ -15,9 +15,13 @@
 			<a href="?pn=${page.pageNo-1}&ps=${page.pageSize}${page.urlParams}" class="prev-page">上一页</a>
 		</c:if>
 
-		<c:forEach begin="${page.viewStartPage}" end="${page.viewEndPage}"
-			step="1" var="pageIndex">
-			<a href="?pn=${pageIndex}&ps=${page.pageSize}${page.urlParams}">${pageIndex}</a>
+		<c:forEach begin="${page.viewStartPage}" end="${page.viewEndPage}" step="1" var="pageIndex">
+			<a 
+				<c:if test="${page.pageNo == pageIndex}">
+					class="active"
+				</c:if>
+				href="?pn=${pageIndex}&ps=${page.pageSize}${page.urlParams}"
+			>${pageIndex}</a>
 		</c:forEach>
 
 		<c:if test="${!page.last}">

@@ -11,7 +11,7 @@
 								<div class="form-inline">
 								  <div class="form-group">
 								    <label>用户名：</label>
-								    <input type="text" name="code" value="${page.entity.code }" class="form-control" placeholder="证件号">
+								    <input type="text" name="code" value="${page.entity.code }" class="form-control" placeholder="用户名">
 								  </div>
 								
 								  <div class="form-group">

@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/WEB-INF/include/taglib.jsp"%>
 <c:set var="currentUrl" value="${pageContext.request.servletPath }"/>
-<c:set var="_version" value="?20170517"></c:set>
+<c:set var="_version" value="?20170707"></c:set>
 
 <!DOCTYPE html>
 <html>
