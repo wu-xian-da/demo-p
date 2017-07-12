@@ -105,7 +105,7 @@
 			    },
 			    legend: {
 			        orient: 'vertical',
-			        top: '180',
+			        bottom:'0',
 			        right: '20',
 			        data: data.title
 			    },
@@ -214,8 +214,9 @@
 			        type: 'category',
 			        boundaryGap: false,
 			        data: [
+					<c:set var="startIndex" value="${fn:length(days.aggs.entirys.buckets)-1 }"/>
 					<c:forEach items="${days.aggs.entirys.buckets }" var="b" varStatus="stat">
-						'${b.keyForDate }'<c:if test="${!stat.last }">,</c:if>
+					'${days.aggs.entirys.buckets[startIndex - stat.index].keyForDate }'<c:if test="${!stat.last }">,</c:if>
 					</c:forEach>
 	               ]
 			    },
