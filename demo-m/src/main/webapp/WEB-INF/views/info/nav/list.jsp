@@ -12,7 +12,7 @@
 					<div class="form-inline">
 					  <div class="form-group">
 					    <label>栏目名称：</label>
-					    <input type="text" name="navName" value="${page.entity.navName }" class="form-control" placeholder="公告名称...">
+					    <input type="text" name="navName" value="${page.entity.navName }" class="form-control" placeholder="栏目名称">
 					  </div>
 					  <div class="form-group">
 					    <label>归属栏目：</label>

@@ -9,7 +9,7 @@
 		
 			<h3>条件检索</h3>
 
-			<form action="${base }/sys/push/ing" method="post">
+			<form id="searchForm" action="${base }/sys/push/ing" method="post">
 			<div class="from-gy-controls">
 				<div class="form-inline">
 
@@ -36,18 +36,23 @@
 				  <div class="form-group">
 				    <label>创建时间：</label>
 				    <div class="date-time-box">
-				    	<input type="text" name="beginCreateTime" value="${page.entity.beginCreateTime }" class="form-control flatpickr">
+				    	<input type="text" name="beginCreateTime" class="form-control flatpickr">
 				    	<i class="date-time-icon"></i>
 				    </div>
 				          至
 				   	<div class="date-time-box">
-				   		<input type="text" name="endCreateTime" value="${page.entity.endCreateTime }" class="form-control flatpickr">
+				   		<input type="text" name="endCreateTime" class="form-control flatpickr">
 				   		<i class="date-time-icon"></i>
 				   	</div>
 				  </div>
 				  <div class="form-group">
 				  	<div class="operation-box operation-head-box">
-				  		<button type="submit" class="btn btn-gy btn-recovery">
+				  		<script type="text/javascript">
+				  			function search(){
+				  				$("#searchForm").submit();
+				  			}
+				  		</script>
+				  		<button type="button" onclick="search();" class="btn btn-gy btn-recovery">
 							<span class="glyphicon glyphicon-search"></span>
 							查询
 						</button>

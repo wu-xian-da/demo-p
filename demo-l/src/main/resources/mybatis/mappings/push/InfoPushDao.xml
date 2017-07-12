@@ -146,7 +146,7 @@
         and DATE_FORMAT(pi.create_time, '%Y-%m-%d')  <![CDATA[<=]]> #{endCreateTime}
     </if>
     <if test="null != beginPushTime and '' != beginPushTime">
-        and DATE_FORMAT(pi.create_time, '%Y-%m-%d')  <![CDATA[>=]]> #{beginPushTime}
+        and DATE_FORMAT(pi.push_time, '%Y-%m-%d')  <![CDATA[>=]]> #{beginPushTime}
     </if>
     <if test="null != endPushTime and '' != endPushTime">
         and DATE_FORMAT(pi.push_time, '%Y-%m-%d')  <![CDATA[<=]]> #{endPushTime}

@@ -9,7 +9,7 @@
 		
 			<h3>条件检索</h3>
 
-            <form action="${base }/sys/push/ed" method="post">
+            <form id="searchForm" action="${base }/sys/push/ed" method="post">
 			<div class="from-gy-controls">
 				<div class="form-inline">
 					<div class="form-group">
@@ -47,19 +47,24 @@
 				<div class="form-group">
 					   <label>推送时间：</label>
 					   <div class="date-time-box">
-					   	<input type="text" name="beginPushTime" value="${page.entity.beginPushTime }" class="form-control flatpickr">
+					   	<input type="text" name="beginPushTime" class="form-control flatpickr">
 						<i class="date-time-icon"></i>
 					</div>
 					至
 					<div class="date-time-box">
-						<input type="text" name="endPushTime" value="${page.entity.endPushTime }" class="form-control flatpickr">
-					 		<i class="date-time-icon"></i>
+						<input type="text" name="endPushTime" class="form-control flatpickr">
+					 	<i class="date-time-icon"></i>
 					 	</div>
 					</div>
 					
 					<div class="form-group">
 						<div class="operation-box operation-head-box">
-							<button type="submit" class="btn btn-gy btn-recovery"><span class="glyphicon glyphicon-search"></span>查询</button>
+							<script type="text/javascript">
+								function search (){
+									$("#searchForm").submit();
+								}
+							</script>
+							<button type="button" onclick="search();" class="btn btn-gy btn-recovery"><span class="glyphicon glyphicon-search"></span>查询</button>
 						</div>
 					</div>
 				</div>

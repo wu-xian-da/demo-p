@@ -5,7 +5,7 @@
 	<div class="col-md-12">
 		<div class="box information-management-box">
 			<h3>条件检索</h3>
-			<form method="post" action="${base }/sys/info/notice">
+			<form id="searchForm" method="post" action="${base }/sys/info/notice">
 				<div class="from-gy-controls">
 					<div class="form-inline">
 					  <div class="form-group">
@@ -29,18 +29,23 @@
 					  <div class="form-group">
 					    <label>发布时间：</label>
 					    <div class="date-time-box">
-					    	<input name="beginCheckTime" value="${page.entity.beginCheckTime }" type="text" class="form-control flatpickr">
+					    	<input name="beginCheckTime" type="text" class="form-control flatpickr">
 					    	<i class="date-time-icon"></i>
 					    </div>
 					    至
 					   	<div class="date-time-box">
-					   		<input name="endCheckTime" value="${page.entity.endCheckTime }" type="text" class="form-control flatpickr">
+					   		<input name="endCheckTime" type="text" class="form-control flatpickr">
 					   		<i class="date-time-icon"></i>
 					   	</div>
 					  </div>
 						<div class="form-group">
 							<div class="operation-box operation-head-box">
-								<button type="submit" class="btn btn-gy btn-recovery" id="onclick"><span class="glyphicon glyphicon-search"></span>查询</button>
+								<script type="text/javascript">
+									function search(){
+										$("#searchForm").submit();
+									}
+								</script>
+								<button type="button" onclick="search();" class="btn btn-gy btn-recovery" id="onclick"><span class="glyphicon glyphicon-search"></span>查询</button>
 							</div>
 						</div>
 					</div>

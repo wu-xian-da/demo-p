@@ -8,7 +8,7 @@
 		    <%@ include file="/WEB-INF/include/message.jsp" %>
 		     
 			<h3>条件检索</h3>
-            <form method="post" action="${base }/sys/info/ninfo">
+            <form id="searchForm" method="post" action="${base }/sys/info/ninfo">
 			<div class="from-gy-controls">
 				<div class="form-inline">
 						<div class="form-group">
@@ -54,19 +54,24 @@
 						<div class="form-group">
 						    <label>发布时间：</label>
 						    <div class="date-time-box">
-						    	<input type="text" name="beginCheckTime" value="${page.entity.beginCheckTime }" class="form-control flatpickr">
+						    	<input type="text" name="beginCheckTime" class="form-control flatpickr">
 						    	<i class="date-time-icon"></i>
 						    </div>
 						          至
 						   	<div class="date-time-box">
-						   		<input type="text" name="endCheckTime" value="${page.entity.endCheckTime }" class="form-control flatpickr">
+						   		<input type="text" name="endCheckTime" class="form-control flatpickr">
 						   		<i class="date-time-icon"></i>
 						   	</div>
 					    </div>
 						  
 					    <div class="form-group">
 							<div class="operation-box operation-head-box">
-								<button type="submit" class="btn btn-gy btn-recovery"><span class="glyphicon glyphicon-search"></span>查询</button>
+								<script type="text/javascript">
+									function search(){
+										$("#searchForm").submit();
+									}
+								</script>
+								<button type="button" onclick="search();" class="btn btn-gy btn-recovery"><span class="glyphicon glyphicon-search"></span>查询</button>
 							</div>
 					   </div>
 				</div>
