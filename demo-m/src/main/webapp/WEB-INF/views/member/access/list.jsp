@@ -13,21 +13,21 @@
 								<div class="col-md-6">
 									<div class="chart-box">
 										<div class="chart-calendar-box">日期选择：<input type="text" class="flatpickr" id="authentication-statistics"><i class="calendar-icon"></i></div> 
-										<div id="everyday-authentication-statistics-charts" style="height: 320px; width: 100%;"></div>
+										<div id="everyday-authentication-statistics-charts" style="height: 350px; width: 100%;"></div>
 									</div>
 								</div>
 
 								<div class="col-md-6">
 									<div class="chart-box">
 										<div class="chart-calendar-box">日期选择：<input type="text" class="flatpickr" id="device-statistics"><i class="calendar-icon"></i></div> 
-										<div id="everyday-device-statistics-charts" style="height: 320px; width: 100%;"></div>
+										<div id="everyday-device-statistics-charts" style="height: 350px; width: 100%;"></div>
 									</div>
 								</div>
 
 							</div>
 
 							<div class="chart-box">
-								<div id="hour-statistics-charts" style="height: 320px; width: 100%;"></div>
+								<div id="hour-statistics-charts" style="height: 350px; width: 100%;"></div>
 							</div>
 						</div>
 					</div>
