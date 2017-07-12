@@ -14,6 +14,11 @@ import com.alibaba.fastjson.annotation.JSONField;
 @Setter
 public class ResponseAggs {
 
-	@JSONField(name="aggregations")
+	@JSONField(name="aggregations",serialize=false)
 	private Aggregations aggs;
+	
+	@JSONField(name="aggs")
+    public Aggregations getAggs(){
+        return this.aggs;
+    }
 }

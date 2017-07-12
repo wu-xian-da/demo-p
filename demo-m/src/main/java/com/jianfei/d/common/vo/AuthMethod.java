@@ -34,7 +34,7 @@ public enum AuthMethod {
             return null;
         }
         for(AuthMethod method : AuthMethod.values()){
-            if(url.startsWith(EsConfig.AUTH_PREFIX + method.getKey())){
+            if(url.startsWith(EsConfig.LOG_AUTH_PREFIX + method.getKey())){
                 return method;
             }
         }

@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class Bucket {
 
-	@JSONField(name="doc_count")
+	@JSONField(name="doc_count",serialize=false)
     private int count;
     
     private String key;
@@ -22,6 +22,10 @@ public class Bucket {
     @JSONField(name="key_as_string")
     private String keyString;
     
+    @JSONField(name="count")
+    public int getCount(){
+    	return this.count;
+    }
     
     public String getKeyForDate(){
         if(key == null){

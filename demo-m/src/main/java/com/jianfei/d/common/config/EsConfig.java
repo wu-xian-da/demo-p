@@ -24,7 +24,7 @@ import com.jianfei.d.common.utils.JodaUtil;
 @Component
 public class EsConfig {
     
-    public static final String AUTH_PREFIX = "/log/auth/";
+    public static final String LOG_AUTH_PREFIX = "/log/auth/";
     
     private static final String URL = "/%s/%s/_search?from=%d&size=%d";
     
@@ -65,11 +65,12 @@ public class EsConfig {
         return this.getUrl(from, size, this.indexNamePrefix + date);
     }
     
-    public String getUrl(String day){
-        if(StringUtils.isBlank(day)){
+    public String getUrl(String date){
+        if(StringUtils.isBlank(date)){
             return this.getUrl();
         }
-        return this.getUrl(DEFAULT_FROM, DEFAULT_SIZE, this.indexNamePrefix + day);
+        date = date.replace("\\-", ".");
+        return this.getUrl(DEFAULT_FROM, DEFAULT_SIZE, this.indexNamePrefix + date);
     }
     
     public String getUrl(int days){

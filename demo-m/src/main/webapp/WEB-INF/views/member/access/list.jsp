@@ -12,14 +12,14 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="chart-box">
-										<div class="chart-calendar-box">日期选择：<input type="text" class="flatpickr"> <i class="calendar-icon"></i></div>
+										<div class="chart-calendar-box">日期选择：<input type="text" class="flatpickr" id="authentication-statistics"><i class="calendar-icon"></i></div> 
 										<div id="everyday-authentication-statistics-charts" style="height: 320px; width: 100%;"></div>
 									</div>
 								</div>
 
 								<div class="col-md-6">
 									<div class="chart-box">
-										<div class="chart-calendar-box">日期选择：<input type="text" class="flatpickr"> <i class="calendar-icon"></i></div>
+										<div class="chart-calendar-box">日期选择：<input type="text" class="flatpickr" id="device-statistics"><i class="calendar-icon"></i></div> 
 										<div id="everyday-device-statistics-charts" style="height: 320px; width: 100%;"></div>
 									</div>
 								</div>
@@ -36,6 +36,150 @@
 <%@ include file="/WEB-INF/include/echarts.jsp" %>
 <%@ include file="/WEB-INF/include/flatpickr.jsp" %>
 <script type="text/javascript">
+		
+		$(function(){
+			flatpickr(".flatpickr",{
+				onChange:function(selectedDates, dateStr, instance){
+					switch(instance.element.id){
+						case "device-statistics":
+							getDevice(dateStr);
+							break;
+						case "authentication-statistics":
+							getAuth(dateStr);
+							break;
+					}
+		
+				}
+			});
+			
+			function getDevice(date){
+				$.ajax({
+			         type: "GET",
+			         url: "${base}/sys/member/access/devices",
+			         data: {date:date},
+			         dataType: "json",
+			         success: function(data){
+			        	 console.log(data);
+			        	var list = data.aggs.entirys.buckets;
+			        	var everyDayData = formatData(list);
+						createPieChart("设备类型",everydayStatisticsChart,everyDayData);
+			         }
+			     });
+			}
+			
+			function getAuth(date){
+				$.ajax({
+			         type: "GET",
+			         url: "${base}/sys/member/access/auths",
+			         data: {date:date},
+			         dataType: "json",
+			         success: function(data){
+			        	var list = data.aggs.entirys.buckets;
+			        	var everydayAuthenticationData = formatData(list);
+						createPieChart("认证方式",everydayAuthenticationChart,everydayAuthenticationData);
+			         }
+			     });
+			}
+			
+			getDevice('');
+			getAuth('');
+		});
+		
+		function createPieChart(title, chart, data){
+			var option = {
+			    title : {
+			        text: title,
+			        x:'left',
+			        textStyle: {
+			        	color: "#676464",
+			        	fontWeight: "normal",
+			        	fontSize: "14",
+			        	fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
+			        }
+			    },
+		
+			    tooltip : {
+			        trigger: 'item',
+			        formatter: "{a} <br/>{b} : {c} ({d}%)"
+			    },
+			    legend: {
+			        orient: 'vertical',
+			        top: '180',
+			        right: '20',
+			        data: data.title
+			    },
+			    series : [{
+			            name: '访问来源',
+			            type: 'pie',
+			            radius : '65%',
+			            center: ['30%', '55%'],
+			            label:{
+			            	normal:{
+			            		position:"inside",
+			            		formatter:"{d}%"
+			            	}
+			            },
+			            data: data.data
+			        }
+			    ]
+			};
+			chart.setOption(option);
+		}
+		
+		var everydayAuthenticationChart = echarts.init(document.getElementById('everyday-authentication-statistics-charts'));
+		var everydayStatisticsChart = echarts.init(document.getElementById('everyday-device-statistics-charts'));
+
+		function formatData(data){
+			var _formatData = {
+				title:[],
+				data:[]
+			};
+			
+			var _itemStyle = [{
+		            	normal:{
+		            		color:"#f36a5b",
+		            		borderWidth: 3,
+				    		borderColor: "#FFF"
+		            	},
+		            	emphasis:{borderWidth:0}
+						},{
+							normal:{
+		            		color:"#35b8eb",
+		            		borderWidth: 2
+		            	},
+		            	emphasis:{
+		            		borderWidth:0
+		            	}
+		          	},{
+		          		normal:{
+		            		color:"#ff9900",
+		            		borderWidth: 2
+		            	},
+		            	emphasis:{
+		            		borderWidth:0
+		            	}
+		          	},{
+		          		normal:{
+		            		color: "#7eba1e",
+		            		borderWidth: 2
+		            	},
+		            	emphasis:{
+		            		borderWidth:0
+		            	}
+		          	}];
+			
+			for(var _i = 0, _len = data.length; _i < _len; _i++){
+				_formatData.title.push(data[_i].key);
+				_formatData.data.push({
+						value: data[_i].count,
+						name: data[_i].key,
+						itemStyle:_itemStyle[_i] != undefined ? _itemStyle[_i] : parseInt(Math.random(_itemStyle.length)*(_itemStyle.length))
+				});
+
+			}
+			return _formatData;
+		}
+
 		//站点统计
 		var option = {
 			    title: {
@@ -86,6 +230,7 @@
 			            showSymbol: false,
 			            itemStyle:{
 			            	normal: {
+			            		color:"#0288c7"
 			            		borderColor: "#0288c7"
 			            	}
 			            },
@@ -111,188 +256,6 @@
 
 		var siteStatisticsChart = echarts.init(document.getElementById('site-statistics-charts'));
 		siteStatisticsChart.setOption(option);
-
-
-		//每日认证
-		var option = {
-		    title : {
-		        text: '认证方式',
-		        x:'left',
-		        textStyle: {
-		        	color: "#676464",
-		        	fontWeight: "normal",
-		        	fontSize: "14",
-		        	fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
-		        }
-		    },
-
-		    tooltip : {
-		        trigger: 'item',
-		        formatter: "{a} <br/>{b} : {c} ({d}%)"
-		    },
-		    legend: {
-		        orient: 'vertical',
-		        top: '180',
-		        right: '20',
-		        data: ['微信认证','短信认证']
-		    },
-
-		    series : [{
-		            name: '访问来源',
-		            type: 'pie',
-		            radius : '65%',
-		            center: ['30%', '55%'],
-		            label:{
-		            	normal:{
-		            		position:"inside",
-		            		formatter:"{d}%"
-		            	}
-		            },
-
-		            data:[
-		                {value:335, name:'微信认证', itemStyle:{
-		                	normal:{
-		                		color:"#f36a5b",
-		                		borderWidth: 3,
-						    	borderColor: "#FFF"
-		                	},
-		                	emphasis:{
-		                		borderWidth:0
-		                	}
-		                }},
-		                {value:310, name:'短信认证', itemStyle:{
-		                	normal:{
-		                		color:"#35b8eb",
-		                		borderWidth: 3,
-						    	borderColor: "#FFF"
-		                	},
-		                	emphasis:{
-		                		borderWidth:0
-		                	}
-		                }}
-		            ],
-		            itemStyle: {
-		                emphasis: {
-		                    shadowBlur: 10,
-		                    shadowOffsetX: 0,
-		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-		                }
-		            }
-		        }
-		    ]
-		};
-
-		var everydayAuthenticationChart = echarts.init(document.getElementById('everyday-authentication-statistics-charts'));
-		everydayAuthenticationChart.setOption(option);
-
-		//每日分析
-		var option = {
-		    title : {
-		        text: '设备类型',
-		        x:'left',
-		        textStyle: {
-		        	color: "#676464",
-		        	fontWeight: "normal",
-		        	fontSize: "14",
-		        	fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
-		        }
-		    },
-
-		    tooltip : {
-		        trigger: 'item',
-		        formatter: "{a} <br/>{b} : {c} ({d}%)"
-		    },
-		    legend: {
-		        orient: 'vertical',
-		        top: '180',
-		        right: '20',
-		        data: ['苹果Mobile','安卓Mobile','苹果MAC','安卓平板', "其他"]
-		    },
-
-		    series : [{
-		            name: '访问来源',
-		            type: 'pie',
-		            radius : '65%',
-		            center: ['30%', '55%'],
-
-		            label:{
-		            	normal:{
-		            		position:"outside",
-		            		formatter:"{d}%"
-		            	}
-		            },
-					labelLine:{
-			    	normal:{
-			    		length:10,
-			    		length2:0
-			    		}
-			    	},
-
-		            data:[
-		                {value:335, name:'苹果Mobile', itemStyle:{
-		                	normal:{
-		                		color:"#f36a5b",
-		                		borderWidth: 3,
-						    	borderColor: "#FFF"
-		                	},
-		                	emphasis:{
-		                		borderWidth:0
-		                	}
-		                }},
-		                {value:310, name:'安卓Mobile', itemStyle:{
-		                	normal:{
-		                		color:"#35b8eb",
-		                		borderWidth: 2,
-						    	borderColor: "#FFF"
-		                	},
-		                	emphasis:{
-		                		borderWidth:0
-		                	}
-		                }},
-		                {value:234, name:'苹果MAC', itemStyle:{
-		                	normal:{
-		                		color:"#ff9900",
-		                		borderWidth: 2,
-						    	borderColor: "#FFF"
-		                	},
-		                	emphasis:{
-		                		borderWidth:0
-		                	}
-		                }},
-		                {value:135, name:'安卓平板', itemStyle: {
-		                	normal:{
-		                		color: "#7eba1e",
-		                		borderWidth: 2,
-						    	borderColor: "#FFF"
-		                	},
-		                	emphasis:{
-		                		borderWidth:0
-		                	}
-		                }},
-
-		                {value:75, name:'其他', itemStyle: {
-		                	normal:{
-		                		color: "#2aa7d8",
-		                		borderWidth: 2,
-						    	borderColor: "#FFF"
-		                	},
-		                	emphasis:{
-		                		borderWidth:0
-		                	}
-		                }}
-		            ],
-		            itemStyle: {
-		                emphasis: {
-		                    shadowBlur: 10,
-		                    shadowOffsetX: 0,
-		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-		                }
-		            }
-		        }
-		    ]
-		};
-		var everydayStatisticsChart = echarts.init(document.getElementById('everyday-device-statistics-charts'));
-		everydayStatisticsChart.setOption(option);
 
 		// 24小时热点分布
 		var option = {
