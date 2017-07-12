@@ -53,9 +53,6 @@ public class EsConfig {
     @Value("#{settings['es.maxretry.timeout']}")
     private int maxRetryTimeout;
     
-    @Value("#{settings['es.day.number']}")
-    private int dayNum;
-    
     public String getUrl(){
         return this.getUrl(DEFAULT_FROM,DEFAULT_SIZE);
     }
@@ -73,13 +70,13 @@ public class EsConfig {
         return this.getUrl(DEFAULT_FROM, DEFAULT_SIZE, this.indexNamePrefix + date);
     }
     
-    public String getUrl(int days){
+    /*public String getUrl(int days){
         List<String> indexs = new ArrayList<String>();
         for(int i = days - 1; i >= 0; i--){
             indexs.add(this.indexNamePrefix + JodaUtil.getMinusDays(i, DATE_PATTERN));
         }
         return this.getUrl(DEFAULT_FROM, DEFAULT_SIZE, StringUtils.join(indexs, ","));
-    }
+    }*/
     
     public String getUrl(int from, int size, String indexName){
     	return String.format(URL, indexName, this.typeName, from, size);

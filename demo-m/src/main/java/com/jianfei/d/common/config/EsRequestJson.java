@@ -44,7 +44,7 @@ public class EsRequestJson {
                                         + "}";
     
     
-    public static final String AUTH_LIST = "{"
+    /*public static final String AUTH_LIST = "{"
             + "\"query\": {"
             	+ "\"bool\": {"
                 	+ "\"should\":["
@@ -52,7 +52,7 @@ public class EsRequestJson {
                         + "{\"match\": {\"url\": {\"query\": \"/log/auth/wx\", \"operator\": \"and\"}}}"
                     + "]"
                + ", \"must\": {\"regexp\": {\"url\": {\"value\": \".*13855178829.*\"}}}"
-        + "}}}";
+        + "}}}";*/
     
     
     
@@ -87,7 +87,7 @@ public class EsRequestJson {
                                                  + "\"field\": \"_index\","
                                                  + "\"size\": 15,"
                                                  + "\"order\": {"
-                                                     + "\"_term\": \"asc\""
+                                                     + "\"_term\": \"desc\""
                                                  + "}"
                                                  + "}"
                                            + "}"
