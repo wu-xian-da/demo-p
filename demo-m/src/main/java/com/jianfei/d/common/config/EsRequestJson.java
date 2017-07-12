@@ -37,7 +37,10 @@ public class EsRequestJson {
                                             + "\"entirys\": {"
                                                 + "\"terms\": {"+ 
                                                     "\"field\": \"ua.device.keyword\","
-                                                    + "\"size\": 20"
+                                                    + "\"size\": 10"
+                                                    + "\"order\":{"
+                                                    	+ "\"_count\": \"desc\""
+                                                    + "}"
                                                 + "}"
                                             + "}"
                                         + "}"

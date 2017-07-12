@@ -10,7 +10,12 @@
 							<div class="from-gy-controls">
 								<div class="form-inline">
 								  <div class="form-group">
-								    <label>发布时间：</label>
+								    <label>用户名：</label>
+								    <input type="text" name="code" value="${page.entity.code }" class="form-control" placeholder="证件号">
+								  </div>
+								
+								  <div class="form-group">
+								    <label>登录时间：</label>
 								    <div class="date-time-box">
 								    	<input type="text" name="start" value="${page.entity.start }" class="form-control flatpickr">
 								    	<i class="date-time-icon"></i>
@@ -32,10 +37,6 @@
 										</select>
 								  </div>
 
-								  <div class="form-group">
-								    <label>用户名：</label>
-								    <input type="text" name="code" value="${page.entity.code }" class="form-control" placeholder="证件号">
-								  </div>
 									<div class="form-group">
 										<div class="operation-box operation-head-box">
 											<button type="submit" class="btn btn-gy btn-recovery">

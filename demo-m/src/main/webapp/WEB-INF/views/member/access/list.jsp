@@ -86,6 +86,7 @@
 		});
 		
 		function createPieChart(title, chart, data){
+			console.log(data);
 			var option = {
 			    title : {
 			        text: title,
@@ -115,7 +116,7 @@
 			            center: ['30%', '55%'],
 			            label:{
 			            	normal:{
-			            		position:"inside",
+			            		position:"outside",
 			            		formatter:"{d}%"
 			            	}
 			            },
