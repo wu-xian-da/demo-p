@@ -135,6 +135,12 @@
 		</div>
 	</div>
 	
+	<div class="row row-list" style="margin-top: 10px;">
+		<div class="col-md-12">
+			<label style="color: red;">【注意】：此功能可往微信关注用户推送信息，操作需谨慎</label>
+		</div>
+	</div>
+	
 	<div class="operation-box" style="padding: 20px;">
 		<button id="confirmBtn" type="button" class="btn btn-gy btn-query">
 			<span class="glyphicon glyphicon-ok-circle"></span>
