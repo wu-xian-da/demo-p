@@ -106,7 +106,9 @@
 							</td>
 							<td><fmt:formatDate value="${d.pushTime}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 							<td>
+								<shiro:hasPermission name="push:ed:detail">
 							    <a href="${base }/sys/push/ed/detail/${d.id }">&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>
+							    </shiro:hasPermission>
 							</td>
 						</tr>
 						</c:forEach>

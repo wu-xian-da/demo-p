@@ -54,10 +54,12 @@
 					<span class="glyphicon glyphicon-search"></span>
 					查询
 				</button>
+				<shiro:hasPermission name="push:ing:add">
 				<a class="btn btn-gy btn-add" href="${base }/sys/push/ing/create">
 					<span class="glyphicon glyphicon-plus-sign"></span>
 					新增
 				</a>
+				</shiro:hasPermission>
 			</div>
 			</form>
 
@@ -81,11 +83,16 @@
 							<td>${d.infoType.name }</td>
 							<td><fmt:formatDate value="${d.createTime}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 							<td>
+								<shiro:hasPermission name="push:ing:update">
 								<a href="${base }/sys/push/ing/update/${d.id }" class="edit"><i></i>编辑</a>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="push:ing:push">
 								&nbsp;&nbsp;
 								<a href="javascript:void(0);" onclick="pushFun(${d.id },'${d.infoName }');"><i class="glyphicon glyphicon-send"></i>&nbsp;&nbsp;推送</a> 
-								
+								</shiro:hasPermission>
+								<shiro:hasPermission name="push:ing:delete">
 								<a href="${base }/sys/push/ing/delete/${d.id }" class="delete"><i></i>删除</a>
+								</shiro:hasPermission>
 						    </td>
 						</tr>
 						</c:forEach>
