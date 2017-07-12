@@ -74,7 +74,7 @@
 							<!-- hidden -->
 							<input type="hidden" id="infoImg" name="infoImg" value="${infoPush.infoImg }" />
 							
-							<span class="tips-text">（200K以内）</span>
+							<span class="tips-text">（64K以内）</span>
 							
 							<span id="infoImgTips" class="error" style="display:none;">图片必须上传，请确认</span>
 						</div>
@@ -240,7 +240,7 @@ $(document).ready(function(){
 	uploadifyPro.multi = false;
 	uploadifyPro.fileExt = "*.gif;*.jpg;*.jpeg;*.png;*.bmp;*.ico";
 	uploadifyPro.buttonClass = "btn btn-gy btn-upload";
-	uploadifyPro.fileSizeLimit = "200k";
+	uploadifyPro.fileSizeLimit = "64k";
 	uploadifyPro.buttonText = "上传图片";
 	uploadifyPro.width='75px', //按钮宽度
 	uploadifyPro.onUploadSuccess = dealInfoImgUpload;

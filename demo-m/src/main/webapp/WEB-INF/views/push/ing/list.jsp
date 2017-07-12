@@ -45,15 +45,18 @@
 				   		<i class="date-time-icon"></i>
 				   	</div>
 				  </div>
-
+				  <div class="form-group">
+				  	<div class="operation-box operation-head-box">
+				  		<button type="submit" class="btn btn-gy btn-recovery">
+							<span class="glyphicon glyphicon-search"></span>
+							查询
+						</button>
+				  	</div>
+				  </div>
 				</div>
 			</div>
 
 			<div class="operation-box operation-um-box">
-				<button type="submit" class="btn btn-gy btn-recovery">
-					<span class="glyphicon glyphicon-search"></span>
-					查询
-				</button>
 				<shiro:hasPermission name="push:ing:add">
 				<a class="btn btn-gy btn-add" href="${base }/sys/push/ing/create">
 					<span class="glyphicon glyphicon-plus-sign"></span>
@@ -159,6 +162,14 @@
 			}
 
 			flatpickr(".flatpickr");
+			
+			$("input[name='beginCreateTime']").flatpickr({
+				"defaultDate": '${page.entity.beginCreateTime }'
+			});
+			
+			$("input[name='endCreateTime']").flatpickr({
+				"defaultDate": '${page.entity.endCreateTime }'
+			});
 		}
 </script>
 <script type="text/javascript">

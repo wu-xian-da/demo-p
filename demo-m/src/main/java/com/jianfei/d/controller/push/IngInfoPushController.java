@@ -126,6 +126,10 @@ public class IngInfoPushController extends BaseController{
 				super.addMessage(attrs, "推送信息失败(上传图文消息素材失败)，请重试！");
 			}else if(10005 == result){
 				super.addMessage(attrs, "推送信息失败(群发消息失败)，请重试！");
+			}else if (10006 == result){
+				super.addMessage(attrs, "推送信息失败(群发消息推送成功数已达到微信官方月度限制)，请下月再试！");
+			}else if (10007 == result){
+				super.addMessage(attrs, "推送信息失败(上传封面图片失败，图片大小超过限制，64K以内)，请修改后重试！");
 			}else{
 				super.addMessage(attrs, "推送信息失败，请重试！");
 			}

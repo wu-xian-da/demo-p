@@ -135,6 +135,14 @@
 
 		flatpickr(".flatpickr");
 
+		$("input[name='beginCheckTime']").flatpickr({
+			"defaultDate": '${page.entity.beginCheckTime }'
+		});
+		
+		$("input[name='endCheckTime']").flatpickr({
+			"defaultDate": '${page.entity.endCheckTime }'
+		});
+
 	}
 	$(function(){
 		$("#checkAll").on("click", function(){

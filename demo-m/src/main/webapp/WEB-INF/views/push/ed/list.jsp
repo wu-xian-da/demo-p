@@ -12,65 +12,57 @@
             <form action="${base }/sys/push/ed" method="post">
 			<div class="from-gy-controls">
 				<div class="form-inline">
-
-
-				  <div class="form-group">
-				    <label>信息名称：</label>
-				    <input type="text" name="infoName" value="${page.entity.infoName }" class="form-control" placeholder="信息名称">
-				  </div>
-
-
-
-				  <div class="form-group">
-				    <label>信息类型：</label>
-				    <select name="infoType" class="form-control">
-					  	<option value="">全部(单选)</option>
-					    <c:forEach items="${pushTypes }" var="pushType">
-					    	<option value="${pushType }"
-					    		<c:if test="${pushType eq page.entity.infoType }">
-					    			selected="selected"
-						  	 	</c:if>
-					    	>${pushType.name }</option>
-					    </c:forEach>
-					</select>
-				  </div>
-
-
-				  <div class="form-group">
-				    <label>推送范围：</label>
-				    <select name="pushRange" class="form-control">
+					<div class="form-group">
+					  <label>信息名称：</label>
+					  <input type="text" name="infoName" value="${page.entity.infoName }" class="form-control" placeholder="信息名称">
+					</div>
+					
+					<div class="form-group">
+					  <label>信息类型：</label>
+					  <select name="infoType" class="form-control">
+					 	<option value="">全部(单选)</option>
+						   <c:forEach items="${pushTypes }" var="pushType">
+						 	<option value="${pushType }"
+						 		<c:if test="${pushType eq page.entity.infoType }">
+						 			selected="selected"
+							 	</c:if>
+						 	>${pushType.name }</option>
+						 </c:forEach>
+					  </select>
+					</div>
+					
+					
+					<div class="form-group">
+					   <label>推送范围：</label>
+					   <select name="pushRange" class="form-control">
 						  <option value="">全部</option>
 						  <option value="wechat"
 						  	   <c:if test="${page.entity.pushRange eq 'wechat'}">
 							  		selected="selected"
 							   </c:if>
 						  >微信公众号</option>
-					</select>
+					   </select>
 				  </div>
 
-
-				  <div class="form-group">
-				    <label>推送时间：</label>
-				    <div class="date-time-box">
-				    	<input type="text" name="beginPushTime" value="${page.entity.beginPushTime }" class="form-control flatpickr">
-				    	<i class="date-time-icon"></i>
-				    </div>
-				          至
-				   	<div class="date-time-box">
-				   		<input type="text" name="endPushTime" value="${page.entity.endPushTime }" class="form-control flatpickr">
-				   		<i class="date-time-icon"></i>
-				   	</div>
-				  </div>
-
-
+				<div class="form-group">
+					   <label>推送时间：</label>
+					   <div class="date-time-box">
+					   	<input type="text" name="beginPushTime" value="${page.entity.beginPushTime }" class="form-control flatpickr">
+						<i class="date-time-icon"></i>
+					</div>
+					至
+					<div class="date-time-box">
+						<input type="text" name="endPushTime" value="${page.entity.endPushTime }" class="form-control flatpickr">
+					 		<i class="date-time-icon"></i>
+					 	</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="operation-box operation-head-box">
+							<button type="submit" class="btn btn-gy btn-recovery"><span class="glyphicon glyphicon-search"></span>查询</button>
+						</div>
+					</div>
 				</div>
-			</div>
-
-			<div class="operation-box operation-um-box">
-				<button type="submit" class="btn btn-gy btn-recovery">
-					<span class="glyphicon glyphicon-search"></span>
-					查询
-				</button>
 			</div>
 			</form>
 
@@ -137,5 +129,13 @@
 			}
 
 			flatpickr(".flatpickr");
+			
+			$("input[name='beginPushTime']").flatpickr({
+				"defaultDate": '${page.entity.beginPushTime }'
+			});
+			
+			$("input[name='endPushTime']").flatpickr({
+				"defaultDate": '${page.entity.endPushTime }'
+			});
 		}
 </script>

@@ -127,13 +127,13 @@
     	<include refid="Base_Column_List" />
     from tb_info_push pi
     where 1 = 1
-    <if test="null != infoName">
+    <if test="null != infoName and '' != infoName">
     	and pi.info_name like CONCAT('%',#{infoName},'%') 
     </if>
     <if test="null != infoType">
     	and pi.info_type = #{infoType}
     </if>
-    <if test="null != pushRange">
+    <if test="null != pushRange and '' != pushRange">
     	and pi.push_range = #{pushRange}
     </if>
     <if test="null != pushStatus">
