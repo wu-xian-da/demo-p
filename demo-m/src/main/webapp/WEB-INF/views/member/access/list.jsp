@@ -5,7 +5,7 @@
 					<div class="col-md-12">
 						<div class="box">
 							<div class="chart-box">
-								<button type="button" class="btn btn-gy btn-exports"><span class="glyphicon glyphicon-share-alt"></span>数据导出</button>
+								<!-- <button type="button" class="btn btn-gy btn-exports"><span class="glyphicon glyphicon-share-alt"></span>数据导出</button> -->
 								<div id="site-statistics-charts" style="height: 320px; width: 100%;"></div>
 							</div>
 
