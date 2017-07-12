@@ -79,7 +79,9 @@ public class AuthController extends BaseController{
                             if(StringUtils.isNotBlank(hit.getEnd())){
                                 json += "\"lte\": \"" + hit.getEndDate() + "\",";
                             }
-                     json += "\"format\": \"yyyy-MM-dd HH:mm:ss\",\"time_zone\": \"+08:00\"}}},";
+                    json += "\"format\": \"yyyy-MM-dd HH:mm:ss\""
+                            //+ ",\"time_zone\": \"+08:00\""
+                            + "}}},";
                 }
                 
                 json += "\"must\": { "
