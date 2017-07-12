@@ -497,7 +497,7 @@
   		<properties>
   			<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
   			
-  			<jdbc.url>jdbc:mysql://192.168.232.8/witplat?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull</jdbc.url>
+  			<jdbc.url>jdbc:mysql://172.27.110.8/witplat?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull</jdbc.url>
   			
   			<jdbc.username>witplat</jdbc.username>
   			<jdbc.password>EYjxU!69tJTy#R51</jdbc.password>
@@ -505,13 +505,13 @@
   			<!-- manager config -->
   			<managerBaseUrl>/data/services/www/upload</managerBaseUrl>
   			<webDomain></webDomain>
-  			<webBaseUrl>http://219.143.16.157:8091</webBaseUrl>
+  			<webBaseUrl>http://58.42.242.176</webBaseUrl>
   			<manager.pool.init>5</manager.pool.init>
   			<manager.pool.minIdle>5</manager.pool.minIdle>
   			<manager.pool.maxActive>10</manager.pool.maxActive>
   			
   			<!-- es -->
-  			<es.addresses>192.168.232.5:9200;192.168.232.6:9200</es.addresses>
+  			<es.addresses>172.27.110.5:9200;172.27.110.6:9200</es.addresses>
   		</properties>
   	</profile>
   	
