@@ -14,6 +14,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -42,6 +43,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
 	
     @Autowired
     private PasswordHelper passwordHelper;
+    
 	 /**
      * 登陆
      */
@@ -50,11 +52,13 @@ public class ShiroDbRealm extends AuthorizingRealm{
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         
         //校验账号
+        System.out.println(token+"======================");
         User user = this.validateUser(token);
         token.setPassword(user.getPassword().toCharArray());
-        //this.loginSuccess(user); //登陆成功后业务处理
+        //用户菜单
         user.setRole(this.roleService.getRoleMenus(user.getRole().getId()));
         SessionUtils.setSessionAttribute(Constants.USER_MENUS, user.getRole().getUserMenus());
+        
         return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
     }
 
@@ -63,19 +67,13 @@ public class ShiroDbRealm extends AuthorizingRealm{
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
-        User user = (User) principals.getPrimaryPrincipal();
-        if (user != null) {
-            //user = this.userService.findByLoginName(user.getLoginName());
-            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-           /* if(user.getRole() != null){ //权限
-                List<String> perms = user.getRole().getStringPermissions();
-                info.addStringPermissions(perms);
-                SessionUtils.setSessionAttribute(Constants.USER_PERMS, perms);
-            }*/
-            info.addStringPermissions(user.getRole().getUserPermissions());
-            return info;
-        }
-        return null;
+    	 User user = (User) principals.getPrimaryPrincipal();
+         if (user != null) {
+             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+             info.addStringPermissions(user.getRole().getUserPermissions());
+             return info;
+         }
+         return null;
     }
     
     
@@ -95,26 +93,28 @@ public class ShiroDbRealm extends AuthorizingRealm{
      * @param token
      */
     private User validateUser(UsernamePasswordToken token){
-        User user = null;
-        
-        //用户查询校对
-        try{
-            user = this.userService.findByLoginName(token.getUsername());
-        }catch(Exception e){
-            throw new AuthenticationException("账号异常,请联系管理员");
-        }
-        
-        if(user == null){
-            throw new UnknownAccountException("账号不存在, 请确认");
-        }
-        if (user.getStatus() == UserStatus.CLOSE) {
-        	 throw new LockedAccountException("账号已禁用");
-		}
-        String newPass = this.passwordHelper.getNewPassword(token.getPassword(), user.getCredentialsSalt());
-        if (newPass.equals(user.getPassword())) {
-			return user;
-		}
-        throw new IncorrectCredentialsException("密码不正确");
+    	 User user = null;
+    	 System.out.println(token.getUsername()+"+++++++++++++++++++");
+         try{
+             user = this.userService.findByLoginName(token.getUsername());
+             
+         }catch(Exception e){
+             throw new AuthenticationException("账号异常");
+         }
+         
+         if(user == null){
+             throw new UnknownAccountException("账号不存在");
+         }
+         
+         if(user.getStatus() == UserStatus.CLOSE){
+             throw new LockedAccountException("账号已禁用");
+         }
+         
+         String newPass = this.passwordHelper.getNewPassword(token.getPassword(), user.getCredentialsSalt());
+         if(newPass.equals(user.getPassword())){
+             return user;
+         }
+         throw new IncorrectCredentialsException("密码不正确");
     }
 
 }

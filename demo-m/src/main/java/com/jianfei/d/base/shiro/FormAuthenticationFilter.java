@@ -50,22 +50,33 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
         super.setFailureAttribute(request, ae);
     }
 
-    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request,ServletResponse response) throws Exception {
-    	this.saveLogLogin(request,LoginStatus.Success);
-    	return super.onLoginSuccess(token, subject, request, response);
+    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request,
+            ServletResponse response) throws Exception {
+        
+        this.saveLogLogin(request, LoginStatus.Success);
+        return super.onLoginSuccess(token, subject, request, response);
     }
 
-    private void saveLogLogin(ServletRequest request, LoginStatus status) {
-		ShiroHttpServletRequest httpRequest = (ShiroHttpServletRequest) request;
-		try {
-			this.logLoginService.save(new LogLogin(getUsername(request),new Date(),httpRequest.getHeader(UA),HttpUtils.getRemoteAddr(httpRequest),status));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request,ServletResponse response) {
-    	this.saveLogLogin(request, LoginStatus.Fail); 
-		return super.onLoginFailure(token, e, request, response);
+    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request,
+            ServletResponse response) {
+        
+        this.saveLogLogin(request, LoginStatus.Fail);
+        return super.onLoginFailure(token, e, request, response);
+    }
+    
+    private void saveLogLogin(ServletRequest request, LoginStatus status){
+    	System.out.println("----------------------"+status.getValue());
+        ShiroHttpServletRequest httpRequest = (ShiroHttpServletRequest)request;
+        try{
+            this.logLoginService.save(new LogLogin(
+                    getUsername(request), 
+                    new Date(), 
+                    httpRequest.getHeader(UA), 
+                    HttpUtils.getRemoteAddr(httpRequest), 
+                    status.getValue()));
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

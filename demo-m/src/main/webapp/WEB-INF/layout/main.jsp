@@ -27,7 +27,7 @@ var sid_s = '${cookie.sid.value}';
 	<div class="main container-fluid" id="app-main">
 		<div class="row" id="row-container">
 			<c:if test="${currentUrl ne '/sys/index' }">
-				<% include file="left.jsp" %>
+				<%@ include file="left.jsp" %>
 			</c:if>
 			<sitemesh:body/>
 		</div>

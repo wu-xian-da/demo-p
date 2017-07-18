@@ -11,7 +11,7 @@
 		a.status,
 		a.createDate,
 		a.role_id AS "role.id",
-		a.department_id AS "department.id",
+		a.department_id AS "department.id"
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
@@ -70,12 +70,12 @@
 	</select>
 	
 	<select id="findByLoginName" resultType="com.jianfei.d.entity.system.User">
-		select <include refid="userColumns"></include>
-		,
+		SELECT
+		<include refid="userColumns" />,
 		c.name AS "department.name"
-		from t_user a 
-		LEFT JOIN t_department c ON a.department_id = c.id
-		where a.loginName = #{loginName}
+		FROM t_user a
+		LEFT JOIN t_department c ON a.department_id=c.id
+		WHERE a.loginName = #{loginName}
 	</select>
 	
 	<select id="findPage" resultType="com.jianfei.d.entity.system.User">

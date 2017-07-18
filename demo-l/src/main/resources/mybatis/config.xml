@@ -32,10 +32,11 @@
         <setting name="logImpl" value="LOG4J"/>
 	</settings>
 	
+	<!-- 
 	<typeHandlers>
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.jianfei.d.entity.common.MenuType"/>
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.jianfei.d.entity.common.UserStatus"/> 
-	</typeHandlers>
+	</typeHandlers> -->
 	
 	<objectFactory type="com.jianfei.d.base.mybatis.interceptor.PageObjectFactory" />
 	<objectWrapperFactory type="com.jianfei.d.base.mybatis.interceptor.PageObjectWrapperFactory" />

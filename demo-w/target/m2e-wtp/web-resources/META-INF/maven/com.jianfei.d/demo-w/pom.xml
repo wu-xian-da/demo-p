@@ -9,7 +9,7 @@
   </parent>
   <artifactId>demo-w</artifactId>
   <packaging>war</packaging>
-  <name>demo-w Maven Webapp</name>
+  <name>demo-w</name>
   <url>http://maven.apache.org</url>
   <dependencies>
   	<dependency>

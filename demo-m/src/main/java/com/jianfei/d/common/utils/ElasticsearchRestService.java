@@ -37,8 +37,7 @@ public class ElasticsearchRestService {
     
     @PostConstruct
     public void init(){
-        client = RestClient.builder(config.getHttpHosts())
-                .setRequestConfigCallback(new RestClientBuilder.RequestConfigCallback() {
+        client = RestClient.builder(config.getHttpHosts()).setRequestConfigCallback(new RestClientBuilder.RequestConfigCallback() {
                     public Builder customizeRequestConfig(Builder requestConfigBuilder) {
                         return requestConfigBuilder.setConnectTimeout(config.getConnTimeout())
                                 .setSocketTimeout(config.getSocketTimeout());

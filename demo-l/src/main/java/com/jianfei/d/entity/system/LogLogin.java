@@ -22,6 +22,11 @@ import com.jianfei.d.entity.common.LoginStatus;
 @NoArgsConstructor
 public class LogLogin extends BaseEntity {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@FormQuery
 	private String loginName;
 	
@@ -34,5 +39,5 @@ public class LogLogin extends BaseEntity {
 	@FormQuery
 	private String ip;
 	
-	private LoginStatus status;
+	private int status;
 }

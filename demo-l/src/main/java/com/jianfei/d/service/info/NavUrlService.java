@@ -5,10 +5,13 @@
   */
 package com.jianfei.d.service.info;
 
+import org.springframework.stereotype.Service;
+
 import com.jianfei.d.base.service.CrudService;
 import com.jianfei.d.dao.info.NavUrlDao;
 import com.jianfei.d.entity.info.NavUrl;
 
+@Service
 public class NavUrlService extends CrudService<NavUrlDao, NavUrl> {
 	
 	/****
