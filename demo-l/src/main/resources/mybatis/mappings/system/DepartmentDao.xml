@@ -22,7 +22,7 @@
 			<if test="parent != null and parent.id != null">,parent_id</if>
 		) values (
 			#{name},
-			#{sort},
+			#{sort}
 			<if test="parent != null and parent.id != null">,#{parent.id}</if>
 		)
 	</insert>

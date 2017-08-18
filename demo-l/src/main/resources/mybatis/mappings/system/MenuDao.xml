@@ -79,7 +79,7 @@
 		SELECT id, name
 		FROM t_menu
 		WHERE parent_id=#{id}
-		ORDET BY sort
+		ORDER BY sort
  	</select>
 	
 	<select id="findAll" resultType="com.jianfei.d.entity.system.Menu">

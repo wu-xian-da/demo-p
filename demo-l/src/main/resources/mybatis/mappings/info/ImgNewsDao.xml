@@ -56,7 +56,7 @@
         #{checkTime},
       </if>
       <if test="orderNum != null">
-      	#{orderNum}
+      	#{orderNum},
       </if>
       <if test="pushStatus != null" >
         #{pushStatus},

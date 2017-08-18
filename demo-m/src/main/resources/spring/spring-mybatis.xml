@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-		<property name="url" value="${jdbc.url.site}"></property>
+		<property name="url" value="${jdbc.url.site}?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull"></property>
 		<property name="username" value="${jdbc.username.site}"></property>
 		<property name="password" value="${jdbc.password.site}"></property>
 		
