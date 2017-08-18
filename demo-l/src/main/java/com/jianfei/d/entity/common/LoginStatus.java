@@ -7,20 +7,6 @@ package com.jianfei.d.entity.common;
 
 public enum LoginStatus {
 	
-	Success(0),Fail(1);
-	
-	private int value;
-
-	public int getValue() {
-		return value;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
-	
-	private LoginStatus(int value){
-		this.value =value;
-	}
+	Success,Fail;
 	
 }

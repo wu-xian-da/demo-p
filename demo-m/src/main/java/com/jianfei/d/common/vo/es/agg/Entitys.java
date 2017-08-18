@@ -14,5 +14,5 @@ import lombok.Setter;
 @Setter
 public class Entitys {
 	
-	private List<Bucket> bucket;
+	private List<Bucket> buckets;
 }

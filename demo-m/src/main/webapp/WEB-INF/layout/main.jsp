@@ -9,9 +9,9 @@
 <head>
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-<script src="${baseStatic }/js/jquery.min.js" type="text/javascript"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="${baseStatic }/img/logo.gif">
+<script src="${baseStatic }/js/jquery.min.js" type="text/javascript"></script>
 <%@ include file="/WEB-INF/include/css.jsp" %>
 <title>贵阳机场智慧管理平台</title>
 <sitemesh:head/>

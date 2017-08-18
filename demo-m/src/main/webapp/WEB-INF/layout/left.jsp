@@ -13,11 +13,11 @@
 			href="./information-management-manage.html"><i
 				class="menu-manage"></i>栏目管理</a></li> -->
 		<c:forEach items="${userMenus }" var="parent">
-			<c:if test="${fn:startsWith(currentUrl,parent.href) }">
+			<c:if test="${fn:startsWith(currentUrl, parent.href) }">
 				<c:forEach items="${parent.childs }" var="child">
-					<li
-						<c:if test="${fn:startsWith(currentUrl,child.href) }">class="active"</c:if>
-					><a href="${child.href }"><i class="new-photo"></i>${child.name }</a></li>
+					<li <c:if test="${fn:startsWith(currentUrl, child.href)}">class="active"</c:if>>
+						<a href="${child.href }"><i class="new-photo"></i>${child.name }</a>
+					</li>
 				</c:forEach>
 			</c:if>
 		</c:forEach>

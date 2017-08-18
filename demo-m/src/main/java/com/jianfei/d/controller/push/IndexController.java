@@ -19,6 +19,8 @@ public class IndexController extends BaseController{
 	
 	@GetMapping("/sys/push")
 	public String index(){
+		
+		System.out.println("====++++");
 		return super.getBaseIndex("/sys/push");
 	}
 }

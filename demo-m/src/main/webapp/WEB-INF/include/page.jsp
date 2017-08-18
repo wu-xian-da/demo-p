@@ -16,12 +16,8 @@
 		</c:if>
 
 		<c:forEach begin="${page.viewStartPage}" end="${page.viewEndPage}" step="1" var="pageIndex">
-			<a 
-				<c:if test="${page.pageNo == pageIndex}">
-					class="active"
-				</c:if>
-				href="?pn=${pageIndex}&ps=${page.pageSize}${page.urlParams}"
-			>${pageIndex}</a>
+			<a <c:if test="${page.pageNo == pageIndex}">class="active"</c:if>
+			href="?pn=${pageIndex}&ps=${page.pageSize}${page.urlParams}">${pageIndex}</a>
 		</c:forEach>
 
 		<c:if test="${!page.last}">

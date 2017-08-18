@@ -61,7 +61,7 @@ public class User extends BaseEntity{
 	
 	/****vo start****/
 	@FormQuery
-	private List<Long> departents;
+	private List<Long> departments;
 	
 	private String rePassword;//重复密码
 	

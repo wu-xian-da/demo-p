@@ -17,6 +17,7 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
+	<!-- 配置统一加载 -->
 	<util:properties id="settings" location="classpath:config/*.properties"></util:properties>
 	<context:property-placeholder properties-ref="settings"/>
 	

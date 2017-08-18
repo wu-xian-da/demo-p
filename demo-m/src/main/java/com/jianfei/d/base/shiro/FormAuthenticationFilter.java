@@ -9,13 +9,11 @@ import java.util.Date;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jianfei.d.common.config.Constants;
@@ -65,7 +63,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
     }
     
     private void saveLogLogin(ServletRequest request, LoginStatus status){
-    	System.out.println("----------------------"+status.getValue());
+    	System.out.println("----------------------"+status);
         ShiroHttpServletRequest httpRequest = (ShiroHttpServletRequest)request;
         try{
             this.logLoginService.save(new LogLogin(
@@ -73,7 +71,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
                     new Date(), 
                     httpRequest.getHeader(UA), 
                     HttpUtils.getRemoteAddr(httpRequest), 
-                    status.getValue()));
+                    status));
         }
         catch(Exception e){
             e.printStackTrace();

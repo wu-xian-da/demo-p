@@ -22,17 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-
-
-
-
-
 import com.jianfei.d.common.config.Constants;
 import com.jianfei.d.common.utils.PasswordHelper;
 import com.jianfei.d.common.utils.SessionUtils;
 import com.jianfei.d.common.vo.MessageStatus;
 import com.jianfei.d.common.vo.PasswordVo;
+import com.jianfei.d.controller.base.BaseController;
 import com.jianfei.d.entity.common.UserStatus;
 import com.jianfei.d.entity.system.User;
 import com.jianfei.d.service.system.DepartmentService;
@@ -46,7 +41,7 @@ import com.jianfei.d.service.system.UserService;
  */
 @Controller
 @RequestMapping(value = "/sys/system/user")
-public class UserController extends com.jianfei.d.controller.base.BaseController{
+public class UserController extends BaseController{
     
     @Autowired
 	private UserService userService;
@@ -65,7 +60,7 @@ public class UserController extends com.jianfei.d.controller.base.BaseController
         model.addAttribute("departmentsTree", super.buildTree(this.departmentService.findTree()));
     }
 
-	@GetMapping("/create")
+	@RequestMapping("/create")
 	public String createForm(Model model) {
 	    setModel(model);
 		return "system/user/form";

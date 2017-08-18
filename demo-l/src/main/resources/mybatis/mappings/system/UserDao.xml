@@ -85,7 +85,7 @@
 		c.name AS "department.name"
 		from t_user a
 		LEFT JOIN t_role b ON a.role_id = b.id
-		LEFT JOIN t_department c ON a.department_ = c.id
+		LEFT JOIN t_department c ON a.department_id = c.id
 		<where>
 			<if test="isNot != null and isNot.size() > 0">
 				a.loginName NOT IN

@@ -19,7 +19,7 @@
 								    <input type="text" name="permission" value="${page.entity.permission }" class="form-control" placeholder="权限标识符">
 								  </div>
 								  <div class="form-group">
-								  	<div class="operation-box">
+								  	<div class="operation-box operation-head-box">
 										<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
 									</div>
 								  </div>

@@ -39,5 +39,5 @@ public class LogLogin extends BaseEntity {
 	@FormQuery
 	private String ip;
 	
-	private int status;
+	private LoginStatus status;
 }

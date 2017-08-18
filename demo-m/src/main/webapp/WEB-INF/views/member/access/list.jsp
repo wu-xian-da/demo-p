@@ -5,27 +5,25 @@
 					<div class="col-md-12">
 						<div class="box">
 							<div class="chart-box">
-								<!-- <button type="button" class="btn btn-gy btn-exports"><span class="glyphicon glyphicon-share-alt"></span>数据导出</button> -->
+								<!-- 
+								<button type="button" class="btn btn-gy btn-exports">
+								<span class="glyphicon glyphicon-share-alt"></span>数据导出</button> -->
 								<div id="site-statistics-charts" style="height: 320px; width: 100%;"></div>
 							</div>
-
 							<div class="row">
 								<div class="col-md-6">
 									<div class="chart-box">
-										<div class="chart-calendar-box">日期选择：<input type="text" class="flatpickr" id="authentication-statistics"><i class="calendar-icon"></i></div> 
+										<div class="chart-calendar-box">日期选择：<input type="text" class="flatpickr" id="authentication-statistics"></div>
 										<div id="everyday-authentication-statistics-charts" style="height: 350px; width: 100%;"></div>
 									</div>
 								</div>
-
 								<div class="col-md-6">
 									<div class="chart-box">
-										<div class="chart-calendar-box">日期选择：<input type="text" class="flatpickr" id="device-statistics"><i class="calendar-icon"></i></div> 
+										<div class="chart-calendar-box">日期选择：<input type="text" class="flatpickr" id="device-statistics"></div>
 										<div id="everyday-device-statistics-charts" style="height: 350px; width: 100%;"></div>
 									</div>
 								</div>
-
 							</div>
-
 							<div class="chart-box">
 								<div id="hour-statistics-charts" style="height: 350px; width: 100%;"></div>
 							</div>
@@ -36,103 +34,127 @@
 <%@ include file="/WEB-INF/include/echarts.jsp" %>
 <%@ include file="/WEB-INF/include/flatpickr.jsp" %>
 <script type="text/javascript">
-		
-		$(function(){
-			flatpickr(".flatpickr",{
-				onChange:function(selectedDates, dateStr, instance){
-					switch(instance.element.id){
-						case "device-statistics":
-							getDevice(dateStr);
-							break;
-						case "authentication-statistics":
-							getAuth(dateStr);
-							break;
-					}
-		
-				}
-			});
-			
-			function getDevice(date){
-				$.ajax({
-			         type: "GET",
-			         url: "${base}/sys/member/access/devices",
-			         data: {date:date},
-			         dataType: "json",
-			         success: function(data){
-			        	var list = data.aggs.entirys.buckets;
-			        	var everyDayData = formatData(list);
-						createPieChart("设备类型",everydayStatisticsChart,everyDayData);
-			         }
-			     });
-			}
-			
-			function getAuth(date){
-				$.ajax({
-			         type: "GET",
-			         url: "${base}/sys/member/access/auths",
-			         data: {date:date},
-			         dataType: "json",
-			         success: function(data){
-			        	var list = data.aggs.entirys.buckets;
-			        	var everydayAuthenticationData = formatData(list);
-						createPieChart("认证方式",everydayAuthenticationChart,everydayAuthenticationData);
-			         }
-			     });
-			}
-			
-			getDevice('');
-			getAuth('');
-		});
-		
-		function createPieChart(title, chart, data){
-			var option = {
-			    title : {
-			        text: title,
-			        x:'left',
-			        textStyle: {
-			        	color: "#676464",
-			        	fontWeight: "normal",
-			        	fontSize: "14",
-			        	fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
-			        }
-			    },
-		
-			    tooltip : {
-			        trigger: 'item',
-			        formatter: "{a} <br/>{b} : {c} ({d}%)"
-			    },
-			    legend: {
-			        orient: 'vertical',
-			        bottom:'0',
-			        right: '0',
-			        data: data.title
-			    },
-			    series : [{
-			            name: '访问来源',
-			            type: 'pie',
-			            radius : '65%',
-			            center: ['34%', '55%'],
-			            label:{
-			            	normal:{
-			            		position:"outside",
-			            		formatter:"{d}%"
-			            	}
-			            },
-			            labelLine:{
-       		            	normal:{
-       		            		length2:5,
-       		            		length:10
-        	 	            }
-        	 	        },
-			            data: data.data
-			        }
-			    ]
-			};
-			chart.setOption(option);
+function getNowFormatDate() {
+    var date = new Date();
+    
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (day >= 0 && day <= 9) {
+    	day = "0" + day;
+    }
+    var nowDate = year + "-" + month + "-" + day;
+    return nowDate;
+}
+
+$(function(){
+	$(".flatpickr").on("change", function(){
+		var id = this.id;
+		var dateStr = $(this).val();
+		switch(id){
+			case "device-statistics":
+				getDevice(dateStr);
+				break;
+			case "authentication-statistics":
+				getAuth(dateStr);
+				break;
 		}
-		
-		var everydayAuthenticationChart = echarts.init(document.getElementById('everyday-authentication-statistics-charts'));
-		var everydayStatisticsChart = echarts.init(document.getElementById('everyday-device-statistics-charts'));
+	});
+	
+	var nowDate = getNowFormatDate();
+	
+	$("#authentication-statistics").flatpickr({
+		"defaultDate": nowDate
+	});
+	
+	$("#device-statistics").flatpickr({
+		"defaultDate": nowDate
+	});
+	
+	getDevice('');
+	getAuth('');
+});
+
+function getDevice(date){
+	$.ajax({
+         type: "GET",
+         url: "${base}/sys/member/access/devices",
+         data: {date:date},
+         dataType: "json",
+         success: function(data){
+        	var list = data.aggs.entirys.buckets;
+        	var everyDayData = formatData(list);
+			createPieChart("设备类型：机场访客（默认当天）",everydayStatisticsChart,everyDayData);
+         }
+     });
+}
+
+function getAuth(date){
+	$.ajax({
+         type: "GET",
+         url: "${base}/sys/member/access/auths",
+         data: {date:date},
+         dataType: "json",
+         success: function(data){
+        	var list = data.aggs.entirys.buckets;
+        	var everydayAuthenticationData = formatData(list);
+			createPieChart("认证方式：认证会员（默认当天）",everydayAuthenticationChart,everydayAuthenticationData);
+         }
+     });
+}
+
+function createPieChart(title, chart, data){
+	var option = {
+	    title : {
+	        text: title,
+	        x:'left',
+	        textStyle: {
+	        	color: "#676464",
+	        	fontWeight: "normal",
+	        	fontSize: "14",
+	        	fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
+	        }
+	    },
+
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient: 'vertical',
+	        bottom: '0',
+	        right: '0',
+	        data: data.title
+	    },
+	    series : [{
+	            name: '访问来源',
+	            type: 'pie',
+	            radius : '65%',
+	            center: ['34%', '55%'],
+	            label:{
+	            	normal:{
+	            		position:"outside",
+	            		formatter:"{d}%"
+	            	}
+	            },
+	            labelLine:{
+	            	normal:{
+	            		length2:5,
+	            		length:10
+	            	}
+	            },
+	            data: data.data
+	        }
+	    ]
+	};
+	chart.setOption(option);
+}
+
+var everydayAuthenticationChart = echarts.init(document.getElementById('everyday-authentication-statistics-charts'));
+var everydayStatisticsChart = echarts.init(document.getElementById('everyday-device-statistics-charts'));
 
 		function formatData(data){
 			var _formatData = {
@@ -184,11 +206,11 @@
 			}
 			return _formatData;
 		}
-
+		
 		//站点统计
 		var option = {
 			    title: {
-			        text: '站点统计',
+			        text: '站点统计：机场访客（单位：天）',
 			        textStyle: {
 			        	color: "#676464",
 			        	fontWeight: "normal",
@@ -217,10 +239,13 @@
 			    xAxis: {
 			        type: 'category',
 			        boundaryGap: false,
+			        axisLabel:{
+						interval:0,
+					},
 			        data: [
 					<c:set var="startIndex" value="${fn:length(days.aggs.entirys.buckets)-1 }"/>
 					<c:forEach items="${days.aggs.entirys.buckets }" var="b" varStatus="stat">
-					'${days.aggs.entirys.buckets[startIndex - stat.index].keyForDate }'<c:if test="${!stat.last }">,</c:if>
+						'${days.aggs.entirys.buckets[startIndex - stat.index].keyForDate }'<c:if test="${!stat.last }">,</c:if>
 					</c:forEach>
 	               ]
 			    },
@@ -236,8 +261,9 @@
 			            showSymbol: false,
 			            itemStyle:{
 			            	normal: {
-			            		color:"#0288c7"
+			            		color: "#0288c7",
 			            		borderColor: "#0288c7"
+
 			            	}
 			            },
 			            lineStyle: {
@@ -259,14 +285,13 @@
 			        }
 			    ]
 		};
-
 		var siteStatisticsChart = echarts.init(document.getElementById('site-statistics-charts'));
 		siteStatisticsChart.setOption(option);
 
 		// 24小时热点分布
 		var option = {
 			    title: {
-			        text: '24小时热点分布',
+			        text: '24小时热点分布：机场访客（默认当天，单位：2小时）',
 			        textStyle: {
 			        	color: "#676464",
 			        	fontWeight: "normal",
@@ -277,11 +302,9 @@
 			    tooltip: {
 			        trigger: 'axis'
 			    },
-
 			    toolbox:{
 			    	show:false
 			    },
-
 			    legend: {
 			        data:['24小时访问人数的变化情况(柱状)'],
 			        orient: 'horizontal',
@@ -291,14 +314,12 @@
 			        	borderColor:"#FF00FF"
 			        }
 			    },
-
 			    grid: {
 			        left: '3%',
 			        right: '4%',
 			        bottom: '3%',
 			        containLabel: true
 			    },
-
 			    xAxis: {
 			        data: [
 					<c:forEach items="${hours.aggs.entirys.buckets }" var="b" varStatus="stat">
@@ -327,7 +348,6 @@
 			        }
 			    ]
 		};
-
 		var hourStatisticsChart = echarts.init(document.getElementById('hour-statistics-charts'));
 		hourStatisticsChart.setOption(option);
 </script>

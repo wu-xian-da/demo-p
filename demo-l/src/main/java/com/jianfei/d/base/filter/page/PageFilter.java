@@ -30,6 +30,7 @@ public class PageFilter extends OncePerRequestFilter{
 		
 		PageContext.setPageParam(this.getPageParam(request));
 		
+		System.out.println(request+".........................1");
 		try {
 			filterChain.doFilter(request, response);
 		} finally {
@@ -48,7 +49,7 @@ public class PageFilter extends OncePerRequestFilter{
 	private PageParam getPageParam(HttpServletRequest request) {
 		String pn = request.getParameter(PageParam.PAGE_NO_NAME);
 		String ps = request.getParameter(PageParam.PAGE_SIZE_NAME);
-		
+		System.out.println(pn+"========================"+ps);
 		PageParam param = new PageParam();
 		
 		try {
@@ -60,8 +61,4 @@ public class PageFilter extends OncePerRequestFilter{
 		
 		return param;
 	}
-
-	
-	
-	
 }

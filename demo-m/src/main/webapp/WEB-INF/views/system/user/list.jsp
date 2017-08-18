@@ -30,7 +30,7 @@
 								    	moduleId="user-department-tree" treeData="${departmentsTree }" hiddenValue="${page.entity.departments }" />
 								  </div>
 								  <div class="form-group">
-								  	<div class="operation-box">
+								  	<div class="operation-box operation-head-box">
 										<button type="submit" class="btn btn-gy btn-query"><span class="glyphicon glyphicon-search"></span>查询</button>
 									</div>
 								  </div>

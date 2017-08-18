@@ -10,28 +10,28 @@
     <function>
         <description>object in collection</description>
         <name>in</name>
-        <function-class>com.jianfei.w.common.utils.Functions</function-class>
+        <function-class>com.jianfei.d.common.utils.Functions</function-class>
         <function-signature>boolean in(java.lang.Iterable,java.lang.Object)</function-signature>
     </function>
     
     <function>
         <description>collection containsAny collection</description>
         <name>containsAny</name>
-        <function-class>com.jianfei.w.common.utils.Functions</function-class>
+        <function-class>com.jianfei.d.common.utils.Functions</function-class>
         <function-signature>boolean containsAny(java.util.Collection, java.util.Collection)</function-signature>
     </function>
     
     <function>
         <description>string equals collection</description>
         <name>equals</name>
-        <function-class>com.jianfei.w.common.utils.Functions</function-class>
+        <function-class>com.jianfei.d.common.utils.Functions</function-class>
         <function-signature>boolean equals(java.lang.Iterable,java.lang.String)</function-signature>
     </function>
     
     <function>
     	<description>id to string</description>
     	<name>listToString</name>
-    	<function-class>com.jianfei.w.common.utils.Functions</function-class>
+    	<function-class>com.jianfei.d.common.utils.Functions</function-class>
     	<function-signature>String listToString(java.util.List)</function-signature>
     </function>
 </taglib>

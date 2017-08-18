@@ -1,91 +1,111 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jianfei.d.dao.system.RoleDao">
-	<resultMap type="com.jianfei.d.entity.system.Role" id="roleMap">
-		<id property="id" column="id"/>
-		<result property="name" column="name"/>
-		<collection property="menus" ofType="com.jianfei.d.entity.system.Menu">
-			<id property="id" column="menu_id"/>
-			<id property="name" column="menu_name"/>
+	
+	<resultMap id="roleMap" type="com.jianfei.d.entity.system.Role">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<collection property="menus" ofType="Menu">
+			<id property="id" column="menu_id" />
+			<id property="name" column="menu_name" />
 		</collection>
 	</resultMap>
 	
-	<resultMap type="com.jianfei.d.entity.system.Role" id="roleMapPage">
-		<id property="id" column="id"/>
-		<result property="name" column="name"/>
-		<collection property="users" column="id" ofType="string" select="findUserByRoleId"></collection>
+	<resultMap id="roleMapPage" type="com.jianfei.d.entity.system.Role">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<collection column="id" property="users" ofType="string" select="findUserByRoleId"/>
 	</resultMap>
 	
-	<resultMap type="com.jianfei.d.entity.system.Role" id="roleMenuMap">
-		<id property="id" column="id"/>
-		<result property="name" column="name"/>
-		<collection property="menus" ofType="com.jianfei.d.entity.system.Menu">
-			<id property="id" column="menu_id"/>
-			<id property="name" column="menu_name"/>
-			<id property="parent.id" column="menu_parent"/>
-			<id property="permission" column="permission"/>
-			<id property="type" column="menu_type"/>
-			<id property="href" column="href"/>
-			<id property="icon" column="icon"/>
+	<resultMap id="roleMenuMap" type="com.jianfei.d.entity.system.Role">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<collection property="menus" ofType="Menu">
+			<id property="id" column="menu_id" />
+			<id property="name" column="menu_name" />
+			<id property="parent.id" column="menu_parent" />
+			<id property="permission" column="permission" />
+			<id property="type" column="menu_type" />
+			<id property="href" column="href" />
+			<id property="icon" column="icon" />
 		</collection>
 	</resultMap>
+	
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
-		insert into t_role(name) values (#{name})
+		INSERT INTO t_role(name) VALUES (#{name})
 	</insert>
 	
 	<delete id="deleteRoleMenu">
-		delete from t_role_menu where role_id = #{id}
+		DELETE FROM t_role_menu WHERE role_id = #{id}
 	</delete>
 	
 	<insert id="insertRoleMenu">
-		insert into t_role_menu(role_id,menu_id)
-		<foreach collection="menus" item="menu" separator="union all">
-			select #{id},#{menu.id} from dual
+		INSERT INTO t_role_menu(role_id, menu_id)
+		<foreach collection="menus" item="menu" separator=" union all ">
+			SELECT #{id}, #{menu.id} FROM dual
 		</foreach>
 	</insert>
 	
 	<delete id="delete">
-		delete from t_role where id = #{id}
+		DELETE FROM t_role WHERE id=#{id}
 	</delete>
 	
 	<update id="update">
-		update t_role set name = #{name} where id = #{id}
+		UPDATE t_role SET
+		name=#{name}
+		WHERE id=#{id}
 	</update>
 	
 	<select id="get" resultMap="roleMap">
-		select a.id,a.name,b.menu_id from t_role a
+		SELECT a.id, a.name, b.menu_id
+		FROM t_role a 
 		LEFT JOIN t_role_menu b ON b.role_id = a.id
-		where a.id = #{id}
-	</select>
-	
-	<select id="getCountByRoleName" resultType="java.lang.Integer">
-		select count(1) from t_role a where a.name = #{name}
-	</select>
-	
-	<select id="findAll" resultType="com.jianfei.d.entity.system.Role">
-		select id,name from t_role
-	</select>
-	
-	<select id="findPage" resultMap="roleMapPage">
-		select a.id,a.name from t_role a
-		<where>
-			<if test="name != null and name != ''">a.name like CONCAT('%',#{name},'%')</if>
-		</where>
-		ORDER BY a.id DESC
+		WHERE a.id = #{id}
 	</select>
 	
 	<select id="getRoleMenus" resultMap="roleMenuMap">
-		select 
-			a.id,a.name,b.menu_id,c.name AS menu_name,c.parent_id AS menu_parent,c.permission,c.type AS menu_type,c.href,c.icon
-		from t_role a
+		SELECT 
+			a.id, a.name, 
+			b.menu_id, 
+			c.name AS menu_name,
+			c.parent_id AS menu_parent,
+			c.permission,
+			c.type AS menu_type,
+			c.href,
+			c.icon
+		FROM t_role a 
 		LEFT JOIN t_role_menu b ON b.role_id = a.id
 		LEFT JOIN t_menu c ON b.menu_id = c.id
-		where a.id = #{id}
-		ORDER BY c.parent_id,c.sort
+		WHERE a.id = #{id}
+		ORDER BY c.parent_id, c.sort
 	</select>
 	
-	<select id="findUserByRoleId" resultType="string">
-		select name form t_user where role_id=#{id}
+	<select id="getCountByRoleName" resultType="java.lang.Integer" >
+		SELECT count(1)
+		FROM t_role a 
+		WHERE a.name = #{name}
+	</select>
+	
+	<select id="findAll" resultType="com.jianfei.d.entity.system.Role" >
+		SELECT id, name
+		FROM t_role 
+	</select>
+	
+	<select id="findUserByRoleId" resultType="string" >
+		SELECT name
+		FROM t_user
+		WHERE role_id = #{id}
+	</select>
+	
+	<select id="findPage" resultMap="roleMapPage">
+		SELECT a.id, a.name
+		FROM t_role a
+		<where>
+			<if test="name != null and name != ''">
+				a.name like CONCAT('%',#{name},'%') 
+			</if>
+		</where>
+		ORDER BY a.id DESC
 	</select>
 </mapper>

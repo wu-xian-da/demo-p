@@ -37,7 +37,7 @@
 		<property name="mapperLocations" value="classpath:mybatis/mappings/**/*.xml" />
 		<property name="configLocation" value="classpath:mybatis/config.xml" />
 		<property name="typeAliasesPackage" value="com.jianfei.d.entity" />
-		<property name="enumBasePackage" value="com.jianfei.d.base.entity.common" />
+		<property name="enumBasePackage" value="com.jianfei.d.entity.common" />
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

@@ -99,7 +99,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
              user = this.userService.findByLoginName(token.getUsername());
              
          }catch(Exception e){
-             throw new AuthenticationException("账号异常");
+             //throw new AuthenticationException("账号异常");
          }
          
          if(user == null){

@@ -13,12 +13,12 @@
 			<div class="from-gy-controls">
 				<div class="form-inline">
 					<div class="form-group">
-					  <label>信息名称：</label>
+					  <label>信息名称:</label>
 					  <input type="text" name="infoName" value="${page.entity.infoName }" class="form-control" placeholder="信息名称">
 					</div>
 					
 					<div class="form-group">
-					  <label>信息类型：</label>
+					  <label>信息类型:</label>
 					  <select name="infoType" class="form-control">
 					 	<option value="">全部(单选)</option>
 						   <c:forEach items="${pushTypes }" var="pushType">
@@ -33,7 +33,7 @@
 					
 					
 					<div class="form-group">
-					   <label>推送范围：</label>
+					   <label>推送范围:</label>
 					   <select name="pushRange" class="form-control">
 						  <option value="">全部</option>
 						  <option value="wechat,"
@@ -45,7 +45,7 @@
 				  </div>
 
 				<div class="form-group">
-					   <label>推送时间：</label>
+					   <label>推送时间:</label>
 					   <div class="date-time-box">
 					   	<input type="text" name="beginPushTime" class="form-control flatpickr">
 						<i class="date-time-icon"></i>

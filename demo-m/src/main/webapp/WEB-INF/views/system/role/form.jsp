@@ -21,7 +21,7 @@
 											<label>角色名称：</label>
 										</div>
 										<div class="col-md-8">
-											<input type="text" name="name" value="${role.name }" class="form-control {required:true,maxlength:20}" placeholder="角色名称">
+											<input type="text" name="name" value="${role.name}" class="form-control {required:true,maxlength:20}" placeholder="角色名称">
 										</div>
 									</div>
 

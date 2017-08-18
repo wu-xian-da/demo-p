@@ -139,10 +139,12 @@ public class IngInfoPushController extends BaseController{
 	
 	@RequestMapping
 	public String list(Model model, InfoPush infoPush) {
+		System.out.println("==================");
 		infoPush.setPushStatus(InfoPushStatus.DCL);
 		
 		this.setBases(model);
 		model.addAttribute("page", infoPushService.findPage(infoPush));
+		System.out.println("-------------------");
 		return "push/ing/list";
 	}
 }
