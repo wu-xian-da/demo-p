@@ -68,6 +68,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
     	 User user = (User) principals.getPrimaryPrincipal();
+    	 System.out.println(user+"+++++++++++===========");
          if (user != null) {
              SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
              info.addStringPermissions(user.getRole().getUserPermissions());

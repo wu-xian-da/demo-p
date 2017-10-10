@@ -51,10 +51,15 @@ public class PageFilter extends OncePerRequestFilter{
 		String ps = request.getParameter(PageParam.PAGE_SIZE_NAME);
 		System.out.println(pn+"========================"+ps);
 		PageParam param = new PageParam();
-		
 		try {
-			param.setPn(Integer.valueOf(pn));
-			param.setPs(Integer.valueOf(ps));
+			if (pn == null && ps == null) {
+				param.setPn(param.getPn());
+				param.setPs(param.getPs());
+			} else {
+				param.setPn(Integer.valueOf(pn));
+				param.setPs(Integer.valueOf(ps));
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
