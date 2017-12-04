@@ -17,6 +17,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import com.jianfei.d.base.annotation.FormQuery;
 import com.jianfei.d.base.entity.BaseEntity;
 import com.jianfei.d.entity.common.MenuType;
 
@@ -51,6 +52,7 @@ public class Menu extends BaseEntity{
 	
 	private String icon;//图标
 	
+	@FormQuery
 	private Menu parent;//父编号
 	
 	private List<Menu> childs;

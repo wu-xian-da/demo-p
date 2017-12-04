@@ -84,7 +84,7 @@
 	
 	<select id="findAll" resultType="com.jianfei.d.entity.system.Menu">
 		select <include refid="menuColumns"></include>
-		from t_menu a
+		from t_menu	a
 	</select>
 	
 	<select id="findPage" resultType="com.jianfei.d.entity.system.Menu">

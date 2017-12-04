@@ -90,6 +90,7 @@ public class MenuController extends BaseController{
     public String list(Model model, Menu menu){
         Page<Menu> menus = this.menuService.findPage(menu);
         model.addAttribute("page", menus);
+        model.addAttribute("menualldata", this.menuService.findAll());
         return "system/menu/list";
     }
 }

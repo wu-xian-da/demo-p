@@ -48,25 +48,71 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${page.data }" var="d" varStatus="stat">
+										<c:forEach items="${menualldata}" var="p" varStatus="stat">
+											<c:if test="${p.parent.id eq -1 }">
 											<tr>
-												<td>${page.beginIndex + stat.count}</td>
-												<td>${d.name }</td>
-												<td>${d.href }</td>
-												<td>${d.permission }</td>
-												<td>${d.type.name }</td>
-												<td>${d.parent.name }</td>
-												<td>${d.sort }</td>
+												<td>${p.id}</td>
+												<td>|--${p.name }</td>
+												<td>${p.href }</td>
+												<td>${p.permission }</td>
+												<td>${p.type.name }</td>
+												<td>${p.parent.name }</td>
+												<td>${p.sort }</td>
 												<td>
 													<shiro:hasPermission name="menu:update">
-													<a href="${base }/sys/system/menu/update/${d.id}" class="edit"><i></i>编辑</a> 
+													<a href="${base }/sys/system/menu/update/${p.id}" class="edit"><i></i>编辑</a> 
 													</shiro:hasPermission>
 													<shiro:hasPermission name="menu:delete">
-													<a href="${base }/sys/system/menu/delete/${d.id}" onclick="javascript:return confirmDel();"
+													<a href="${base }/sys/system/menu/delete/${p.id}" onclick="javascript:return confirmDel();"
 														class="delete"><i></i>删除</a>
 													</shiro:hasPermission>
 												</td>
 											</tr>
+												<c:forEach items="${menualldata }" var="c">	
+													<c:if test="${c.parent.id eq p.id }">
+													<tr>
+														<td>${c.id}</td>
+														<td>||--${c.name }</td>
+														<td>${c.href }</td>
+														<td>${c.permission }</td>
+														<td>${c.type.name }</td>
+														<td>${c.parent.name }</td>
+														<td>${c.sort }</td>
+														<td>
+															<shiro:hasPermission name="menu:update">
+															<a href="${base }/sys/system/menu/update/${c.id}" class="edit"><i></i>编辑</a> 
+															</shiro:hasPermission>
+															<shiro:hasPermission name="menu:delete">
+															<a href="${base }/sys/system/menu/delete/${c.id}" onclick="javascript:return confirmDel();"
+																class="delete"><i></i>删除</a>
+															</shiro:hasPermission>
+														</td>
+													</tr>
+														<c:forEach items="${menualldata }" var="d">
+															<c:if test="${d.parent.id eq c.id }">
+															<tr>
+																<td>${d.id}</td>
+																<td>|||--${d.name }</td>
+																<td>${d.href }</td>
+																<td>${d.permission }</td>
+																<td>${d.type.name }</td>
+																<td>${d.parent.name }</td>
+																<td>${d.sort }</td>
+																<td>
+																	<shiro:hasPermission name="menu:update">
+																	<a href="${base }/sys/system/menu/update/${d.id}" class="edit"><i></i>编辑</a> 
+																	</shiro:hasPermission>
+																	<shiro:hasPermission name="menu:delete">
+																	<a href="${base }/sys/system/menu/delete/${d.id}" onclick="javascript:return confirmDel();"
+																		class="delete"><i></i>删除</a>
+																	</shiro:hasPermission>
+																</td>
+															</tr>
+															</c:if>
+														</c:forEach>	
+													</c:if>
+												</c:forEach>
+											</c:if>
 										</c:forEach>
 									</tbody>
 								</table>
