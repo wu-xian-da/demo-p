@@ -38,7 +38,7 @@
 									<thead>
 										<tr>
 											<th>序号</th>
-											<th>权限名称</th>
+											<th class="dleft">权限名称</th>
 											<th>权限URL</th>
 											<th>权限标识符</th>
 											<th>权限类型</th>
@@ -52,7 +52,7 @@
 											<c:if test="${p.parent.id eq -1 }">
 											<tr>
 												<td>${p.id}</td>
-												<td>|--${p.name }</td>
+												<td class="dleft">${p.name }</td>
 												<td>${p.href }</td>
 												<td>${p.permission }</td>
 												<td>${p.type.name }</td>
@@ -72,7 +72,7 @@
 													<c:if test="${c.parent.id eq p.id }">
 													<tr>
 														<td>${c.id}</td>
-														<td>||--${c.name }</td>
+														<td class="dleft">- -${c.name }</td>
 														<td>${c.href }</td>
 														<td>${c.permission }</td>
 														<td>${c.type.name }</td>
@@ -92,7 +92,7 @@
 															<c:if test="${d.parent.id eq c.id }">
 															<tr>
 																<td>${d.id}</td>
-																<td>|||--${d.name }</td>
+																<td class="dleft">- - - -${d.name }</td>
 																<td>${d.href }</td>
 																<td>${d.permission }</td>
 																<td>${d.type.name }</td>
