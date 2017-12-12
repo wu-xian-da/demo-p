@@ -7,7 +7,7 @@ package com.jianfei.d.base.dao;
 
 import java.util.List;
 
-import com.jianfei.d.entity.common.Page;
+import com.jianfei.d.page.common.Page;
 
 public interface CrudDao<T> extends BaseDao {
 	

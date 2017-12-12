@@ -3,11 +3,11 @@
   *@author changchun.wu
   *2017年6月23日下午4:44:40
   */
-package com.jianfei.d.base.mybatis.interceptor;
+package com.jianfei.d.page.interceptor;
 
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
 
-import com.jianfei.d.entity.common.Page;
+import com.jianfei.d.page.common.Page;
 
 /*****
  * 创建分页对象,Page按照集合处理

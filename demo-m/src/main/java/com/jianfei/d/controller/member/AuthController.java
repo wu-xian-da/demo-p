@@ -9,15 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jianfei.d.base.filter.page.PageContext;
 import com.jianfei.d.common.config.EsConfig;
 import com.jianfei.d.common.utils.ElasticsearchRestService;
 import com.jianfei.d.common.vo.AuthMethod;
 import com.jianfei.d.common.vo.es.hit.Hit;
 import com.jianfei.d.common.vo.es.hit.ResponseHits;
 import com.jianfei.d.controller.base.BaseController;
-import com.jianfei.d.entity.common.Page;
-import com.jianfei.d.entity.common.PageParam;
+import com.jianfei.d.page.common.Page;
+import com.jianfei.d.page.common.PageParam;
+import com.jianfei.d.page.filter.PageContext;
 
 
 /**

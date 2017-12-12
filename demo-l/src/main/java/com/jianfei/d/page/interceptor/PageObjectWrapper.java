@@ -3,7 +3,7 @@
   *@author changchun.wu
   *2017年6月23日下午4:34:32
   */
-package com.jianfei.d.base.mybatis.interceptor;
+package com.jianfei.d.page.interceptor;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import org.apache.ibatis.reflection.factory.ObjectFactory;
 import org.apache.ibatis.reflection.property.PropertyTokenizer;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapper;
 
-import com.jianfei.d.base.filter.page.PageContext;
-import com.jianfei.d.entity.common.Page;
-import com.jianfei.d.entity.common.PageParam;
+import com.jianfei.d.page.common.Page;
+import com.jianfei.d.page.common.PageParam;
+import com.jianfei.d.page.filter.PageContext;
 
 /***
  * 对象封装把Mybatis List 数据封装为Page对象

@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jianfei.d.base.dao.CrudDao;
 import com.jianfei.d.base.entity.BaseEntity;
-import com.jianfei.d.entity.common.Page;
+import com.jianfei.d.page.common.Page;
 
 public abstract class CrudService<D extends CrudDao<T>,T extends BaseEntity> extends BaseService{
 	

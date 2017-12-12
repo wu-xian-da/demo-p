@@ -3,7 +3,7 @@
   *@author changchun.wu
   *2017年6月23日上午9:40:42
   */
-package com.jianfei.d.base.filter.page;
+package com.jianfei.d.page.filter;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.jianfei.d.entity.common.PageParam;
+import com.jianfei.d.page.common.PageParam;
 
 /******
  * 分页过滤器

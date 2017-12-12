@@ -3,14 +3,14 @@
   *@author changchun.wu
   *2017年6月23日下午4:32:14
   */
-package com.jianfei.d.base.mybatis.interceptor;
+package com.jianfei.d.page.interceptor;
 
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.ReflectionException;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapper;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
 
-import com.jianfei.d.entity.common.Page;
+import com.jianfei.d.page.common.Page;
 
 public class PageObjectWrapperFactory implements ObjectWrapperFactory {
 

@@ -56,8 +56,8 @@ import org.springframework.core.NestedIOException;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 
-import com.jianfei.d.base.mybatis.interceptor.PageInterceptor;
-import com.jianfei.d.entity.common.Page;
+import com.jianfei.d.page.common.Page;
+import com.jianfei.d.page.interceptor.PageInterceptor;
 
 
 public class MySqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, InitializingBean, ApplicationListener<ApplicationEvent> {

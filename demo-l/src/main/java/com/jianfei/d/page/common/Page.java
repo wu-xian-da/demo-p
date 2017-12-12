@@ -1,4 +1,4 @@
-package com.jianfei.d.entity.common;
+package com.jianfei.d.page.common;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

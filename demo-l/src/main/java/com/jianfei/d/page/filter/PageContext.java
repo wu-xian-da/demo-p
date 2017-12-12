@@ -3,9 +3,9 @@
   *@author changchun.wu
   *2017年6月23日上午9:28:32
   */
-package com.jianfei.d.base.filter.page;
+package com.jianfei.d.page.filter;
 
-import com.jianfei.d.entity.common.PageParam;
+import com.jianfei.d.page.common.PageParam;
 
 /***
  * Page 上下文传递
