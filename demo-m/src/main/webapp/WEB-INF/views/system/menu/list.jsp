@@ -53,8 +53,8 @@
 											<tr>
 												<td>${p.id}</td>
 												<td class="dleft">${p.name }</td>
-												<td>${p.href }</td>
-												<td>${p.permission }</td>
+												<td class="dleft">${p.href }</td>
+												<td class="dleft">${p.permission }</td>
 												<td>${p.type.name }</td>
 												<td>${p.parent.name }</td>
 												<td>${p.sort }</td>
@@ -73,8 +73,8 @@
 													<tr>
 														<td>${c.id}</td>
 														<td class="dleft">- -${c.name }</td>
-														<td>${c.href }</td>
-														<td>${c.permission }</td>
+														<td class="dleft">${c.href }</td>
+														<td class="dleft">${c.permission }</td>
 														<td>${c.type.name }</td>
 														<td>${c.parent.name }</td>
 														<td>${c.sort }</td>
@@ -93,8 +93,8 @@
 															<tr>
 																<td>${d.id}</td>
 																<td class="dleft">- - - -${d.name }</td>
-																<td>${d.href }</td>
-																<td>${d.permission }</td>
+																<td class="dleft">${d.href }</td>
+																<td class="dleft">${d.permission }</td>
 																<td>${d.type.name }</td>
 																<td>${d.parent.name }</td>
 																<td>${d.sort }</td>
