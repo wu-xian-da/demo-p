@@ -47,7 +47,7 @@
 	</select>
 	
 	<select id="findTree" resultMap="DepartmentTree">
-		select id,name from t_department where parent_id = 1 ORDER BY sort
+		select id,name from t_department where parent_id = -1 ORDER BY sort
 	</select>
 	
 	<select id="findChild" resultMap="DepartmentTree">
